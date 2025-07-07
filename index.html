@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PLN Parod</title>
+    <title>PLN Priod</title>
     <script src="https://www.youtube.com/iframe_api"></script>
     <style>
         * {
@@ -82,6 +82,7 @@
             position: relative;
             min-height: 400vh;
             overflow-x: hidden;
+            transition: opacity 0.5s ease;
         }
 
         .mosaic-container {
@@ -713,7 +714,7 @@
     </nav>
 
     <!-- Section mosaïque -->
-    <section class="hero">
+    <section class="hero" id="hero">
         <div class="mosaic-container" id="mosaic">
             <div class="mosaic-item" data-project="project1">
                 <img src="https://media.giphy.com/media/3o6Zta2kQfOv1oXz4Q/giphy.gif" alt="Performance Live">
@@ -966,6 +967,7 @@
         let currentColumn = 0;
         let currentProject = null;
         const mosaic = document.getElementById('mosaic');
+        const hero = document.getElementById('hero');
         const totalColumns = 3;
 
         function nextColumn() {
@@ -1040,7 +1042,7 @@
                     </div>
                 `).join('')}
             `;
-            document.querySelector('.hero').style.display = 'none';
+            hero.style.opacity = '0';
             document.querySelector('.video-section').classList.add('active');
             window.scrollTo(0, 0);
 
@@ -1089,7 +1091,7 @@
         // Fermer la section vidéo
         function closeVideo() {
             document.querySelector('.video-section').classList.remove('active');
-            document.querySelector('.hero').style.display = 'block';
+            hero.style.opacity = '1';
             const sharePanel = document.getElementById('share-panel');
             if (sharePanel) sharePanel.classList.remove('active');
             if (player && player.stopVideo) {
@@ -1177,19 +1179,24 @@
             currentColumn = 0;
             mosaic.style.transform = `translateX(0)`;
             window.scrollTo({ top: 0, behavior: 'smooth' });
+            bioSection.style.display = 'block';
+            bioSection.style.opacity = '0';
             setTimeout(() => {
                 bioSection.classList.add('active');
-                bioSection.style.transition = 'transform 0.5s ease';
-            }, 100);
+            }, 50);
         }
 
         function hideBio() {
             const bioSection = document.getElementById('bio-section');
-            bioSection.style.transform = 'translateY(100%)';
+            const hero = document.getElementById('hero');
             bioSection.classList.remove('active');
             setTimeout(() => {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-                bioSection.style.transition = ''; // Réinitialise la transition
+                bioSection.style.display = 'none';
+                hero.style.opacity = '0';
+                setTimeout(() => {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    hero.style.opacity = '1';
+                }, 50);
             }, 500);
         }
     </script>
