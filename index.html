@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PLN Proudo</title>
+    <title>PLN Prood</title>
     <script src="https://www.youtube.com/iframe_api"></script>
     <style>
         * {
@@ -255,18 +255,7 @@
             width: 100%;
             height: 100%;
             z-index: 1;
-            background: #000; /* Masque visuellement les éléments comme "4K" */
-        }
-
-        .video-content .video-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9); /* Overlay plus opaque pour bloquer "4K" */
-            z-index: 2;
-            pointer-events: none;
+            background: transparent;
         }
 
         .video-content .video-title-overlay {
@@ -610,7 +599,7 @@
     <nav id="nav">
         <div class="nav-logo">
             <img src="https://via.placeholder.com/40x40?text=Logo" alt="PLN Prod Logo">
-            <p>PLN Proud</p>
+            <p>PLN Prod</p>
         </div>
         <ul>
             <li><a href="#narration">Narration</a></li>
@@ -753,6 +742,12 @@
     </footer>
 
     <script>
+        // Initialisation de l'API YouTube
+        let player;
+        function onYouTubeIframeAPIReady() {
+            console.log('YouTube API prête');
+        }
+
         // Données des vidéos YouTube et GIFs pour chaque projet
         const videoData = {
             project1: {
@@ -854,7 +849,6 @@
         // Gestion du défilement horizontal
         let currentColumn = 0;
         let currentProject = null;
-        let player = null;
         const mosaic = document.getElementById('mosaic');
         const totalColumns = 3;
 
@@ -889,7 +883,6 @@
             videoContent.innerHTML = `
                 <div class="video-wrapper">
                     <iframe id="youtube-player" src="${data.url}" frameborder="0" allowfullscreen></iframe>
-                    <div class="video-overlay"></div>
                     <div class="video-title-overlay">${data.title}</div>
                     <div class="share-panel" id="share-panel">
                         <span class="close-share" onclick="toggleSharePanel()">✖</span>
@@ -935,18 +928,27 @@
             document.querySelector('.video-section').classList.add('active');
             window.scrollTo(0, 0);
 
-            // Initialiser le lecteur YouTube
+            // Initialiser le lecteur YouTube après un délai pour s'assurer que l'API est prête
             if (typeof YT !== 'undefined' && YT.loaded) {
-                player = new YT.Player('youtube-player', {
-                    events: {
-                        'onStateChange': onPlayerStateChange,
-                        'onReady': (event) => {
-                            console.log('YouTube Player is ready');
-                        }
+                setTimeout(() => {
+                    if (!player) {
+                        player = new YT.Player('youtube-player', {
+                            events: {
+                                'onReady': (event) => {
+                                    console.log('YouTube Player is ready, playing video');
+                                    event.target.playVideo();
+                                },
+                                'onStateChange': onPlayerStateChange
+                            }
+                        });
+                    } else {
+                        player.loadVideoById(data.url.split('/embed/')[1].split('?')[0]);
+                        player.playVideo();
                     }
-                });
+                }, 500); // Délai de 500ms pour laisser l'API se charger
             } else {
-                console.error('YouTube API not loaded');
+                console.error('YouTube API not loaded, retrying...');
+                setTimeout(() => showVideo(projectId), 1000); // Re-tenter si l'API n'est pas prête
             }
 
             // Réappliquer les écouteurs aux nouvelles vignettes
@@ -978,28 +980,6 @@
             }
         }
 
-        // Démarrer la lecture
-        function playVideo() {
-            if (player && player.playVideo) {
-                console.log('Playing video via custom play button');
-                player.playVideo();
-            }
-        }
-
-        // Passer en plein écran (désactivé via paramètres URL)
-        function goFullscreen() {
-            const iframe = document.getElementById('youtube-player');
-            if (iframe && iframe.requestFullscreen) {
-                iframe.requestFullscreen();
-            } else if (iframe && iframe.mozRequestFullScreen) {
-                iframe.mozRequestFullScreen();
-            } else if (iframe && iframe.webkitRequestFullscreen) {
-                iframe.webkitRequestFullscreen();
-            } else if (iframe && iframe.msRequestFullscreen) {
-                iframe.msRequestFullscreen();
-            }
-        }
-
         // Fermer la section vidéo
         function closeVideo() {
             document.querySelector('.video-section').classList.remove('active');
@@ -1009,8 +989,7 @@
             if (player && player.stopVideo) {
                 console.log('Stopping video');
                 player.stopVideo(); // Arrête la vidéo
-                player.destroy(); // Détruit l'instance pour réinitialiser
-                player = null; // Réinitialise la référence
+                // Pas de destroy pour éviter les instabilités, juste une pause
             }
             // Restaurer la position dans la mosaïque
             if (currentProject) {
@@ -1020,10 +999,11 @@
                 mosaic.style.transform = `translateX(-${currentColumn * 100}vw)`;
                 window.scrollTo(0, row * window.innerHeight);
             }
-            // Réinitialiser le contenu de l'iframe
+            // Réinitialiser le contenu sans détruire l'instance
             const videoContent = document.getElementById('video-content');
             if (videoContent) {
-                videoContent.innerHTML = ''; // Supprime l'iframe pour forcer la réinitialisation
+                videoContent.innerHTML = ''; // Supprime l'iframe
+                player = null; // Réinitialise pour la prochaine lecture
             }
         }
 
