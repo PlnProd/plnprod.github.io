@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PLN Pod</title>
+    <title>PLN Puod</title>
     <script src="https://www.youtube.com/iframe_api"></script>
     <style>
         * {
@@ -1175,9 +1175,13 @@
         // Gestion de la section Bio avec effet de glissement
         function showBio() {
             const bioSection = document.getElementById('bio-section');
+            if (!bioSection) {
+                console.error('Bio section not found');
+                return;
+            }
             const mosaic = document.getElementById('mosaic');
             currentColumn = 0;
-            mosaic.style.transform = `translateX(0)`;
+            if (mosaic) mosaic.style.transform = `translateX(0)`;
             window.scrollTo({ top: 0, behavior: 'smooth' });
             bioSection.style.display = 'block';
             bioSection.style.opacity = '0';
@@ -1189,15 +1193,19 @@
         function hideBio() {
             const bioSection = document.getElementById('bio-section');
             const hero = document.getElementById('hero');
-            bioSection.classList.remove('active');
-            setTimeout(() => {
-                bioSection.style.display = 'none';
-                hero.style.opacity = '0';
+            if (bioSection) {
+                bioSection.classList.remove('active');
                 setTimeout(() => {
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                    hero.style.opacity = '1';
-                }, 50);
-            }, 500);
+                    bioSection.style.display = 'none';
+                    if (hero) {
+                        hero.style.opacity = '0';
+                        setTimeout(() => {
+                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                            hero.style.opacity = '1';
+                        }, 50);
+                    }
+                }, 500);
+            }
         }
     </script>
 </body>
