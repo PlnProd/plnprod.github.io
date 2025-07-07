@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PLN Psod</title>
+    <title>PLN Pqod</title>
     <script src="https://www.youtube.com/iframe_api"></script>
     <style>
         * {
@@ -170,6 +170,7 @@
             background-color: #000;
             min-height: 100vh;
             position: relative;
+            top: 0;
         }
 
         .video-section.active {
@@ -973,14 +974,14 @@
         function nextColumn() {
             if (currentColumn < totalColumns - 1) {
                 currentColumn++;
-                mosaic.style.transform = `translateX(-${currentColumn * 100}vw)`;
+                if (mosaic) mosaic.style.transform = `translateX(-${currentColumn * 100}vw)`;
             }
         }
 
         function prevColumn() {
             if (currentColumn > 0) {
                 currentColumn--;
-                mosaic.style.transform = `translateX(-${currentColumn * 100}vw)`;
+                if (mosaic) mosaic.style.transform = `translateX(-${currentColumn * 100}vw)`;
             }
         }
 
@@ -1043,8 +1044,9 @@
                 `).join('')}
             `;
             hero.style.opacity = '0';
-            document.querySelector('.video-section').classList.add('active');
-            window.scrollTo(0, 0);
+            const videoSection = document.querySelector('.video-section');
+            if (videoSection) videoSection.classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
 
             if (typeof YT !== 'undefined' && YT.loaded) {
                 setTimeout(() => {
@@ -1090,7 +1092,8 @@
 
         // Fermer la section vidéo
         function closeVideo() {
-            document.querySelector('.video-section').classList.remove('active');
+            const videoSection = document.querySelector('.video-section');
+            if (videoSection) videoSection.classList.remove('active');
             hero.style.opacity = '1';
             const sharePanel = document.getElementById('share-panel');
             if (sharePanel) sharePanel.classList.remove('active');
@@ -1101,7 +1104,7 @@
                 const projectIndex = parseInt(currentProject.replace('project', '')) - 1;
                 currentColumn = Math.floor(projectIndex % 3);
                 const row = Math.floor(projectIndex / 3);
-                mosaic.style.transform = `translateX(-${currentColumn * 100}vw)`;
+                if (mosaic) mosaic.style.transform = `translateX(-${currentColumn * 100}vw)`;
                 window.scrollTo(0, row * window.innerHeight);
             }
             const videoContent = document.getElementById('video-content');
@@ -1175,19 +1178,17 @@
         // Gestion de la section Bio avec effet de glissement
         function showBio() {
             const bioSection = document.getElementById('bio-section');
-            if (!bioSection) {
-                console.error('Bio section not found');
-                return;
+            if (bioSection) {
+                const mosaic = document.getElementById('mosaic');
+                currentColumn = 0;
+                if (mosaic) mosaic.style.transform = `translateX(0)`;
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                bioSection.style.display = 'block';
+                bioSection.style.opacity = '0';
+                setTimeout(() => {
+                    bioSection.classList.add('active');
+                }, 50);
             }
-            const mosaic = document.getElementById('mosaic');
-            currentColumn = 0;
-            if (mosaic) mosaic.style.transform = `translateX(0)`;
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-            bioSection.style.display = 'block';
-            bioSection.style.opacity = '0';
-            setTimeout(() => {
-                bioSection.classList.add('active');
-            }, 50);
         }
 
         function hideBio() {
