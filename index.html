@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PLN Prood</title>
+    <title>PLN Proodo</title>
     <script src="https://www.youtube.com/iframe_api"></script>
     <style>
         * {
@@ -17,6 +17,7 @@
             background-color: #000;
             color: #fff;
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
         /* Barre de navigation */
@@ -69,6 +70,7 @@
             text-decoration: none;
             font-size: 1.1rem;
             text-transform: uppercase;
+            cursor: pointer;
         }
 
         nav ul li a:hover {
@@ -455,6 +457,81 @@
             filter: brightness(0) invert(1);
         }
 
+        /* Section Bio */
+        .bio-section {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: #000;
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 2rem;
+            opacity: 0;
+            transform: translateY(100%);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .bio-section.active {
+            display: flex;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .bio-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .bio-text {
+            font-size: 1.2rem;
+            font-weight: 300;
+            text-align: center;
+            max-width: 600px;
+            margin-bottom: 2rem;
+        }
+
+        .bio-link {
+            font-size: 1.1rem;
+            color: #3498db;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .bio-link:hover {
+            color: #2980b9;
+        }
+
+        .bio-photo {
+            display: none;
+            margin-top: 20rem;
+            max-width: 400px;
+            width: 100%;
+            height: auto;
+        }
+
+        .bio-awards {
+            margin-top: 2rem;
+            text-align: center;
+            max-width: 600px;
+        }
+
+        .bio-awards h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .bio-awards p {
+            font-size: 1rem;
+            color: #ccc;
+        }
+
         /* Footer */
         footer {
             background-color: #000;
@@ -463,6 +540,7 @@
             padding: 1rem;
             position: relative;
             width: 100%;
+            z-index: 1;
         }
 
         /* Responsive */
@@ -591,6 +669,18 @@
                 width: 30px;
                 height: 30px;
             }
+
+            .bio-title {
+                font-size: 1.8rem;
+            }
+
+            .bio-text {
+                font-size: 1rem;
+            }
+
+            .bio-photo {
+                max-width: 100%;
+            }
         }
     </style>
 </head>
@@ -605,7 +695,7 @@
             <li><a href="#narration">Narration</a></li>
             <li><a href="#publicite">Publicité</a></li>
             <li><a href="#musique-video">Musique-Vidéo</a></li>
-            <li><a href="#bio">Bio</a></li>
+            <li><a href="#" onclick="showBio()">Bio</a></li>
             <li><a href="#equipement">Équipement</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
@@ -733,6 +823,19 @@
         </div>
         <div class="related-videos" id="related-videos">
             <!-- Vignettes -->
+        </div>
+    </section>
+
+    <!-- Section Bio -->
+    <section class="bio-section" id="bio-section">
+        <div class="bio-title">Vidéaste Passionné de Vidéographie. Créateur de Films. Conteur d'Histoires</div>
+        <div class="bio-text">Avec une passion pour capturer des moments uniques et raconter des histoires visuelles, je transforme des idées en expériences cinématographiques mémorables. Chaque projet est une opportunité de créer quelque chose d'extraordinaire.</div>
+        <a href="#" class="bio-link" onclick="hideBio()">voir le portfolio</a>
+        <img src="https://via.placeholder.com/400x300?text=Photo+Bio" alt="Photo Bio" class="bio-photo">
+        <div class="bio-awards">
+            <h3>Distinctions & Commentaires Clients</h3>
+            <p>"Travail exceptionnel, très professionnel !" - Client A</p>
+            <p>"Une créativité hors pair, je recommande vivement !" - Client B</p>
         </div>
     </section>
 
@@ -928,7 +1031,7 @@
             document.querySelector('.video-section').classList.add('active');
             window.scrollTo(0, 0);
 
-            // Initialiser le lecteur YouTube après un délai pour s'assurer que l'API est prête
+            // Initialiser le lecteur YouTube après un délai
             if (typeof YT !== 'undefined' && YT.loaded) {
                 setTimeout(() => {
                     if (!player) {
@@ -945,13 +1048,12 @@
                         player.loadVideoById(data.url.split('/embed/')[1].split('?')[0]);
                         player.playVideo();
                     }
-                }, 500); // Délai de 500ms pour laisser l'API se charger
+                }, 500);
             } else {
                 console.error('YouTube API not loaded, retrying...');
-                setTimeout(() => showVideo(projectId), 1000); // Re-tenter si l'API n'est pas prête
+                setTimeout(() => showVideo(projectId), 1000);
             }
 
-            // Réappliquer les écouteurs aux nouvelles vignettes
             applyThumbnailListeners();
         }
 
@@ -963,20 +1065,14 @@
                 const videoInfo = activeThumbnail.querySelector('.video-info');
                 const playingText = activeThumbnail.querySelector('.playing-text');
                 if (event.data === YT.PlayerState.PLAYING) {
-                    console.log('Video is playing, adding .playing class');
                     activeThumbnail.classList.add('playing');
                     if (videoInfo) videoInfo.style.display = 'none';
                     if (playingText) playingText.style.display = 'none';
                 } else if (event.data === YT.PlayerState.PAUSED || event.data === YT.PlayerState.ENDED) {
-                    console.log('Video is paused or ended, removing .playing class');
                     activeThumbnail.classList.remove('playing');
                     if (videoInfo) videoInfo.style.display = '';
                     if (playingText) playingText.style.display = 'none';
-                } else {
-                    console.log('Unknown player state:', event.data);
                 }
-            } else {
-                console.log('No active thumbnail found');
             }
         }
 
@@ -987,11 +1083,8 @@
             const sharePanel = document.getElementById('share-panel');
             if (sharePanel) sharePanel.classList.remove('active');
             if (player && player.stopVideo) {
-                console.log('Stopping video');
-                player.stopVideo(); // Arrête la vidéo
-                // Pas de destroy pour éviter les instabilités, juste une pause
+                player.stopVideo();
             }
-            // Restaurer la position dans la mosaïque
             if (currentProject) {
                 const projectIndex = parseInt(currentProject.replace('project', '')) - 1;
                 currentColumn = Math.floor(projectIndex % 3);
@@ -999,20 +1092,17 @@
                 mosaic.style.transform = `translateX(-${currentColumn * 100}vw)`;
                 window.scrollTo(0, row * window.innerHeight);
             }
-            // Réinitialiser le contenu sans détruire l'instance
             const videoContent = document.getElementById('video-content');
             if (videoContent) {
-                videoContent.innerHTML = ''; // Supprime l'iframe
-                player = null; // Réinitialise pour la prochaine lecture
+                videoContent.innerHTML = '';
+                player = null;
             }
         }
 
         // Ouvrir/fermer le panneau de partage
         function toggleSharePanel() {
             const sharePanel = document.getElementById('share-panel');
-            if (sharePanel) {
-                sharePanel.classList.toggle('active');
-            }
+            if (sharePanel) sharePanel.classList.toggle('active');
         }
 
         // Fonctions de partage
@@ -1021,18 +1111,10 @@
             const url = data.url;
             let shareUrl;
             switch (platform) {
-                case 'facebook':
-                    shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
-                    break;
-                case 'twitter':
-                    shareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(data.title)}`;
-                    break;
-                case 'pinterest':
-                    shareUrl = `https://pinterest.com/pin/create/button/?url=${encodeURIComponent(url)}&description=${encodeURIComponent(data.title)}`;
-                    break;
-                case 'tumblr':
-                    shareUrl = `https://www.tumblr.com/widgets/share/tool?canonicalUrl=${encodeURIComponent(url)}&title=${encodeURIComponent(data.title)}`;
-                    break;
+                case 'facebook': shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`; break;
+                case 'twitter': shareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(data.title)}`; break;
+                case 'pinterest': shareUrl = `https://pinterest.com/pin/create/button/?url=${encodeURIComponent(url)}&description=${encodeURIComponent(data.title)}`; break;
+                case 'tumblr': shareUrl = `https://www.tumblr.com/widgets/share/tool?canonicalUrl=${encodeURIComponent(url)}&title=${encodeURIComponent(data.title)}`; break;
             }
             window.open(shareUrl, '_blank');
         }
@@ -1042,12 +1124,10 @@
             const data = videoData[currentProject];
             navigator.clipboard.writeText(data.url).then(() => {
                 alert('Lien copié dans le presse-papiers !');
-            }).catch(err => {
-                console.error('Erreur lors de la copie du lien :', err);
-            });
+            }).catch(err => console.error('Erreur lors de la copie du lien :', err));
         }
 
-        // Nouvelle fonction pour appliquer les écouteurs
+        // Appliquer les écouteurs aux vignettes
         function applyThumbnailListeners() {
             const thumbnails = document.querySelectorAll('.related-video');
             thumbnails.forEach(thumbnail => {
@@ -1058,7 +1138,6 @@
             });
         }
 
-        // Définir les gestionnaires comme fonctions séparées
         function handleMouseEnter(event) {
             const thumbnail = event.currentTarget;
             const playingText = thumbnail.querySelector('.playing-text');
@@ -1079,6 +1158,26 @@
             if (videoInfo && !thumbnail.classList.contains('playing')) {
                 videoInfo.style.display = 'none';
             }
+        }
+
+        // Gestion de la section Bio
+        function showBio() {
+            const bioSection = document.getElementById('bio-section');
+            const mosaic = document.getElementById('mosaic');
+            currentColumn = 0; // Retour au projet 1
+            mosaic.style.transform = `translateX(0)`;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            setTimeout(() => {
+                bioSection.classList.add('active');
+            }, 100); // Délai pour aligner avec le scroll
+        }
+
+        function hideBio() {
+            const bioSection = document.getElementById('bio-section');
+            bioSection.classList.remove('active');
+            setTimeout(() => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }, 500); // Attendre la fin du fondu
         }
     </script>
 </body>
