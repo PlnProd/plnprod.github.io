@@ -3,133 +3,1093 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio Vidéo - Musique Classique</title>
+    <title>PLN Prod</title>
+    <script src="https://www.youtube.com/iframe_api"></script>
     <style>
-        body {
-            font-family: Arial, sans-serif;
+        * {
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
         }
-        header {
-            background-color: #333;
-            color: white;
-            text-align: center;
-            padding: 2em;
+
+        body {
+            background-color: #000;
+            color: #fff;
+            line-height: 1.6;
         }
+
+        /* Barre de navigation */
         nav {
-            background-color: #444;
-            padding: 1em;
+            background-color: #000;
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: background-color 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
-        nav a {
-            color: white;
-            margin: 0 1em;
+
+        nav.scrolled {
+            background-color: transparent;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            margin-left: 2rem;
+        }
+
+        .nav-logo img {
+            width: 40px;
+            height: auto;
+            margin-right: 0.5rem;
+        }
+
+        .nav-logo p {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            margin-right: 2rem;
+        }
+
+        nav ul li {
+            margin: 0 1.5rem;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+        }
+
+        nav ul li a:hover {
+            color: #3498db;
+        }
+
+        /* Section mosaïque */
+        .hero {
+            position: relative;
+            min-height: 400vh;
+            overflow-x: hidden;
+        }
+
+        .mosaic-container {
+            display: grid;
+            grid-template-columns: repeat(3, 100vw);
+            grid-template-rows: repeat(4, 100vh);
+            width: 300vw;
+            transition: transform 0.5s ease;
+        }
+
+        .mosaic-item {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .mosaic-item img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+        }
+
+        .mosaic-item .content {
+            text-align: center;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 2rem;
+            border-radius: 10px;
+            z-index: 2;
+        }
+
+        .mosaic-item h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .mosaic-item button {
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            cursor: pointer;
+            border-radius: 5px;
+            z-index: 2;
+        }
+
+        .mosaic-item button:hover {
+            background-color: #2980b9;
+        }
+
+        .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2rem;
+            color: #fff;
+            cursor: pointer;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 0.5rem;
+            border-radius: 50%;
+            z-index: 100;
+        }
+
+        .arrow-right {
+            right: 20px;
+        }
+
+        .arrow-left {
+            left: 20px;
+        }
+
+        /* Section vidéo */
+        .video-section {
+            display: none;
+            padding: 3rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: #000;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        .video-section.active {
+            display: block;
+        }
+
+        .video-header {
+            background-color: #000;
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1001;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 100px;
+        }
+
+        .video-header .left-controls {
+            display: flex;
+            align-items: center;
+            margin-left: 2rem;
+        }
+
+        .video-header .info-icon,
+        .video-header .share-icon,
+        .video-header .share-text {
+            color: #fff;
+            font-size: 1.2rem;
+            margin-right: 0.5rem;
+            cursor: pointer;
+        }
+
+        .video-header .share-text {
             text-decoration: none;
         }
-        .portfolio {
-            max-width: 1200px;
-            margin: 2em auto;
-            padding: 0 1em;
+
+        .video-header .share-text:hover,
+        .video-header .share-icon:hover {
+            color: #3498db;
         }
-        .video-card {
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            margin: 1em 0;
-            padding: 1em;
+
+        .video-header .divider {
+            color: #fff;
+            margin: 0 0.5rem;
         }
-        .video-card iframe {
-            width: 100%;
-            height: 315px;
-        }
-        .video-card h3 {
-            margin: 0.5em 0;
-        }
-        footer {
-            background-color: #333;
-            color: white;
-            text-align: center;
-            padding: 1em;
+
+        .video-section .close-btn {
             position: fixed;
-            bottom: 0;
+            top: 6.5rem;
+            right: 1rem;
+            font-size: 1.8rem;
+            color: #fff;
+            cursor: pointer;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 0.6rem 0.9rem;
+            border-radius: 50%;
+            transition: background 0.3s;
+            z-index: 1002;
+        }
+
+        .video-section .close-btn:hover {
+            background: rgba(0, 0, 0, 1);
+        }
+
+        .video-content {
+            display: flex;
+            flex-direction: row;
+            gap: 2rem;
+            align-items: flex-start;
+            justify-content: center;
+            margin-top: 100px;
+            position: relative;
+            flex-wrap: wrap;
+        }
+
+        .video-content .video-wrapper {
+            position: relative;
+            max-width: 600px;
             width: 100%;
+            height: calc(600px * 9 / 16);
+        }
+
+        .video-content iframe {
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            /* Ajout pour masquer les éléments comme "4K" */
+            background: #000; /* Couvre les éléments indésirables */
+        }
+
+        .video-content .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .video-content .video-title-overlay {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            font-size: 1.2rem;
+            padding: 0.5rem;
+            text-align: center;
+            z-index: 3;
+        }
+
+        .video-wrapper:hover .video-title-overlay {
+            display: block;
+        }
+
+        .video-description {
+            max-width: 500px;
+            text-align: left;
+        }
+
+        .video-description h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .video-description p {
+            font-size: 1.1rem;
+        }
+
+        /* Vignettes des vidéos associées */
+        .related-videos {
+            display: flex;
+            justify-content: flex-start;
+            gap: 1rem;
+            margin-top: 2rem;
+            width: 100%;
+        }
+
+        .related-video {
+            width: 200px;
+            height: calc(200px * 9 / 16);
+            cursor: pointer;
+            position: relative;
+        }
+
+        .related-video img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 5px;
+            transition: opacity 0.3s;
+        }
+
+        .related-video.active img {
+            opacity: 0.8;
+        }
+
+        .related-video.active.playing:hover .playing-text {
+            display: block;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #fff;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            font-size: 0.9vw;
+            font-weight: bold;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            z-index: 10; /* Augmenté pour priorité */
+        }
+
+        .related-video:not(.playing):hover img {
+            opacity: 0.7;
+        }
+
+        .related-video .video-info {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            z-index: 3;
+        }
+
+        .related-video:not(.playing):hover .video-info {
+            display: flex;
+        }
+
+        .related-video.active.playing .video-info,
+        .related-video.active.playing:hover .video-info {
+            display: none !important;
+        }
+
+        .video-info .video-title {
+            color: #fff;
+            padding: 0.3vw 0.6vw;
+            font-size: 0.6vw;
+            text-align: center;
+            width: 100%;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+        }
+
+        .video-info .video-duration {
+            color: #fff;
+            padding: 0.3vw 0.6vw;
+            font-size: 0.5vw;
+            text-align: center;
+            width: 100%;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+        }
+
+        .video-info .play-icon {
+            width: 40px;
+            height: 40px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>') no-repeat center;
+            background-size: contain;
+            opacity: 0.9;
+            transition: opacity 0.3s;
+        }
+
+        .video-info .play-icon:hover {
+            opacity: 1;
+        }
+
+        /* Panneau de partage */
+        .share-panel {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1003;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .share-panel.active {
+            display: flex;
+        }
+
+        .share-panel .share-text {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            text-align: center;
+            color: #fff;
+        }
+
+        .share-panel .close-share {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #fff;
+        }
+
+        .share-panel .close-share:hover {
+            color: #3498db;
+        }
+
+        .share-panel .share-buttons {
+            position: absolute;
+            bottom: 60px;
+            left: 20px;
+            right: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+
+        .share-panel .share-button {
+            width: 40px;
+            height: 40px;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .share-panel .share-button img {
+            width: 100%;
+            height: 100%;
+            filter: brightness(0) invert(1);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #000;
+            color: #fff;
+            text-align: center;
+            padding: 1rem;
+            position: relative;
+            width: 100%;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-logo img {
+                width: 30px;
+            }
+
+            .nav-logo p {
+                font-size: 1rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                margin-right: 0;
+            }
+
+            nav ul li {
+                margin: 0.5rem 0;
+            }
+
+            .mosaic-item h1 {
+                font-size: 1.5rem;
+            }
+
+            .mosaic-item button {
+                padding: 0.5rem 1rem;
+                font-size: 1rem;
+            }
+
+            .arrow {
+                font-size: 1.5rem;
+                padding: 0.3rem;
+            }
+
+            .video-content {
+                flex-direction: column;
+                align-items: center;
+                margin-top: 80px;
+            }
+
+            .video-content .video-wrapper {
+                height: calc(100vw * 9 / 16);
+            }
+
+            .video-content .video-title-overlay {
+                font-size: 0.9rem;
+            }
+
+            .share-panel {
+                height: calc(100vw * 9 / 16);
+            }
+
+            .share-panel .share-text {
+                font-size: 1.2rem;
+            }
+
+            .share-panel .share-buttons {
+                bottom: 40px;
+                gap: 1rem;
+            }
+
+            .video-description {
+                text-align: center;
+            }
+
+            .video-description h2 {
+                font-size: 1.5rem;
+            }
+
+            .video-section .close-btn {
+                font-size: 1.4rem;
+                padding: 0.4rem 0.7rem;
+                top: 5.5rem;
+                background: rgba(0, 0, 0, 0.8);
+            }
+
+            .video-section .close-btn:hover {
+                background: rgba(0, 0, 0, 1);
+            }
+
+            .video-header {
+                height: 80px;
+            }
+
+            .video-header .left-controls {
+                margin-left: 1rem;
+            }
+
+            .video-header .info-icon,
+            .video-header .share-icon,
+            .video-header .share-text {
+                font-size: 1rem;
+            }
+
+            .related-videos {
+                gap: 0.5rem;
+                justify-content: flex-start;
+            }
+
+            .related-video {
+                width: 120px;
+                height: calc(120px * 9 / 16);
+            }
+
+            .related-video.active.playing:hover .playing-text {
+                font-size: 2.8vw;
+                padding: 0.8rem 1.2rem;
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+                z-index: 10;
+            }
+
+            .video-info .video-title {
+                font-size: 2.5vw;
+                padding: 1vw 1.5vw;
+                text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+            }
+
+            .video-info .video-duration {
+                font-size: 2vw;
+                padding: 1vw 1.5vw;
+                text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+            }
+
+            .video-info .play-icon {
+                width: 30px;
+                height: 30px;
+            }
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Production Vidéo pour la Musique Classique</h1>
-        <p>Spécialiste en captation et montage pour conservatoires et événements musicaux</p>
-    </header>
-    <nav>
-        <a href="#home">Accueil</a>
-        <a href="#portfolio">Portfolio</a>
-        <a href="#about">À propos</a>
-        <a href="#contact">Contact</a>
+    <!-- Barre de navigation -->
+    <nav id="nav">
+        <div class="nav-logo">
+            <img src="https://via.placeholder.com/40x40?text=Logo" alt="PLN Prod Logo">
+            <p>PLN Prod</p>
+        </div>
+        <ul>
+            <li><a href="#narration">Narration</a></li>
+            <li><a href="#publicite">Publicité</a></li>
+            <li><a href="#musique-video">Musique-Vidéo</a></li>
+            <li><a href="#bio">Bio</a></li>
+            <li><a href="#equipement">Équipement</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
     </nav>
-    <section class="portfolio" id="portfolio">
-        <h2>Portfolio</h2>
-        <div class="video-card">
-            <h3>Montage Narratif : Récital de Piano</h3>
-            <p>Exercice de montage utilisant des clips libres de droits (Pexels) pour simuler une captation de récital, avec synchronisation sur une pièce de Chopin.</p>
-            <div style="padding:56.25% 0 0 0;position:relative;">
-                <iframe src="https://player.vimeo.com/video/1096651721?h=29906a25a2&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Bach - Aria Goldberg - Exemple"></iframe>
+
+    <!-- Section mosaïque -->
+    <section class="hero">
+        <div class="mosaic-container" id="mosaic">
+            <div class="mosaic-item" data-project="project1">
+                <img src="https://media.giphy.com/media/3o6Zta2kQfOv1oXz4Q/giphy.gif" alt="Performance Live">
+                <div class="content">
+                    <h1>Projet 1</h1>
+                    <button onclick="showVideo('project1')">Lire la vidéo</button>
+                </div>
+                <div class="arrow arrow-right" onclick="nextColumn()">❯</div>
             </div>
-            <script src="https://player.vimeo.com/api/player.js"></script>
-        <div class="video-card">
-            <h3>Vidéo Promotionnelle : Conservatoire Fictif</h3>
-            <p>Montage simulant une vidéo promotionnelle pour un conservatoire, avec des plans d’étudiants et de professeurs, musique libre de droits.</p>
-            <iframe title="vimeo-player" src="https://player.vimeo.com/video/1096651721?h=29906a25a2" width="640" height="360" frameborder="0"    allowfullscreen></iframe>
+            <div class="mosaic-item" data-project="project2">
+                <img src="https://media.giphy.com/media/3o7TKz9fL5s9Z6Z6hW/giphy.gif" alt="Clip Musical">
+                <div class="content">
+                    <h1>Projet 2</h1>
+                    <button onclick="showVideo('project2')">Lire la vidéo</button>
+                </div>
+                <div class="arrow arrow-left" onclick="prevColumn()">❮</div>
+                <div class="arrow arrow-right" onclick="nextColumn()">❯</div>
+            </div>
+            <div class="mosaic-item" data-project="project3">
+                <img src="https://media.giphy.com/media/l0MYt5j0ya4jXh6M0/giphy.gif" alt="Animation Abstraite">
+                <div class="content">
+                    <h1>Projet 3</h1>
+                    <button onclick="showVideo('project3')">Lire la vidéo</button>
+                </div>
+                <div class="arrow arrow-left" onclick="prevColumn()">❮</div>
+            </div>
+            <div class="mosaic-item" data-project="project4">
+                <img src="https://media.giphy.com/media/xT9IgzoZZ0xxInIgZq/giphy.gif" alt="Concert Électrique">
+                <div class="content">
+                    <h1>Projet 4</h1>
+                    <button onclick="showVideo('project4')">Lire la vidéo</button>
+                </div>
+                <div class="arrow arrow-right" onclick="nextColumn()">❯</div>
+            </div>
+            <div class="mosaic-item" data-project="project5">
+                <img src="https://media.giphy.com/media/3o6Zt6KHxJTbNbLDeM/giphy.gif" alt="Publicité Créative">
+                <div class="content">
+                    <h1>Projet 5</h1>
+                    <button onclick="showVideo('project5')">Lire la vidéo</button>
+                </div>
+                <div class="arrow arrow-left" onclick="prevColumn()">❮</div>
+                <div class="arrow arrow-right" onclick="nextColumn()">❯</div>
+            </div>
+            <div class="mosaic-item" data-project="project6">
+                <img src="https://media.giphy.com/media/26xBzdT9i8m7Dq1k4/giphy.gif" alt="Documentaire Musical">
+                <div class="content">
+                    <h1>Projet 6</h1>
+                    <button onclick="showVideo('project6')">Lire la vidéo</button>
+                </div>
+                <div class="arrow arrow-left" onclick="prevColumn()">❮</div>
+            </div>
+            <div class="mosaic-item" data-project="project7">
+                <img src="https://media.giphy.com/media/xT9IgG2xK7z4z6z6hW/giphy.gif" alt="Performance Acoustique">
+                <div class="content">
+                    <h1>Projet 7</h1>
+                    <button onclick="showVideo('project7')">Lire la vidéo</button>
+                </div>
+                <div class="arrow arrow-right" onclick="nextColumn()">❯</div>
+            </div>
+            <div class="mosaic-item" data-project="project8">
+                <img src="https://media.giphy.com/media/3o7aDcz6By4yX8Wn3G/giphy.gif" alt="Clip Experimental">
+                <div class="content">
+                    <h1>Projet 8</h1>
+                    <button onclick="showVideo('project8')">Lire la vidéo</button>
+                </div>
+                <div class="arrow arrow-left" onclick="prevColumn()">❮</div>
+                <div class="arrow arrow-right" onclick="nextColumn()">❯</div>
+            </div>
+            <div class="mosaic-item" data-project="project9">
+                <img src="https://media.giphy.com/media/3o6ZtaO9BZHcOjmErm/giphy.gif" alt="Live Studio">
+                <div class="content">
+                    <h1>Projet 9</h1>
+                    <button onclick="showVideo('project9')">Lire la vidéo</button>
+                </div>
+                <div class="arrow arrow-left" onclick="prevColumn()">❮</div>
+            </div>
+            <div class="mosaic-item" data-project="project10">
+                <img src="https://media.giphy.com/media/l0Iyl55kTeh71nTWw/giphy.gif" alt="Vidéo Narrative">
+                <div class="content">
+                    <h1>Projet 10</h1>
+                    <button onclick="showVideo('project10')">Lire la vidéo</button>
+                </div>
+                <div class="arrow arrow-right" onclick="nextColumn()">❯</div>
+            </div>
+            <div class="mosaic-item" data-project="project11">
+                <img src="https://media.giphy.com/media/26FPy3G0rLKBPlrB6/giphy.gif" alt="Visualisation Musicale">
+                <div class="content">
+                    <h1>Projet 11</h1>
+                    <button onclick="showVideo('project11')">Lire la vidéo</button>
+                </div>
+                <div class="arrow arrow-left" onclick="prevColumn()">❮</div>
+                <div class="arrow arrow-right" onclick="nextColumn()">❯</div>
+            </div>
+            <div class="mosaic-item" data-project="project12">
+                <img src="https://media.giphy.com/media/3o7TKF0r3wY2f2gQ6k/giphy.gif" alt="Show Live">
+                <div class="content">
+                    <h1>Projet 12</h1>
+                    <button onclick="showVideo('project12')">Lire la vidéo</button>
+                </div>
+                <div class="arrow arrow-left" onclick="prevColumn()">❮</div>
+            </div>
         </div>
     </section>
-<section id="about">
-    <h2>À propos</h2>
-    <p>Passionné par la musique classique et la vidéo, nous créons des contenus engageants pour mettre en valeur les conservatoires et leurs talents. Nos compétences incluent le tournage, le montage et la réalisation de vidéos adaptées aux besoins spécifiques des institutions culturelles et éducatives.</p>
-    <h3>Nos Missions</h3>
-    <p>Notre objectif est d'accompagner les conservatoires, artistes et événements musicaux dans la mise en valeur de leur travail, tout en intégrant des pratiques responsables et durables.</p>
-    <h3>Notre Engagement RSE</h3>
-    <p>Nous alignons nos projets de tournage, montage et réalisation de vidéos sur les principes de l’écodesign et du bas carbone, en mettant en œuvre des actions concrètes pour minimiser notre impact environnemental. Voici nos approches pragmatiques :</p>
-    <ul>
-        <li>
-            <strong>Tournage Écoresponsable :</strong>
-            <ul>
-                <li>Clips promotionnels libres de droits : utilisation de vidéos Pexels pour éviter tout tournage physique, éliminant les émissions liées aux déplacements et à l’équipement.</li>
-                <li>Tournages futurs : planification efficace des tournages (une seule session, plan de prises précis), utilisation d’éclairages LED alimentés par des batteries rechargeables.</li>
-                <li>Transport : transports en commun et covoiturage pour réduire l’empreinte carbone des déplacements.</li>
-            </ul>
-        </li>
-        <li>
-            <strong>Montage Bas Carbone :</strong>
-            <ul>
-                <li>Logiciel : utilisation de DaVinci Resolve sur un ordinateur portable économe en énergie (AMD Ryzen 9 6900HS et Radeon Graphics, consommation maximale de 70-100 W contre 300 W pour un PC de bureau).</li>
-                <li>Optimisation : réduction des rendus inutiles en prévisualisant à basse résolution et en rendant uniquement la version finale en 1080p.</li>
-            </ul>
-        </li>
-        <li>
-            <strong>Réalisation et Diffusion Durables :</strong>
-            <ul>
-                <li>Site web : hébergement sur une plateforme écoresponsable (GitHub Pages, efficace pour les sites statiques), avec optimisation pour un chargement rapide (vidéos compressées, utilisation d’images légères).</li>
-                <li>Streaming : téléchargement des vidéos en 1080p plutôt qu’en 4K pour réduire l’empreinte carbone. Promotion de Vimeo pour des initiatives de durabilité plus visibles.</li>
-                <li>Stockage : stockage des fichiers sur un disque dur externe plutôt que dans le cloud afin de limiter l’utilisation des data centers.</li>
-            </ul>
-        </li>
-        <li>
-            <strong>Communication Écoresponsable :</strong>
-            <ul>
-                <li>Utilisation de clips libres de droits et d’équipements économes pour réduire l’impact environnemental des vidéos.</li>
-                <li>Préférence pour le matériel durable (Sony) et achat d’occasion pour les petits équipements.</li>
-                <li>Recyclage des déchets électroniques (ex. : batteries usagées) via des points de collecte locaux.</li>
-            </ul>
-        </li>
-    </ul>
-    <p>Nos pratiques reflètent notre engagement à intégrer la durabilité dans toutes les étapes de nos projets. Nous sommes convaincus que l’avenir de la production vidéo passe par des choix responsables et innovants.</p>
-</section>
-    <section id="contact">
-        <h2>Contact</h2>
-        <p>Email : contact@votreportfolio.com</p>
+
+    <!-- Section vidéo -->
+    <section class="video-section" id="video-section">
+        <div class="video-header">
+            <div class="left-controls">
+                <span class="info-icon">ℹ️</span>
+                <span class="divider">|</span>
+                <span class="share-icon" onclick="toggleSharePanel()">↪</span>
+                <a href="#" class="share-text" onclick="toggleSharePanel()">partager</a>
+            </div>
+        </div>
+        <div class="close-btn" onclick="closeVideo()">✖</div>
+        <div class="video-content" id="video-content">
+            <!-- Lecteur et description -->
+        </div>
+        <div class="related-videos" id="related-videos">
+            <!-- Vignettes -->
+        </div>
     </section>
+
+    <!-- Footer -->
     <footer>
-        <p>&copy; 2025 PLNProudono - Tous droits réservés</p>
+        <p>© 2016 by Plnp-Prod. Proudly created by PLN Prod.</p>
     </footer>
+
+    <script>
+        // Données des vidéos YouTube et GIFs pour chaque projet
+        const videoData = {
+            project1: {
+                url: 'https://www.youtube.com/embed/dQw4w9WgXcQ?controls=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=0&rel=0', // Ajout de paramètres pour masquer "4K"
+                title: 'Projet 1 : Performance Live',
+                description: 'Une performance live vibrante capturant l’essence de la musique et de la créativité.',
+                gif: 'https://media.giphy.com/media/3o6Zta2kQfOv1oXz4Q/giphy.gif',
+                duration: '3:45'
+            },
+            project2: {
+                url: 'https://www.youtube.com/embed/9bZkp7q19f0?controls=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=0&rel=0',
+                title: 'Projet 2 : Clip Musical',
+                description: 'Un clip musical énergique avec des visuels audacieux et une production soignée.',
+                gif: 'https://media.giphy.com/media/3o7TKz9fL5s9Z6Z6hW/giphy.gif',
+                duration: '4:20'
+            },
+            project3: {
+                url: 'https://www.youtube.com/embed/M7lc1UVf-VE?controls=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=0&rel=0',
+                title: 'Projet 3 : Animation Abstraite',
+                description: 'Une exploration visuelle abstraite synchronisée avec une bande-son unique.',
+                gif: 'https://media.giphy.com/media/l0MYt5j0ya4jXh6M0/giphy.gif',
+                duration: '2:50'
+            },
+            project4: {
+                url: 'https://www.youtube.com/embed/dQw4w9WgXcQ?controls=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=0&rel=0',
+                title: 'Projet 4 : Concert Électrique',
+                description: 'Un concert capturé avec une énergie brute et des effets visuels immersifs.',
+                gif: 'https://media.giphy.com/media/xT9IgzoZZ0xxInIgZq/giphy.gif',
+                duration: '5:10'
+            },
+            project5: {
+                url: 'https://www.youtube.com/embed/9bZkp7q19f0?controls=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=0&rel=0',
+                title: 'Projet 5 : Publicité Créative',
+                description: 'Une publicité innovante combinant narration et visuels modernes.',
+                gif: 'https://media.giphy.com/media/3o6Zt6KHxJTbNbLDeM/giphy.gif',
+                duration: '1:30'
+            },
+            project6: {
+                url: 'https://www.youtube.com/embed/M7lc1UVf-VE?controls=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=0&rel=0',
+                title: 'Projet 6 : Documentaire Musical',
+                description: 'Un documentaire explorant la création d’un projet musical unique.',
+                gif: 'https://media.giphy.com/media/26xBzdT9i8m7Dq1k4/giphy.gif',
+                duration: '8:15'
+            },
+            project7: {
+                url: 'https://www.youtube.com/embed/dQw4w9WgXcQ?controls=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=0&rel=0',
+                title: 'Projet 7 : Performance Acoustique',
+                description: 'Une session acoustique intime avec une ambiance chaleureuse.',
+                gif: 'https://media.giphy.com/media/xT9IgG2xK7z4z6z6hW/giphy.gif',
+                duration: '3:20'
+            },
+            project8: {
+                url: 'https://www.youtube.com/embed/9bZkp7q19f0?controls=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=0&rel=0',
+                title: 'Projet 8 : Clip Experimental',
+                description: 'Un clip expérimental jouant avec les couleurs et les formes.',
+                gif: 'https://media.giphy.com/media/3o7aDcz6By4yX8Wn3G/giphy.gif',
+                duration: '4:00'
+            },
+            project9: {
+                url: 'https://www.youtube.com/embed/M7lc1UVf-VE?controls=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=0&rel=0',
+                title: 'Projet 9 : Live Studio',
+                description: 'Une session live enregistrée en studio avec un son pur.',
+                gif: 'https://media.giphy.com/media/3o6ZtaO9BZHcOjmErm/giphy.gif',
+                duration: '6:05'
+            },
+            project10: {
+                url: 'https://www.youtube.com/embed/dQw4w9WgXcQ?controls=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=0&rel=0',
+                title: 'Projet 10 : Vidéo Narrative',
+                description: 'Une histoire captivante racontée à travers des images puissantes.',
+                gif: 'https://media.giphy.com/media/l0Iyl55kTeh71nTWw/giphy.gif',
+                duration: '5:30'
+            },
+            project11: {
+                url: 'https://www.youtube.com/embed/9bZkp7q19f0?controls=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=0&rel=0',
+                title: 'Projet 11 : Visualisation Musicale',
+                description: 'Une visualisation musicale dynamique et immersive.',
+                gif: 'https://media.giphy.com/media/26FPy3G0rLKBPlrB6/giphy.gif',
+                duration: '3:10'
+            },
+            project12: {
+                url: 'https://www.youtube.com/embed/M7lc1UVf-VE?controls=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=0&rel=0',
+                title: 'Projet 12 : Show Live',
+                description: 'Un spectacle live mettant en avant une production audiovisuelle de pointe.',
+                gif: 'https://media.giphy.com/media/3o7TKF0r3wY2f2gQ6k/giphy.gif',
+                duration: '7:25'
+            }
+        };
+
+        // Gestion du défilement pour la barre de navigation
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // Gestion du défilement horizontal
+        let currentColumn = 0;
+        let currentProject = null;
+        let player = null;
+        const mosaic = document.getElementById('mosaic');
+        const totalColumns = 3;
+
+        function nextColumn() {
+            if (currentColumn < totalColumns - 1) {
+                currentColumn++;
+                mosaic.style.transform = `translateX(-${currentColumn * 100}vw)`;
+            }
+        }
+
+        function prevColumn() {
+            if (currentColumn > 0) {
+                currentColumn--;
+                mosaic.style.transform = `translateX(-${currentColumn * 100}vw)`;
+            }
+        }
+
+        // Afficher la section vidéo
+        function showVideo(projectId) {
+            currentProject = projectId;
+            const data = videoData[projectId];
+            const projectIndex = parseInt(projectId.replace('project', '')) - 1;
+            const row = Math.floor(projectIndex / 3);
+            const projectsInRow = [
+                `project${row * 3 + 1}`,
+                `project${row * 3 + 2}`,
+                `project${row * 3 + 3}`
+            ].filter(id => id in videoData);
+
+            const videoContent = document.getElementById('video-content');
+            const relatedVideos = document.getElementById('related-videos');
+            videoContent.innerHTML = `
+                <div class="video-wrapper">
+                    <iframe id="youtube-player" src="${data.url}" frameborder="0" allowfullscreen></iframe>
+                    <div class="video-overlay"></div>
+                    <div class="video-title-overlay">${data.title}</div>
+                    <div class="share-panel" id="share-panel">
+                        <span class="close-share" onclick="toggleSharePanel()">✖</span>
+                        <div class="share-text">partager cette vidéo sur :</div>
+                        <div class="share-buttons">
+                            <button class="share-button" onclick="shareTo('facebook')">
+                                <img src="https://www.flaticon.com/svg/static/icons/svg/124/124010.svg" alt="Facebook">
+                            </button>
+                            <button class="share-button" onclick="shareTo('twitter')">
+                                <img src="https://www.flaticon.com/svg/static/icons/svg/733/733579.svg" alt="Twitter">
+                            </button>
+                            <button class="share-button" onclick="shareTo('pinterest')">
+                                <img src="https://www.flaticon.com/svg/static/icons/svg/2111/2111502.svg" alt="Pinterest">
+                            </button>
+                            <button class="share-button" onclick="shareTo('tumblr')">
+                                <img src="https://www.flaticon.com/svg/static/icons/svg/174/174876.svg" alt="Tumblr">
+                            </button>
+                            <button class="share-button" onclick="copyLink()">
+                                <img src="https://www.flaticon.com/svg/static/icons/svg/1828/1828460.svg" alt="Copier le lien">
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="video-description">
+                    <h2>${data.title}</h2>
+                    <p>${data.description}</p>
+                </div>
+            `;
+            relatedVideos.innerHTML = `
+                ${projectsInRow.map(id => `
+                    <div class="related-video ${id === projectId ? 'active' : ''}" data-project-id="${id}" onclick="showVideo('${id}')">
+                        <img src="${videoData[id].gif}" alt="${videoData[id].title}">
+                        <div class="video-info">
+                            <span class="video-title">${videoData[id].title}</span>
+                            <span class="play-icon"></span>
+                            <span class="video-duration">${videoData[id].duration}</span>
+                        </div>
+                        <span class="playing-text" style="display: none;">En cours de lecture</span>
+                    </div>
+                `).join('')}
+            `;
+            document.querySelector('.hero').style.display = 'none';
+            document.querySelector('.video-section').classList.add('active');
+            window.scrollTo(0, 0);
+
+            // Initialiser le lecteur YouTube
+            player = new YT.Player('youtube-player', {
+                events: {
+                    'onStateChange': onPlayerStateChange,
+                    'onReady': (event) => {
+                        console.log('YouTube Player is ready');
+                    }
+                }
+            });
+
+            // Réappliquer les écouteurs aux nouvelles vignettes
+            applyThumbnailListeners();
+        }
+
+        // Gérer les changements d'état du lecteur
+        function onPlayerStateChange(event) {
+            const activeThumbnail = document.querySelector('.related-video.active');
+            console.log('Player state changed:', event.data, 'Thumbnail found:', !!activeThumbnail);
+            if (activeThumbnail) {
+                const videoInfo = activeThumbnail.querySelector('.video-info');
+                const playingText = activeThumbnail.querySelector('.playing-text');
+                if (event.data === YT.PlayerState.PLAYING) {
+                    console.log('Video is playing, adding .playing class');
+                    activeThumbnail.classList.add('playing');
+                    if (videoInfo) videoInfo.style.display = 'none';
+                    if (playingText) playingText.style.display = 'none'; // Masqué par défaut
+                } else if (event.data === YT.PlayerState.PAUSED || event.data === YT.PlayerState.ENDED) {
+                    console.log('Video is paused or ended, removing .playing class');
+                    activeThumbnail.classList.remove('playing');
+                    if (videoInfo) videoInfo.style.display = '';
+                    if (playingText) playingText.style.display = 'none';
+                } else {
+                    console.log('Unknown player state:', event.data);
+                }
+            } else {
+                console.log('No active thumbnail found');
+            }
+        }
+
+        // Démarrer la lecture
+        function playVideo() {
+            if (player && player.playVideo) {
+                console.log('Playing video via custom play button');
+                player.playVideo();
+            }
+        }
+
+        // Passer en plein écran (désactivé via paramètres URL)
+        function goFullscreen() {
+            const iframe = document.getElementById('youtube-player');
+            if (iframe.requestFullscreen) {
+                iframe.requestFullscreen();
+            } else if (iframe.mozRequestFullScreen) {
+                iframe.mozRequestFullScreen();
+            } else if (iframe.webkitRequestFullscreen) {
+                iframe.webkitRequestFullscreen();
+            } else if (iframe.msRequestFullscreen) {
+                iframe.msRequestFullscreen();
+            }
+        }
+
+        // Fermer la section vidéo
+        function closeVideo() {
+            document.querySelector('.video-section').classList.remove('active');
+            document.querySelector('.hero').style.display = 'block';
+            const sharePanel = document.getElementById('share-panel');
+            if (sharePanel) sharePanel.classList.remove('active');
+            if (player && player.stopVideo) {
+                console.log('Stopping video');
+                player.stopVideo(); // Assure l'arrêt complet de la vidéo et du son
+            }
+            // Restaurer la position dans la mosaïque
+            if (currentProject) {
+                const projectIndex = parseInt(currentProject.replace('project', '')) - 1;
+                currentColumn = Math.floor(projectIndex % 3);
+                const row = Math.floor(projectIndex / 3);
+                mosaic.style.transform = `translateX(-${currentColumn * 100}vw)`;
+                window.scrollTo(0, row * window.innerHeight);
+            }
+            player = null; // Réinitialiser le lecteur pour éviter les problèmes
+        }
+
+        // Ouvrir/fermer le panneau de partage
+        function toggleSharePanel() {
+            const sharePanel = document.getElementById('share-panel');
+            if (sharePanel) {
+                sharePanel.classList.toggle('active');
+            }
+        }
+
+        // Fonctions de partage
+        function shareTo(platform) {
+            const data = videoData[currentProject];
+            const url = data.url;
+            let shareUrl;
+            switch (platform) {
+                case 'facebook':
+                    shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+                    break;
+                case 'twitter':
+                    shareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(data.title)}`;
+                    break;
+                case 'pinterest':
+                    shareUrl = `https://pinterest.com/pin/create/button/?url=${encodeURIComponent(url)}&description=${encodeURIComponent(data.title)}`;
+                    break;
+                case 'tumblr':
+                    shareUrl = `https://www.tumblr.com/widgets/share/tool?canonicalUrl=${encodeURIComponent(url)}&title=${encodeURIComponent(data.title)}`;
+                    break;
+            }
+            window.open(shareUrl, '_blank');
+        }
+
+        // Copier le lien
+        function copyLink() {
+            const data = videoData[currentProject];
+            navigator.clipboard.writeText(data.url).then(() => {
+                alert('Lien copié dans le presse-papiers !');
+            }).catch(err => {
+                console.error('Erreur lors de la copie du lien :', err);
+            });
+        }
+
+        // Nouvelle fonction pour appliquer les écouteurs
+        function applyThumbnailListeners() {
+            const thumbnails = document.querySelectorAll('.related-video');
+            thumbnails.forEach(thumbnail => {
+                thumbnail.removeEventListener('mouseenter', handleMouseEnter);
+                thumbnail.removeEventListener('mouseleave', handleMouseLeave);
+                thumbnail.addEventListener('mouseenter', handleMouseEnter);
+                thumbnail.addEventListener('mouseleave', handleMouseLeave);
+            });
+        }
+
+        // Définir les gestionnaires comme fonctions séparées
+        function handleMouseEnter(event) {
+            const thumbnail = event.currentTarget;
+            const playingText = thumbnail.querySelector('.playing-text');
+            const videoInfo = thumbnail.querySelector('.video-info');
+            if (thumbnail.classList.contains('active') && thumbnail.classList.contains('playing') && playingText) {
+                playingText.style.display = 'block';
+                if (videoInfo) videoInfo.style.display = 'none';
+            } else if (videoInfo && !thumbnail.classList.contains('playing')) {
+                videoInfo.style.display = 'flex';
+            }
+        }
+
+        function handleMouseLeave(event) {
+            const thumbnail = event.currentTarget;
+            const playingText = thumbnail.querySelector('.playing-text');
+            const videoInfo = thumbnail.querySelector('.video-info');
+            if (playingText) playingText.style.display = 'none';
+            if (videoInfo && !thumbnail.classList.contains('playing')) {
+                videoInfo.style.display = 'none';
+            }
+        }
+    </script>
 </body>
 </html>
