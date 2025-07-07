@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PLN Prodoo</title>
+    <title>PLN PrAAood</title>
     <script src="https://www.youtube.com/iframe_api"></script>
     <style>
         * {
@@ -466,7 +466,7 @@
             width: 100%;
             height: 100vh;
             background: #000;
-            z-index: 999; /* Réduit pour que la nav reste au-dessus */
+            z-index: 999;
             padding: 2rem;
             opacity: 0;
             transform: translateY(100%);
@@ -480,20 +480,20 @@
         }
 
         .bio-content {
-            width: 66.66%; /* Deux tiers de l'écran */
+            width: 66.66%;
             margin-left: 0;
-            padding-top: 80px; /* Espace pour la navigation */
+            padding-top: 80px;
         }
 
         .bio-title {
-            font-size: 2rem; /* Réduction légère */
+            font-size: 2rem;
             font-weight: bold;
-            line-height: 1.2; /* Réduction de l'espacement entre lignes */
+            line-height: 1.2;
             margin-bottom: 1rem;
         }
 
         .bio-text {
-            font-size: 1rem; /* Moitié de 2rem */
+            font-size: 1rem;
             font-weight: 300;
             font-style: italic;
             margin-bottom: 2rem;
@@ -1170,7 +1170,7 @@
             }
         }
 
-        // Gestion de la section Bio
+        // Gestion de la section Bio avec effet de glissement
         function showBio() {
             const bioSection = document.getElementById('bio-section');
             const mosaic = document.getElementById('mosaic');
@@ -1179,14 +1179,17 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
             setTimeout(() => {
                 bioSection.classList.add('active');
+                bioSection.style.transition = 'transform 0.5s ease';
             }, 100);
         }
 
         function hideBio() {
             const bioSection = document.getElementById('bio-section');
+            bioSection.style.transform = 'translateY(100%)';
             bioSection.classList.remove('active');
             setTimeout(() => {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
+                bioSection.style.transition = ''; // Réinitialise la transition
             }, 500);
         }
     </script>
