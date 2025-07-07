@@ -255,8 +255,7 @@
             width: 100%;
             height: 100%;
             z-index: 1;
-            /* Ajout pour masquer les éléments comme "4K" */
-            background: #000; /* Couvre les éléments indésirables */
+            background: #000; /* Masque visuellement les éléments comme "4K" */
         }
 
         .video-content .video-overlay {
@@ -265,6 +264,7 @@
             left: 0;
             width: 100%;
             height: 100%;
+            background: rgba(0, 0, 0, 0.9); /* Overlay plus opaque pour bloquer "4K" */
             z-index: 2;
             pointer-events: none;
         }
@@ -342,7 +342,7 @@
             font-weight: bold;
             text-align: center;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-            z-index: 10; /* Augmenté pour priorité */
+            z-index: 10;
         }
 
         .related-video:not(.playing):hover img {
@@ -756,84 +756,84 @@
         // Données des vidéos YouTube et GIFs pour chaque projet
         const videoData = {
             project1: {
-                url: 'https://www.youtube.com/embed/dQw4w9WgXcQ?controls=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=0&rel=0', // Ajout de paramètres pour masquer "4K"
+                url: 'https://www.youtube.com/embed/dQw4w9WgXcQ?controls=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=0&rel=0&enablejsapi=1',
                 title: 'Projet 1 : Performance Live',
                 description: 'Une performance live vibrante capturant l’essence de la musique et de la créativité.',
                 gif: 'https://media.giphy.com/media/3o6Zta2kQfOv1oXz4Q/giphy.gif',
                 duration: '3:45'
             },
             project2: {
-                url: 'https://www.youtube.com/embed/9bZkp7q19f0?controls=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=0&rel=0',
+                url: 'https://www.youtube.com/embed/9bZkp7q19f0?controls=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=0&rel=0&enablejsapi=1',
                 title: 'Projet 2 : Clip Musical',
                 description: 'Un clip musical énergique avec des visuels audacieux et une production soignée.',
                 gif: 'https://media.giphy.com/media/3o7TKz9fL5s9Z6Z6hW/giphy.gif',
                 duration: '4:20'
             },
             project3: {
-                url: 'https://www.youtube.com/embed/M7lc1UVf-VE?controls=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=0&rel=0',
+                url: 'https://www.youtube.com/embed/M7lc1UVf-VE?controls=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=0&rel=0&enablejsapi=1',
                 title: 'Projet 3 : Animation Abstraite',
                 description: 'Une exploration visuelle abstraite synchronisée avec une bande-son unique.',
                 gif: 'https://media.giphy.com/media/l0MYt5j0ya4jXh6M0/giphy.gif',
                 duration: '2:50'
             },
             project4: {
-                url: 'https://www.youtube.com/embed/dQw4w9WgXcQ?controls=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=0&rel=0',
+                url: 'https://www.youtube.com/embed/dQw4w9WgXcQ?controls=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=0&rel=0&enablejsapi=1',
                 title: 'Projet 4 : Concert Électrique',
                 description: 'Un concert capturé avec une énergie brute et des effets visuels immersifs.',
                 gif: 'https://media.giphy.com/media/xT9IgzoZZ0xxInIgZq/giphy.gif',
                 duration: '5:10'
             },
             project5: {
-                url: 'https://www.youtube.com/embed/9bZkp7q19f0?controls=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=0&rel=0',
+                url: 'https://www.youtube.com/embed/9bZkp7q19f0?controls=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=0&rel=0&enablejsapi=1',
                 title: 'Projet 5 : Publicité Créative',
                 description: 'Une publicité innovante combinant narration et visuels modernes.',
                 gif: 'https://media.giphy.com/media/3o6Zt6KHxJTbNbLDeM/giphy.gif',
                 duration: '1:30'
             },
             project6: {
-                url: 'https://www.youtube.com/embed/M7lc1UVf-VE?controls=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=0&rel=0',
+                url: 'https://www.youtube.com/embed/M7lc1UVf-VE?controls=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=0&rel=0&enablejsapi=1',
                 title: 'Projet 6 : Documentaire Musical',
                 description: 'Un documentaire explorant la création d’un projet musical unique.',
                 gif: 'https://media.giphy.com/media/26xBzdT9i8m7Dq1k4/giphy.gif',
                 duration: '8:15'
             },
             project7: {
-                url: 'https://www.youtube.com/embed/dQw4w9WgXcQ?controls=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=0&rel=0',
+                url: 'https://www.youtube.com/embed/dQw4w9WgXcQ?controls=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=0&rel=0&enablejsapi=1',
                 title: 'Projet 7 : Performance Acoustique',
                 description: 'Une session acoustique intime avec une ambiance chaleureuse.',
                 gif: 'https://media.giphy.com/media/xT9IgG2xK7z4z6z6hW/giphy.gif',
                 duration: '3:20'
             },
             project8: {
-                url: 'https://www.youtube.com/embed/9bZkp7q19f0?controls=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=0&rel=0',
+                url: 'https://www.youtube.com/embed/9bZkp7q19f0?controls=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=0&rel=0&enablejsapi=1',
                 title: 'Projet 8 : Clip Experimental',
                 description: 'Un clip expérimental jouant avec les couleurs et les formes.',
                 gif: 'https://media.giphy.com/media/3o7aDcz6By4yX8Wn3G/giphy.gif',
                 duration: '4:00'
             },
             project9: {
-                url: 'https://www.youtube.com/embed/M7lc1UVf-VE?controls=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=0&rel=0',
+                url: 'https://www.youtube.com/embed/M7lc1UVf-VE?controls=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=0&rel=0&enablejsapi=1',
                 title: 'Projet 9 : Live Studio',
                 description: 'Une session live enregistrée en studio avec un son pur.',
                 gif: 'https://media.giphy.com/media/3o6ZtaO9BZHcOjmErm/giphy.gif',
                 duration: '6:05'
             },
             project10: {
-                url: 'https://www.youtube.com/embed/dQw4w9WgXcQ?controls=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=0&rel=0',
+                url: 'https://www.youtube.com/embed/dQw4w9WgXcQ?controls=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=0&rel=0&enablejsapi=1',
                 title: 'Projet 10 : Vidéo Narrative',
                 description: 'Une histoire captivante racontée à travers des images puissantes.',
                 gif: 'https://media.giphy.com/media/l0Iyl55kTeh71nTWw/giphy.gif',
                 duration: '5:30'
             },
             project11: {
-                url: 'https://www.youtube.com/embed/9bZkp7q19f0?controls=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=0&rel=0',
+                url: 'https://www.youtube.com/embed/9bZkp7q19f0?controls=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=0&rel=0&enablejsapi=1',
                 title: 'Projet 11 : Visualisation Musicale',
                 description: 'Une visualisation musicale dynamique et immersive.',
                 gif: 'https://media.giphy.com/media/26FPy3G0rLKBPlrB6/giphy.gif',
                 duration: '3:10'
             },
             project12: {
-                url: 'https://www.youtube.com/embed/M7lc1UVf-VE?controls=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=0&rel=0',
+                url: 'https://www.youtube.com/embed/M7lc1UVf-VE?controls=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=0&rel=0&enablejsapi=1',
                 title: 'Projet 12 : Show Live',
                 description: 'Un spectacle live mettant en avant une production audiovisuelle de pointe.',
                 gif: 'https://media.giphy.com/media/3o7TKF0r3wY2f2gQ6k/giphy.gif',
@@ -936,14 +936,18 @@
             window.scrollTo(0, 0);
 
             // Initialiser le lecteur YouTube
-            player = new YT.Player('youtube-player', {
-                events: {
-                    'onStateChange': onPlayerStateChange,
-                    'onReady': (event) => {
-                        console.log('YouTube Player is ready');
+            if (typeof YT !== 'undefined' && YT.loaded) {
+                player = new YT.Player('youtube-player', {
+                    events: {
+                        'onStateChange': onPlayerStateChange,
+                        'onReady': (event) => {
+                            console.log('YouTube Player is ready');
+                        }
                     }
-                }
-            });
+                });
+            } else {
+                console.error('YouTube API not loaded');
+            }
 
             // Réappliquer les écouteurs aux nouvelles vignettes
             applyThumbnailListeners();
@@ -960,7 +964,7 @@
                     console.log('Video is playing, adding .playing class');
                     activeThumbnail.classList.add('playing');
                     if (videoInfo) videoInfo.style.display = 'none';
-                    if (playingText) playingText.style.display = 'none'; // Masqué par défaut
+                    if (playingText) playingText.style.display = 'none';
                 } else if (event.data === YT.PlayerState.PAUSED || event.data === YT.PlayerState.ENDED) {
                     console.log('Video is paused or ended, removing .playing class');
                     activeThumbnail.classList.remove('playing');
@@ -985,13 +989,13 @@
         // Passer en plein écran (désactivé via paramètres URL)
         function goFullscreen() {
             const iframe = document.getElementById('youtube-player');
-            if (iframe.requestFullscreen) {
+            if (iframe && iframe.requestFullscreen) {
                 iframe.requestFullscreen();
-            } else if (iframe.mozRequestFullScreen) {
+            } else if (iframe && iframe.mozRequestFullScreen) {
                 iframe.mozRequestFullScreen();
-            } else if (iframe.webkitRequestFullscreen) {
+            } else if (iframe && iframe.webkitRequestFullscreen) {
                 iframe.webkitRequestFullscreen();
-            } else if (iframe.msRequestFullscreen) {
+            } else if (iframe && iframe.msRequestFullscreen) {
                 iframe.msRequestFullscreen();
             }
         }
@@ -1004,7 +1008,9 @@
             if (sharePanel) sharePanel.classList.remove('active');
             if (player && player.stopVideo) {
                 console.log('Stopping video');
-                player.stopVideo(); // Assure l'arrêt complet de la vidéo et du son
+                player.stopVideo(); // Arrête la vidéo
+                player.destroy(); // Détruit l'instance pour réinitialiser
+                player = null; // Réinitialise la référence
             }
             // Restaurer la position dans la mosaïque
             if (currentProject) {
@@ -1014,7 +1020,11 @@
                 mosaic.style.transform = `translateX(-${currentColumn * 100}vw)`;
                 window.scrollTo(0, row * window.innerHeight);
             }
-            player = null; // Réinitialiser le lecteur pour éviter les problèmes
+            // Réinitialiser le contenu de l'iframe
+            const videoContent = document.getElementById('video-content');
+            if (videoContent) {
+                videoContent.innerHTML = ''; // Supprime l'iframe pour forcer la réinitialisation
+            }
         }
 
         // Ouvrir/fermer le panneau de partage
