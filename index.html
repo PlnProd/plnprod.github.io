@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PLN Praaod</title>
+    <title>PLN Prodoo</title>
     <script src="https://www.youtube.com/iframe_api"></script>
     <style>
         * {
@@ -437,7 +437,7 @@
             position: absolute;
             bottom: 60px;
             left: 20px;
-            right: 20px;
+            right: 20rem;
             display: flex;
             justify-content: center;
             gap: 1.5rem;
@@ -466,7 +466,7 @@
             width: 100%;
             height: 100vh;
             background: #000;
-            z-index: 1000;
+            z-index: 999; /* Réduit pour que la nav reste au-dessus */
             padding: 2rem;
             opacity: 0;
             transform: translateY(100%);
@@ -482,17 +482,18 @@
         .bio-content {
             width: 66.66%; /* Deux tiers de l'écran */
             margin-left: 0;
-            padding-top: 120px; /* Espace pour la navigation */
+            padding-top: 80px; /* Espace pour la navigation */
         }
 
         .bio-title {
-            font-size: 2.5rem;
+            font-size: 2rem; /* Réduction légère */
             font-weight: bold;
+            line-height: 1.2; /* Réduction de l'espacement entre lignes */
             margin-bottom: 1rem;
         }
 
         .bio-text {
-            font-size: 1.25rem; /* Moitié de 2.5rem */
+            font-size: 1rem; /* Moitié de 2rem */
             font-weight: 300;
             font-style: italic;
             margin-bottom: 2rem;
@@ -504,6 +505,9 @@
             text-decoration: none;
             cursor: pointer;
             display: block;
+            position: relative;
+            bottom: 0;
+            margin-top: 2rem;
         }
 
         .bio-link:hover {
@@ -678,11 +682,11 @@
             }
 
             .bio-title {
-                font-size: 1.8rem;
+                font-size: 1.5rem;
             }
 
             .bio-text {
-                font-size: 0.9rem;
+                font-size: 0.75rem;
             }
 
             .bio-photo {
@@ -836,7 +840,7 @@
     <!-- Section Bio -->
     <section class="bio-section" id="bio-section">
         <div class="bio-content">
-            <div class="bio-title">Vidéaste<br>Passionné de Vidéographie.<br><br>Créateur de<br>Films.<br><br><br>Conteur d'Histoires</div>
+            <div class="bio-title">Vidéaste Passionné de Vidéographie.<br>Créateur de Films.<br><br>Conteur d'Histoires</div>
             <div class="bio-text"><i>Texte de paragraphe. Vous pouvez le personnaliser et ajouter votre propre contenu. Cliquez ici pour modifier le texte et ajouter des informations sur votre entreprise, présenter votre équipe et les services proposés. Vous pouvez également partager votre histoire, vos inspirations, et mettre en avant votre approche unique. Captivez l'attention de vos visiteurs et faites-vous remarquer.</i></div>
             <a href="#" class="bio-link" onclick="hideBio()">voir le portfolio</a>
         </div>
