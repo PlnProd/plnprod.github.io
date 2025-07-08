@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PLNou Prod</title>
+    <title>PLouN Prod</title>
     <script src="https://www.youtube.com/iframe_api"></script>
     <style>
         * {
@@ -486,7 +486,7 @@
 
         .bio-content {
             width: 66.66%;
-            margin-left: 5%; /* Indentation légère vers la droite */
+            margin-left: 5%;
             padding-top: 80px;
         }
 
@@ -521,7 +521,7 @@
 
         .bio-image {
             width: 100%;
-            height: calc(100vh - 150px); /* Ajusté pour occuper tout l'espace avant défilement */
+            height: calc(100vh - 150px);
             object-fit: cover;
             margin-top: 2rem;
             display: block;
@@ -682,6 +682,58 @@
             color: #2980b9;
         }
 
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: #222;
+            padding: 2rem;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            border-radius: 5px;
+            text-align: left;
+        }
+
+        .modal-content h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .modal-content p {
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .close-modal:hover {
+            color: #3498db;
+        }
+
         /* Footer */
         footer {
             background-color: #000;
@@ -835,7 +887,7 @@
             }
 
             .bio-image {
-                height: calc(100vh - 100px); /* Ajustement pour mobile */
+                height: calc(100vh - 100px);
             }
 
             .contact-content {
@@ -858,6 +910,10 @@
                 flex-direction: column;
                 gap: 0.5rem;
             }
+
+            .modal-content {
+                max-width: 90%;
+            }
         }
     </style>
 </head>
@@ -872,8 +928,8 @@
             <li><a href="#narration">Narration</a></li>
             <li><a href="#publicite">Publicité</a></li>
             <li><a href="#musique-video">Musique-Vidéo</a></li>
-            <li><a href="#" onclick="showBio()">Bio</a></li>
-            <li><a href="#" onclick="showContact()">Contact</a></li>
+            <li><a href="#" onclick="showSection('bio')">Bio</a></li>
+            <li><a href="#" onclick="showSection('contact')">Contact</a></li>
             <li><a href="#equipement">Équipement</a></li>
         </ul>
     </nav>
@@ -1022,7 +1078,7 @@
     <section class="contact-section" id="contact-section">
         <div class="contact-content">
             <div class="contact-column-1">
-                <p>Me contacter pour exprimer notre créativité ensemble</p>
+                <p>Me contacter pour exprimer<br>notre créativité ensemble</p>
                 <a href="mailto:pln.prod35@gmail.com">pln.prod35@gmail.com</a>
                 <div class="social-icons">
                     <a href="https://twitter.com" target="_blank" style="background-image: url('https://www.flaticon.com/svg/static/icons/svg/733/733579.svg');"></a>
@@ -1039,12 +1095,20 @@
             </div>
         </div>
         <div class="legal-links">
-            <a href="#">Termes et conditions</a>
-            <a href="#">Politique de confidentialité</a>
-            <a href="#">Mentions légales</a>
-            <a href="#">Politique de cookies</a>
+            <a href="#" onclick="showModal('terms')">Termes et conditions</a>
+            <a href="#" onclick="showModal('privacy')">Politique de confidentialité</a>
+            <a href="#" onclick="showModal('legal')">Mentions légales</a>
+            <a href="#" onclick="showModal('cookies')">Politique de cookies</a>
         </div>
     </section>
+
+    <!-- Modal -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">✖</span>
+            <div id="modal-text"></div>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer>
@@ -1369,16 +1433,55 @@
             }
         }
 
-        // Gestion de la section Bio avec effet de glissement
-        function showBio() {
+        // Gestion des sections avec effet de glissement
+        function showSection(section) {
             const bioSection = document.getElementById('bio-section');
-            if (bioSection) {
-                bioSection.style.display = 'block';
+            const contactSection = document.getElementById('contact-section');
+            const videoSection = document.getElementById('video-section');
+
+            if (bioSection.classList.contains('active')) {
+                bioSection.classList.remove('active');
                 setTimeout(() => {
-                    bioSection.classList.add('active');
-                }, 10); // Petit délai pour déclencher l'animation
-                hero.style.opacity = '0';
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+                    bioSection.style.display = 'none';
+                    openSection(section);
+                }, 500);
+            } else if (contactSection.classList.contains('active')) {
+                contactSection.classList.remove('active');
+                setTimeout(() => {
+                    contactSection.style.display = 'none';
+                    openSection(section);
+                }, 500);
+            } else if (videoSection.classList.contains('active')) {
+                videoSection.classList.remove('active');
+                setTimeout(() => {
+                    videoSection.style.display = 'none';
+                    openSection(section);
+                }, 500);
+            } else {
+                openSection(section);
+            }
+        }
+
+        function openSection(section) {
+            const bioSection = document.getElementById('bio-section');
+            const contactSection = document.getElementById('contact-section');
+            hero.style.opacity = '0';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            if (section === 'bio') {
+                if (bioSection) {
+                    bioSection.style.display = 'block';
+                    setTimeout(() => {
+                        bioSection.classList.add('active');
+                    }, 10);
+                }
+            } else if (section === 'contact') {
+                if (contactSection) {
+                    contactSection.style.display = 'block';
+                    setTimeout(() => {
+                        contactSection.classList.add('active');
+                    }, 10);
+                }
             }
         }
 
@@ -1390,49 +1493,68 @@
                     bioSection.style.display = 'none';
                     hero.style.opacity = '1';
                     window.scrollTo({ top: 0, behavior: 'smooth' });
-                }, 500); // Correspond à la durée de l'animation
+                }, 500);
             }
         }
 
-        // Gestion de la section Contact avec effet de glissement
-        function showContact() {
-            const contactSection = document.getElementById('contact-section');
-            if (contactSection) {
-                contactSection.style.display = 'block';
-                setTimeout(() => {
-                    contactSection.classList.add('active');
-                }, 10); // Petit délai pour déclencher l'animation
-                hero.style.opacity = '0';
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }
-        }
-
-        function hideContact() {
-            const contactSection = document.getElementById('contact-section');
-            if (contactSection) {
-                contactSection.classList.remove('active');
-                setTimeout(() => {
-                    contactSection.style.display = 'none';
-                    hero.style.opacity = '1';
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                }, 500); // Correspond à la durée de l'animation
-            }
-        }
-
-        // Gestion de l'abonnement
-        function subscribe() {
+        // Gestion de l'abonnement avec envoi automatique
+        async function subscribe() {
             const emailInput = document.getElementById('email-input');
             const email = emailInput.value;
             if (email) {
-                const subject = 'Nouvel abonné';
-                const body = `${email} vient de s'abonner`;
-                const mailtoLink = `mailto:pln.prod35@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-                window.location.href = mailtoLink;
-                emailInput.value = '';
-                alert('Merci pour votre abonnement ! Un email a été envoyé.');
+                try {
+                    const response = await fetch('https://api.example.com/send-email', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            to: 'pln.prod35@gmail.com',
+                            subject: 'Nouvel abonné',
+                            body: `${email} vient de s'abonner le ${new Date().toLocaleString('fr-FR', { timeZone: 'Europe/Paris' })}`
+                        }),
+                    });
+                    if (response.ok) {
+                        emailInput.value = '';
+                        alert('Merci pour votre abonnement ! Un email a été envoyé.');
+                    } else {
+                        throw new Error('Erreur lors de l\'envoi de l\'email.');
+                    }
+                } catch (error) {
+                    console.error('Erreur :', error);
+                    alert('Une erreur s\'est produite. Veuillez réessayer.');
+                }
             } else {
                 alert('Veuillez saisir une adresse email.');
             }
+        }
+
+        // Gestion de la modale
+        function showModal(type) {
+            const modal = document.getElementById('modal');
+            const modalText = document.getElementById('modal-text');
+            let content = '';
+            switch (type) {
+                case 'terms':
+                    content = '<h2>Politique de confidentialité</h2><p>La politique de confidentialité de PLN Prod vise à protéger les données personnelles de nos visiteurs et clients. Nous nous engageons à respecter la confidentialité et la sécurité de toutes les informations que vous partagez avec nous. Notre politique de confidentialité détaille la manière dont nous collectons, utilisons, divulguons et protégeons vos données. Nous vous encourageons à la consulter régulièrement pour rester informé de nos pratiques en matière de confidentialité. Pour des informations plus détaillées sur la protection de vos données, veuillez consulter notre politique de confidentialité complète.</p>';
+                    break;
+                case 'privacy':
+                    content = '<h2>POLITIQUE DE CONFIDENTIALITÉ</h2><p>En tant que vidéaste, nous accordons une importance capitale à la protection de la vie privée de nos visiteurs et clients. Notre politique de confidentialité vise à informer nos visiteurs sur la manière dont nous collectons, utilisons, divulguons et gérons leurs données. Nous recueillons des informations limitées, telles que les coordonnées de contact et les détails du projet, pour comprendre les besoins de nos clients. Ces informations sont collectées de manière transparente et avec le consentement des visiteurs. Nous ne partageons les informations avec aucun tiers sans le consentement explicite des visiteurs. Toutes les données sont stockées de manière sécurisée et ne sont conservées que pendant la durée nécessaire pour mener à bien les projets. La confidentialité et la sécurité des informations de nos clients sont notre priorité absolue. Nous nous engageons à mettre à jour régulièrement notre politique de confidentialité pour refléter les changements dans nos pratiques et la législation. Pour des informations plus détaillées sur notre politique de confidentialité, n\'hésitez pas à nous contacter.</p>';
+                    break;
+                case 'legal':
+                    content = '<h2>MENTIONS LÉGALES</h2><p>En tant que vidéaste professionnel, nous sommes tenus de vous fournir des informations légales concernant notre activité. Cette section contient des détails tels que notre dénomination sociale, l\'adresse de notre siège social, les coordonnées de l\'hébergeur de notre site, ainsi que des mentions relatives à l\'utilisation de données personnelles et de cookies. De plus, nous tenons à vous informer de la plateforme de règlement des litiges en ligne (OS) fournie par la Commission européenne, et de vos droits en tant que client de contacter le conseil d\'arbitrage de la Commission européenne en cas de litige.</p>';
+                    break;
+                case 'cookies':
+                    content = '<h2>POLITIQUE DE COOKIES</h2><p>Vidéaste PLN Prod s\'engage à protéger votre vie privée. Ce site utilise des cookies pour améliorer l\'expérience utilisateur et à des fins de sécurité et d\'analyse. En utilisant notre site, vous consentez à notre utilisation des cookies conformément aux termes de cette politique. La chose la plus importante à savoir sur les cookies que nous utilisons est qu\'ils servent à améliorer la fonctionnalité de notre site, par exemple, en se souvenant des préférences du site et des paramètres de langue.</p>';
+                    break;
+            }
+            modalText.innerHTML = content;
+            modal.classList.add('active');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('modal');
+            modal.classList.remove('active');
         }
     </script>
 </body>
