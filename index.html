@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PLNpopo Prod</title>
+    <title>PLN Priid</title>
     <script src="https://www.youtube.com/iframe_api"></script>
     <style>
         * {
@@ -174,10 +174,11 @@
             left: 0;
             width: 100%;
             z-index: 999;
+            justify-content: center;
         }
 
         .video-section.active {
-            display: block;
+            display: flex;
         }
 
         .video-header {
@@ -249,6 +250,7 @@
             margin-top: 100px;
             position: relative;
             flex-wrap: wrap;
+            width: 100%;
         }
 
         .video-content .video-wrapper {
@@ -300,7 +302,7 @@
         /* Vignettes des vidéos associées */
         .related-videos {
             display: flex;
-            justify-content: flex-start;
+            justify-content: center;
             gap: 1rem;
             margin-top: 2rem;
             width: 100%;
@@ -585,7 +587,7 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            max-width: 200px; /* Réduit la largeur des colonnes */
+            max-width: 200px;
         }
 
         .contact-column-1 p {
@@ -626,7 +628,7 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            max-width: 200px; /* Réduit la largeur des colonnes */
+            max-width: 200px;
         }
 
         .contact-column-2 p {
@@ -865,7 +867,7 @@
 
             .related-videos {
                 gap: 0.5rem;
-                justify-content: flex-start;
+                justify-content: center;
             }
 
             .related-video {
@@ -1090,7 +1092,7 @@
         <div class="bio-content">
             <div class="bio-title">Vidéaste Passionné de Vidéographie.<br>Créateur de Films.<br><br>Conteur d'Histoires</div>
             <div class="bio-text"><i>Texte de paragraphe. Vous pouvez le personnaliser et ajouter votre propre contenu. Cliquez ici pour modifier le texte et ajouter des informations sur votre entreprise, présenter votre équipe et les services proposés. Vous pouvez également partager votre histoire, vos inspirations, et mettre en avant votre approche unique. Captivez l'attention de vos visiteurs et faites-vous remarquer.</i></div>
-            <a href="#" class="bio-link" onclick="hideBio()">voir le portfolio</a>
+            <a href="#" class="bio-link" onclick="hideSection('bio')">voir le portfolio</a>
             <img src="https://via.placeholder.com/1200x600?text=Image+Portfolio" alt="Image Portfolio" class="bio-image">
         </div>
         <div class="bio-awards">
@@ -1107,6 +1109,16 @@
                 <p>Me contacter pour exprimer<br>notre créativité ensemble</p>
                 <a href="mailto:pln.prod35@gmail.com">pln.prod35@gmail.com</a>
                 <div class="social-icons">
+                    <a href="https://twitter.com" target="_blank">
+                        <svg width="30" height="30" viewBox="0 0 24 24" fill="#1DA1F2">
+                            <path d="M23.954 4.569c-.885.389-1.83.654-2.825.775 1.014-.611 1.794-1.574 2.163-2.723-.951.555-2.005.959-3.127 1.184-.897-.957-2.178-1.555-3.594-1.555-2.717 0-4.92 2.203-4.92 4.917 0 .39.045.765.127 1.124C7.691 8.094 4.066 6.13 1.64 3.161c-.427.722-.666 1.561-.666 2.475 0 1.71.87 3.213 2.188 4.096-.807-.026-1.566-.248-2.228-.616v.061c0 2.385 1.693 4.374 3.946 4.827-.413.111-.849.171-1.296.171-.314 0-.615-.03-.916-.086.631 1.953 2.445 3.377 4.604 3.417-1.68 1.319-3.809 2.105-6.102 2.105-.39 0-.779-.023-1.17-.067 2.189 1.394 4.768 2.209 7.557 2.209 9.054 0 14.01-7.496 14.01-13.986 0-.209 0-.42-.015-.63.961-.689 1.8-1.56 2.46-2.548l-.047-.02z"/>
+                        </svg>
+                    </a>
+                    <a href="https://facebook.com" target="_blank">
+                        <svg width="30" height="30" viewBox="0 0 24 24" fill="#3B5998">
+                            <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/>
+                        </svg>
+                    </a>
                     <a href="https://youtube.com" target="_blank">
                         <svg width="30" height="30" viewBox="0 0 24 24" fill="#FF0000">
                             <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
@@ -1138,7 +1150,7 @@
         <div class="equip-content">
             <div class="bio-title">Notre Société</div>
             <div class="bio-text"><i>PLN Prod est une entreprise de vidéaste spécialisée dans la création de contenus vidéo de haute qualité. Nous sommes passionnés par la réalisation de films et la capture d'instants mémorables. Notre équipe talentueuse travaille avec dévouement pour donner vie à vos idées et projets.</i></div>
-            <a href="#" class="bio-link" onclick="hideEquip()">retour</a>
+            <a href="#" class="bio-link" onclick="hideSection('equip')">retour</a>
         </div>
     </section>
 
@@ -1171,15 +1183,15 @@
             videoContent.innerHTML = `
                 <div class="video-wrapper">
                     <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?enablejsapi=1" frameborder="0" allowfullscreen></iframe>
-                    <div class="video-title-overlay">Titre de la vidéo</div>
+                    <div class="video-title-overlay">Titre de la vidéo ${projectId}</div>
                 </div>
                 <div class="video-description">
-                    <h2>Titre de la vidéo</h2>
-                    <p>Description de la vidéo...</p>
+                    <h2>Titre de la vidéo ${projectId}</h2>
+                    <p>Description de la vidéo ${projectId}...</p>
                 </div>
             `;
 
-            // Exemple de vignettes
+            // Vignettes cohérentes
             relatedVideos.innerHTML = `
                 <div class="related-video" onclick="playRelatedVideo('dQw4w9WgXcQ')">
                     <img src="https://via.placeholder.com/200x112?text=Video+1" alt="Vignette 1">
@@ -1200,6 +1212,7 @@
             `;
 
             videoSection.classList.add('active');
+            relatedVideos.querySelector(`[onclick="playRelatedVideo('dQw4w9WgXcQ')"]`).classList.add('active', 'playing');
         }
 
         function closeVideo() {
@@ -1238,14 +1251,9 @@
             section.classList.add('active');
         }
 
-        function hideBio() {
-            const bioSection = document.getElementById('bio-section');
-            bioSection.classList.remove('active');
-        }
-
-        function hideEquip() {
-            const equipSection = document.getElementById('equip-section');
-            equipSection.classList.remove('active');
+        function hideSection(sectionId) {
+            const section = document.getElementById(sectionId + '-section');
+            section.classList.remove('active');
         }
 
         function closeModal() {
@@ -1272,7 +1280,7 @@
             const row = Math.floor((projectNumber - 1) / 3);
             const col = (projectNumber - 1) % 3;
             mosaic.style.transform = `translateX(-${col * 100}vw)`;
-            window.scrollTo({ top: row * 100 * vh, behavior: 'smooth' });
+            window.scrollTo({ top: row * window.innerHeight, behavior: 'smooth' });
         }
 
         window.addEventListener('scroll', () => {
