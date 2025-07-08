@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PLN gougneProd</title>
+    <title>PLN zProd</title>
     <script src="https://www.youtube.com/iframe_api"></script>
     <style>
         * {
@@ -456,12 +456,6 @@
             cursor: pointer;
         }
 
-        .share-panel .share-button img {
-            width: 100%;
-            height: 100%;
-            filter: brightness(0) invert(1);
-        }
-
         /* Section Bio */
         .bio-section {
             display: none;
@@ -622,8 +616,6 @@
             background-size: contain;
             background-repeat: no-repeat;
             transition: opacity 0.3s;
-            filter: brightness(0) invert(1); /* Rendre les icônes visibles sur fond noir */
-            background-color: #fff; /* Fond blanc pour garantir la visibilité */
         }
 
         .social-icons a:hover {
@@ -651,7 +643,6 @@
             background: #333;
             border: 1px solid #555;
             color: #fff;
-            placeholder: "saisissez votre email ici";
         }
 
         .contact-column-2 button {
@@ -662,7 +653,7 @@
             font-size: 1rem;
             cursor: pointer;
             border-radius: 5px;
-            width: 250px; /* Ajusté dynamiquement à la largeur du rectangle de saisie */
+            width: 250px;
         }
 
         .contact-column-2 button:hover {
@@ -1088,24 +1079,31 @@
                 <p>Me contacter pour exprimer<br>notre créativité ensemble</p>
                 <a href="mailto:pln.prod35@gmail.com">pln.prod35@gmail.com</a>
                 <div class="social-icons">
-                    <a href="https://twitter.com" target="_blank" style="background-image: url('https://www.flaticon.com/svg/static/icons/svg/733/733579.svg');"></a>
-                    <a href="https://facebook.com" target="_blank" style="background-image: url('https://www.flaticon.com/svg/static/icons/svg/124/124010.svg');"></a>
-                    <a href="https://vimeo.com" target="_blank" style="background-image: url('https://www.flaticon.com/svg/static/icons/svg/2111/2111537.svg');"></a>
-                    <a href="https://youtube.com" target="_blank" style="background-image: url('https://www.flaticon.com/svg/static/icons/svg/1383/1383268.svg');"></a>
-                    <a href="https://instagram.com" target="_blank" style="background-image: url('https://www.flaticon.com/svg/static/icons/svg/2111/2111463.svg');"></a>
+                    <a href="https://twitter.com" target="_blank">
+                        <svg width="30" height="30" viewBox="0 0 24 24" fill="#1DA1F2">
+                            <path d="M23.954 4.569c-.885.389-1.83.654-2.825.775 1.014-.611 1.794-1.574 2.163-2.723-.951.555-2.005.959-3.127 1.184-.897-.957-2.178-1.555-3.594-1.555-2.717 0-4.92 2.203-4.92 4.917 0 .39.045.765.127 1.124C7.691 8.094 4.066 6.13 1.64 3.161c-.427.722-.666 1.561-.666 2.475 0 1.71.87 3.213 2.188 4.096-.807-.026-1.566-.248-2.228-.616v.061c0 2.385 1.693 4.374 3.946 4.827-.413.111-.849.171-1.296.171-.314 0-.615-.03-.916-.086.631 1.953 2.445 3.377 4.604 3.417-1.68 1.319-3.809 2.105-6.102 2.105-.39 0-.779-.023-1.17-.067 2.189 1.394 4.768 2.209 7.557 2.209 9.054 0 14.01-7.496 14.01-13.986 0-.209 0-.42-.015-.63.961-.689 1.8-1.56 2.46-2.548l-.047-.02z"/>
+                        </svg>
+                    </a>
+                    <a href="https://facebook.com" target="_blank">
+                        <svg width="30" height="30" viewBox="0 0 24 24" fill="#3B5998">
+                            <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/>
+                        </svg>
+                    </a>
+                    <a href="https://vimeo.com" target="_blank">
+                        <svg width="30" height="30" viewBox="0 0 24 24" fill="#1AB7EA"></svg>
+                    </a>
                 </div>
             </div>
             <div class="contact-column-2">
-                <p>Rejoignez ma liste d'envoi</p>
-                <input type="email" id="email-input" placeholder="saisissez votre email ici">
-                <button onclick="subscribe()">S'abonner</button>
+                <p>Envoyez-moi un message</p>
+                <input type="text" placeholder="Nom">
+                <input type="text" placeholder="Email">
+                <button>Envoyer</button>
             </div>
         </div>
         <div class="legal-links">
-            <a href="#" onclick="showModal('terms')">Termes et conditions</a>
-            <a href="#" onclick="showModal('privacy')">Politique de confidentialité</a>
-            <a href="#" onclick="showModal('legal')">Mentions légales</a>
-            <a href="#" onclick="showModal('cookies')">Politique de cookies</a>
+            <a href="#">Mentions légales</a>
+            <a href="#">Politique de confidentialité</a>
         </div>
     </section>
 
@@ -1113,111 +1111,122 @@
     <div class="modal" id="modal">
         <div class="modal-content">
             <span class="close-modal" onclick="closeModal()">✖</span>
-            <div id="modal-text"></div>
+            <h2>Informations</h2>
+            <p>Ceci est un exemple de contenu modal. Vous pouvez personnaliser ce texte pour inclure des informations spécifiques sur votre projet ou service.</p>
         </div>
     </div>
 
     <!-- Footer -->
     <footer>
-        <p>© 2016 by Plnp-Prod. Proudly created by PLN Prod.</p>
+        <p>&copy; 2025 PLN Prod. Tous droits réservés.</p>
     </footer>
 
     <script>
-        // Initialisation de l'API YouTube
         let player;
         function onYouTubeIframeAPIReady() {
-            console.log('YouTube API prête');
+            // Initialisation du lecteur YouTube (si nécessaire)
         }
 
-        // Données des vidéos YouTube et GIFs pour chaque projet
-        const videoData = {
-            project1: {
-                url: 'https://www.youtube.com/embed/dQw4w9WgXcQ?controls=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=0&rel=0&enablejsapi=1',
-                title: 'Projet 1 : Performance Live',
-                description: 'Une performance live vibrante capturant l’essence de la musique et de la créativité.',
-                gif: 'https://media.giphy.com/media/3o6Zta2kQfOv1oXz4Q/giphy.gif',
-                duration: '3:45'
-            },
-            project2: {
-                url: 'https://www.youtube.com/embed/9bZkp7q19f0?controls=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=0&rel=0&enablejsapi=1',
-                title: 'Projet 2 : Clip Musical',
-                description: 'Un clip musical énergique avec des visuels audacieux et une production soignée.',
-                gif: 'https://media.giphy.com/media/3o7TKz9fL5s9Z6Z6hW/giphy.gif',
-                duration: '4:20'
-            },
-            project3: {
-                url: 'https://www.youtube.com/embed/M7lc1UVf-VE?controls=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=0&rel=0&enablejsapi=1',
-                title: 'Projet 3 : Animation Abstraite',
-                description: 'Une exploration visuelle abstraite synchronisée avec une bande-son unique.',
-                gif: 'https://media.giphy.com/media/l0MYt5j0ya4jXh6M0/giphy.gif',
-                duration: '2:50'
-            },
-            project4: {
-                url: 'https://www.youtube.com/embed/dQw4w9WgXcQ?controls=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=0&rel=0&enablejsapi=1',
-                title: 'Projet 4 : Concert Électrique',
-                description: 'Un concert capturé avec une énergie brute et des effets visuels immersifs.',
-                gif: 'https://media.giphy.com/media/xT9IgzoZZ0xxInIgZq/giphy.gif',
-                duration: '5:10'
-            },
-            project5: {
-                url: 'https://www.youtube.com/embed/9bZkp7q19f0?controls=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=0&rel=0&enablejsapi=1',
-                title: 'Projet 5 : Publicité Créative',
-                description: 'Une publicité innovante combinant narration et visuels modernes.',
-                gif: 'https://media.giphy.com/media/3o6Zt6KHxJTbNbLDeM/giphy.gif',
-                duration: '1:30'
-            },
-            project6: {
-                url: 'https://www.youtube.com/embed/M7lc1UVf-VE?controls=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=0&rel=0&enablejsapi=1',
-                title: 'Projet 6 : Documentaire Musical',
-                description: 'Un documentaire explorant la création d’un projet musical unique.',
-                gif: 'https://media.giphy.com/media/26xBzdT9i8m7Dq1k4/giphy.gif',
-                duration: '8:15'
-            },
-            project7: {
-                url: 'https://www.youtube.com/embed/dQw4w9WgXcQ?controls=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=0&rel=0&enablejsapi=1',
-                title: 'Projet 7 : Performance Acoustique',
-                description: 'Une session acoustique intime avec une ambiance chaleureuse.',
-                gif: 'https://media.giphy.com/media/xT9IgG2xK7z4z6z6hW/giphy.gif',
-                duration: '3:20'
-            },
-            project8: {
-                url: 'https://www.youtube.com/embed/9bZkp7q19f0?controls=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=0&rel=0&enablejsapi=1',
-                title: 'Projet 8 : Clip Experimental',
-                description: 'Un clip expérimental jouant avec les couleurs et les formes.',
-                gif: 'https://media.giphy.com/media/3o7aDcz6By4yX8Wn3G/giphy.gif',
-                duration: '4:00'
-            },
-            project9: {
-                url: 'https://www.youtube.com/embed/M7lc1UVf-VE?controls=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=0&rel=0&enablejsapi=1',
-                title: 'Projet 9 : Live Studio',
-                description: 'Une session live enregistrée en studio avec un son pur.',
-                gif: 'https://media.giphy.com/media/3o6ZtaO9BZHcOjmErm/giphy.gif',
-                duration: '6:05'
-            },
-            project10: {
-                url: 'https://www.youtube.com/embed/dQw4w9WgXcQ?controls=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=0&rel=0&enablejsapi=1',
-                title: 'Projet 10 : Vidéo Narrative',
-                description: 'Une histoire captivante racontée à travers des images puissantes.',
-                gif: 'https://media.giphy.com/media/l0Iyl55kTeh71nTWw/giphy.gif',
-                duration: '5:30'
-            },
-            project11: {
-                url: 'https://www.youtube.com/embed/9bZkp7q19f0?controls=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=0&rel=0&enablejsapi=1',
-                title: 'Projet 11 : Visualisation Musicale',
-                description: 'Une visualisation musicale dynamique et immersive.',
-                gif: 'https://media.giphy.com/media/26FPy3G0rLKBPlrB6/giphy.gif',
-                duration: '3:10'
-            },
-            project12: {
-                url: 'https://www.youtube.com/embed/M7lc1UVf-VE?controls=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=0&rel=0&enablejsapi=1',
-                title: 'Projet 12 : Show Live',
-                description: 'Un spectacle live mettant en avant une production audiovisuelle de pointe.',
-                gif: 'https://media.giphy.com/media/3o7TKF0r3wY2f2gQ6k/giphy.gif',
-                duration: '7:25'
-            }
-        };
+        function showVideo(projectId) {
+            const videoSection = document.getElementById('video-section');
+            const videoContent = document.getElementById('video-content');
+            const relatedVideos = document.getElementById('related-videos');
 
-        // Gestion du défilement pour la barre de navigation
+            // Exemple de contenu vidéo
+            videoContent.innerHTML = `
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?enablejsapi=1" frameborder="0" allowfullscreen></iframe>
+                    <div class="video-title-overlay">Titre de la vidéo</div>
+                </div>
+                <div class="video-description">
+                    <h2>Titre de la vidéo</h2>
+                    <p>Description de la vidéo...</p>
+                </div>
+            `;
+
+            // Exemple de vignettes
+            relatedVideos.innerHTML = `
+                <div class="related-video" onclick="playRelatedVideo('dQw4w9WgXcQ')">
+                    <img src="https://via.placeholder.com/200x112?text=Video+1" alt="Vignette 1">
+                    <div class="video-info">
+                        <div class="video-title">Vidéo 1</div>
+                        <div class="video-duration">3:45</div>
+                        <div class="play-icon"></div>
+                    </div>
+                </div>
+                <div class="related-video" onclick="playRelatedVideo('abc123xyz')">
+                    <img src="https://via.placeholder.com/200x112?text=Video+2" alt="Vignette 2">
+                    <div class="video-info">
+                        <div class="video-title">Vidéo 2</div>
+                        <div class="video-duration">4:12</div>
+                        <div class="play-icon"></div>
+                    </div>
+                </div>
+            `;
+
+            videoSection.classList.add('active');
+        }
+
+        function closeVideo() {
+            const videoSection = document.getElementById('video-section');
+            videoSection.classList.remove('active');
+            const videoContent = document.getElementById('video-content');
+            videoContent.innerHTML = '';
+            const relatedVideos = document.getElementById('related-videos');
+            relatedVideos.innerHTML = '';
+        }
+
+        function playRelatedVideo(videoId) {
+            const videoContent = document.getElementById('video-content');
+            videoContent.innerHTML = `
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/${videoId}?enablejsapi=1" frameborder="0" allowfullscreen></iframe>
+                    <div class="video-title-overlay">Titre de la vidéo ${videoId}</div>
+                </div>
+                <div class="video-description">
+                    <h2>Titre de la vidéo ${videoId}</h2>
+                    <p>Description de la vidéo ${videoId}...</p>
+                </div>
+            `;
+            const relatedVideos = document.getElementById('related-videos');
+            relatedVideos.querySelectorAll('.related-video').forEach(video => video.classList.remove('active', 'playing'));
+            relatedVideos.querySelector(`[onclick="playRelatedVideo('${videoId}')"]`).classList.add('active', 'playing');
+        }
+
+        function toggleSharePanel() {
+            const sharePanel = document.querySelector('.share-panel');
+            sharePanel.classList.toggle('active');
+        }
+
+        function showSection(sectionId) {
+            const section = document.getElementById(sectionId + '-section');
+            section.classList.add('active');
+        }
+
+        function hideBio() {
+            const bioSection = document.getElementById('bio-section');
+            bioSection.classList.remove('active');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('modal');
+            modal.classList.remove('active');
+        }
+
+        function nextColumn() {
+            const mosaic = document.getElementById('mosaic');
+            let translateX = parseInt(mosaic.style.transform.replace(/translateX\(-(\d+)vw\)/, '$1') || 0);
+            if (translateX < 200) translateX += 100;
+            mosaic.style.transform = `translateX(-${translateX}vw)`;
+        }
+
+        function prevColumn() {
+            const mosaic = document.getElementById('mosaic');
+            let translateX = parseInt(mosaic.style.transform.replace(/translateX\(-(\d+)vw\)/, '$1') || 0);
+            if (translateX > 0) translateX -= 100;
+            mosaic.style.transform = `translateX(-${translateX}vw)`;
+        }
+
         window.addEventListener('scroll', () => {
             const nav = document.getElementById('nav');
             if (window.scrollY > 50) {
@@ -1227,350 +1236,10 @@
             }
         });
 
-        // Gestion du défilement horizontal
-        let currentColumn = 0;
-        let currentProject = null;
-        const mosaic = document.getElementById('mosaic');
-        const hero = document.getElementById('hero');
-        const totalColumns = 3;
-
-        function nextColumn() {
-            if (currentColumn < totalColumns - 1) {
-                currentColumn++;
-                if (mosaic) mosaic.style.transform = `translateX(-${currentColumn * 100}vw)`;
-            }
-        }
-
-        function prevColumn() {
-            if (currentColumn > 0) {
-                currentColumn--;
-                if (mosaic) mosaic.style.transform = `translateX(-${currentColumn * 100}vw)`;
-            }
-        }
-
-        // Afficher la section vidéo
-        function showVideo(projectId) {
-            currentProject = projectId;
-            const data = videoData[projectId];
-            const projectIndex = parseInt(projectId.replace('project', '')) - 1;
-            const row = Math.floor(projectIndex / 3);
-            const projectsInRow = [
-                `project${row * 3 + 1}`,
-                `project${row * 3 + 2}`,
-                `project${row * 3 + 3}`
-            ].filter(id => id in videoData);
-
-            const videoSection = document.getElementById('video-section');
-            const videoContent = document.getElementById('video-content');
-            const relatedVideos = document.getElementById('related-videos');
-            if (videoContent && relatedVideos && videoSection) {
-                videoContent.innerHTML = `
-                    <div class="video-wrapper">
-                        <iframe id="youtube-player" src="${data.url}" frameborder="0" allowfullscreen></iframe>
-                        <div class="video-title-overlay">${data.title}</div>
-                        <div class="share-panel" id="share-panel">
-                            <span class="close-share" onclick="toggleSharePanel()">✖</span>
-                            <div class="share-text">partager cette vidéo sur :</div>
-                            <div class="share-buttons">
-                                <button class="share-button" onclick="shareTo('facebook')">
-                                    <img src="https://www.flaticon.com/svg/static/icons/svg/124/124010.svg" alt="Facebook">
-                                </button>
-                                <button class="share-button" onclick="shareTo('twitter')">
-                                    <img src="https://www.flaticon.com/svg/static/icons/svg/733/733579.svg" alt="Twitter">
-                                </button>
-                                <button class="share-button" onclick="shareTo('pinterest')">
-                                    <img src="https://www.flaticon.com/svg/static/icons/svg/2111/2111502.svg" alt="Pinterest">
-                                </button>
-                                <button class="share-button" onclick="shareTo('tumblr')">
-                                    <img src="https://www.flaticon.com/svg/static/icons/svg/174/174876.svg" alt="Tumblr">
-                                </button>
-                                <button class="share-button" onclick="copyLink()">
-                                    <img src="https://www.flaticon.com/svg/static/icons/svg/1828/1828460.svg" alt="Copier le lien">
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="video-description">
-                        <h2>${data.title}</h2>
-                        <p>${data.description}</p>
-                    </div>
-                `;
-                relatedVideos.innerHTML = `
-                    ${projectsInRow.map(id => `
-                        <div class="related-video ${id === projectId ? 'active' : ''}" data-project-id="${id}" onclick="showVideo('${id}')">
-                            <img src="${videoData[id].gif}" alt="${videoData[id].title}">
-                            <div class="video-info">
-                                <span class="video-title">${videoData[id].title}</span>
-                                <span class="play-icon"></span>
-                                <span class="video-duration">${videoData[id].duration}</span>
-                            </div>
-                            <span class="playing-text" style="display: none;">En cours de lecture</span>
-                        </div>
-                    `).join('')}
-                `;
-                hero.style.opacity = '0';
-                videoSection.classList.add('active');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-
-                if (typeof YT !== 'undefined' && YT.loaded) {
-                    setTimeout(() => {
-                        if (!player) {
-                            player = new YT.Player('youtube-player', {
-                                events: {
-                                    'onReady': (event) => {
-                                        event.target.playVideo();
-                                    },
-                                    'onStateChange': onPlayerStateChange
-                                }
-                            });
-                        } else {
-                            player.loadVideoById(data.url.split('/embed/')[1].split('?')[0]);
-                            player.playVideo();
-                        }
-                    }, 500);
-                } else {
-                    console.error('YouTube API not loaded, retrying...');
-                    setTimeout(() => showVideo(projectId), 1000);
-                }
-
-                applyThumbnailListeners();
-            }
-        }
-
-        // Gérer les changements d'état du lecteur
-        function onPlayerStateChange(event) {
-            const activeThumbnail = document.querySelector('.related-video.active');
-            if (activeThumbnail) {
-                const videoInfo = activeThumbnail.querySelector('.video-info');
-                const playingText = activeThumbnail.querySelector('.playing-text');
-                if (event.data === YT.PlayerState.PLAYING) {
-                    activeThumbnail.classList.add('playing');
-                    if (videoInfo) videoInfo.style.display = 'none';
-                    if (playingText) playingText.style.display = 'none';
-                } else if (event.data === YT.PlayerState.PAUSED || event.data === YT.PlayerState.ENDED) {
-                    activeThumbnail.classList.remove('playing');
-                    if (videoInfo) videoInfo.style.display = '';
-                    if (playingText) playingText.style.display = 'none';
-                }
-            }
-        }
-
-        // Fermer la section vidéo
-        function closeVideo() {
-            const videoSection = document.getElementById('video-section');
-            if (videoSection) videoSection.classList.remove('active');
-            hero.style.opacity = '1';
-            const sharePanel = document.getElementById('share-panel');
-            if (sharePanel) sharePanel.classList.remove('active');
-            if (player && player.stopVideo) {
-                player.stopVideo();
-            }
-            if (currentProject) {
-                const projectIndex = parseInt(currentProject.replace('project', '')) - 1;
-                currentColumn = Math.floor(projectIndex % 3);
-                const row = Math.floor(projectIndex / 3);
-                if (mosaic) mosaic.style.transform = `translateX(-${currentColumn * 100}vw)`;
-                window.scrollTo(0, row * window.innerHeight);
-            }
-            const videoContent = document.getElementById('video-content');
-            if (videoContent) {
-                videoContent.innerHTML = '';
-                player = null;
-            }
-        }
-
-        // Ouvrir/fermer le panneau de partage
-        function toggleSharePanel() {
-            const sharePanel = document.getElementById('share-panel');
-            if (sharePanel) sharePanel.classList.toggle('active');
-        }
-
-        // Fonctions de partage
-        function shareTo(platform) {
-            const data = videoData[currentProject];
-            const url = data.url;
-            let shareUrl;
-            switch (platform) {
-                case 'facebook': shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`; break;
-                case 'twitter': shareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(data.title)}`; break;
-                case 'pinterest': shareUrl = `https://pinterest.com/pin/create/button/?url=${encodeURIComponent(url)}&description=${encodeURIComponent(data.title)}`; break;
-                case 'tumblr': shareUrl = `https://www.tumblr.com/widgets/share/tool?canonicalUrl=${encodeURIComponent(url)}&title=${encodeURIComponent(data.title)}`; break;
-            }
-            window.open(shareUrl, '_blank');
-        }
-
-        // Copier le lien
-        function copyLink() {
-            const data = videoData[currentProject];
-            navigator.clipboard.writeText(data.url).then(() => {
-                alert('Lien copié dans le presse-papiers !');
-            }).catch(err => console.error('Erreur lors de la copie du lien :', err));
-        }
-
-        // Appliquer les écouteurs aux vignettes
-        function applyThumbnailListeners() {
-            const thumbnails = document.querySelectorAll('.related-video');
-            thumbnails.forEach(thumbnail => {
-                thumbnail.removeEventListener('mouseenter', handleMouseEnter);
-                thumbnail.removeEventListener('mouseleave', handleMouseLeave);
-                thumbnail.addEventListener('mouseenter', handleMouseEnter);
-                thumbnail.addEventListener('mouseleave', handleMouseLeave);
-            });
-        }
-
-        function handleMouseEnter(event) {
-            const thumbnail = event.currentTarget;
-            const playingText = thumbnail.querySelector('.playing-text');
-            const videoInfo = thumbnail.querySelector('.video-info');
-            if (thumbnail.classList.contains('active') && thumbnail.classList.contains('playing') && playingText) {
-                playingText.style.display = 'block';
-                if (videoInfo) videoInfo.style.display = 'none';
-            } else if (videoInfo && !thumbnail.classList.contains('playing')) {
-                videoInfo.style.display = 'flex';
-            }
-        }
-
-        function handleMouseLeave(event) {
-            const thumbnail = event.currentTarget;
-            const playingText = thumbnail.querySelector('.playing-text');
-            const videoInfo = thumbnail.querySelector('.video-info');
-            if (playingText) playingText.style.display = 'none';
-            if (videoInfo && !thumbnail.classList.contains('playing')) {
-                videoInfo.style.display = 'none';
-            }
-        }
-
-        // Gestion des sections avec effet de glissement
-        function showSection(section) {
-            const bioSection = document.getElementById('bio-section');
-            const contactSection = document.getElementById('contact-section');
-            const videoSection = document.getElementById('video-section');
-
-            if (bioSection.classList.contains('active')) {
-                bioSection.classList.remove('active');
-                setTimeout(() => {
-                    bioSection.style.display = 'none';
-                    openSection(section);
-                }, 500);
-            } else if (contactSection.classList.contains('active')) {
-                contactSection.classList.remove('active');
-                setTimeout(() => {
-                    contactSection.style.display = 'none';
-                    openSection(section);
-                }, 500);
-            } else if (videoSection.classList.contains('active')) {
-                videoSection.classList.remove('active');
-                setTimeout(() => {
-                    videoSection.style.display = 'none';
-                    openSection(section);
-                }, 500);
-            } else {
-                openSection(section);
-            }
-        }
-
-        function openSection(section) {
-            const bioSection = document.getElementById('bio-section');
-            const contactSection = document.getElementById('contact-section');
-            hero.style.opacity = '0';
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-
-            if (section === 'bio') {
-                if (bioSection) {
-                    bioSection.style.display = 'block';
-                    setTimeout(() => {
-                        bioSection.classList.add('active');
-                    }, 10);
-                }
-            } else if (section === 'contact') {
-                if (contactSection) {
-                    contactSection.style.display = 'block';
-                    setTimeout(() => {
-                        contactSection.classList.add('active');
-                    }, 10);
-                }
-            }
-        }
-
-        function hideBio() {
-            const bioSection = document.getElementById('bio-section');
-            if (bioSection) {
-                bioSection.classList.remove('active');
-                setTimeout(() => {
-                    bioSection.style.display = 'none';
-                    hero.style.opacity = '1';
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                }, 500);
-            }
-        }
-
-        // Gestion de l'abonnement avec envoi automatique et réinitialisation
-        async function subscribe() {
-            const emailInput = document.getElementById('email-input');
-            const email = emailInput.value;
-            if (email) {
-                try {
-                    const response = await fetch('https://api.example.com/send-email', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({
-                            to: 'pln.prod35@gmail.com',
-                            subject: 'Nouvel abonné',
-                            body: `${email} vient de s'abonner le ${new Date().toLocaleString('fr-FR', { timeZone: 'Europe/Paris' })}`
-                        }),
-                    });
-                    if (response.ok) {
-                        emailInput.value = ''; // Réinitialisation après soumission
-                        alert('Merci pour votre abonnement ! Un email a été envoyé.');
-                    } else {
-                        throw new Error('Erreur lors de l\'envoi de l\'email.');
-                    }
-                } catch (error) {
-                    console.error('Erreur :', error);
-                    alert('Une erreur s\'est produite. Veuillez réessayer.');
-                }
-            } else {
-                alert('Veuillez saisir une adresse email.');
-            }
-        }
-
-        // Gestion de la modale
-        function showModal(type) {
+        document.querySelector('.info-icon').addEventListener('click', () => {
             const modal = document.getElementById('modal');
-            const modalText = document.getElementById('modal-text');
-            let content = '';
-            switch (type) {
-                case 'terms':
-                    content = '<h2>Politique de confidentialité</h2><p>La politique de confidentialité de PLN Prod vise à protéger les données personnelles de nos visiteurs et clients. Nous nous engageons à respecter la confidentialité et la sécurité de toutes les informations que vous partagez avec nous. Notre politique de confidentialité détaille la manière dont nous collectons, utilisons, divulguons et protégeons vos données. Nous vous encourageons à la consulter régulièrement pour rester informé de nos pratiques en matière de confidentialité. Pour des informations plus détaillées sur la protection de vos données, veuillez consulter notre politique de confidentialité complète.</p>';
-                    break;
-                case 'privacy':
-                    content = '<h2>POLITIQUE DE CONFIDENTIALITÉ</h2><p>En tant que vidéaste, nous accordons une importance capitale à la protection de la vie privée de nos visiteurs et clients. Notre politique de confidentialité vise à informer nos visiteurs sur la manière dont nous collectons, utilisons, divulguons et gérons leurs données. Nous recueillons des informations limitées, telles que les coordonnées de contact et les détails du projet, pour comprendre les besoins de nos clients. Ces informations sont collectées de manière transparente et avec le consentement des visiteurs. Nous ne partageons les informations avec aucun tiers sans le consentement explicite des visiteurs. Toutes les données sont stockées de manière sécurisée et ne sont conservées que pendant la durée nécessaire pour mener à bien les projets. La confidentialité et la sécurité des informations de nos clients sont notre priorité absolue. Nous nous engageons à mettre à jour régulièrement notre politique de confidentialité pour refléter les changements dans nos pratiques et la législation. Pour des informations plus détaillées sur notre politique de confidentialité, n\'hésitez pas à nous contacter.</p>';
-                    break;
-                case 'legal':
-                    content = '<h2>MENTIONS LÉGALES</h2><p>En tant que vidéaste professionnel, nous sommes tenus de vous fournir des informations légales concernant notre activité. Cette section contient des détails tels que notre dénomination sociale, l\'adresse de notre siège social, les coordonnées de l\'hébergeur de notre site, ainsi que des mentions relatives à l\'utilisation de données personnelles et de cookies. De plus, nous tenons à vous informer de la plateforme de règlement des litiges en ligne (OS) fournie par la Commission européenne, et de vos droits en tant que client de contacter le conseil d\'arbitrage de la Commission européenne en cas de litige.</p>';
-                    break;
-                case 'cookies':
-                    content = '<h2>POLITIQUE DE COOKIES</h2><p>Vidéaste PLN Prod s\'engage à protéger votre vie privée. Ce site utilise des cookies pour améliorer l\'expérience utilisateur et à des fins de sécurité et d\'analyse. En utilisant notre site, vous consentez à notre utilisation des cookies conformément aux termes de cette politique. La chose la plus importante à savoir sur les cookies que nous utilisons est qu\'ils servent à améliorer la fonctionnalité de notre site, par exemple, en se souvenant des préférences du site et des paramètres de langue.</p>';
-                    break;
-            }
-            modalText.innerHTML = content;
             modal.classList.add('active');
-        }
-
-        function closeModal() {
-            const modal = document.getElementById('modal');
-            modal.classList.remove('active');
-        }
-
-        // Réinitialisation du champ email au chargement
-        window.onload = function() {
-            const emailInput = document.getElementById('email-input');
-            if (emailInput) {
-                emailInput.value = ''; // Efface toute valeur stockée localement
-            }
-        };
+        });
     </script>
 </body>
 </html>
