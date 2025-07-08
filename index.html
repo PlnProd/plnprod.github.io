@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PLNouille Prod</title>
+    <title>PLNoze Prod</title>
     <script src="https://www.youtube.com/iframe_api"></script>
     <style>
         * {
@@ -591,6 +591,7 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
+            max-width: 300px;
         }
 
         .contact-column-1 p {
@@ -621,6 +622,7 @@
             background-size: contain;
             background-repeat: no-repeat;
             transition: opacity 0.3s;
+            filter: brightness(0) invert(1); /* Rendre les icônes visibles sur fond noir */
         }
 
         .social-icons a:hover {
@@ -631,6 +633,7 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
+            max-width: 300px;
         }
 
         .contact-column-2 p {
@@ -647,16 +650,18 @@
             background: #333;
             border: 1px solid #555;
             color: #fff;
+            placeholder: "saisissez votre email ici";
         }
 
         .contact-column-2 button {
             background-color: #3498db;
             color: #fff;
             border: none;
-            padding: 0.5rem 1rem;
+            padding: 0.5rem;
             font-size: 1rem;
             cursor: pointer;
             border-radius: 5px;
+            width: 250px; /* Ajusté dynamiquement à la largeur du rectangle de saisie */
         }
 
         .contact-column-2 button:hover {
@@ -899,6 +904,7 @@
 
             .contact-column-1, .contact-column-2 {
                 justify-content: flex-start;
+                max-width: 250px;
             }
 
             .social-icons a {
@@ -1090,7 +1096,7 @@
             </div>
             <div class="contact-column-2">
                 <p>Rejoignez ma liste d'envoi</p>
-                <input type="email" id="email-input" placeholder="Saisissez votre email ici">
+                <input type="email" id="email-input" placeholder="saisissez votre email ici">
                 <button onclick="subscribe()">S'abonner</button>
             </div>
         </div>
