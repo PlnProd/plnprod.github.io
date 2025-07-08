@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PLN Prod ooo</title>
+    <title>PLN Propppd</title>
     <script src="https://www.youtube.com/iframe_api"></script>
     <style>
         * {
@@ -575,7 +575,7 @@
 
         .contact-content {
             width: 80%;
-            margin-left: 15%; /* Décalage à droite */
+            margin-left: 15%;
             padding-top: 80px;
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -587,12 +587,13 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            max-width: 250px; /* Élargissement des colonnes */
+            max-width: 300px; /* Élargissement pour une ligne */
         }
 
         .contact-column-1 p {
             font-size: 1.5rem;
             margin-bottom: 1rem;
+            white-space: nowrap; /* Pour garder sur une ligne */
         }
 
         .contact-column-1 a {
@@ -628,7 +629,7 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            max-width: 250px; /* Élargissement des colonnes */
+            max-width: 300px; /* Élargissement pour une ligne */
         }
 
         .contact-column-2 p {
@@ -640,7 +641,7 @@
             padding: 0.5rem;
             font-size: 1rem;
             width: 100%;
-            max-width: 250px;
+            max-width: 300px;
             margin-bottom: 1rem;
             background: #333;
             border: 1px solid #555;
@@ -655,7 +656,7 @@
             font-size: 1rem;
             cursor: pointer;
             border-radius: 5px;
-            width: 250px;
+            width: 300px;
         }
 
         .contact-column-2 button:hover {
@@ -919,7 +920,7 @@
 
             .contact-content {
                 width: 90%;
-                margin-left: 10%; /* Ajustement pour mobile */
+                margin-left: 10%;
                 grid-template-columns: 1fr;
                 gap: 1rem;
             }
@@ -1094,9 +1095,6 @@
             <div class="bio-text"><i>Texte de paragraphe. Vous pouvez le personnaliser et ajouter votre propre contenu. Cliquez ici pour modifier le texte et ajouter des informations sur votre entreprise, présenter votre équipe et les services proposés. Vous pouvez également partager votre histoire, vos inspirations, et mettre en avant votre approche unique. Captivez l'attention de vos visiteurs et faites-vous remarquer.</i></div>
             <a href="#" class="bio-link" onclick="hideSection('bio')">voir le portfolio</a>
             <img src="https://via.placeholder.com/1200x600?text=Image+Portfolio" alt="Image Portfolio" class="bio-image">
-            <div class="nav-links">
-                <a href="#" onclick="showSection('contact')">Contact</a> | <a href="#" onclick="showSection('equip')">Équipement</a>
-            </div>
         </div>
         <div class="bio-awards">
             <h3>Distinctions & Commentaires Clients</h3>
@@ -1109,7 +1107,7 @@
     <section class="contact-section" id="contact-section">
         <div class="contact-content">
             <div class="contact-column-1">
-                <p>Me contacter pour exprimer<br>notre créativité ensemble</p>
+                <p>Me contacter pour exprimer notre créativité ensemble</p>
                 <a href="mailto:pln.prod35@gmail.com">pln.prod35@gmail.com</a>
                 <div class="social-icons">
                     <a href="https://twitter.com" target="_blank">
@@ -1145,9 +1143,7 @@
         <div class="legal-links">
             <a href="#">Mentions légales</a>
             <a href="#">Politique de confidentialité</a>
-        </div>
-        <div class="nav-links">
-            <a href="#" onclick="showSection('bio')">Bio</a> | <a href="#" onclick="showSection('equip')">Équipement</a>
+            <a href="#">Termes et Conditions</a>
         </div>
     </section>
 
@@ -1157,9 +1153,11 @@
             <div class="bio-title">Notre Société</div>
             <div class="bio-text"><i>PLN Prod est une entreprise de vidéaste spécialisée dans la création de contenus vidéo de haute qualité. Nous sommes passionnés par la réalisation de films et la capture d'instants mémorables. Notre équipe talentueuse travaille avec dévouement pour donner vie à vos idées et projets.</i></div>
             <a href="#" class="bio-link" onclick="hideSection('equip')">retour</a>
-            <div class="nav-links">
-                <a href="#" onclick="showSection('bio')">Bio</a> | <a href="#" onclick="showSection('contact')">Contact</a>
-            </div>
+        </div>
+        <div class="legal-links">
+            <a href="#">Mentions légales</a>
+            <a href="#">Politique de confidentialité</a>
+            <a href="#">Termes et Conditions</a>
         </div>
     </section>
 
@@ -1258,9 +1256,7 @@
         function showSection(sectionId) {
             const section = document.getElementById(sectionId + '-section');
             const allSections = document.querySelectorAll('.bio-section, .contact-section, .equip-section');
-            allSections.forEach(s => {
-                if (s !== section) s.classList.remove('active');
-            });
+            allSections.forEach(s => s.classList.remove('active'));
             section.classList.add('active');
         }
 
@@ -1294,6 +1290,8 @@
             const col = (projectNumber - 1) % 3;
             mosaic.style.transform = `translateX(-${col * 100}vw)`;
             window.scrollTo({ top: row * window.innerHeight, behavior: 'smooth' });
+            const allSections = document.querySelectorAll('.bio-section, .contact-section, .equip-section');
+            allSections.forEach(s => s.classList.remove('active'));
         }
 
         window.addEventListener('scroll', () => {
