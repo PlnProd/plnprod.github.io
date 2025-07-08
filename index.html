@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PLNqqqqqq Prod</title>
+    <title>PL*LLLLLLLLLLN Prod</title>
     <script src="https://www.youtube.com/iframe_api"></script>
     <style>
         * {
@@ -1253,12 +1253,7 @@
             const mosaic = document.getElementById('mosaic');
             mosaic.style.transform = 'translateX(0vw)';
             window.scrollTo({ top: 0, behavior: 'smooth' });
-            const arrows = document.querySelectorAll('.arrow');
-            arrows.forEach(arrow => {
-                arrow.style.display = 'block';
-                arrow.style.pointerEvents = 'auto';
-                arrow.onclick = arrow.getAttribute('onclick'); // Réassigner les gestionnaires d'événements
-            });
+            rebindArrowEvents();
         }
 
         function playRelatedVideo(videoId) {
@@ -1325,12 +1320,7 @@
             const mosaic = document.getElementById('mosaic');
             mosaic.style.transform = 'translateX(0vw)';
             window.scrollTo({ top: 0, behavior: 'smooth' });
-            const arrows = document.querySelectorAll('.arrow');
-            arrows.forEach(arrow => {
-                arrow.style.display = 'block';
-                arrow.style.pointerEvents = 'auto';
-                arrow.onclick = arrow.getAttribute('onclick'); // Réassigner les gestionnaires d'événements
-            });
+            rebindArrowEvents();
         }
 
         function closeModal() {
@@ -1367,11 +1357,20 @@
             const hero = document.getElementById('hero');
             hero.style.opacity = '1';
             hero.style.pointerEvents = 'auto';
+            rebindArrowEvents();
+        }
+
+        function rebindArrowEvents() {
             const arrows = document.querySelectorAll('.arrow');
             arrows.forEach(arrow => {
                 arrow.style.display = 'block';
                 arrow.style.pointerEvents = 'auto';
-                arrow.onclick = arrow.getAttribute('onclick'); // Réassigner les gestionnaires d'événements
+                const action = arrow.getAttribute('onclick');
+                if (action === 'nextColumn()') {
+                    arrow.onclick = nextColumn;
+                } else if (action === 'prevColumn()') {
+                    arrow.onclick = prevColumn;
+                }
             });
         }
 
