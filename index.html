@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PLN Pirod</title>
+    <title>PLN Prossd</title>
     <script src="https://www.youtube.com/iframe_api"></script>
     <style>
         * {
@@ -1184,33 +1184,24 @@
         function showBio() {
             const bioSection = document.getElementById('bio-section');
             if (bioSection) {
-                const mosaic = document.getElementById('mosaic');
-                currentColumn = 0;
-                if (mosaic) mosaic.style.transform = `translateX(0)`;
-                window.scrollTo({ top: 0, behavior: 'smooth' });
                 bioSection.style.display = 'block';
-                bioSection.style.opacity = '0';
                 setTimeout(() => {
                     bioSection.classList.add('active');
-                }, 50);
+                }, 10); // Petit délai pour déclencher l'animation
+                hero.style.opacity = '0';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             }
         }
 
         function hideBio() {
             const bioSection = document.getElementById('bio-section');
-            const hero = document.getElementById('hero');
             if (bioSection) {
                 bioSection.classList.remove('active');
                 setTimeout(() => {
                     bioSection.style.display = 'none';
-                    if (hero) {
-                        hero.style.opacity = '0';
-                        setTimeout(() => {
-                            window.scrollTo({ top: 0, behavior: 'smooth' });
-                            hero.style.opacity = '1';
-                        }, 50);
-                    }
-                }, 500);
+                    hero.style.opacity = '1';
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }, 500); // Correspond à la durée de l'animation
             }
         }
     </script>
