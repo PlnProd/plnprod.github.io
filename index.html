@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PLNNNINI Prod</title>
+    <title>PLN Prodouille</title>
     <script src="https://www.youtube.com/iframe_api"></script>
     <style>
         * {
@@ -151,7 +151,7 @@
             padding: 0.5rem;
             border-radius: 50%;
             z-index: 100;
-            display: block; /* Réactivation des flèches */
+            display: block;
         }
 
         .arrow-right {
@@ -580,7 +580,7 @@
             padding-top: 80px;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 0.5rem; /* Rapprocher les colonnes */
+            gap: 0.2rem; /* Rapprocher encore les colonnes */
             height: calc(100% - 100px);
         }
 
@@ -598,11 +598,11 @@
         }
 
         .contact-column-1 p.br-after-exprimer {
-            white-space: normal; /* Permettre le saut de ligne */
+            white-space: normal;
         }
 
         .contact-column-1 p.br-after-exprimer br {
-            display: block; /* Saut de ligne après "exprimer" */
+            display: block;
         }
 
         .contact-column-1 a {
@@ -931,7 +931,7 @@
                 width: 90%;
                 margin-left: 10%;
                 grid-template-columns: 1fr;
-                gap: 0.5rem;
+                gap: 0.2rem;
             }
 
             .contact-column-1, .contact-column-2 {
@@ -1266,14 +1266,6 @@
 
         function showSection(sectionId) {
             const section = document.getElementById(sectionId + '-section');
-            const allSections = document.querySelectorAll('.bio-section, .contact-section, .equip-section');
-            allSections.forEach(s => {
-                if (s !== section) {
-                    s.classList.remove('active');
-                    s.style.transform = 'translateY(100%)';
-                    s.style.opacity = '0';
-                }
-            });
             section.classList.add('active');
             setTimeout(() => {
                 section.style.transform = 'translateY(0)';
