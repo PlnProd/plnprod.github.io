@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PLN Prozoiod</title>
+    <title>PLN Prazouillod</title>
     <script src="https://www.youtube.com/iframe_api"></script>
     <style>
         * {
@@ -252,6 +252,7 @@
             position: relative;
             flex-wrap: wrap;
             width: 100%;
+            margin-left: 0; /* Correction du décalage à gauche */
         }
 
         .video-content .video-wrapper {
@@ -1088,7 +1089,7 @@
                 <a href="#" class="share-text" onclick="toggleSharePanel()">partager</a>
             </div>
         </div>
-        <div class="close-btn" onclick="closeVideo()">✖</div>
+        <div class="close-btn" onclick="closeVideoAndReturn()">✖</div>
         <div class="video-content" id="video-content">
             <!-- Lecteur et description -->
         </div>
@@ -1197,7 +1198,7 @@
             const videoContent = document.getElementById('video-content');
             const relatedVideos = document.getElementById('related-videos');
 
-            // Exemple de contenu vidéo
+            // Contenu vidéo avec disposition côte à côte
             videoContent.innerHTML = `
                 <div class="video-wrapper">
                     <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?enablejsapi=1" frameborder="0" allowfullscreen></iframe>
@@ -1233,7 +1234,7 @@
             relatedVideos.querySelector(`[onclick="playRelatedVideo('dQw4w9WgXcQ')"]`).classList.add('active', 'playing');
         }
 
-        function closeVideo() {
+        function closeVideoAndReturn() {
             const videoSection = document.getElementById('video-section');
             videoSection.classList.remove('active');
             const videoContent = document.getElementById('video-content');
@@ -1243,6 +1244,8 @@
             const mosaic = document.getElementById('mosaic');
             mosaic.style.transform = 'translateX(0vw)';
             window.scrollTo({ top: 0, behavior: 'smooth' });
+            const hero = document.getElementById('hero');
+            hero.style.display = 'block'; // Assure le retour à la mosaïque
         }
 
         function playRelatedVideo(videoId) {
@@ -1274,6 +1277,17 @@
                 section.style.transform = 'translateY(0)';
                 section.style.opacity = '1';
             }, 10);
+            const navLinks = document.querySelectorAll('nav ul li a');
+            navLinks.forEach(link => {
+                link.onclick = (e) => {
+                    e.preventDefault();
+                    const targetSection = e.target.getAttribute('onclick').replace('showSection(\'', '').replace('\')', '');
+                    if (targetSection !== sectionId) {
+                        hideSection(sectionId);
+                        showSection(targetSection);
+                    }
+                };
+            });
         }
 
         function hideSection(sectionId) {
@@ -1286,6 +1300,16 @@
             const mosaic = document.getElementById('mosaic');
             mosaic.style.transform = 'translateX(0vw)';
             window.scrollTo({ top: 0, behavior: 'smooth' });
+            const navLinks = document.querySelectorAll('nav ul li a');
+            navLinks.forEach(link => {
+                const targetSection = link.getAttribute('onclick').replace('showSection(\'', '').replace('\')', '');
+                if (targetSection === 'narration' || targetSection === 'publicite' || targetSection === 'musique-video') {
+                    link.onclick = (e) => {
+                        e.preventDefault();
+                        scrollToProject(parseInt(e.target.getAttribute('onclick').match(/\d+/)[0]));
+                    };
+                }
+            });
         }
 
         function closeModal() {
