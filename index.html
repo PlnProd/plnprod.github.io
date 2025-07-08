@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PLN Prodzaoui</title>
+    <title>PLN Prozoiod</title>
     <script src="https://www.youtube.com/iframe_api"></script>
     <style>
         * {
@@ -580,7 +580,7 @@
             padding-top: 80px;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 0.1rem; /* Rapprocher encore les colonnes */
+            gap: 0.1rem;
             height: calc(100% - 100px);
         }
 
@@ -1150,8 +1150,6 @@
             </div>
         </div>
         <div class="legal-links">
-            <a href="#" onclick="showSection('bio')">Bio</a>
-            <a href="#" onclick="showSection('equip')">Équipement</a>
             <a href="#">Mentions légales</a>
             <a href="#">Politique de confidentialité</a>
             <a href="#">Politique des cookies</a>
@@ -1167,8 +1165,6 @@
             <a href="#" class="bio-link" onclick="hideSection('equip')">retour</a>
         </div>
         <div class="legal-links">
-            <a href="#" onclick="showSection('bio')">Bio</a>
-            <a href="#" onclick="showSection('contact')">Contact</a>
             <a href="#">Mentions légales</a>
             <a href="#">Politique de confidentialité</a>
             <a href="#">Politique des cookies</a>
@@ -1244,6 +1240,9 @@
             videoContent.innerHTML = '';
             const relatedVideos = document.getElementById('related-videos');
             relatedVideos.innerHTML = '';
+            const mosaic = document.getElementById('mosaic');
+            mosaic.style.transform = 'translateX(0vw)';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function playRelatedVideo(videoId) {
@@ -1284,6 +1283,9 @@
             setTimeout(() => {
                 section.classList.remove('active');
             }, 500);
+            const mosaic = document.getElementById('mosaic');
+            mosaic.style.transform = 'translateX(0vw)';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function closeModal() {
@@ -1311,6 +1313,12 @@
             const col = (projectNumber - 1) % 3;
             mosaic.style.transform = `translateX(-${col * 100}vw)`;
             window.scrollTo({ top: row * window.innerHeight, behavior: 'smooth' });
+            const allSections = document.querySelectorAll('.bio-section, .contact-section, .equip-section');
+            allSections.forEach(s => {
+                s.classList.remove('active');
+                s.style.transform = 'translateY(100%)';
+                s.style.opacity = '0';
+            });
         }
 
         window.addEventListener('scroll', () => {
