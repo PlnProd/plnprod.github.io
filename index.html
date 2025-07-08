@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PLNpopopoProd</title>
+    <title>PLNoisoisois Prod</title>
     <script src="https://www.youtube.com/iframe_api"></script>
     <style>
         * {
@@ -1233,9 +1233,10 @@
 
             videoSection.classList.add('active');
             relatedVideos.querySelector(`[onclick="playRelatedVideo('dQw4w9WgXcQ')"]`).classList.add('active', 'playing');
-            // Masquer la mosaïque temporairement
-            document.getElementById('hero').style.opacity = '0';
-            document.getElementById('hero').style.pointerEvents = 'none';
+            // Masquer la mosaïque
+            const hero = document.getElementById('hero');
+            hero.style.opacity = '0';
+            hero.style.pointerEvents = 'none';
         }
 
         function closeVideoAndReturnToMosaic() {
@@ -1304,8 +1305,9 @@
                 };
             });
             // Masquer la mosaïque
-            document.getElementById('hero').style.opacity = '0';
-            document.getElementById('hero').style.pointerEvents = 'none';
+            const hero = document.getElementById('hero');
+            hero.style.opacity = '0';
+            hero.style.pointerEvents = 'none';
         }
 
         function hideSection(sectionId) {
