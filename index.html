@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PLN Prossd</title>
+    <title>PLN Pffod</title>
     <script src="https://www.youtube.com/iframe_api"></script>
     <style>
         * {
@@ -486,7 +486,7 @@
 
         .bio-content {
             width: 66.66%;
-            margin-left: 0;
+            margin-left: 5%; /* Indentation légère vers la droite */
             padding-top: 80px;
         }
 
@@ -519,6 +519,14 @@
             color: #2980b9;
         }
 
+        .bio-image {
+            width: 100%;
+            height: calc(100vh - 200px); /* Occupe l'espace jusqu'en bas, ajusté pour le padding et titre */
+            object-fit: cover;
+            margin-top: 2rem;
+            display: block;
+        }
+
         .bio-photo {
             display: none;
             margin-top: 20rem;
@@ -531,6 +539,10 @@
             margin-top: 2rem;
             text-align: center;
             max-width: 600px;
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
         }
 
         .bio-awards h3 {
@@ -683,6 +695,7 @@
 
             .bio-content {
                 width: 100%;
+                margin-left: 5%; /* Indentation conservée */
                 padding-top: 80px;
             }
 
@@ -692,6 +705,10 @@
 
             .bio-text {
                 font-size: 0.75rem;
+            }
+
+            .bio-image {
+                height: calc(100vh - 150px); /* Ajustement pour mobile */
             }
 
             .bio-photo {
@@ -848,8 +865,8 @@
             <div class="bio-title">Vidéaste Passionné de Vidéographie.<br>Créateur de Films.<br><br>Conteur d'Histoires</div>
             <div class="bio-text"><i>Texte de paragraphe. Vous pouvez le personnaliser et ajouter votre propre contenu. Cliquez ici pour modifier le texte et ajouter des informations sur votre entreprise, présenter votre équipe et les services proposés. Vous pouvez également partager votre histoire, vos inspirations, et mettre en avant votre approche unique. Captivez l'attention de vos visiteurs et faites-vous remarquer.</i></div>
             <a href="#" class="bio-link" onclick="hideBio()">voir le portfolio</a>
+            <img src="https://via.placeholder.com/1200x400?text=Image+Portfolio" alt="Image Portfolio" class="bio-image">
         </div>
-        <img src="https://via.placeholder.com/400x300?text=Photo+Bio" alt="Photo Bio" class="bio-photo">
         <div class="bio-awards">
             <h3>Distinctions & Commentaires Clients</h3>
             <p>"Travail exceptionnel, très professionnel !" - Client A</p>
