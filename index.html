@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PLNoze Prod</title>
+    <title>PLN gougneProd</title>
     <script src="https://www.youtube.com/iframe_api"></script>
     <style>
         * {
@@ -230,7 +230,7 @@
             color: #fff;
             cursor: pointer;
             background: rgba(0, 0, 0, 0.8);
-            padding: 0.6rem 0.9rem;
+            padding: 0.6rem 0.7rem;
             border-radius: 50%;
             transition: background 0.3s;
             z-index: 1002;
@@ -623,6 +623,7 @@
             background-repeat: no-repeat;
             transition: opacity 0.3s;
             filter: brightness(0) invert(1); /* Rendre les icônes visibles sur fond noir */
+            background-color: #fff; /* Fond blanc pour garantir la visibilité */
         }
 
         .social-icons a:hover {
@@ -1503,7 +1504,7 @@
             }
         }
 
-        // Gestion de l'abonnement avec envoi automatique
+        // Gestion de l'abonnement avec envoi automatique et réinitialisation
         async function subscribe() {
             const emailInput = document.getElementById('email-input');
             const email = emailInput.value;
@@ -1521,7 +1522,7 @@
                         }),
                     });
                     if (response.ok) {
-                        emailInput.value = '';
+                        emailInput.value = ''; // Réinitialisation après soumission
                         alert('Merci pour votre abonnement ! Un email a été envoyé.');
                     } else {
                         throw new Error('Erreur lors de l\'envoi de l\'email.');
@@ -1562,6 +1563,14 @@
             const modal = document.getElementById('modal');
             modal.classList.remove('active');
         }
+
+        // Réinitialisation du champ email au chargement
+        window.onload = function() {
+            const emailInput = document.getElementById('email-input');
+            if (emailInput) {
+                emailInput.value = ''; // Efface toute valeur stockée localement
+            }
+        };
     </script>
 </body>
 </html>
