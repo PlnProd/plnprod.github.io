@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PLN Priid</title>
+    <title>PLN Prod ooo</title>
     <script src="https://www.youtube.com/iframe_api"></script>
     <style>
         * {
@@ -575,7 +575,7 @@
 
         .contact-content {
             width: 80%;
-            margin-left: 10%;
+            margin-left: 15%; /* Décalage à droite */
             padding-top: 80px;
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -587,7 +587,7 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            max-width: 200px;
+            max-width: 250px; /* Élargissement des colonnes */
         }
 
         .contact-column-1 p {
@@ -628,7 +628,7 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            max-width: 200px;
+            max-width: 250px; /* Élargissement des colonnes */
         }
 
         .contact-column-2 p {
@@ -640,7 +640,7 @@
             padding: 0.5rem;
             font-size: 1rem;
             width: 100%;
-            max-width: 200px;
+            max-width: 250px;
             margin-bottom: 1rem;
             background: #333;
             border: 1px solid #555;
@@ -655,7 +655,7 @@
             font-size: 1rem;
             cursor: pointer;
             border-radius: 5px;
-            width: 200px;
+            width: 250px;
         }
 
         .contact-column-2 button:hover {
@@ -919,14 +919,14 @@
 
             .contact-content {
                 width: 90%;
-                margin-left: 5%;
+                margin-left: 10%; /* Ajustement pour mobile */
                 grid-template-columns: 1fr;
                 gap: 1rem;
             }
 
             .contact-column-1, .contact-column-2 {
                 justify-content: flex-start;
-                max-width: 150px;
+                max-width: 200px;
             }
 
             .social-icons a {
@@ -1094,6 +1094,9 @@
             <div class="bio-text"><i>Texte de paragraphe. Vous pouvez le personnaliser et ajouter votre propre contenu. Cliquez ici pour modifier le texte et ajouter des informations sur votre entreprise, présenter votre équipe et les services proposés. Vous pouvez également partager votre histoire, vos inspirations, et mettre en avant votre approche unique. Captivez l'attention de vos visiteurs et faites-vous remarquer.</i></div>
             <a href="#" class="bio-link" onclick="hideSection('bio')">voir le portfolio</a>
             <img src="https://via.placeholder.com/1200x600?text=Image+Portfolio" alt="Image Portfolio" class="bio-image">
+            <div class="nav-links">
+                <a href="#" onclick="showSection('contact')">Contact</a> | <a href="#" onclick="showSection('equip')">Équipement</a>
+            </div>
         </div>
         <div class="bio-awards">
             <h3>Distinctions & Commentaires Clients</h3>
@@ -1143,6 +1146,9 @@
             <a href="#">Mentions légales</a>
             <a href="#">Politique de confidentialité</a>
         </div>
+        <div class="nav-links">
+            <a href="#" onclick="showSection('bio')">Bio</a> | <a href="#" onclick="showSection('equip')">Équipement</a>
+        </div>
     </section>
 
     <!-- Section Équipement -->
@@ -1151,6 +1157,9 @@
             <div class="bio-title">Notre Société</div>
             <div class="bio-text"><i>PLN Prod est une entreprise de vidéaste spécialisée dans la création de contenus vidéo de haute qualité. Nous sommes passionnés par la réalisation de films et la capture d'instants mémorables. Notre équipe talentueuse travaille avec dévouement pour donner vie à vos idées et projets.</i></div>
             <a href="#" class="bio-link" onclick="hideSection('equip')">retour</a>
+            <div class="nav-links">
+                <a href="#" onclick="showSection('bio')">Bio</a> | <a href="#" onclick="showSection('contact')">Contact</a>
+            </div>
         </div>
     </section>
 
@@ -1248,6 +1257,10 @@
 
         function showSection(sectionId) {
             const section = document.getElementById(sectionId + '-section');
+            const allSections = document.querySelectorAll('.bio-section, .contact-section, .equip-section');
+            allSections.forEach(s => {
+                if (s !== section) s.classList.remove('active');
+            });
             section.classList.add('active');
         }
 
