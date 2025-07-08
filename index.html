@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PLN Prodouille</title>
+    <title>PLN Prodzaoui</title>
     <script src="https://www.youtube.com/iframe_api"></script>
     <style>
         * {
@@ -580,7 +580,7 @@
             padding-top: 80px;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 0.2rem; /* Rapprocher encore les colonnes */
+            gap: 0.1rem; /* Rapprocher encore les colonnes */
             height: calc(100% - 100px);
         }
 
@@ -931,7 +931,7 @@
                 width: 90%;
                 margin-left: 10%;
                 grid-template-columns: 1fr;
-                gap: 0.2rem;
+                gap: 0.1rem;
             }
 
             .contact-column-1, .contact-column-2 {
@@ -1150,6 +1150,8 @@
             </div>
         </div>
         <div class="legal-links">
+            <a href="#" onclick="showSection('bio')">Bio</a>
+            <a href="#" onclick="showSection('equip')">Équipement</a>
             <a href="#">Mentions légales</a>
             <a href="#">Politique de confidentialité</a>
             <a href="#">Politique des cookies</a>
@@ -1165,6 +1167,8 @@
             <a href="#" class="bio-link" onclick="hideSection('equip')">retour</a>
         </div>
         <div class="legal-links">
+            <a href="#" onclick="showSection('bio')">Bio</a>
+            <a href="#" onclick="showSection('contact')">Contact</a>
             <a href="#">Mentions légales</a>
             <a href="#">Politique de confidentialité</a>
             <a href="#">Politique des cookies</a>
@@ -1307,12 +1311,6 @@
             const col = (projectNumber - 1) % 3;
             mosaic.style.transform = `translateX(-${col * 100}vw)`;
             window.scrollTo({ top: row * window.innerHeight, behavior: 'smooth' });
-            const allSections = document.querySelectorAll('.bio-section, .contact-section, .equip-section');
-            allSections.forEach(s => {
-                s.classList.remove('active');
-                s.style.transform = 'translateY(100%)';
-                s.style.opacity = '0';
-            });
         }
 
         window.addEventListener('scroll', () => {
