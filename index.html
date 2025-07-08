@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PLN Pffod</title>
+    <title>PLNou Prod</title>
     <script src="https://www.youtube.com/iframe_api"></script>
     <style>
         * {
@@ -521,7 +521,7 @@
 
         .bio-image {
             width: 100%;
-            height: calc(100vh - 200px); /* Occupe l'espace jusqu'en bas, ajusté pour le padding et titre */
+            height: calc(100vh - 150px); /* Ajusté pour occuper tout l'espace avant défilement */
             object-fit: cover;
             margin-top: 2rem;
             display: block;
@@ -553,6 +553,133 @@
         .bio-awards p {
             font-size: 1rem;
             color: #ccc;
+        }
+
+        /* Section Contact */
+        .contact-section {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: #000;
+            z-index: 998;
+            padding: 2rem;
+            opacity: 0;
+            transform: translateY(100%);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .contact-section.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .contact-content {
+            width: 80%;
+            margin-left: 10%;
+            padding-top: 80px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            height: calc(100% - 100px);
+        }
+
+        .contact-column-1 {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .contact-column-1 p {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-column-1 a {
+            font-size: 1.1rem;
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        .contact-column-1 a:hover {
+            color: #2980b9;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-icons a {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            transition: opacity 0.3s;
+        }
+
+        .social-icons a:hover {
+            opacity: 0.8;
+        }
+
+        .contact-column-2 {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .contact-column-2 p {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-column-2 input {
+            padding: 0.5rem;
+            font-size: 1rem;
+            width: 100%;
+            max-width: 250px;
+            margin-bottom: 1rem;
+            background: #333;
+            border: 1px solid #555;
+            color: #fff;
+        }
+
+        .contact-column-2 button {
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .contact-column-2 button:hover {
+            background-color: #2980b9;
+        }
+
+        .legal-links {
+            position: absolute;
+            bottom: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 1rem;
+        }
+
+        .legal-links a {
+            color: #3498db;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .legal-links a:hover {
+            color: #2980b9;
         }
 
         /* Footer */
@@ -695,7 +822,7 @@
 
             .bio-content {
                 width: 100%;
-                margin-left: 5%; /* Indentation conservée */
+                margin-left: 5%;
                 padding-top: 80px;
             }
 
@@ -708,11 +835,28 @@
             }
 
             .bio-image {
-                height: calc(100vh - 150px); /* Ajustement pour mobile */
+                height: calc(100vh - 100px); /* Ajustement pour mobile */
             }
 
-            .bio-photo {
-                max-width: 100%;
+            .contact-content {
+                width: 90%;
+                margin-left: 5%;
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .contact-column-1, .contact-column-2 {
+                justify-content: flex-start;
+            }
+
+            .social-icons a {
+                width: 25px;
+                height: 25px;
+            }
+
+            .legal-links {
+                flex-direction: column;
+                gap: 0.5rem;
             }
         }
     </style>
@@ -729,8 +873,8 @@
             <li><a href="#publicite">Publicité</a></li>
             <li><a href="#musique-video">Musique-Vidéo</a></li>
             <li><a href="#" onclick="showBio()">Bio</a></li>
+            <li><a href="#" onclick="showContact()">Contact</a></li>
             <li><a href="#equipement">Équipement</a></li>
-            <li><a href="#contact">Contact</a></li>
         </ul>
     </nav>
 
@@ -865,12 +1009,40 @@
             <div class="bio-title">Vidéaste Passionné de Vidéographie.<br>Créateur de Films.<br><br>Conteur d'Histoires</div>
             <div class="bio-text"><i>Texte de paragraphe. Vous pouvez le personnaliser et ajouter votre propre contenu. Cliquez ici pour modifier le texte et ajouter des informations sur votre entreprise, présenter votre équipe et les services proposés. Vous pouvez également partager votre histoire, vos inspirations, et mettre en avant votre approche unique. Captivez l'attention de vos visiteurs et faites-vous remarquer.</i></div>
             <a href="#" class="bio-link" onclick="hideBio()">voir le portfolio</a>
-            <img src="https://via.placeholder.com/1200x400?text=Image+Portfolio" alt="Image Portfolio" class="bio-image">
+            <img src="https://via.placeholder.com/1200x600?text=Image+Portfolio" alt="Image Portfolio" class="bio-image">
         </div>
         <div class="bio-awards">
             <h3>Distinctions & Commentaires Clients</h3>
             <p>"Travail exceptionnel, très professionnel !" - Client A</p>
             <p>"Une créativité hors pair, je recommande vivement !" - Client B</p>
+        </div>
+    </section>
+
+    <!-- Section Contact -->
+    <section class="contact-section" id="contact-section">
+        <div class="contact-content">
+            <div class="contact-column-1">
+                <p>Me contacter pour exprimer notre créativité ensemble</p>
+                <a href="mailto:pln.prod35@gmail.com">pln.prod35@gmail.com</a>
+                <div class="social-icons">
+                    <a href="https://twitter.com" target="_blank" style="background-image: url('https://www.flaticon.com/svg/static/icons/svg/733/733579.svg');"></a>
+                    <a href="https://facebook.com" target="_blank" style="background-image: url('https://www.flaticon.com/svg/static/icons/svg/124/124010.svg');"></a>
+                    <a href="https://vimeo.com" target="_blank" style="background-image: url('https://www.flaticon.com/svg/static/icons/svg/2111/2111537.svg');"></a>
+                    <a href="https://youtube.com" target="_blank" style="background-image: url('https://www.flaticon.com/svg/static/icons/svg/1383/1383268.svg');"></a>
+                    <a href="https://instagram.com" target="_blank" style="background-image: url('https://www.flaticon.com/svg/static/icons/svg/2111/2111463.svg');"></a>
+                </div>
+            </div>
+            <div class="contact-column-2">
+                <p>Rejoignez ma liste d'envoi</p>
+                <input type="email" id="email-input" placeholder="Saisissez votre email ici">
+                <button onclick="subscribe()">S'abonner</button>
+            </div>
+        </div>
+        <div class="legal-links">
+            <a href="#">Termes et conditions</a>
+            <a href="#">Politique de confidentialité</a>
+            <a href="#">Mentions légales</a>
+            <a href="#">Politique de cookies</a>
         </div>
     </section>
 
@@ -1219,6 +1391,47 @@
                     hero.style.opacity = '1';
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                 }, 500); // Correspond à la durée de l'animation
+            }
+        }
+
+        // Gestion de la section Contact avec effet de glissement
+        function showContact() {
+            const contactSection = document.getElementById('contact-section');
+            if (contactSection) {
+                contactSection.style.display = 'block';
+                setTimeout(() => {
+                    contactSection.classList.add('active');
+                }, 10); // Petit délai pour déclencher l'animation
+                hero.style.opacity = '0';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        function hideContact() {
+            const contactSection = document.getElementById('contact-section');
+            if (contactSection) {
+                contactSection.classList.remove('active');
+                setTimeout(() => {
+                    contactSection.style.display = 'none';
+                    hero.style.opacity = '1';
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }, 500); // Correspond à la durée de l'animation
+            }
+        }
+
+        // Gestion de l'abonnement
+        function subscribe() {
+            const emailInput = document.getElementById('email-input');
+            const email = emailInput.value;
+            if (email) {
+                const subject = 'Nouvel abonné';
+                const body = `${email} vient de s'abonner`;
+                const mailtoLink = `mailto:pln.prod35@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+                window.location.href = mailtoLink;
+                emailInput.value = '';
+                alert('Merci pour votre abonnement ! Un email a été envoyé.');
+            } else {
+                alert('Veuillez saisir une adresse email.');
             }
         }
     </script>
