@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PLN Prazouillod</title>
+    <title>PLN Perorod</title>
     <script src="https://www.youtube.com/iframe_api"></script>
     <style>
         * {
@@ -252,7 +252,7 @@
             position: relative;
             flex-wrap: wrap;
             width: 100%;
-            margin-left: 0; /* Correction du décalage à gauche */
+            margin-left: 0;
         }
 
         .video-content .video-wrapper {
@@ -1232,6 +1232,8 @@
 
             videoSection.classList.add('active');
             relatedVideos.querySelector(`[onclick="playRelatedVideo('dQw4w9WgXcQ')"]`).classList.add('active', 'playing');
+            // Masquer temporairement la mosaïque pour éviter les conflits
+            document.getElementById('hero').style.display = 'none';
         }
 
         function closeVideoAndReturn() {
@@ -1244,8 +1246,10 @@
             const mosaic = document.getElementById('mosaic');
             mosaic.style.transform = 'translateX(0vw)';
             window.scrollTo({ top: 0, behavior: 'smooth' });
-            const hero = document.getElementById('hero');
-            hero.style.display = 'block'; // Assure le retour à la mosaïque
+            document.getElementById('hero').style.display = 'block'; // Restaurer la mosaïque
+            // Réactiver les flèches
+            const arrows = document.querySelectorAll('.arrow');
+            arrows.forEach(arrow => arrow.style.display = 'block');
         }
 
         function playRelatedVideo(videoId) {
@@ -1343,6 +1347,7 @@
                 s.style.transform = 'translateY(100%)';
                 s.style.opacity = '0';
             });
+            document.getElementById('hero').style.display = 'block'; // Assure le retour à la mosaïque
         }
 
         window.addEventListener('scroll', () => {
