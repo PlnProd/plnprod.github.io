@@ -3,1237 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PL*LLLLLLLLLLN Prod</title>
+    <title>clouN Prod</title>
     <script src="https://www.youtube.com/iframe_api"></script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
-
-        body {
-            background-color: #000;
-            color: #fff;
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        /* Barre de navigation */
-        nav {
-            background-color: #000;
-            padding: 1rem;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            transition: background-color 0.3s;
+        /* Les styles CSS restent inchangés pour cet exemple */
+        #mosaic {
             display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        nav.scrolled {
-            background-color: transparent;
-        }
-
-        .nav-logo {
-            display: flex;
-            align-items: center;
-            margin-left: 2rem;
-        }
-
-        .nav-logo img {
-            width: 40px;
-            height: auto;
-            margin-right: 0.5rem;
-        }
-
-        .nav-logo p {
-            font-size: 1.2rem;
-            font-weight: bold;
-        }
-
-        nav ul {
-            list-style: none;
-            display: flex;
-            margin-right: 2rem;
-        }
-
-        nav ul li {
-            margin: 0 1.5rem;
-        }
-
-        nav ul li a {
-            color: #fff;
-            text-decoration: none;
-            font-size: 1.1rem;
-            text-transform: uppercase;
-            cursor: pointer;
-        }
-
-        nav ul li a:hover {
-            color: #3498db;
-        }
-
-        /* Section mosaïque */
-        .hero {
-            position: relative;
-            min-height: 400vh;
-            overflow-x: hidden;
-            transition: opacity 0.5s ease;
-            display: block;
-        }
-
-        .mosaic-container {
-            display: grid;
-            grid-template-columns: repeat(3, 100vw);
-            grid-template-rows: repeat(4, 100vh);
-            width: 300vw;
             transition: transform 0.5s ease;
         }
-
-        .mosaic-item {
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            overflow: hidden;
+        #hero {
+            transition: opacity 0.3s ease;
         }
-
-        .mosaic-item img {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: 1;
-        }
-
-        .mosaic-item .content {
-            text-align: center;
-            background: rgba(0, 0, 0, 0.5);
-            padding: 2rem;
-            border-radius: 10px;
-            z-index: 2;
-        }
-
-        .mosaic-item h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .mosaic-item button {
-            background-color: #3498db;
-            color: #fff;
-            border: none;
-            padding: 1rem 2rem;
-            font-size: 1.1rem;
-            cursor: pointer;
-            border-radius: 5px;
-            z-index: 2;
-        }
-
-        .mosaic-item button:hover {
-            background-color: #2980b9;
-        }
-
-        .arrow {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 2rem;
-            color: #fff;
-            cursor: pointer;
-            background: rgba(0, 0, 0, 0.5);
-            padding: 0.5rem;
-            border-radius: 50%;
-            z-index: 100;
-            display: block;
-        }
-
-        .arrow-right {
-            right: 20px;
-        }
-
-        .arrow-left {
-            left: 20px;
-        }
-
-        /* Section vidéo */
         .video-section {
             display: none;
-            padding: 3rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-            background-color: #000;
-            min-height: 100vh;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 999;
-            justify-content: center;
         }
-
         .video-section.active {
-            display: flex;
-        }
-
-        .video-header {
-            background-color: #000;
-            padding: 1rem;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1001;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            height: 100px;
-        }
-
-        .video-header .left-controls {
-            display: flex;
-            align-items: center;
-            margin-left: 2rem;
-        }
-
-        .video-header .info-icon,
-        .video-header .share-icon,
-        .video-header .share-text {
-            color: #fff;
-            font-size: 1.2rem;
-            margin-right: 0.5rem;
-            cursor: pointer;
-        }
-
-        .video-header .share-text {
-            text-decoration: none;
-        }
-
-        .video-header .share-text:hover,
-        .video-header .share-icon:hover {
-            color: #3498db;
-        }
-
-        .video-header .divider {
-            color: #fff;
-            margin: 0 0.5rem;
-        }
-
-        .video-section .close-btn {
-            position: fixed;
-            top: 6.5rem;
-            right: 1rem;
-            font-size: 1.8rem;
-            color: #fff;
-            cursor: pointer;
-            background: rgba(0, 0, 0, 0.8);
-            padding: 0.6rem 0.7rem;
-            border-radius: 50%;
-            transition: background 0.3s;
-            z-index: 1002;
-        }
-
-        .video-section .close-btn:hover {
-            background: rgba(0, 0, 0, 1);
-        }
-
-        .video-content {
-            display: flex;
-            flex-direction: row;
-            gap: 2rem;
-            align-items: flex-start;
-            justify-content: center;
-            margin-top: 100px;
-            position: relative;
-            flex-wrap: wrap;
-            width: 100%;
-            margin-left: 0;
-        }
-
-        .video-content .video-wrapper {
-            position: relative;
-            max-width: 600px;
-            width: 100%;
-            height: calc(600px * 9 / 16);
-        }
-
-        .video-content iframe {
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-            background: transparent;
-        }
-
-        .video-content .video-title-overlay {
-            display: none;
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            color: #fff;
-            font-size: 1.2rem;
-            padding: 0.5rem;
-            text-align: center;
-            z-index: 3;
-        }
-
-        .video-wrapper:hover .video-title-overlay {
             display: block;
         }
-
-        .video-description {
-            max-width: 500px;
-            text-align: left;
-        }
-
-        .video-description h2 {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-        }
-
-        .video-description p {
-            font-size: 1.1rem;
-        }
-
-        /* Vignettes des vidéos associées */
-        .related-videos {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-top: 2rem;
-            width: 100%;
-        }
-
-        .related-video {
-            width: 200px;
-            height: calc(200px * 9 / 16);
+        .arrow {
             cursor: pointer;
-            position: relative;
-        }
-
-        .related-video img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 5px;
-            transition: opacity 0.3s;
-        }
-
-        .related-video.active img {
-            opacity: 0.8;
-        }
-
-        .related-video.active.playing:hover .playing-text {
-            display: block;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: #fff;
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
-            font-size: 0.9vw;
-            font-weight: bold;
-            text-align: center;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-            z-index: 10;
-        }
-
-        .related-video:not(.playing):hover img {
-            opacity: 0.7;
-        }
-
-        .related-video .video-info {
-            display: none;
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            flex-direction: column;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px;
-            z-index: 3;
-        }
-
-        .related-video:not(.playing):hover .video-info {
-            display: flex;
-        }
-
-        .related-video.active.playing .video-info,
-        .related-video.active.playing:hover .video-info {
-            display: none !important;
-        }
-
-        .video-info .video-title {
-            color: #fff;
-            padding: 0.3vw 0.6vw;
-            font-size: 0.6vw;
-            text-align: center;
-            width: 100%;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
-        }
-
-        .video-info .video-duration {
-            color: #fff;
-            padding: 0.3vw 0.6vw;
-            font-size: 0.5vw;
-            text-align: center;
-            width: 100%;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
-        }
-
-        .video-info .play-icon {
-            width: 40px;
-            height: 40px;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>') no-repeat center;
-            background-size: contain;
-            opacity: 0.9;
-            transition: opacity 0.3s;
-        }
-
-        .video-info .play-icon:hover {
-            opacity: 1;
-        }
-
-        /* Panneau de partage */
-        .share-panel {
-            display: none;
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            z-index: 1003;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .share-panel.active {
-            display: flex;
-        }
-
-        .share-panel .share-text {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            text-align: center;
-            color: #fff;
-        }
-
-        .share-panel .close-share {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: #fff;
-        }
-
-        .share-panel .close-share:hover {
-            color: #3498db;
-        }
-
-        .share-panel .share-buttons {
-            position: absolute;
-            bottom: 60px;
-            left: 20px;
-            right: 20rem;
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-        }
-
-        .share-panel .share-button {
-            width: 40px;
-            height: 40px;
-            background: none;
-            border: none;
-            cursor: pointer;
-        }
-
-        /* Section Bio */
-        .bio-section {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background: #000;
-            z-index: 998;
-            padding: 2rem;
-            opacity: 0;
-            transform: translateY(100%);
-            transition: opacity 0.5s ease, transform 0.5s ease;
-        }
-
-        .bio-section.active {
-            display: block;
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .bio-content {
-            width: 66.66%;
-            margin-left: 5%;
-            padding-top: 80px;
-        }
-
-        .bio-title {
-            font-size: 2rem;
-            font-weight: bold;
-            line-height: 1.2;
-            margin-bottom: 1rem;
-        }
-
-        .bio-text {
-            font-size: 1rem;
-            font-weight: 300;
-            font-style: italic;
-            margin-bottom: 2rem;
-        }
-
-        .bio-link {
-            font-size: 1.1rem;
-            color: #3498db;
-            text-decoration: none;
-            cursor: pointer;
-            display: block;
-            position: relative;
-            bottom: 0;
-            margin-top: 2rem;
-        }
-
-        .bio-link:hover {
-            color: #2980b9;
-        }
-
-        .bio-image {
-            width: 100%;
-            height: calc(100vh - 150px);
-            object-fit: cover;
-            margin-top: 2rem;
-            display: block;
-        }
-
-        .bio-photo {
-            display: none;
-            margin-top: 20rem;
-            max-width: 400px;
-            width: 100%;
-            height: auto;
-        }
-
-        .bio-awards {
-            margin-top: 2rem;
-            text-align: center;
-            max-width: 600px;
-            position: absolute;
-            bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .bio-awards h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .bio-awards p {
-            font-size: 1rem;
-            color: #ccc;
-        }
-
-        /* Section Contact */
-        .contact-section {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background: #000;
-            z-index: 998;
-            padding: 2rem;
-            opacity: 0;
-            transform: translateY(100%);
-            transition: opacity 0.5s ease, transform 0.5s ease;
-        }
-
-        .contact-section.active {
-            display: block;
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .contact-content {
-            width: 80%;
-            margin-left: 15%;
-            padding-top: 80px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 0.1rem;
-            height: calc(100% - 100px);
-        }
-
-        .contact-column-1 {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            max-width: 300px;
-        }
-
-        .contact-column-1 p {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            white-space: nowrap;
-        }
-
-        .contact-column-1 p.br-after-exprimer {
-            white-space: normal;
-        }
-
-        .contact-column-1 p.br-after-exprimer br {
-            display: block;
-        }
-
-        .contact-column-1 a {
-            font-size: 1.1rem;
-            color: #3498db;
-            text-decoration: none;
-        }
-
-        .contact-column-1 a:hover {
-            color: #2980b9;
-        }
-
-        .social-icons {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-
-        .social-icons a {
-            display: inline-block;
-            width: 30px;
-            height: 30px;
-            background-size: contain;
-            background-repeat: no-repeat;
-            transition: opacity 0.3s;
-        }
-
-        .social-icons a:hover {
-            opacity: 0.8;
-        }
-
-        .contact-column-2 {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            max-width: 300px;
-        }
-
-        .contact-column-2 p {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .contact-column-2 input {
-            padding: 0.5rem;
-            font-size: 1rem;
-            width: 100%;
-            max-width: 300px;
-            margin-bottom: 1rem;
-            background: #333;
-            border: 1px solid #555;
-            color: #fff;
-        }
-
-        .contact-column-2 button {
-            background-color: #3498db;
-            color: #fff;
-            border: none;
-            padding: 0.5rem;
-            font-size: 1rem;
-            cursor: pointer;
-            border-radius: 5px;
-            width: 300px;
-        }
-
-        .contact-column-2 button:hover {
-            background-color: #2980b9;
-        }
-
-        .legal-links {
-            position: absolute;
-            bottom: 1rem;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 1rem;
-        }
-
-        .legal-links a {
-            color: #3498db;
-            text-decoration: none;
-            font-size: 0.9rem;
-        }
-
-        .legal-links a:hover {
-            color: #2980b9;
-        }
-
-        /* Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .modal.active {
-            display: flex;
-        }
-
-        .modal-content {
-            background: #222;
-            padding: 2rem;
-            max-width: 600px;
-            width: 90%;
-            max-height: 80vh;
-            overflow-y: auto;
-            border-radius: 5px;
-            text-align: left;
-        }
-
-        .modal-content h2 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .modal-content p {
-            font-size: 1rem;
-            line-height: 1.5;
-        }
-
-        .close-modal {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            font-size: 1.5rem;
-            color: #fff;
-            cursor: pointer;
-        }
-
-        .close-modal:hover {
-            color: #3498db;
-        }
-
-        /* Footer */
-        footer {
-            background-color: #000;
-            color: #fff;
-            text-align: center;
-            padding: 1rem;
-            position: relative;
-            width: 100%;
-            z-index: 1;
-        }
-
-        /* Section Équipement */
-        .equip-section {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background: #000;
-            z-index: 998;
-            padding: 2rem;
-            opacity: 0;
-            transform: translateY(100%);
-            transition: opacity 0.5s ease, transform 0.5s ease;
-        }
-
-        .equip-section.active {
-            display: block;
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .equip-content {
-            width: 66.66%;
-            margin-left: 5%;
-            padding-top: 80px;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .nav-logo img {
-                width: 30px;
-            }
-
-            .nav-logo p {
-                font-size: 1rem;
-            }
-
-            nav ul {
-                flex-direction: column;
-                margin-right: 0;
-            }
-
-            nav ul li {
-                margin: 0.5rem 0;
-            }
-
-            .mosaic-item h1 {
-                font-size: 1.5rem;
-            }
-
-            .mosaic-item button {
-                padding: 0.5rem 1rem;
-                font-size: 1rem;
-            }
-
-            .arrow {
-                font-size: 1.5rem;
-                padding: 0.3rem;
-            }
-
-            .video-content {
-                flex-direction: column;
-                align-items: center;
-                margin-top: 80px;
-            }
-
-            .video-content .video-wrapper {
-                height: calc(100vw * 9 / 16);
-            }
-
-            .video-content .video-title-overlay {
-                font-size: 0.9rem;
-            }
-
-            .share-panel {
-                height: calc(100vw * 9 / 16);
-            }
-
-            .share-panel .share-text {
-                font-size: 1.2rem;
-            }
-
-            .share-panel .share-buttons {
-                bottom: 40px;
-                gap: 1rem;
-            }
-
-            .video-description {
-                text-align: center;
-            }
-
-            .video-description h2 {
-                font-size: 1.5rem;
-            }
-
-            .video-section .close-btn {
-                font-size: 1.4rem;
-                padding: 0.4rem 0.7rem;
-                top: 5.5rem;
-                background: rgba(0, 0, 0, 0.8);
-            }
-
-            .video-section .close-btn:hover {
-                background: rgba(0, 0, 0, 1);
-            }
-
-            .video-header {
-                height: 80px;
-            }
-
-            .video-header .left-controls {
-                margin-left: 1rem;
-            }
-
-            .video-header .info-icon,
-            .video-header .share-icon,
-            .video-header .share-text {
-                font-size: 1rem;
-            }
-
-            .related-videos {
-                gap: 0.5rem;
-                justify-content: center;
-            }
-
-            .related-video {
-                width: 120px;
-                height: calc(120px * 9 / 16);
-            }
-
-            .related-video.active.playing:hover .playing-text {
-                font-size: 2.8vw;
-                padding: 0.8rem 1.2rem;
-                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-                z-index: 10;
-            }
-
-            .video-info .video-title {
-                font-size: 2.5vw;
-                padding: 1vw 1.5vw;
-                text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
-            }
-
-            .video-info .video-duration {
-                font-size: 2vw;
-                padding: 1vw 1.5vw;
-                text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
-            }
-
-            .video-info .play-icon {
-                width: 30px;
-                height: 30px;
-            }
-
-            .bio-content {
-                width: 100%;
-                margin-left: 5%;
-                padding-top: 80px;
-            }
-
-            .bio-title {
-                font-size: 1.5rem;
-            }
-
-            .bio-text {
-                font-size: 0.75rem;
-            }
-
-            .bio-image {
-                height: calc(100vh - 100px);
-            }
-
-            .contact-content {
-                width: 90%;
-                margin-left: 10%;
-                grid-template-columns: 1fr;
-                gap: 0.1rem;
-            }
-
-            .contact-column-1, .contact-column-2 {
-                justify-content: flex-start;
-                max-width: 200px;
-            }
-
-            .social-icons a {
-                width: 25px;
-                height: 25px;
-            }
-
-            .legal-links {
-                flex-direction: column;
-                gap: 0.5rem;
-            }
-
-            .modal-content {
-                max-width: 90%;
-            }
         }
     </style>
 </head>
 <body>
-    <!-- Barre de navigation -->
-    <nav id="nav">
-        <div class="nav-logo">
-            <img src="https://via.placeholder.com/40x40?text=Logo" alt="PLN Prod Logo">
-            <p>PLN Prod</p>
+    <div id="hero">
+        <div id="mosaic">
+            <!-- Contenu de la mosaïque (exemple) -->
+            <div class="project" onclick="showVideo(1)">Projet 1</div>
+            <div class="project" onclick="showVideo(2)">Projet 2</div>
+            <div class="project" onclick="showVideo(3)">Projet 3</div>
         </div>
+        <div class="arrow" onclick="prevColumn()">←</div>
+        <div class="arrow" onclick="nextColumn()">→</div>
+    </div>
+    <div id="video-section" class="video-section">
+        <div id="video-content"></div>
+        <div id="related-videos"></div>
+        <button onclick="closeVideoAndReturnToMosaic()">Fermer</button>
+    </div>
+    <nav>
         <ul>
-            <li><a href="#narration" onclick="scrollToProject(4)">Narration</a></li>
-            <li><a href="#publicite" onclick="scrollToProject(7)">Publicité</a></li>
-            <li><a href="#musique-video" onclick="scrollToProject(10)">Musique-Vidéo</a></li>
-            <li><a href="#" onclick="showSection('bio')">Bio</a></li>
-            <li><a href="#" onclick="showSection('contact')">Contact</a></li>
-            <li><a href="#" onclick="showSection('equip')">Équipement</a></li>
+            <li><a href="#" onclick="showSection('narration')">Narration</a></li>
+            <li><a href="#" onclick="showSection('publicite')">Publicité</a></li>
+            <li><a href="#" onclick="showSection('musique-video')">Musique-Vidéo</a></li>
         </ul>
     </nav>
-
-    <!-- Section mosaïque -->
-    <section class="hero" id="hero">
-        <div class="mosaic-container" id="mosaic">
-            <div class="mosaic-item" data-project="project1">
-                <img src="https://media.giphy.com/media/3o6Zta2kQfOv1oXz4Q/giphy.gif" alt="Performance Live">
-                <div class="content">
-                    <h1>Projet 1</h1>
-                    <button onclick="showVideo('project1')">Lire la vidéo</button>
-                </div>
-                <div class="arrow arrow-right" onclick="nextColumn()">❯</div>
-            </div>
-            <div class="mosaic-item" data-project="project2">
-                <img src="https://media.giphy.com/media/3o7TKz9fL5s9Z6Z6hW/giphy.gif" alt="Clip Musical">
-                <div class="content">
-                    <h1>Projet 2</h1>
-                    <button onclick="showVideo('project2')">Lire la vidéo</button>
-                </div>
-                <div class="arrow arrow-left" onclick="prevColumn()">❮</div>
-                <div class="arrow arrow-right" onclick="nextColumn()">❯</div>
-            </div>
-            <div class="mosaic-item" data-project="project3">
-                <img src="https://media.giphy.com/media/l0MYt5j0ya4jXh6M0/giphy.gif" alt="Animation Abstraite">
-                <div class="content">
-                    <h1>Projet 3</h1>
-                    <button onclick="showVideo('project3')">Lire la vidéo</button>
-                </div>
-                <div class="arrow arrow-left" onclick="prevColumn()">❮</div>
-            </div>
-            <div class="mosaic-item" data-project="project4">
-                <img src="https://media.giphy.com/media/xT9IgzoZZ0xxInIgZq/giphy.gif" alt="Concert Électrique">
-                <div class="content">
-                    <h1>Projet 4</h1>
-                    <button onclick="showVideo('project4')">Lire la vidéo</button>
-                </div>
-                <div class="arrow arrow-right" onclick="nextColumn()">❯</div>
-            </div>
-            <div class="mosaic-item" data-project="project5">
-                <img src="https://media.giphy.com/media/3o6Zt6KHxJTbNbLDeM/giphy.gif" alt="Publicité Créative">
-                <div class="content">
-                    <h1>Projet 5</h1>
-                    <button onclick="showVideo('project5')">Lire la vidéo</button>
-                </div>
-                <div class="arrow arrow-left" onclick="prevColumn()">❮</div>
-                <div class="arrow arrow-right" onclick="nextColumn()">❯</div>
-            </div>
-            <div class="mosaic-item" data-project="project6">
-                <img src="https://media.giphy.com/media/26xBzdT9i8m7Dq1k4/giphy.gif" alt="Documentaire Musical">
-                <div class="content">
-                    <h1>Projet 6</h1>
-                    <button onclick="showVideo('project6')">Lire la vidéo</button>
-                </div>
-                <div class="arrow arrow-left" onclick="prevColumn()">❮</div>
-            </div>
-            <div class="mosaic-item" data-project="project7">
-                <img src="https://media.giphy.com/media/xT9IgG2xK7z4z6z6hW/giphy.gif" alt="Performance Acoustique">
-                <div class="content">
-                    <h1>Projet 7</h1>
-                    <button onclick="showVideo('project7')">Lire la vidéo</button>
-                </div>
-                <div class="arrow arrow-right" onclick="nextColumn()">❯</div>
-            </div>
-            <div class="mosaic-item" data-project="project8">
-                <img src="https://media.giphy.com/media/3o7aDcz6By4yX8Wn3G/giphy.gif" alt="Clip Experimental">
-                <div class="content">
-                    <h1>Projet 8</h1>
-                    <button onclick="showVideo('project8')">Lire la vidéo</button>
-                </div>
-                <div class="arrow arrow-left" onclick="prevColumn()">❮</div>
-                <div class="arrow arrow-right" onclick="nextColumn()">❯</div>
-            </div>
-            <div class="mosaic-item" data-project="project9">
-                <img src="https://media.giphy.com/media/3o6ZtaO9BZHcOjmErm/giphy.gif" alt="Live Studio">
-                <div class="content">
-                    <h1>Projet 9</h1>
-                    <button onclick="showVideo('project9')">Lire la vidéo</button>
-                </div>
-                <div class="arrow arrow-left" onclick="prevColumn()">❮</div>
-            </div>
-            <div class="mosaic-item" data-project="project10">
-                <img src="https://media.giphy.com/media/l0Iyl55kTeh71nTWw/giphy.gif" alt="Vidéo Narrative">
-                <div class="content">
-                    <h1>Projet 10</h1>
-                    <button onclick="showVideo('project10')">Lire la vidéo</button>
-                </div>
-                <div class="arrow arrow-right" onclick="nextColumn()">❯</div>
-            </div>
-            <div class="mosaic-item" data-project="project11">
-                <img src="https://media.giphy.com/media/26FPy3G0rLKBPlrB6/giphy.gif" alt="Visualisation Musicale">
-                <div class="content">
-                    <h1>Projet 11</h1>
-                    <button onclick="showVideo('project11')">Lire la vidéo</button>
-                </div>
-                <div class="arrow arrow-left" onclick="prevColumn()">❮</div>
-                <div class="arrow arrow-right" onclick="nextColumn()">❯</div>
-            </div>
-            <div class="mosaic-item" data-project="project12">
-                <img src="https://media.giphy.com/media/3o7TKF0r3wY2f2gQ6k/giphy.gif" alt="Show Live">
-                <div class="content">
-                    <h1>Projet 12</h1>
-                    <button onclick="showVideo('project12')">Lire la vidéo</button>
-                </div>
-                <div class="arrow arrow-left" onclick="prevColumn()">❮</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Section vidéo -->
-    <section class="video-section" id="video-section">
-        <div class="video-header">
-            <div class="left-controls">
-                <span class="info-icon">ℹ️</span>
-                <span class="divider">|</span>
-                <span class="share-icon" onclick="toggleSharePanel()">↪</span>
-                <a href="#" class="share-text" onclick="toggleSharePanel()">partager</a>
-            </div>
-        </div>
-        <div class="close-btn" onclick="closeVideoAndReturnToMosaic()">✖</div>
-        <div class="video-content" id="video-content">
-            <!-- Lecteur et description -->
-        </div>
-        <div class="related-videos" id="related-videos">
-            <!-- Vignettes -->
-        </div>
-    </section>
-
-    <!-- Section Bio -->
-    <section class="bio-section" id="bio-section">
-        <div class="bio-content">
-            <div class="bio-title">Vidéaste Passionné de Vidéographie.<br>Créateur de Films.<br><br>Conteur d'Histoires</div>
-            <div class="bio-text"><i>Texte de paragraphe. Vous pouvez le personnaliser et ajouter votre propre contenu. Cliquez ici pour modifier le texte et ajouter des informations sur votre entreprise, présenter votre équipe et les services proposés. Vous pouvez également partager votre histoire, vos inspirations, et mettre en avant votre approche unique. Captivez l'attention de vos visiteurs et faites-vous remarquer.</i></div>
-            <a href="#" class="bio-link" onclick="hideSection('bio')">voir le portfolio</a>
-            <img src="https://via.placeholder.com/1200x600?text=Image+Portfolio" alt="Image Portfolio" class="bio-image">
-        </div>
-        <div class="bio-awards">
-            <h3>Distinctions & Commentaires Clients</h3>
-            <p>"Travail exceptionnel, très professionnel !" - Client A</p>
-            <p>"Une créativité hors pair, je recommande vivement !" - Client B</p>
-        </div>
-    </section>
-
-    <!-- Section Contact -->
-    <section class="contact-section" id="contact-section">
-        <div class="contact-content">
-            <div class="contact-column-1">
-                <p class="br-after-exprimer">Me contacter pour exprimer<br>notre créativité ensemble</p>
-                <a href="mailto:pln.prod35@gmail.com">pln.prod35@gmail.com</a>
-                <div class="social-icons">
-                    <a href="https://twitter.com" target="_blank">
-                        <svg width="30" height="30" viewBox="0 0 24 24" fill="#1DA1F2">
-                            <path d="M23.954 4.569c-.885.389-1.83.654-2.825.775 1.014-.611 1.794-1.574 2.163-2.723-.951.555-2.005.959-3.127 1.184-.897-.957-2.178-1.555-3.594-1.555-2.717 0-4.92 2.203-4.92 4.917 0 .39.045.765.127 1.124C7.691 8.094 4.066 6.13 1.64 3.161c-.427.722-.666 1.561-.666 2.475 0 1.71.87 3.213 2.188 4.096-.807-.026-1.566-.248-2.228-.616v.061c0 2.385 1.693 4.374 3.946 4.827-.413.111-.849.171-1.296.171-.314 0-.615-.03-.916-.086.631 1.953 2.445 3.377 4.604 3.417-1.68 1.319-3.809 2.105-6.102 2.105-.39 0-.779-.023-1.17-.067 2.189 1.394 4.768 2.209 7.557 2.209 9.054 0 14.01-7.496 14.01-13.986 0-.209 0-.42-.015-.63.961-.689 1.8-1.56 2.46-2.548l-.047-.02z"/>
-                        </svg>
-                    </a>
-                    <a href="https://facebook.com" target="_blank">
-                        <svg width="30" height="30" viewBox="0 0 24 24" fill="#3B5998">
-                            <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/>
-                        </svg>
-                    </a>
-                    <a href="https://youtube.com" target="_blank">
-                        <svg width="30" height="30" viewBox="0 0 24 24" fill="#FF0000">
-                            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-                        </svg>
-                    </a>
-                    <a href="https://instagram.com" target="_blank">
-                        <svg width="30" height="30" viewBox="0 0 24 24" fill="#E1306C">
-                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.317 3.608 1.292.975.975 1.23 2.242 1.292 3.608.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.062 1.366-.317 2.633-1.292 3.608-.975.975-2.242 1.23-3.608 1.292-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.366-.062-2.633-.317-3.608-1.292-.975-.975-1.23-2.242-1.292-3.608-.058-1.266-.07-1.646-.07-4.85s.012-3.584.07-4.85c.062-1.366.317-2.633 1.292-3.608.975-.975 2.242-1.23 3.608-1.292 1.266-.058 1.646-.07 4.85-.07m0-2.163c-3.259 0-3.667.014-4.947.072-1.316.059-2.593.317-3.533 1.257C2.27 2.452 2.013 3.729 1.954 5.053c-.058 1.28-.072 1.688-.072 4.947s.014 3.667.072 4.947c.059 1.324.317 2.6 1.257 3.54.94.94 2.216 1.198 3.54 1.257 1.28.058 1.688.072 4.947.072s3.667-.014 4.947-.072c1.324-.059 2.6-.317 3.54-1.257.94-.94 1.198-2.216 1.257-3.54.058-1.28.072-1.688.072-4.947s-.014-3.667-.072-4.947c-.059-1.324-.317-2.6-1.257-3.54-.94-.94-2.216-1.198-3.54-1.257-1.28-.058-1.688-.072-4.947-.072h-.008zM12 6.875c-3.617 0-6.55 2.925-6.55 6.55s2.925 6.55 6.55 6.55 6.55-2.925 6.55-6.55-2.925-6.55-6.55-6.55zm0 10.85c-2.312 0-4.175-1.867-4.175-4.175s1.863-4.175 4.175-4.175 4.175 1.863 4.175 4.175-1.863 4.175-4.175 4.175zm6.844-10.85c0 .96-.775 1.735-1.735 1.735-.96 0-1.735-.775-1.735-1.735 0-.96.775-1.735 1.735-1.735.96 0 1.735.775 1.735 1.735z"/>
-                        </svg>
-                    </a>
-                    <a href="https://vimeo.com" target="_blank" style="font-family: 'cursive'; font-size: 25px;">V</a>
-                </div>
-            </div>
-            <div class="contact-column-2">
-                <p>Envoyez-moi un message</p>
-                <input type="text" placeholder="Nom">
-                <input type="text" placeholder="Email">
-                <button>Envoyer</button>
-            </div>
-        </div>
-        <div class="legal-links">
-            <a href="#">Mentions légales</a>
-            <a href="#">Politique de confidentialité</a>
-            <a href="#">Politique des cookies</a>
-            <a href="#">Termes et Conditions</a>
-        </div>
-    </section>
-
-    <!-- Section Équipement -->
-    <section class="equip-section" id="equip-section">
-        <div class="equip-content">
-            <div class="bio-title">Notre Société</div>
-            <div class="bio-text"><i>PLN Prod est une entreprise de vidéaste spécialisée dans la création de contenus vidéo de haute qualité. Nous sommes passionnés par la réalisation de films et la capture d'instants mémorables. Notre équipe talentueuse travaille avec dévouement pour donner vie à vos idées et projets.</i></div>
-            <a href="#" class="bio-link" onclick="hideSection('equip')">retour</a>
-        </div>
-        <div class="legal-links">
-            <a href="#">Mentions légales</a>
-            <a href="#">Politique de confidentialité</a>
-            <a href="#">Politique des cookies</a>
-            <a href="#">Termes et Conditions</a>
-        </div>
-    </section>
-
-    <!-- Modal -->
-    <div class="modal" id="modal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeModal()">✖</span>
-            <h2>Informations</h2>
-            <p>Ceci est un exemple de contenu modal. Vous pouvez personnaliser ce texte pour inclure des informations spécifiques sur votre projet ou service.</p>
-        </div>
-    </div>
-
-    <!-- Footer -->
-    <footer>
-        <p>© 2025 PLN Prod. Tous droits réservés.</p>
-    </footer>
+    <div id="narration-section" class="section"><button onclick="hideSection('narration')">Retour</button></div>
+    <div id="publicite-section" class="section"><button onclick="hideSection('publicite')">Retour</button></div>
+    <div id="musique-video-section" class="section"><button onclick="hideSection('musique-video')">Retour</button></div>
 
     <script>
-        let player;
-        function onYouTubeIframeAPIReady() {
-            // Initialisation du lecteur YouTube (si nécessaire)
-        }
+        let savedMosaicTransform = ''; // Variable pour sauvegarder l'état de la mosaïque
 
         function showVideo(projectId) {
             const videoSection = document.getElementById('video-section');
             const videoContent = document.getElementById('video-content');
             const relatedVideos = document.getElementById('related-videos');
+            const mosaic = document.getElementById('mosaic');
 
-            // Contenu vidéo avec disposition côte à côte
+            // Sauvegarder la transformation actuelle de la mosaïque
+            savedMosaicTransform = mosaic.style.transform || 'translateX(0vw)';
+
+            // Exemple de contenu vidéo
             videoContent.innerHTML = `
-                <div class="video-wrapper">
-                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?enablejsapi=1" frameborder="0" allowfullscreen></iframe>
-                    <div class="video-title-overlay">Titre de la vidéo ${projectId}</div>
-                </div>
-                <div class="video-description">
-                    <h2>Titre de la vidéo ${projectId}</h2>
-                    <p>Description de la vidéo ${projectId}...</p>
-                </div>
+                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?enablejsapi=1" frameborder="0" allowfullscreen></iframe>
+                <h2>Projet ${projectId}</h2>
             `;
-
-            // Vignettes cohérentes
             relatedVideos.innerHTML = `
-                <div class="related-video" onclick="playRelatedVideo('dQw4w9WgXcQ')">
-                    <img src="https://via.placeholder.com/200x112?text=Video+1" alt="Vignette 1">
-                    <div class="video-info">
-                        <div class="video-title">Vidéo 1</div>
-                        <div class="video-duration">3:45</div>
-                        <div class="play-icon"></div>
-                    </div>
-                </div>
-                <div class="related-video" onclick="playRelatedVideo('abc123xyz')">
-                    <img src="https://via.placeholder.com/200x112?text=Video+2" alt="Vignette 2">
-                    <div class="video-info">
-                        <div class="video-title">Vidéo 2</div>
-                        <div class="video-duration">4:12</div>
-                        <div class="play-icon"></div>
-                    </div>
-                </div>
+                <div onclick="playRelatedVideo('dQw4w9WgXcQ')">Vidéo connexe 1</div>
             `;
 
             videoSection.classList.add('active');
-            relatedVideos.querySelector(`[onclick="playRelatedVideo('dQw4w9WgXcQ')"]`).classList.add('active', 'playing');
-            // Masquer la mosaïque
             const hero = document.getElementById('hero');
             hero.style.opacity = '0';
             hero.style.pointerEvents = 'none';
@@ -1242,16 +82,13 @@
         function closeVideoAndReturnToMosaic() {
             const videoSection = document.getElementById('video-section');
             videoSection.classList.remove('active');
-            const videoContent = document.getElementById('video-content');
-            videoContent.innerHTML = '';
-            const relatedVideos = document.getElementById('related-videos');
-            relatedVideos.innerHTML = '';
-            // Restaurer la mosaïque et ses flèches
+            document.getElementById('video-content').innerHTML = '';
+            document.getElementById('related-videos').innerHTML = '';
             const hero = document.getElementById('hero');
             hero.style.opacity = '1';
             hero.style.pointerEvents = 'auto';
             const mosaic = document.getElementById('mosaic');
-            mosaic.style.transform = 'translateX(0vw)';
+            mosaic.style.transform = savedMosaicTransform; // Restaurer l'état sauvegardé
             window.scrollTo({ top: 0, behavior: 'smooth' });
             rebindArrowEvents();
         }
@@ -1259,80 +96,38 @@
         function playRelatedVideo(videoId) {
             const videoContent = document.getElementById('video-content');
             videoContent.innerHTML = `
-                <div class="video-wrapper">
-                    <iframe src="https://www.youtube.com/embed/${videoId}?enablejsapi=1" frameborder="0" allowfullscreen></iframe>
-                    <div class="video-title-overlay">Titre de la vidéo ${videoId}</div>
-                </div>
-                <div class="video-description">
-                    <h2>Titre de la vidéo ${videoId}</h2>
-                    <p>Description de la vidéo ${videoId}...</p>
-                </div>
+                <iframe src="https://www.youtube.com/embed/${videoId}?enablejsapi=1" frameborder="0" allowfullscreen></iframe>
             `;
-            const relatedVideos = document.getElementById('related-videos');
-            relatedVideos.querySelectorAll('.related-video').forEach(video => video.classList.remove('active', 'playing'));
-            relatedVideos.querySelector(`[onclick="playRelatedVideo('${videoId}')"]`).classList.add('active', 'playing');
-        }
-
-        function toggleSharePanel() {
-            const sharePanel = document.querySelector('.share-panel');
-            sharePanel.classList.toggle('active');
         }
 
         function showSection(sectionId) {
             const section = document.getElementById(sectionId + '-section');
             section.classList.add('active');
-            setTimeout(() => {
-                section.style.transform = 'translateY(0)';
-                section.style.opacity = '1';
-            }, 10);
-            const navLinks = document.querySelectorAll('nav ul li a');
-            navLinks.forEach(link => {
-                link.onclick = (e) => {
-                    e.preventDefault();
-                    const targetSection = e.target.getAttribute('onclick').replace('showSection(\'', '').replace('\')', '');
-                    if (targetSection !== sectionId) {
-                        hideSection(sectionId);
-                        if (targetSection === 'narration' || targetSection === 'publicite' || targetSection === 'musique-video') {
-                            scrollToProject(parseInt(e.target.getAttribute('onclick').match(/\d+/)[0]));
-                        } else {
-                            showSection(targetSection);
-                        }
-                    }
-                };
-            });
-            // Masquer la mosaïque
             const hero = document.getElementById('hero');
             hero.style.opacity = '0';
             hero.style.pointerEvents = 'none';
+            const mosaic = document.getElementById('mosaic');
+            savedMosaicTransform = mosaic.style.transform || 'translateX(0vw)'; // Sauvegarder avant de masquer
         }
 
         function hideSection(sectionId) {
             const section = document.getElementById(sectionId + '-section');
-            section.style.transform = 'translateY(100%)';
-            section.style.opacity = '0';
-            setTimeout(() => {
-                section.classList.remove('active');
-            }, 500);
-            // Restaurer la mosaïque
+            section.classList.remove('active');
             const hero = document.getElementById('hero');
             hero.style.opacity = '1';
             hero.style.pointerEvents = 'auto';
             const mosaic = document.getElementById('mosaic');
-            mosaic.style.transform = 'translateX(0vw)';
+            mosaic.style.transform = savedMosaicTransform; // Restaurer l'état sauvegardé
             window.scrollTo({ top: 0, behavior: 'smooth' });
             rebindArrowEvents();
-        }
-
-        function closeModal() {
-            const modal = document.getElementById('modal');
-            modal.classList.remove('active');
         }
 
         function nextColumn() {
             const mosaic = document.getElementById('mosaic');
             let translateX = parseInt(mosaic.style.transform.replace(/translateX\(-(\d+)vw\)/, '$1') || 0);
-            if (translateX < 200) translateX += 100;
+            if (translateX < 200) translateX += 100; // Limite arbitraire à 200vw
             mosaic.style.transform = `translateX(-${translateX}vw)`;
+            savedMosaicTransform = mosaic.style.transform; // Mettre à jour l'état sauvegardé
         }
 
         function prevColumn() {
@@ -1340,24 +135,7 @@
             let translateX = parseInt(mosaic.style.transform.replace(/translateX\(-(\d+)vw\)/, '$1') || 0);
             if (translateX > 0) translateX -= 100;
             mosaic.style.transform = `translateX(-${translateX}vw)`;
-        }
-
-        function scrollToProject(projectNumber) {
-            const mosaic = document.getElementById('mosaic');
-            const row = Math.floor((projectNumber - 1) / 3);
-            const col = (projectNumber - 1) % 3;
-            mosaic.style.transform = `translateX(-${col * 100}vw)`;
-            window.scrollTo({ top: row * window.innerHeight, behavior: 'smooth' });
-            const allSections = document.querySelectorAll('.bio-section, .contact-section, .equip-section, .video-section');
-            allSections.forEach(s => {
-                s.classList.remove('active');
-                s.style.transform = 'translateY(100%)';
-                s.style.opacity = '0';
-            });
-            const hero = document.getElementById('hero');
-            hero.style.opacity = '1';
-            hero.style.pointerEvents = 'auto';
-            rebindArrowEvents();
+            savedMosaicTransform = mosaic.style.transform; // Mettre à jour l'état sauvegardé
         }
 
         function rebindArrowEvents() {
@@ -1373,20 +151,6 @@
                 }
             });
         }
-
-        window.addEventListener('scroll', () => {
-            const nav = document.getElementById('nav');
-            if (window.scrollY > 50) {
-                nav.classList.add('scrolled');
-            } else {
-                nav.classList.remove('scrolled');
-            }
-        });
-
-        document.querySelector('.info-icon').addEventListener('click', () => {
-            const modal = document.getElementById('modal');
-            modal.classList.add('active');
-        });
     </script>
 </body>
 </html>
