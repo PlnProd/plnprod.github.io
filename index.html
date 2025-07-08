@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PLNoisoisois Prod</title>
+    <title>PLNnnnn Prod</title>
     <script src="https://www.youtube.com/iframe_api"></script>
     <style>
         * {
@@ -1258,6 +1258,8 @@
                 arrow.style.display = 'block';
                 arrow.style.pointerEvents = 'auto';
             });
+            // Forcer la réactivation des événements
+            arrows.forEach(arrow => arrow.dispatchEvent(new Event('click', { bubbles: true })));
         }
 
         function playRelatedVideo(videoId) {
@@ -1329,6 +1331,8 @@
                 arrow.style.display = 'block';
                 arrow.style.pointerEvents = 'auto';
             });
+            // Forcer la réactivation des événements
+            arrows.forEach(arrow => arrow.dispatchEvent(new Event('click', { bubbles: true })));
         }
 
         function closeModal() {
@@ -1370,6 +1374,8 @@
                 arrow.style.display = 'block';
                 arrow.style.pointerEvents = 'auto';
             });
+            // Forcer la réactivation des événements
+            arrows.forEach(arrow => arrow.dispatchEvent(new Event('click', { bubbles: true })));
         }
 
         window.addEventListener('scroll', () => {
