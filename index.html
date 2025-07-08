@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PLN Poirod</title>
+    <title>PLN Pirod</title>
     <script src="https://www.youtube.com/iframe_api"></script>
     <style>
         * {
@@ -169,8 +169,11 @@
             margin: 0 auto;
             background-color: #000;
             min-height: 100vh;
-            position: relative;
+            position: fixed;
             top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 999;
         }
 
         .video-section.active {
@@ -468,7 +471,7 @@
             width: 100%;
             height: 100vh;
             background: #000;
-            z-index: 999;
+            z-index: 998;
             padding: 2rem;
             opacity: 0;
             transform: translateY(100%);
@@ -997,79 +1000,81 @@
                 `project${row * 3 + 3}`
             ].filter(id => id in videoData);
 
+            const videoSection = document.getElementById('video-section');
             const videoContent = document.getElementById('video-content');
             const relatedVideos = document.getElementById('related-videos');
-            videoContent.innerHTML = `
-                <div class="video-wrapper">
-                    <iframe id="youtube-player" src="${data.url}" frameborder="0" allowfullscreen></iframe>
-                    <div class="video-title-overlay">${data.title}</div>
-                    <div class="share-panel" id="share-panel">
-                        <span class="close-share" onclick="toggleSharePanel()">✖</span>
-                        <div class="share-text">partager cette vidéo sur :</div>
-                        <div class="share-buttons">
-                            <button class="share-button" onclick="shareTo('facebook')">
-                                <img src="https://www.flaticon.com/svg/static/icons/svg/124/124010.svg" alt="Facebook">
-                            </button>
-                            <button class="share-button" onclick="shareTo('twitter')">
-                                <img src="https://www.flaticon.com/svg/static/icons/svg/733/733579.svg" alt="Twitter">
-                            </button>
-                            <button class="share-button" onclick="shareTo('pinterest')">
-                                <img src="https://www.flaticon.com/svg/static/icons/svg/2111/2111502.svg" alt="Pinterest">
-                            </button>
-                            <button class="share-button" onclick="shareTo('tumblr')">
-                                <img src="https://www.flaticon.com/svg/static/icons/svg/174/174876.svg" alt="Tumblr">
-                            </button>
-                            <button class="share-button" onclick="copyLink()">
-                                <img src="https://www.flaticon.com/svg/static/icons/svg/1828/1828460.svg" alt="Copier le lien">
-                            </button>
+            if (videoContent && relatedVideos && videoSection) {
+                videoContent.innerHTML = `
+                    <div class="video-wrapper">
+                        <iframe id="youtube-player" src="${data.url}" frameborder="0" allowfullscreen></iframe>
+                        <div class="video-title-overlay">${data.title}</div>
+                        <div class="share-panel" id="share-panel">
+                            <span class="close-share" onclick="toggleSharePanel()">✖</span>
+                            <div class="share-text">partager cette vidéo sur :</div>
+                            <div class="share-buttons">
+                                <button class="share-button" onclick="shareTo('facebook')">
+                                    <img src="https://www.flaticon.com/svg/static/icons/svg/124/124010.svg" alt="Facebook">
+                                </button>
+                                <button class="share-button" onclick="shareTo('twitter')">
+                                    <img src="https://www.flaticon.com/svg/static/icons/svg/733/733579.svg" alt="Twitter">
+                                </button>
+                                <button class="share-button" onclick="shareTo('pinterest')">
+                                    <img src="https://www.flaticon.com/svg/static/icons/svg/2111/2111502.svg" alt="Pinterest">
+                                </button>
+                                <button class="share-button" onclick="shareTo('tumblr')">
+                                    <img src="https://www.flaticon.com/svg/static/icons/svg/174/174876.svg" alt="Tumblr">
+                                </button>
+                                <button class="share-button" onclick="copyLink()">
+                                    <img src="https://www.flaticon.com/svg/static/icons/svg/1828/1828460.svg" alt="Copier le lien">
+                                </button>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="video-description">
-                    <h2>${data.title}</h2>
-                    <p>${data.description}</p>
-                </div>
-            `;
-            relatedVideos.innerHTML = `
-                ${projectsInRow.map(id => `
-                    <div class="related-video ${id === projectId ? 'active' : ''}" data-project-id="${id}" onclick="showVideo('${id}')">
-                        <img src="${videoData[id].gif}" alt="${videoData[id].title}">
-                        <div class="video-info">
-                            <span class="video-title">${videoData[id].title}</span>
-                            <span class="play-icon"></span>
-                            <span class="video-duration">${videoData[id].duration}</span>
-                        </div>
-                        <span class="playing-text" style="display: none;">En cours de lecture</span>
+                    <div class="video-description">
+                        <h2>${data.title}</h2>
+                        <p>${data.description}</p>
                     </div>
-                `).join('')}
-            `;
-            hero.style.opacity = '0';
-            const videoSection = document.querySelector('.video-section');
-            if (videoSection) videoSection.classList.add('active');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+                `;
+                relatedVideos.innerHTML = `
+                    ${projectsInRow.map(id => `
+                        <div class="related-video ${id === projectId ? 'active' : ''}" data-project-id="${id}" onclick="showVideo('${id}')">
+                            <img src="${videoData[id].gif}" alt="${videoData[id].title}">
+                            <div class="video-info">
+                                <span class="video-title">${videoData[id].title}</span>
+                                <span class="play-icon"></span>
+                                <span class="video-duration">${videoData[id].duration}</span>
+                            </div>
+                            <span class="playing-text" style="display: none;">En cours de lecture</span>
+                        </div>
+                    `).join('')}
+                `;
+                hero.style.opacity = '0';
+                videoSection.classList.add('active');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
 
-            if (typeof YT !== 'undefined' && YT.loaded) {
-                setTimeout(() => {
-                    if (!player) {
-                        player = new YT.Player('youtube-player', {
-                            events: {
-                                'onReady': (event) => {
-                                    event.target.playVideo();
-                                },
-                                'onStateChange': onPlayerStateChange
-                            }
-                        });
-                    } else {
-                        player.loadVideoById(data.url.split('/embed/')[1].split('?')[0]);
-                        player.playVideo();
-                    }
-                }, 500);
-            } else {
-                console.error('YouTube API not loaded, retrying...');
-                setTimeout(() => showVideo(projectId), 1000);
+                if (typeof YT !== 'undefined' && YT.loaded) {
+                    setTimeout(() => {
+                        if (!player) {
+                            player = new YT.Player('youtube-player', {
+                                events: {
+                                    'onReady': (event) => {
+                                        event.target.playVideo();
+                                    },
+                                    'onStateChange': onPlayerStateChange
+                                }
+                            });
+                        } else {
+                            player.loadVideoById(data.url.split('/embed/')[1].split('?')[0]);
+                            player.playVideo();
+                        }
+                    }, 500);
+                } else {
+                    console.error('YouTube API not loaded, retrying...');
+                    setTimeout(() => showVideo(projectId), 1000);
+                }
+
+                applyThumbnailListeners();
             }
-
-            applyThumbnailListeners();
         }
 
         // Gérer les changements d'état du lecteur
@@ -1092,7 +1097,7 @@
 
         // Fermer la section vidéo
         function closeVideo() {
-            const videoSection = document.querySelector('.video-section');
+            const videoSection = document.getElementById('video-section');
             if (videoSection) videoSection.classList.remove('active');
             hero.style.opacity = '1';
             const sharePanel = document.getElementById('share-panel');
