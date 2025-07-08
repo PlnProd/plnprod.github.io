@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PLN Perorod</title>
+    <title>PLN Prodzizi</title>
     <script src="https://www.youtube.com/iframe_api"></script>
     <style>
         * {
@@ -83,6 +83,7 @@
             min-height: 400vh;
             overflow-x: hidden;
             transition: opacity 0.5s ease;
+            display: block; /* Assure que la mosaïque reste visible par défaut */
         }
 
         .mosaic-container {
@@ -151,7 +152,7 @@
             padding: 0.5rem;
             border-radius: 50%;
             z-index: 100;
-            display: block;
+            display: block; /* Assure que les flèches restent visibles */
         }
 
         .arrow-right {
@@ -1232,8 +1233,9 @@
 
             videoSection.classList.add('active');
             relatedVideos.querySelector(`[onclick="playRelatedVideo('dQw4w9WgXcQ')"]`).classList.add('active', 'playing');
-            // Masquer temporairement la mosaïque pour éviter les conflits
-            document.getElementById('hero').style.display = 'none';
+            // Masquer la mosaïque temporairement sans désactiver les flèches
+            document.getElementById('hero').style.opacity = '0';
+            document.getElementById('hero').style.pointerEvents = 'none';
         }
 
         function closeVideoAndReturn() {
@@ -1246,10 +1248,15 @@
             const mosaic = document.getElementById('mosaic');
             mosaic.style.transform = 'translateX(0vw)';
             window.scrollTo({ top: 0, behavior: 'smooth' });
-            document.getElementById('hero').style.display = 'block'; // Restaurer la mosaïque
-            // Réactiver les flèches
+            // Restaurer la mosaïque et les flèches
+            const hero = document.getElementById('hero');
+            hero.style.opacity = '1';
+            hero.style.pointerEvents = 'auto';
             const arrows = document.querySelectorAll('.arrow');
-            arrows.forEach(arrow => arrow.style.display = 'block');
+            arrows.forEach(arrow => {
+                arrow.style.display = 'block';
+                arrow.style.pointerEvents = 'auto';
+            });
         }
 
         function playRelatedVideo(videoId) {
@@ -1289,9 +1296,14 @@
                     if (targetSection !== sectionId) {
                         hideSection(sectionId);
                         showSection(targetSection);
+                    } else if (targetSection === 'narration' || targetSection === 'publicite' || targetSection === 'musique-video') {
+                        scrollToProject(parseInt(e.target.getAttribute('onclick').match(/\d+/)[0]));
                     }
                 };
             });
+            // Masquer la mosaïque sans désactiver les flèches
+            document.getElementById('hero').style.opacity = '0';
+            document.getElementById('hero').style.pointerEvents = 'none';
         }
 
         function hideSection(sectionId) {
@@ -1304,15 +1316,13 @@
             const mosaic = document.getElementById('mosaic');
             mosaic.style.transform = 'translateX(0vw)';
             window.scrollTo({ top: 0, behavior: 'smooth' });
-            const navLinks = document.querySelectorAll('nav ul li a');
-            navLinks.forEach(link => {
-                const targetSection = link.getAttribute('onclick').replace('showSection(\'', '').replace('\')', '');
-                if (targetSection === 'narration' || targetSection === 'publicite' || targetSection === 'musique-video') {
-                    link.onclick = (e) => {
-                        e.preventDefault();
-                        scrollToProject(parseInt(e.target.getAttribute('onclick').match(/\d+/)[0]));
-                    };
-                }
+            const hero = document.getElementById('hero');
+            hero.style.opacity = '1';
+            hero.style.pointerEvents = 'auto';
+            const arrows = document.querySelectorAll('.arrow');
+            arrows.forEach(arrow => {
+                arrow.style.display = 'block';
+                arrow.style.pointerEvents = 'auto';
             });
         }
 
@@ -1347,7 +1357,14 @@
                 s.style.transform = 'translateY(100%)';
                 s.style.opacity = '0';
             });
-            document.getElementById('hero').style.display = 'block'; // Assure le retour à la mosaïque
+            const hero = document.getElementById('hero');
+            hero.style.opacity = '1';
+            hero.style.pointerEvents = 'auto';
+            const arrows = document.querySelectorAll('.arrow');
+            arrows.forEach(arrow => {
+                arrow.style.display = 'block';
+                arrow.style.pointerEvents = 'auto';
+            });
         }
 
         window.addEventListener('scroll', () => {
