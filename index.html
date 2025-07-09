@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PLNzouille Prod</title>
+    <title>PLN banzouli Prod</title>
     <style>
         * {
             margin: 0;
@@ -447,8 +447,7 @@
             color: #fff;
             padding: 0.3rem 0.6rem;
             font-size: 0.8rem;
-            text-align: center;
-            width: 100%;
+            text-align: 1;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
         }
 
@@ -456,21 +455,21 @@
             color: #fff;
             padding: 0.3rem 0.6rem;
             font-size: 0.7rem;
-            text-align: center;
+            text-align: left;
             width: 100%;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
         }
 
-        .video-info .play-icon {
+        .video-info .play-btn {
             width: 40px;
             height: 40px;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>') no-repeat center;
+            background: url('data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox=%220%200%2024%2024%22%20fill=%22white%22%3E%3Cpolygon%20points=%225%203%2019%2012%205%2021%205%203%22%3E%3C/polygon%3E%3C/svg%3E') no-repeat center;
             background-size: contain;
             opacity: 0.9;
             transition: opacity 0.3s;
         }
 
-        .video-info .play-icon:hover {
+        .video-info .play-btn:hover {
             opacity: 1;
         }
 
@@ -1089,7 +1088,7 @@
                     </a>
                     <a href="https://instagram.com" target="_blank">
                         <svg width="30" height="30" viewBox="0 0 24 24" fill="#E1306C">
-                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.317 3.608 1.292.975.975 1.23 2.242 1.292 3.608.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.062 1.366-.317 2.633-1.292 3.608-.975.975-2.242 1.23-3.608 1.292-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.366-.062-2.633-.317-3.608-1.292-.975-.975-1.23-2.242-1.292-3.608-.058-1.266-.07-1.646-.07-4.85s.012-3.584.07-4.85c.062-1.366.317-2.633 1.292-3.608.975-.975 2.242-1.23 3.608-1.292 1.266-.058 1.646-.07 4.85-.07m0-2.163c-3.259 0-3.667.014-4.947.072-1.316.059-2.593.317-3.533 1.257C2.27 2.452 2.013 3.729 1.954 5.053c-.058 1.28-.072 1.688-.072 4.947s.014 3.667.072 4.947c.059 1.324.317 2.6 1.257 3.54.94.94 2.216 1.198 3.54 1.257 1.28.058 1.688.072 4.947.072s3.667-.014 4.947-.072c1.324-.059 2.6-.317 3.54-1.257.94-.94 1.198-2.216 1.257-3.54.058-1.28.072-1.688.072-4.947s-.014-3.667-.072-4.947c-.059-1.324-.317-2.6-1.257-3.54-.94-.94-2.216-1.198-3.54-1.257-1.28-.058-1.688-.072-4.947-.072h-.008zM12 6.875c-3.617 0-6.55 2.925-6.55 6.55s2.925 6.55 6.55 6.55 6.55-2.925 6.55-6.55-2.925-6.55-6.55-6.55zm0 10.85c-2.312 0-4.175-1.867-4.175-4.175s1.863-4.175 4.175-4.175 4.175 1.863 4.175 4.175-1.863-4.175-4.175-4.175zm6.844-10.975c0 .96-.775 1.735-1.735 1.735 0-1.735-.775 1.735-1.735.96 0 1.735.775-1.735 1.735z"/>
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.317 3.608 1.292.975.975 1.23 2.242 1.292 3.608.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.062 1.366-.317 2.633-1.292 3.608-.975.975-2.242 1.23-3.608 1.292-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.366-.062-2.633-.317-3.608-1.292-.975-.975-1.23-2.242-1.292-3.608-.058-1.266-.07-1.646-.07-4.85s.012-3.584.07-4.85c.062-1.366.317-2.633 1.292-3.608.975-.975 2.242-1.23 3.608-1.292 1.266-.058 1.646-.07 4.85-.07m0-2.163c-3.259 0-3.667.014-4.947.072-1.316.059-2.593.317-3.533 1.257C2.27 2.452 2.013 3.729 1.954 5.053c-.058 1.28-.072 1.688-.072 4.947s.014 3.667.072 4.947c.059 1.324.317 2.6 1.257 3.54.94.94 2.216 1.198 3.54 1.257 1.28.058 1.688.072 4.947.072s3.667-.014 4.947-.072c1.324-.059 2.6-.317 3.54-1.257.94-.94 1.198-2.216 1.257-3.54.058-1.28.072-1.688.072-4.947s-.014-3.667-.072-4.947c-.059-1.324-.317-2.6-1.257-3.54-.94-.94-2.216-1.198-3.54-1.257-1.28-.058-1.688-.072-4.947-.072h-.008zM12 6.875c-3.617 0-6.55 2.925-6.55 6.55s2.925 6.55 6.55 6.55 6.55-2.925 6.55-6.55-2.925-6.55-6.55-6.55zm0 10.85c-2.312 0-4.175-1.867-4.175-4.175s1.863-4.175 4.175-4.175-0-1.863-4.175-4.175-0-1-4.175-0z0-1.735c0-.96.775-1.735 1.735-1.735s1.735.775 0 1.735z"/>
                         </svg>
                     </a>
                     <a href="https://vimeo.com" target="_blank" style="font-family: 'cursive'; font-size: 25px;">V</a>
@@ -1110,12 +1109,12 @@
         </div>
     </section>
 
-    <!-- Section Équipement -->
+    <!-- Section Équipage -->
     <section class="equip-section" id="equip-section">
         <div class="equip-content">
             <div class="bio-title">Notre société</div>
             <div class="bio-text"><i>PLN Prod est une entreprise de vidéaste spécialisée dans la création de contenus vidéos de haute qualité.</i></div>
-            <a href="#" class="bio-link" onclick="hideSection('equip')">retour</a>
+            <a href="#" class="bio-link" onclick="hideSection('equip')">Retour</a>
         </div>
         <div class="legal-links">
             <a href="#">Mentions légales</a>
@@ -1128,7 +1127,7 @@
     <!-- Modal -->
     <div class="modal" id="modal">
         <div class="modal-content">
-            <span class="close-modal" onclick="closeModal()">✖</span>
+            <span class="close-modal" onclick="closeModal()">×</span>
             <h2>Informations</h2>
             <p>Ceci est un exemple de contenu modal.</p>
         </div>
@@ -1147,26 +1146,26 @@
         const videoData = {
             project1: { url: "https://www.youtube.com/embed/dQw4w9WgXcQ", title: "Projet 1", description: "Description du projet 1..." },
             project2: { url: "https://www.youtube.com/embed/9bZkp7q19f0", title: "Projet 2", description: "Description du projet 2..." },
-            project3: { url: "https://www.youtube.com/embed/3tmd-ClzV_Q", title: "Projet 3", description: "Description du projet 3..." },
-            project4: { url: "https://www.youtube.com/embed/5qap5aO4i9A", title: "Projet 4", description: "Description du projet 4..." },
+            project3: { url: "https://www.youtube.com/embed/3tmd-Clz4z9A", title: "Projet 3", description: "Description du projet 3..." },
+            project4: { url: "https://www.youtube.com/embed/5qap5aO4i9", title: "Projet 4", description: "Description du projet 4..." },
             project5: { url: "https://www.youtube.com/embed/9bZkp7q19f0", title: "Projet 5", description: "Description du projet 5..." },
-            project6: { url: "https://www.youtube.com/embed/dQw4w9WgXcQ", title: "Projet 6", description: "Description du projet 6..." },
-            project7: { url: "https://www.youtube.com/embed/3tmd-ClzV_Q", title: "Projet 7", description: "Description du projet 7..." },
+            project6: { url: "https://www.youtube.com/embed/dQw4w9wgXcQ", title: "Projet 6", description: "Description du projet 6..." },
+            project7: { url: "https://www.youtube.com/embed/3tmd-Clz4z3A", title: "Projet 7", description: "Description du projet 7..." },
             project8: { url: "https://www.youtube.com/embed/5qap5aO4i9A", title: "Projet 8", description: "Description du projet 8..." },
-            project9: { url: "https://www.youtube.com/embed/dQw4w9WgXcQ", title: "Projet 9", description: "Description du projet 9..." },
+            project9: { url: "https://www.youtube.com/embed/dQw4w9wgXcQ", title: "Projet 9", description: "Description du projet 9..." },
             project10: { url: "https://www.youtube.com/embed/9bZkp7q19f0", title: "Projet 10", description: "Description du projet 10..." },
-            project11: { url: "https://www.youtube.com/embed/3tmd-ClzV_Q", title: "Projet 11", description: "Description du projet 11..." },
-            project12: { url: "https://www.youtube.com/embed/5qap5aO4i9A", title: "Projet 12", description: "Description du projet 12..." },
+            project11: { url: "https://www.youtube.com/embed/3tmd-Clz4z3", title: "Projet 11", description: "Description du projet 11..." },
+            project12: { url: "https://www.youtube.com/embed/5qap5aO4i9A", title: "Projet 12 description: "Description du projet 12..." },
             video1: { url: "https://www.youtube.com/embed/dQw4w9WgXcQ", title: "Vidéo 1", description: "Description vidéo 1..." },
             video2: { url: "https://www.youtube.com/embed/9bZkp7q19f0", title: "Vidéo 2", description: "Description vidéo 2..." },
-            video3: { url: "https://www.youtube.com/embed/3tmd-ClzV_Q", title: "Vidéo 3", description: "Description vidéo 3..." }
+            video3: { url: "https://www.youtube.com/embed/3tmd-Clz4z9", title: "Vidéo description: "3..." },
         };
 
         // URLs valides pour les vignettes
         const thumbnailUrls = {
             video1: "https://media.giphy.com/media/3o6Zta2kQfOv1oXz4Q/giphy.gif",
             video2: "https://media.giphy.com/media/3o7TKz9fL5s9Z6Z6hW/giphy.gif",
-            video3: "https://media.giphy.com/media/l0MYt5j0ya4jXh6M0/giphy.gif"
+            video3: "https://media.giphy.com/media/l0MyT5j0ya4jXh6M0/giphy.gif"
         };
 
         // Initialisation des flèches
@@ -1175,9 +1174,9 @@
             const arrows = document.querySelectorAll('.arrow');
             arrows.forEach(arrow => {
                 arrow.style.display = 'block';
-                arrow.style.visibility = 'visible';
-                arrow.style.pointerEvents = 'auto';
-                arrow.style.opacity = '1';
+                arrow.style.setProperty('visibility', 'visible', '!important');
+                arrow.style.setProperty('pointer-events', 'auto', '!important');
+                arrow.style.setProperty('opacity', '1', '!important');
                 arrow.style.zIndex = '100';
                 arrow.onclick = null;
                 if (arrow.classList.contains('arrow-right')) {
@@ -1193,6 +1192,9 @@
             }
         }
 
+        // Appeler initArrows au chargement du document
+        document.addEventListener('DOMContentLoaded', initArrows);
+
         function showVideo(projectId) {
             console.log(`showVideo appelé pour ${projectId}`);
             try {
@@ -1201,7 +1203,7 @@
                 const relatedVideos = document.getElementById('related-videos');
                 const hero = document.getElementById('hero');
                 const mosaic = document.getElementById('mosaic');
-                const closeBtn = document.querySelector('.close-btn');
+                const closeBtn = document.querySelector('.video-section .close-btn');
 
                 if (!videoSection || !videoContent || !relatedVideos || !hero || !mosaic || !closeBtn) {
                     console.error('Éléments manquants:', { videoSection, videoContent, relatedVideos, hero, mosaic, closeBtn });
@@ -1214,40 +1216,52 @@
                     s.style.display = 'none';
                     s.style.opacity = '0';
                     s.style.zIndex = '-1';
+                    s.style.transform = 'translateY(0)';
                 });
 
-                // Masquer hero et mosaïque
+                // Réinitialiser hero et mosaïque
                 hero.style.display = 'none';
                 hero.style.opacity = '0';
                 hero.style.pointerEvents = 'none';
                 hero.style.zIndex = '-1';
-                mosaic.style.transform = 'translateX(0vw)';
+                mosaic.style.transform = 'translateX(0)';
                 mosaic.style.pointerEvents = 'none';
                 mosaic.style.opacity = '0';
                 mosaic.style.zIndex = '-1';
                 currentColumn = 0;
 
-                // Afficher section vidéo
-                videoSection.style.display = 'flex';
+                // Réinitialiser et afficher la section vidéo
+                videoSection.style.display = 'none';
                 videoSection.style.opacity = '0';
                 videoSection.style.zIndex = '999';
-                videoSection.style.visibility = 'visible';
-                videoContent.style.display = 'flex';
-                videoContent.style.opacity = '1';
+                videoSection.style.backgroundColor = '#111';
+                videoContent.style.display = 'none';
+                videoContent.style.opacity = '0';
                 videoContent.style.zIndex = '2';
-                relatedVideos.style.display = 'flex';
-                relatedVideos.style.opacity = '1';
+                videoContent.style.backgroundColor = 'transparent';
+                relatedVideos.style.display = 'none';
+                relatedVideos.style.opacity = '0';
                 relatedVideos.style.zIndex = '2';
-                closeBtn.style.display = 'block';
-                closeBtn.style.opacity = '1';
-                closeBtn.style.visibility = 'visible';
+                closeBtn.style.display = 'none';
+                closeBtn.style.opacity = '0';
+                closeBtn.style.visibility = 'hidden';
                 closeBtn.style.zIndex = '1002';
+
                 setTimeout(() => {
+                    videoSection.style.display = 'flex';
                     videoSection.style.opacity = '1';
                     videoSection.classList.add('active');
+                    videoContent.style.display = 'flex';
+                    videoContent.style.opacity = '1';
+                    relatedVideos.style.display = 'flex';
+                    relatedVideos.style.opacity = '1';
+                    closeBtn.style.display = 'block';
+                    closeBtn.style.setProperty('opacity', '1', '!important');
+                    closeBtn.style.setProperty('visibility', 'visible', '!important');
+                    closeBtn.style.setProperty('z-index', '1002', '!important');
                 }, 10);
 
-                // Contenu vidéo
+                // Contenu de la vidéo
                 const video = videoData[projectId] || videoData['project1'];
                 videoContent.innerHTML = `
                     <div class="video-wrapper">
@@ -1262,6 +1276,13 @@
                 `;
                 const fallback = videoContent.querySelector('.video-fallback');
                 if (fallback) fallback.style.display = 'none';
+
+                const videoWrapper = videoContent.querySelector('.video-wrapper');
+                if (videoWrapper) {
+                    videoWrapper.style.display = 'block';
+                    videoWrapper.style.opacity = '1';
+                    videoWrapper.style.zIndex = '2';
+                }
 
                 // Vignettes liées
                 relatedVideos.innerHTML = `
@@ -1297,14 +1318,15 @@
                 // Attacher les gestionnaires d'événements pour les vignettes
                 relatedVideos.querySelectorAll('.related-video').forEach(video => {
                     const videoId = video.getAttribute('data-video-id');
-                    video.style.opacity = '1';
-                    video.style.visibility = 'visible';
+                    video.style.display = 'block';
+                    video.style.setProperty('opacity', '1', '!important');
+                    video.style.setProperty('visibility', 'visible', '!important');
                     video.style.zIndex = '2';
                     video.style.width = '200px';
                     video.style.height = 'calc(200px * 9 / 16)';
                     video.querySelector('img').style.display = 'block';
-                    video.querySelector('img').style.opacity = '1';
-                    video.querySelector('img').style.visibility = 'visible';
+                    video.querySelector('img').style.setProperty('opacity', '1', '!important');
+                    video.querySelector('img').style.setProperty('visibility', 'visible', '!important');
                     video.addEventListener('click', () => playRelatedVideo(videoId));
                 });
             } catch (error) {
@@ -1331,6 +1353,7 @@
                     return;
                 }
 
+                // Cacher la section vidéo
                 videoSection.style.opacity = '0';
                 videoContent.style.opacity = '0';
                 relatedVideos.style.opacity = '0';
@@ -1347,8 +1370,9 @@
                     closeBtn.style.zIndex = '-1';
                 }, 500);
 
+                // Afficher la mosaïque
                 hero.style.display = 'block';
-                mosaic.style.opacity = '1';
+                mosaic.style.opacity = 'opacity 0.5s ease';
                 mosaic.style.zIndex = '1';
                 setTimeout(() => {
                     hero.style.opacity = '1';
@@ -1357,8 +1381,9 @@
                     mosaic.style.pointerEvents = 'auto';
                 }, 10);
                 mosaic.style.transform = `translateX(-${currentColumn * 100}vw)`;
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+                window.scrollTo({ top: '0', behavior: 'smooth' });
 
+                // Réinitialiser les flèches
                 initArrows();
             } catch (error) {
                 console.error('Erreur dans closeVideoAndReturnToMosaic:', error);
@@ -1369,11 +1394,12 @@
             console.log(`playRelatedVideo appelé pour ${videoId}`);
             try {
                 const videoContent = document.getElementById('video-content');
-                const relatedVideos = document.getElementById('related-videos');
-                const closeBtn = document.querySelector('.close-btn');
+                const relatedVideos = document.querySelector('#related-videos');
+                relatedVideos;
+                const closeBtn = document.querySelector('.video-section .close-btn');
 
                 if (!videoContent || !relatedVideos || !closeBtn) {
-                    console.error('Éléments manquants:', { videoContent, relatedVideos, closeBtn });
+                    console.error('closeBtn','Éléments manquants:', { videoContent, relatedVideos, closeBtn });
                     return;
                 }
 
@@ -1390,15 +1416,18 @@
                     <div class="video-fallback">Vidéo non disponible.</div>
                 `;
                 const fallback = videoContent.querySelector('.video-fallback');
-                if (fallback) fallback.style.display = 'none';
+                if (fallback) {
+                    fallback.style.display = 'none';
+                }
 
                 videoContent.style.display = 'flex';
                 videoContent.style.opacity = '1';
                 videoContent.style.zIndex = '2';
-                closeBtn.style.display = 'block';
-                closeBtn.style.opacity = '1';
-                closeBtn.style.visibility = 'visible';
-                closeBtn.style.zIndex = '1002';
+                videoContent.style.backgroundColor = 'transparent';
+                closeBtn.style.setProperty('display', 'block', '!important');
+                closeBtn.style.setProperty('opacity', '1', '!important');
+                closeBtn.style.setProperty('visibility', 'visible', '!important');
+                closeBtn.style.setProperty('z-index', '1002', '!important');
 
                 relatedVideos.querySelectorAll('.related-video').forEach(video => {
                     video.classList.remove('active', 'playing');
@@ -1409,14 +1438,14 @@
                 const activeVideo = relatedVideos.querySelector(`[data-video-id="${videoId}"]`);
                 if (activeVideo) {
                     activeVideo.classList.add('active', 'playing');
-                    activeVideo.style.opacity = '1';
-                    activeVideo.style.visibility = 'visible';
+                    activeVideo.style.setProperty('opacity', '1', '!important');
+                    activeVideo.style.setProperty('visibility', 'visible', '!important');
                     activeVideo.style.zIndex = '2';
                     activeVideo.style.width = '200px';
                     activeVideo.style.height = 'calc(200px * 9 / 16)';
                     activeVideo.querySelector('img').style.display = 'block';
-                    activeVideo.querySelector('img').style.opacity = '1';
-                    activeVideo.querySelector('img').style.visibility = 'visible';
+                    activeVideo.querySelector('img').style.setProperty('opacity', '1', '!important');
+                    activeVideo.querySelector('img').style.setProperty('visibility', 'visible', '!important');
                     activeVideo.querySelector('.playing-text').style.display = 'block';
                 }
             } catch (error) {
@@ -1443,13 +1472,15 @@
         function showSection(sectionId) {
             console.log(`showSection appelé pour ${sectionId}`);
             try {
-                const section = document.getElementById(sectionId + '-section');
+                const section = document.getElementById(`${sectionId}-section`);
                 const hero = document.getElementById('hero');
                 const mosaic = document.getElementById('mosaic');
                 const videoSection = document.getElementById('video-section');
+                const videoContent = document.getElementById('video-content');
+                const closeBtn = document.querySelector('.video-section .close-btn');
 
-                if (!section || !hero || !mosaic || !videoSection) {
-                    console.error('Éléments manquants:', { section, hero, mosaic, videoSection });
+                if (!section || !hero || !mosaic || !videoSection || !videoContent || !closeBtn) {
+                    console.error('Éléments manquants:', { section, hero, mosaic, videoSection, videoContent, closeBtn });
                     return;
                 }
 
@@ -1457,7 +1488,7 @@
                     s.classList.remove('active');
                     s.style.display = 'none';
                     s.style.opacity = '0';
-                    s.style.transform = 'translateY(100%)';
+                    s.style.transform = 'translateY(0)';
                     s.style.zIndex = '-1';
                 });
 
@@ -1473,11 +1504,20 @@
                 hero.style.opacity = '0';
                 hero.style.pointerEvents = 'none';
                 hero.style.zIndex = '-1';
-                mosaic.style.transform = 'translateX(0vw)';
+                mosaic.style.transform = 'translateX(0)';
                 mosaic.style.pointerEvents = 'none';
                 mosaic.style.opacity = '0';
                 mosaic.style.zIndex = '-1';
                 currentColumn = 0;
+
+                videoSection.style.display = 'none';
+                videoSection.style.opacity = '0';
+                videoSection.style.zIndex = '-1';
+                videoContent.style.display = 'none';
+                videoContent.innerHTML = '';
+                closeBtn.style.display = 'none';
+                closeBtn.style.opacity = '0';
+                closeBtn.style.zIndex = '-1';
 
                 initArrows();
             } catch (error) {
@@ -1488,15 +1528,15 @@
         function hideSection(sectionId) {
             console.log(`hideSection appelé pour ${sectionId}`);
             try {
-                const section = document.getElementById(sectionId + '-section');
+                const section = document.getElementById(`${sectionId}-section`);
                 const hero = document.getElementById('hero');
                 const mosaic = document.getElementById('mosaic');
                 const videoSection = document.getElementById('video-section');
                 const videoContent = document.getElementById('video-content');
-                const closeBtn = document.querySelector('.close-btn');
+                const closeBtn = document.querySelector('.video-section .close-btn');
 
-                if (!section || !hero || !mosaic || !videoSection) {
-                    console.error('Éléments manquants:', { section, hero, mosaic, videoSection });
+                if (!section || !hero || !mosaic || !videoSection || !videoContent || !closeBtn) {
+                    console.error('Éléments manquants:', { section, hero, mosaic, videoSection, videoContent, closeBtn });
                     return;
                 }
 
@@ -1524,15 +1564,11 @@
                 videoSection.style.display = 'none';
                 videoSection.style.opacity = '0';
                 videoSection.style.zIndex = '-1';
-                if (videoContent) {
-                    videoContent.style.display = 'none';
-                    videoContent.innerHTML = '';
-                }
-                if (closeBtn) {
-                    closeBtn.style.display = 'none';
-                    closeBtn.style.opacity = '0';
-                    closeBtn.style.zIndex = '-1';
-                }
+                videoContent.style.display = 'none';
+                videoContent.innerHTML = '';
+                closeBtn.style.display = 'none';
+                closeBtn.style.opacity = '0';
+                closeBtn.style.zIndex = '-1';
 
                 initArrows();
             } catch (error) {
@@ -1601,10 +1637,10 @@
                 const hero = document.getElementById('hero');
                 const videoSection = document.getElementById('video-section');
                 const videoContent = document.getElementById('video-content');
-                const closeBtn = document.querySelector('.close-btn');
+                const closeBtn = document.querySelector('.video-section .close-btn');
 
-                if (!mosaic || !hero || !videoSection) {
-                    console.error('Éléments manquants:', { mosaic, hero, videoSection });
+                if (!mosaic || !hero || !videoSection || !videoContent || !closeBtn) {
+                    console.error('Éléments manquants:', { mosaic, hero, videoSection, videoContent, closeBtn });
                     return;
                 }
 
@@ -1621,7 +1657,7 @@
                     s.classList.remove('active');
                     s.style.display = 'none';
                     s.style.opacity = '0';
-                    s.style.transform = 'translateY(100%)';
+                    s.style.transform = 'translateY(0)';
                     s.style.zIndex = '-1';
                 });
 
@@ -1632,19 +1668,14 @@
                     hero.style.zIndex = '1';
                 }, 10);
 
-                videoSection.classList.remove('active');
                 videoSection.style.display = 'none';
                 videoSection.style.opacity = '0';
                 videoSection.style.zIndex = '-1';
-                if (videoContent) {
-                    videoContent.style.display = 'none';
-                    videoContent.innerHTML = '';
-                }
-                if (closeBtn) {
-                    closeBtn.style.display = 'none';
-                    closeBtn.style.opacity = '0';
-                    closeBtn.style.zIndex = '-1';
-                }
+                videoContent.style.display = 'none';
+                videoContent.innerHTML = '';
+                closeBtn.style.display = 'none';
+                closeBtn.style.opacity = '0';
+                closeBtn.style.zIndex = '-1';
 
                 initArrows();
             } catch (error) {
@@ -1652,5 +1683,4 @@
             }
         }
     </script>
-</body>
-</html>
+</body></html>
