@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PLN GRASBALOUDGE</title>
+    <title>PLN bouzouli</title>
     <style>
         * {
             margin: 0;
@@ -190,7 +190,7 @@
             padding: 0;
             margin: 0;
             overflow: hidden;
-            pointer-events: auto !important;
+            pointer-events: none;
         }
 
         .video-section.active {
@@ -256,10 +256,10 @@
             border-radius: 50%;
             transition: background 0.3s;
             z-index: 1002 !important;
-            display: block !important;
-            visibility: visible !important;
-            opacity: 1 !important;
-            pointer-events: auto !important;
+            display: none;
+            visibility: hidden;
+            opacity: 0;
+            pointer-events: none;
         }
 
         .video-section.active .close-btn {
@@ -287,6 +287,11 @@
             max-width: 1200px;
             background-color: transparent;
             z-index: 2;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .video-section.active .video-content {
             opacity: 1 !important;
             visibility: visible !important;
             pointer-events: auto !important;
@@ -363,17 +368,22 @@
         }
 
         .related-videos {
-            display: flex !important;
+            display: none;
             justify-content: center;
             gap: 1rem;
             margin-top: 2rem;
             width: 100%;
             max-width: 1200px;
             z-index: 2;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .video-section.active .related-videos {
+            display: flex !important;
             opacity: 1 !important;
             visibility: visible !important;
             pointer-events: auto !important;
-            flex-wrap: wrap;
         }
 
         .related-video {
@@ -502,7 +512,7 @@
             opacity: 0;
             transform: translateY(100%);
             transition: opacity 0.5s ease, transform 0.5s ease;
-            pointer-events: auto !important;
+            pointer-events: none;
         }
 
         .bio-section.active, .contact-section.active, .equip-section.active {
@@ -510,6 +520,7 @@
             opacity: 1 !important;
             transform: translateY(0) !important;
             pointer-events: auto !important;
+            z-index: 998 !important;
         }
 
         .bio-content, .equip-content {
@@ -691,12 +702,13 @@
             z-index: 1000;
             justify-content: center;
             align-items: center;
-            pointer-events: auto !important;
+            pointer-events: none;
         }
 
         .modal.active {
             display: flex !important;
             pointer-events: auto !important;
+            z-index: 1000 !important;
         }
 
         .modal-content {
@@ -1176,26 +1188,30 @@
         // Initialisation des flèches
         function initArrows() {
             console.log('Initialisation des flèches');
-            const arrows = document.querySelectorAll('.arrow');
-            arrows.forEach(arrow => {
-                arrow.style.display = 'block';
-                arrow.style.setProperty('visibility', 'visible', '!important');
-                arrow.style.setProperty('pointer-events', 'auto', '!important');
-                arrow.style.setProperty('opacity', '1', '!important');
-                arrow.style.zIndex = '100';
-                arrow.onclick = null; // Réinitialiser pour éviter les doubles bindings
-                if (arrow.classList.contains('arrow-right')) {
-                    arrow.onclick = nextColumn;
-                } else if (arrow.classList.contains('arrow-left')) {
-                    arrow.onclick = prevColumn;
+            try {
+                const arrows = document.querySelectorAll('.arrow');
+                arrows.forEach(arrow => {
+                    arrow.style.display = 'block';
+                    arrow.style.setProperty('visibility', 'visible', '!important');
+                    arrow.style.setProperty('pointer-events', 'auto', '!important');
+                    arrow.style.setProperty('opacity', '1', '!important');
+                    arrow.style.zIndex = '100';
+                    arrow.onclick = null; // Réinitialiser pour éviter les doubles bindings
+                    if (arrow.classList.contains('arrow-right')) {
+                        arrow.onclick = nextColumn;
+                    } else if (arrow.classList.contains('arrow-left')) {
+                        arrow.onclick = prevColumn;
+                    }
+                });
+                const mosaic = document.getElementById('mosaic');
+                if (mosaic) {
+                    mosaic.style.pointerEvents = 'auto';
+                    mosaic.style.opacity = '1';
+                    mosaic.style.zIndex = '1';
+                    mosaic.style.transform = `translateX(-${currentColumn * 100}vw)`;
                 }
-            });
-            const mosaic = document.getElementById('mosaic');
-            if (mosaic) {
-                mosaic.style.pointerEvents = 'auto';
-                mosaic.style.opacity = '1';
-                mosaic.style.zIndex = '1';
-                mosaic.style.transform = `translateX(-${currentColumn * 100}vw)`;
+            } catch (error) {
+                console.error('Erreur dans initArrows:', error);
             }
         }
 
@@ -1244,15 +1260,19 @@
                     videoContent.style.display = 'flex';
                     videoContent.style.opacity = '1';
                     videoContent.style.pointerEvents = 'auto';
+                    videoContent.style.zIndex = '2';
                     relatedVideos.style.display = 'flex';
                     relatedVideos.style.opacity = '1';
                     relatedVideos.style.pointerEvents = 'auto';
+                    relatedVideos.style.zIndex = '2';
                     closeBtn.style.setProperty('display', 'block', '!important');
                     closeBtn.style.setProperty('opacity', '1', '!important');
                     closeBtn.style.setProperty('visibility', 'visible', '!important');
                     closeBtn.style.setProperty('z-index', '1002', '!important');
                     closeBtn.style.setProperty('pointer-events', 'auto', '!important');
+                    closeBtn.onclick = null; // Réinitialiser l'événement
                     closeBtn.onclick = closeVideoAndReturnToMosaic;
+                    console.log('Croix de fermeture initialisée:', closeBtn);
                 }, 10);
 
                 // Contenu de la vidéo
@@ -1418,6 +1438,9 @@
                     closeBtn.style.setProperty('visibility', 'visible', '!important');
                     closeBtn.style.setProperty('z-index', '1002', '!important');
                     closeBtn.style.setProperty('pointer-events', 'auto', '!important');
+                    closeBtn.onclick = null; // Réinitialiser l'événement
+                    closeBtn.onclick = closeVideoAndReturnToMosaic;
+                    console.log('Croix de fermeture réinitialisée dans playRelatedVideo:', closeBtn);
 
                     relatedVideos.querySelectorAll('.related-video').forEach(video => {
                         video.classList.remove('active', 'playing');
@@ -1458,6 +1481,8 @@
                 if (sharePanel) {
                     sharePanel.classList.toggle('active');
                     sharePanel.style.pointerEvents = sharePanel.classList.contains('active') ? 'auto' : 'none';
+                } else {
+                    console.warn('Panneau de partage non trouvé');
                 }
             } catch (error) {
                 console.error('Erreur dans toggleSharePanel:', error);
@@ -1731,10 +1756,11 @@
             videoSection.style.pointerEvents = 'none';
             videoContent.style.display = 'none';
             videoContent.innerHTML = '';
-            closeBtn.style.display = 'none';
-            closeBtn.style.opacity = '0';
-            closeBtn.style.zIndex = '-1';
-            closeBtn.style.pointerEvents = 'none';
+            closeBtn.style.setProperty('display', 'none', '!important');
+            closeBtn.style.setProperty('opacity', '0', '!important');
+            closeBtn.style.setProperty('visibility', 'hidden', '!important');
+            closeBtn.style.setProperty('z-index', '-1', '!important');
+            closeBtn.style.setProperty('pointer-events', 'none', '!important');
 
             initArrows();
         } catch (error) {
@@ -1757,20 +1783,44 @@
     // Initialisation au chargement de la page
     document.addEventListener('DOMContentLoaded', () => {
         console.log('DOMContentLoaded - Initialisation');
-        initArrows();
-        document.querySelectorAll('.bio-section, .contact-section, .equip-section, .video-section').forEach(s => {
-            s.style.display = 'none';
-            s.style.opacity = '0';
-            s.style.zIndex = '-1';
-            s.classList.remove('active');
-            s.style.pointerEvents = 'none';
-        });
-        const hero = document.getElementById('hero');
-        if (hero) {
-            hero.style.display = 'block';
-            hero.style.opacity = '1';
-            hero.style.pointerEvents = 'auto';
-            hero.style.zIndex = '1';
+        try {
+            // Masquer toutes les sections sauf la mosaïque
+            document.querySelectorAll('.bio-section, .contact-section, .equip-section, .video-section').forEach(s => {
+                s.style.display = 'none';
+                s.style.opacity = '0';
+                s.style.zIndex = '-1';
+                s.style.pointerEvents = 'none';
+                s.classList.remove('active');
+            });
+
+            // Masquer la croix de fermeture au chargement
+            const closeBtn = document.querySelector('.video-section .close-btn');
+            if (closeBtn) {
+                closeBtn.style.setProperty('display', 'none', '!important');
+                closeBtn.style.setProperty('opacity', '0', '!important');
+                closeBtn.style.setProperty('visibility', 'hidden', '!important');
+                closeBtn.style.setProperty('z-index', '-1', '!important');
+                closeBtn.style.setProperty('pointer-events', 'none', '!important');
+            }
+
+            // Afficher la mosaïque
+            const hero = document.getElementById('hero');
+            const mosaic = document.getElementById('mosaic');
+            if (hero && mosaic) {
+                hero.style.display = 'block';
+                hero.style.opacity = '1';
+                hero.style.pointerEvents = 'auto';
+                hero.style.zIndex = '1';
+                mosaic.style.opacity = '1';
+                mosaic.style.zIndex = '1';
+                mosaic.style.pointerEvents = 'auto';
+                mosaic.style.transform = `translateX(-${currentColumn * 100}vw)`;
+            }
+
+            // Initialiser les flèches
+            initArrows();
+        } catch (error) {
+            console.error('Erreur dans DOMContentLoaded:', error);
         }
     });
 </script>
