@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PLN Prodesco</title>
+    <title>PLN Prodononono</title>
     <style>
         * {
             margin: 0;
@@ -447,6 +447,7 @@
             z-index: 998;
             padding: 2rem;
             opacity: 0;
+            transform: translateY(100%);
             transition: opacity 0.5s ease, transform 0.5s ease;
         }
 
@@ -1114,7 +1115,7 @@
                 mosaic.style.transform = 'translateX(0vw)';
                 mosaic.style.pointerEvents = 'none';
 
-                // Contenu de la section vidéo
+                // Contenu de la section vidéo (image statique pour éviter les problèmes d'iframe)
                 videoContent.innerHTML = `
                     <div class="video-wrapper">
                         <img src="https://via.placeholder.com/600x337?text=Video+${projectId}" alt="Vidéo ${projectId}">
@@ -1290,9 +1291,11 @@
 
                 section.classList.add('active');
                 section.style.display = 'block';
-                section.style.opacity = '1';
-                section.style.transform = 'translateY(0)';
-                section.style.zIndex = '998';
+                setTimeout(() => {
+                    section.style.opacity = '1';
+                    section.style.transform = 'translateY(0)';
+                    section.style.zIndex = '998';
+                }, 10); // Délai pour permettre à la transition de s'exécuter
 
                 hero.style.display = 'none';
                 hero.style.opacity = '0';
@@ -1337,7 +1340,7 @@
                 setTimeout(() => {
                     section.classList.remove('active');
                     section.style.display = 'none';
-                }, 500);
+                }, 500); // Délai pour permettre à la transition de s'exécuter
 
                 hero.style.display = 'block';
                 hero.style.opacity = '1';
