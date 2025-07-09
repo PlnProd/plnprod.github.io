@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PLN banzouli Prod</title>
+    <title>PLN GRASBALOUDGE</title>
     <style>
         * {
             margin: 0;
@@ -68,6 +68,7 @@
             font-size: 1.1rem;
             text-transform: uppercase;
             cursor: pointer;
+            pointer-events: auto !important;
         }
 
         nav ul li a:hover {
@@ -81,7 +82,7 @@
             transition: opacity 0.5s ease;
             display: block;
             z-index: 1;
-            pointer-events: auto;
+            pointer-events: auto !important;
         }
 
         .mosaic-container {
@@ -90,7 +91,7 @@
             grid-template-rows: repeat(4, 100vh);
             width: 300vw;
             transition: transform 0.5s ease;
-            pointer-events: auto;
+            pointer-events: auto !important;
             z-index: 1;
         }
 
@@ -135,6 +136,7 @@
             cursor: pointer;
             border-radius: 5px;
             z-index: 2;
+            pointer-events: auto !important;
         }
 
         .mosaic-item button:hover {
@@ -188,6 +190,7 @@
             padding: 0;
             margin: 0;
             overflow: hidden;
+            pointer-events: auto !important;
         }
 
         .video-section.active {
@@ -195,6 +198,7 @@
             opacity: 1 !important;
             visibility: visible !important;
             z-index: 999 !important;
+            pointer-events: auto !important;
         }
 
         .video-header {
@@ -223,6 +227,7 @@
             font-size: 1.2rem;
             margin-right: 0.5rem;
             cursor: pointer;
+            pointer-events: auto !important;
         }
 
         .video-header .share-text {
@@ -254,6 +259,7 @@
             display: block !important;
             visibility: visible !important;
             opacity: 1 !important;
+            pointer-events: auto !important;
         }
 
         .video-section.active .close-btn {
@@ -261,6 +267,7 @@
             visibility: visible !important;
             opacity: 1 !important;
             z-index: 1002 !important;
+            pointer-events: auto !important;
         }
 
         .video-section .close-btn:hover {
@@ -282,6 +289,7 @@
             z-index: 2;
             opacity: 1 !important;
             visibility: visible !important;
+            pointer-events: auto !important;
         }
 
         .video-content .video-wrapper {
@@ -294,6 +302,7 @@
             display: block !important;
             opacity: 1 !important;
             visibility: visible !important;
+            pointer-events: auto !important;
         }
 
         .video-content iframe {
@@ -304,6 +313,7 @@
             display: block !important;
             visibility: visible !important;
             opacity: 1 !important;
+            pointer-events: auto !important;
         }
 
         .video-content .video-title-overlay {
@@ -362,6 +372,7 @@
             z-index: 2;
             opacity: 1 !important;
             visibility: visible !important;
+            pointer-events: auto !important;
             flex-wrap: wrap;
         }
 
@@ -374,6 +385,7 @@
             opacity: 1 !important;
             visibility: visible !important;
             z-index: 2;
+            pointer-events: auto !important;
         }
 
         .related-video img {
@@ -432,6 +444,7 @@
             opacity: 1 !important;
             visibility: visible !important;
             background: rgba(0, 0, 0, 0.5);
+            pointer-events: auto !important;
         }
 
         .related-video:not(.playing):hover .video-info {
@@ -447,7 +460,8 @@
             color: #fff;
             padding: 0.3rem 0.6rem;
             font-size: 0.8rem;
-            text-align: 1;
+            text-align: center;
+            width: 100%;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
         }
 
@@ -455,21 +469,23 @@
             color: #fff;
             padding: 0.3rem 0.6rem;
             font-size: 0.7rem;
-            text-align: left;
+            text-align: center;
             width: 100%;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
         }
 
-        .video-info .play-btn {
+        .video-info .play-icon {
+            display: block;
             width: 40px;
             height: 40px;
-            background: url('data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox=%220%200%2024%2024%22%20fill=%22white%22%3E%3Cpolygon%20points=%225%203%2019%2012%205%2021%205%203%22%3E%3C/polygon%3E%3C/svg%3E') no-repeat center;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>') no-repeat center;
             background-size: contain;
             opacity: 0.9;
             transition: opacity 0.3s;
+            pointer-events: auto !important;
         }
 
-        .video-info .play-btn:hover {
+        .video-info .play-icon:hover {
             opacity: 1;
         }
 
@@ -486,17 +502,18 @@
             opacity: 0;
             transform: translateY(100%);
             transition: opacity 0.5s ease, transform 0.5s ease;
+            pointer-events: auto !important;
         }
 
         .bio-section.active, .contact-section.active, .equip-section.active {
             display: block !important;
             opacity: 1 !important;
             transform: translateY(0) !important;
-            z-index: 998 !important;
+            pointer-events: auto !important;
         }
 
         .bio-content, .equip-content {
-            width: 66.66%;
+            width: 90%;
             margin-left: 5%;
             padding-top: 80px;
             display: flex;
@@ -507,24 +524,23 @@
         .bio-title {
             font-size: 2rem;
             font-weight: bold;
-            line-height: 1.2;
             margin-bottom: 1rem;
         }
 
         .bio-text {
             font-size: 1rem;
             font-weight: 300;
+            margin-bottom: 1rem;
             font-style: italic;
-            margin-bottom: 2rem;
         }
 
         .bio-link {
+            display: block;
             font-size: 1.1rem;
             color: #3498db;
             text-decoration: none;
             cursor: pointer;
-            display: block;
-            margin-top: 2rem;
+            pointer-events: auto !important;
         }
 
         .bio-link:hover {
@@ -535,8 +551,7 @@
             width: 100%;
             height: calc(100vh - 150px);
             object-fit: cover;
-            margin-top: 2rem;
-            display: block;
+            margin-bottom: 2rem;
         }
 
         .bio-awards {
@@ -560,43 +575,40 @@
         }
 
         .contact-content {
-            width: 80%;
-            margin-left: 10%;
+            width: 90%;
+            margin-left: 5%;
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 2rem;
-            height: calc(100% - 100px);
             padding-top: 80px;
         }
 
-        .contact-column-1 {
+        .contact-column-1, .contact-column-2 {
             display: flex;
             flex-direction: column;
             justify-content: center;
+            align-items: flex-start;
             max-width: 400px;
         }
 
-        .contact-column-1 p {
+        .contact-column p {
             font-size: 1.5rem;
             margin-bottom: 1rem;
             white-space: nowrap;
         }
 
-        .contact-column-1 p.br-after-exprimer {
+        .contact-column p.br-after-exprimer {
             white-space: normal;
         }
 
-        .contact-column-1 p.br-after-exprimer br {
-            display: block;
-        }
-
-        .contact-column-1 a {
+        .contact-column a {
             font-size: 1.1rem;
             color: #3498db;
             text-decoration: none;
+            pointer-events: auto !important;
         }
 
-        .contact-column-1 a:hover {
+        .contact-column a:hover {
             color: #2980b9;
         }
 
@@ -612,46 +624,36 @@
             height: 30px;
             background-size: contain;
             background-repeat: no-repeat;
-            transition: opacity 0.3s;
+            pointer-events: auto !important;
         }
 
         .social-icons a:hover {
             opacity: 0.8;
         }
 
-        .contact-column-2 {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            max-width: 400px;
-        }
-
-        .contact-column-2 p {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-        }
-
         .contact-column-2 input {
             padding: 0.5rem;
             font-size: 1rem;
+            margin-bottom: 1rem;
             width: 100%;
             max-width: 400px;
-            margin-bottom: 1rem;
-            background: #333;
+            background-color: #333;
             border: 1px solid #555;
             color: #fff;
+            pointer-events: auto !important;
         }
 
         .contact-column-2 button {
             background-color: #3498db;
             color: #fff;
             border: none;
-            padding: 0.5rem;
+            padding: 0.5rem 1rem;
             font-size: 1rem;
-            cursor: pointer;
             border-radius: 5px;
+            cursor: pointer;
             width: 100%;
             max-width: 400px;
+            pointer-events: auto !important;
         }
 
         .contact-column-2 button:hover {
@@ -671,6 +673,7 @@
             color: #3498db;
             text-decoration: none;
             font-size: 0.9rem;
+            pointer-events: auto !important;
         }
 
         .legal-links a:hover {
@@ -688,10 +691,12 @@
             z-index: 1000;
             justify-content: center;
             align-items: center;
+            pointer-events: auto !important;
         }
 
         .modal.active {
             display: flex !important;
+            pointer-events: auto !important;
         }
 
         .modal-content {
@@ -722,6 +727,7 @@
             font-size: 1.5rem;
             color: #fff;
             cursor: pointer;
+            pointer-events: auto !important;
         }
 
         .close-modal:hover {
@@ -1088,7 +1094,7 @@
                     </a>
                     <a href="https://instagram.com" target="_blank">
                         <svg width="30" height="30" viewBox="0 0 24 24" fill="#E1306C">
-                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.317 3.608 1.292.975.975 1.23 2.242 1.292 3.608.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.062 1.366-.317 2.633-1.292 3.608-.975.975-2.242 1.23-3.608 1.292-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.366-.062-2.633-.317-3.608-1.292-.975-.975-1.23-2.242-1.292-3.608-.058-1.266-.07-1.646-.07-4.85s.012-3.584.07-4.85c.062-1.366.317-2.633 1.292-3.608.975-.975 2.242-1.23 3.608-1.292 1.266-.058 1.646-.07 4.85-.07m0-2.163c-3.259 0-3.667.014-4.947.072-1.316.059-2.593.317-3.533 1.257C2.27 2.452 2.013 3.729 1.954 5.053c-.058 1.28-.072 1.688-.072 4.947s.014 3.667.072 4.947c.059 1.324.317 2.6 1.257 3.54.94.94 2.216 1.198 3.54 1.257 1.28.058 1.688.072 4.947.072s3.667-.014 4.947-.072c1.324-.059 2.6-.317 3.54-1.257.94-.94 1.198-2.216 1.257-3.54.058-1.28.072-1.688.072-4.947s-.014-3.667-.072-4.947c-.059-1.324-.317-2.6-1.257-3.54-.94-.94-2.216-1.198-3.54-1.257-1.28-.058-1.688-.072-4.947-.072h-.008zM12 6.875c-3.617 0-6.55 2.925-6.55 6.55s2.925 6.55 6.55 6.55 6.55-2.925 6.55-6.55-2.925-6.55-6.55-6.55zm0 10.85c-2.312 0-4.175-1.867-4.175-4.175s1.863-4.175 4.175-4.175-0-1.863-4.175-4.175-0-1-4.175-0z0-1.735c0-.96.775-1.735 1.735-1.735s1.735.775 0 1.735z"/>
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.317 3.608 1.292.975.975 1.23 2.242 1.292 3.608.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.062 1.366-.317 2.633-1.292 3.608-.975.975-2.242 1.23-3.608 1.292-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.366-.062-2.633-.317-3.608-1.292-.975-.975-1.23-2.242-1.292-3.608-.058-1.266-.07-1.646-.07-4.85s.012-3.584.07-4.85c.062-1.366.317-2.633 1.292-3.608.975-.975 2.242-1.23 3.608-1.292 1.266-.058 1.646-.07 4.85-.07m0-2.163c-3.259 0-3.667.014-4.947.072-1.316.059-2.593.317-3.533 1.257C2.27 2.452 2.013 3.729 1.954 5.053c-.058 1.28-.072 1.688-.072 4.947s.014 3.667.072 4.947c.059 1.324.317 2.6 1.257 3.54.94.94 2.216 1.198 3.54 1.257 1.28.058 1.688.072 4.947.072s3.667-.014 4.947-.072c1.324-.059 2.6-.317 3.54-1.257.94-.94 1.198-2.216 1.257-3.54.058-1.28.072-1.688.072-4.947s-.014-3.667-.072-4.947c-.059-1.324-.317-2.6-1.257-3.54-.94-.94-2.216-1.198-3.54-1.257-1.28-.058-1.688-.072-4.947-.072h-.008zM12 6.875c-3.617 0-6.55 2.925-6.55 6.55s2.925 6.55 6.55 6.55 6.55-2.925 6.55-6.55-2.925-6.55-6.55-6.55zm0 10.85c-2.312 0-4.175-1.867-4.175-4.175s1.863-4.175 4.175-4.175 4.175 1.863 4.175 4.175-1.863 4.175-4.175 4.175zm6.844-10.975c0 .96-.775 1.735-1.735 1.735s-.96-.775-1.735 0c-.775.96 0-1.735 0-1.735s.775-.96 1.735 0z"/>
                         </svg>
                     </a>
                     <a href="https://vimeo.com" target="_blank" style="font-family: 'cursive'; font-size: 25px;">V</a>
@@ -1102,34 +1108,34 @@
             </div>
         </div>
         <div class="legal-links">
-            <a href="#">Mentions légales</a>
-            <a href="#">Politique de confidentialité</a>
-            <a href="#">Politique des cookies</a>
-            <a href="#">Termes et Conditions</a>
+            <a href="#" onclick="showModal('mentions-legales')">Mentions légales</a>
+            <a href="#" onclick="showModal('politique-confidentialite')">Politique de confidentialité</a>
+            <a href="#" onclick="showModal('politique-cookies')">Politique des cookies</a>
+            <a href="#" onclick="showModal('termes-conditions')">Termes et Conditions</a>
         </div>
     </section>
 
-    <!-- Section Équipage -->
+    <!-- Section Équipement -->
     <section class="equip-section" id="equip-section">
         <div class="equip-content">
             <div class="bio-title">Notre société</div>
             <div class="bio-text"><i>PLN Prod est une entreprise de vidéaste spécialisée dans la création de contenus vidéos de haute qualité.</i></div>
-            <a href="#" class="bio-link" onclick="hideSection('equip')">Retour</a>
+            <a href="#" class="bio-link" onclick="hideSection('equip')">retour</a>
         </div>
         <div class="legal-links">
-            <a href="#">Mentions légales</a>
-            <a href="#">Politique de confidentialité</a>
-            <a href="#">Politique des cookies</a>
-            <a href="#">Termes et Conditions</a>
+            <a href="#" onclick="showModal('mentions-legales')">Mentions légales</a>
+            <a href="#" onclick="showModal('politique-confidentialite')">Politique de confidentialité</a>
+            <a href="#" onclick="showModal('politique-cookies')">Politique des cookies</a>
+            <a href="#" onclick="showModal('termes-conditions')">Termes et Conditions</a>
         </div>
     </section>
 
     <!-- Modal -->
     <div class="modal" id="modal">
         <div class="modal-content">
-            <span class="close-modal" onclick="closeModal()">×</span>
+            <span class="close-modal" onclick="closeModal()">✖</span>
             <h2>Informations</h2>
-            <p>Ceci est un exemple de contenu modal.</p>
+            <p id="modal-content-text">Ceci est un exemple de contenu modal.</p>
         </div>
     </div>
 
@@ -1146,26 +1152,25 @@
         const videoData = {
             project1: { url: "https://www.youtube.com/embed/dQw4w9WgXcQ", title: "Projet 1", description: "Description du projet 1..." },
             project2: { url: "https://www.youtube.com/embed/9bZkp7q19f0", title: "Projet 2", description: "Description du projet 2..." },
-            project3: { url: "https://www.youtube.com/embed/3tmd-Clz4z9A", title: "Projet 3", description: "Description du projet 3..." },
-            project4: { url: "https://www.youtube.com/embed/5qap5aO4i9", title: "Projet 4", description: "Description du projet 4..." },
+            project3: { url: "https://www.youtube.com/embed/3tmd-ClzV_Q", title: "Projet 3", description: "Description du projet 3..." },
+            project4: { url: "https://www.youtube.com/embed/5qap5aO4i9A", title: "Projet 4", description: "Description du projet 4..." },
             project5: { url: "https://www.youtube.com/embed/9bZkp7q19f0", title: "Projet 5", description: "Description du projet 5..." },
-            project6: { url: "https://www.youtube.com/embed/dQw4w9wgXcQ", title: "Projet 6", description: "Description du projet 6..." },
-            project7: { url: "https://www.youtube.com/embed/3tmd-Clz4z3A", title: "Projet 7", description: "Description du projet 7..." },
+            project6: { url: "https://www.youtube.com/embed/dQw4w9WgXcQ", title: "Projet 6", description: "Description du projet 6..." },
+            project7: { url: "https://www.youtube.com/embed/3tmd-ClzV_Q", title: "Projet 7", description: "Description du projet 7..." },
             project8: { url: "https://www.youtube.com/embed/5qap5aO4i9A", title: "Projet 8", description: "Description du projet 8..." },
-            project9: { url: "https://www.youtube.com/embed/dQw4w9wgXcQ", title: "Projet 9", description: "Description du projet 9..." },
+            project9: { url: "https://www.youtube.com/embed/dQw4w9WgXcQ", title: "Projet 9", description: "Description du projet 9..." },
             project10: { url: "https://www.youtube.com/embed/9bZkp7q19f0", title: "Projet 10", description: "Description du projet 10..." },
-            project11: { url: "https://www.youtube.com/embed/3tmd-Clz4z3", title: "Projet 11", description: "Description du projet 11..." },
-            project12: { url: "https://www.youtube.com/embed/5qap5aO4i9A", title: "Projet 12 description: "Description du projet 12..." },
+            project11: { url: "https://www.youtube.com/embed/3tmd-ClzV_Q", title: "Projet 11", description: "Description du projet 11..." },
+            project12: { url: "https://www.youtube.com/embed/5qap5aO4i9A", title: "Projet 12", description: "Description du projet 12..." },
             video1: { url: "https://www.youtube.com/embed/dQw4w9WgXcQ", title: "Vidéo 1", description: "Description vidéo 1..." },
             video2: { url: "https://www.youtube.com/embed/9bZkp7q19f0", title: "Vidéo 2", description: "Description vidéo 2..." },
-            video3: { url: "https://www.youtube.com/embed/3tmd-Clz4z9", title: "Vidéo description: "3..." },
+            video3: { url: "https://www.youtube.com/embed/3tmd-ClzV_Q", title: "Vidéo 3", description: "Description vidéo 3..." }
         };
 
-        // URLs valides pour les vignettes
         const thumbnailUrls = {
             video1: "https://media.giphy.com/media/3o6Zta2kQfOv1oXz4Q/giphy.gif",
             video2: "https://media.giphy.com/media/3o7TKz9fL5s9Z6Z6hW/giphy.gif",
-            video3: "https://media.giphy.com/media/l0MyT5j0ya4jXh6M0/giphy.gif"
+            video3: "https://media.giphy.com/media/l0MYt5j0ya4jXh6M0/giphy.gif"
         };
 
         // Initialisation des flèches
@@ -1178,7 +1183,7 @@
                 arrow.style.setProperty('pointer-events', 'auto', '!important');
                 arrow.style.setProperty('opacity', '1', '!important');
                 arrow.style.zIndex = '100';
-                arrow.onclick = null;
+                arrow.onclick = null; // Réinitialiser pour éviter les doubles bindings
                 if (arrow.classList.contains('arrow-right')) {
                     arrow.onclick = nextColumn;
                 } else if (arrow.classList.contains('arrow-left')) {
@@ -1188,13 +1193,13 @@
             const mosaic = document.getElementById('mosaic');
             if (mosaic) {
                 mosaic.style.pointerEvents = 'auto';
+                mosaic.style.opacity = '1';
+                mosaic.style.zIndex = '1';
                 mosaic.style.transform = `translateX(-${currentColumn * 100}vw)`;
             }
         }
 
-        // Appeler initArrows au chargement du document
-        document.addEventListener('DOMContentLoaded', initArrows);
-
+        // Afficher une vidéo
         function showVideo(projectId) {
             console.log(`showVideo appelé pour ${projectId}`);
             try {
@@ -1216,10 +1221,10 @@
                     s.style.display = 'none';
                     s.style.opacity = '0';
                     s.style.zIndex = '-1';
-                    s.style.transform = 'translateY(0)';
+                    s.style.pointerEvents = 'none';
                 });
 
-                // Réinitialiser hero et mosaïque
+                // Cacher hero et mosaïque
                 hero.style.display = 'none';
                 hero.style.opacity = '0';
                 hero.style.pointerEvents = 'none';
@@ -1230,35 +1235,24 @@
                 mosaic.style.zIndex = '-1';
                 currentColumn = 0;
 
-                // Réinitialiser et afficher la section vidéo
-                videoSection.style.display = 'none';
-                videoSection.style.opacity = '0';
-                videoSection.style.zIndex = '999';
-                videoSection.style.backgroundColor = '#111';
-                videoContent.style.display = 'none';
-                videoContent.style.opacity = '0';
-                videoContent.style.zIndex = '2';
-                videoContent.style.backgroundColor = 'transparent';
-                relatedVideos.style.display = 'none';
-                relatedVideos.style.opacity = '0';
-                relatedVideos.style.zIndex = '2';
-                closeBtn.style.display = 'none';
-                closeBtn.style.opacity = '0';
-                closeBtn.style.visibility = 'hidden';
-                closeBtn.style.zIndex = '1002';
-
+                // Afficher la section vidéo
                 setTimeout(() => {
                     videoSection.style.display = 'flex';
                     videoSection.style.opacity = '1';
+                    videoSection.style.pointerEvents = 'auto';
                     videoSection.classList.add('active');
                     videoContent.style.display = 'flex';
                     videoContent.style.opacity = '1';
+                    videoContent.style.pointerEvents = 'auto';
                     relatedVideos.style.display = 'flex';
                     relatedVideos.style.opacity = '1';
-                    closeBtn.style.display = 'block';
+                    relatedVideos.style.pointerEvents = 'auto';
+                    closeBtn.style.setProperty('display', 'block', '!important');
                     closeBtn.style.setProperty('opacity', '1', '!important');
                     closeBtn.style.setProperty('visibility', 'visible', '!important');
                     closeBtn.style.setProperty('z-index', '1002', '!important');
+                    closeBtn.style.setProperty('pointer-events', 'auto', '!important');
+                    closeBtn.onclick = closeVideoAndReturnToMosaic;
                 }, 10);
 
                 // Contenu de la vidéo
@@ -1276,13 +1270,6 @@
                 `;
                 const fallback = videoContent.querySelector('.video-fallback');
                 if (fallback) fallback.style.display = 'none';
-
-                const videoWrapper = videoContent.querySelector('.video-wrapper');
-                if (videoWrapper) {
-                    videoWrapper.style.display = 'block';
-                    videoWrapper.style.opacity = '1';
-                    videoWrapper.style.zIndex = '2';
-                }
 
                 // Vignettes liées
                 relatedVideos.innerHTML = `
@@ -1315,19 +1302,14 @@
                     </div>
                 `;
 
-                // Attacher les gestionnaires d'événements pour les vignettes
                 relatedVideos.querySelectorAll('.related-video').forEach(video => {
                     const videoId = video.getAttribute('data-video-id');
                     video.style.display = 'block';
                     video.style.setProperty('opacity', '1', '!important');
                     video.style.setProperty('visibility', 'visible', '!important');
+                    video.style.setProperty('pointer-events', 'auto', '!important');
                     video.style.zIndex = '2';
-                    video.style.width = '200px';
-                    video.style.height = 'calc(200px * 9 / 16)';
-                    video.querySelector('img').style.display = 'block';
-                    video.querySelector('img').style.setProperty('opacity', '1', '!important');
-                    video.querySelector('img').style.setProperty('visibility', 'visible', '!important');
-                    video.addEventListener('click', () => playRelatedVideo(videoId));
+                    video.onclick = () => playRelatedVideo(videoId);
                 });
             } catch (error) {
                 console.error('Erreur dans showVideo:', error);
@@ -1338,6 +1320,7 @@
             }
         }
 
+        // Fermer la vidéo et revenir à la mosaïque
         function closeVideoAndReturnToMosaic() {
             console.log('closeVideoAndReturnToMosaic appelé');
             try {
@@ -1346,18 +1329,21 @@
                 const relatedVideos = document.getElementById('related-videos');
                 const hero = document.getElementById('hero');
                 const mosaic = document.getElementById('mosaic');
-                const closeBtn = document.querySelector('.close-btn');
+                const closeBtn = document.querySelector('.video-section .close-btn');
 
                 if (!videoSection || !videoContent || !relatedVideos || !hero || !mosaic || !closeBtn) {
                     console.error('Éléments manquants:', { videoSection, videoContent, relatedVideos, hero, mosaic, closeBtn });
                     return;
                 }
 
-                // Cacher la section vidéo
                 videoSection.style.opacity = '0';
                 videoContent.style.opacity = '0';
                 relatedVideos.style.opacity = '0';
                 closeBtn.style.opacity = '0';
+                videoSection.style.pointerEvents = 'none';
+                videoContent.style.pointerEvents = 'none';
+                relatedVideos.style.pointerEvents = 'none';
+                closeBtn.style.pointerEvents = 'none';
                 setTimeout(() => {
                     videoSection.classList.remove('active');
                     videoSection.style.display = 'none';
@@ -1370,84 +1356,91 @@
                     closeBtn.style.zIndex = '-1';
                 }, 500);
 
-                // Afficher la mosaïque
                 hero.style.display = 'block';
-                mosaic.style.opacity = 'opacity 0.5s ease';
+                mosaic.style.opacity = '1';
                 mosaic.style.zIndex = '1';
+                mosaic.style.pointerEvents = 'auto';
                 setTimeout(() => {
                     hero.style.opacity = '1';
                     hero.style.pointerEvents = 'auto';
                     hero.style.zIndex = '1';
-                    mosaic.style.pointerEvents = 'auto';
                 }, 10);
                 mosaic.style.transform = `translateX(-${currentColumn * 100}vw)`;
-                window.scrollTo({ top: '0', behavior: 'smooth' });
+                window.scrollTo({ top: 0, behavior: 'smooth' });
 
-                // Réinitialiser les flèches
                 initArrows();
             } catch (error) {
                 console.error('Erreur dans closeVideoAndReturnToMosaic:', error);
             }
         }
 
+        // Jouer une vidéo liée
         function playRelatedVideo(videoId) {
             console.log(`playRelatedVideo appelé pour ${videoId}`);
             try {
                 const videoContent = document.getElementById('video-content');
-                const relatedVideos = document.querySelector('#related-videos');
-                relatedVideos;
+                const relatedVideos = document.getElementById('related-videos');
                 const closeBtn = document.querySelector('.video-section .close-btn');
 
                 if (!videoContent || !relatedVideos || !closeBtn) {
-                    console.error('closeBtn','Éléments manquants:', { videoContent, relatedVideos, closeBtn });
+                    console.error('Éléments manquants:', { videoContent, relatedVideos, closeBtn });
                     return;
                 }
 
-                const video = videoData[videoId] || videoData['video1'];
-                videoContent.innerHTML = `
-                    <div class="video-wrapper">
-                        <iframe src="${video.url}?autoplay=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                        <div class="video-title-overlay">${video.title}</div>
-                    </div>
-                    <div class="video-description">
-                        <h2>${video.title}</h2>
-                        <p>${video.description}</p>
-                    </div>
-                    <div class="video-fallback">Vidéo non disponible.</div>
-                `;
-                const fallback = videoContent.querySelector('.video-fallback');
-                if (fallback) {
-                    fallback.style.display = 'none';
-                }
+                videoContent.style.display = 'none';
+                videoContent.style.opacity = '0';
+                videoContent.style.pointerEvents = 'none';
+                videoContent.innerHTML = '';
 
-                videoContent.style.display = 'flex';
-                videoContent.style.opacity = '1';
-                videoContent.style.zIndex = '2';
-                videoContent.style.backgroundColor = 'transparent';
-                closeBtn.style.setProperty('display', 'block', '!important');
-                closeBtn.style.setProperty('opacity', '1', '!important');
-                closeBtn.style.setProperty('visibility', 'visible', '!important');
-                closeBtn.style.setProperty('z-index', '1002', '!important');
+                setTimeout(() => {
+                    const video = videoData[videoId] || videoData['video1'];
+                    videoContent.innerHTML = `
+                        <div class="video-wrapper">
+                            <iframe src="${video.url}?autoplay=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                            <div class="video-title-overlay">${video.title}</div>
+                        </div>
+                        <div class="video-description">
+                            <h2>${video.title}</h2>
+                            <p>${video.description}</p>
+                        </div>
+                        <div class="video-fallback">Vidéo non disponible.</div>
+                    `;
+                    const fallback = videoContent.querySelector('.video-fallback');
+                    if (fallback) fallback.style.display = 'none';
 
-                relatedVideos.querySelectorAll('.related-video').forEach(video => {
-                    video.classList.remove('active', 'playing');
-                    video.querySelector('.playing-text').style.display = 'none';
-                    video.style.width = '200px';
-                    video.style.height = 'calc(200px * 9 / 16)';
-                });
-                const activeVideo = relatedVideos.querySelector(`[data-video-id="${videoId}"]`);
-                if (activeVideo) {
-                    activeVideo.classList.add('active', 'playing');
-                    activeVideo.style.setProperty('opacity', '1', '!important');
-                    activeVideo.style.setProperty('visibility', 'visible', '!important');
-                    activeVideo.style.zIndex = '2';
-                    activeVideo.style.width = '200px';
-                    activeVideo.style.height = 'calc(200px * 9 / 16)';
-                    activeVideo.querySelector('img').style.display = 'block';
-                    activeVideo.querySelector('img').style.setProperty('opacity', '1', '!important');
-                    activeVideo.querySelector('img').style.setProperty('visibility', 'visible', '!important');
-                    activeVideo.querySelector('.playing-text').style.display = 'block';
-                }
+                    videoContent.style.display = 'flex';
+                    videoContent.style.opacity = '1';
+                    videoContent.style.zIndex = '2';
+                    videoContent.style.pointerEvents = 'auto';
+
+                    closeBtn.style.setProperty('display', 'block', '!important');
+                    closeBtn.style.setProperty('opacity', '1', '!important');
+                    closeBtn.style.setProperty('visibility', 'visible', '!important');
+                    closeBtn.style.setProperty('z-index', '1002', '!important');
+                    closeBtn.style.setProperty('pointer-events', 'auto', '!important');
+
+                    relatedVideos.querySelectorAll('.related-video').forEach(video => {
+                        video.classList.remove('active', 'playing');
+                        video.querySelector('.playing-text').style.display = 'none';
+                        video.style.width = '200px';
+                        video.style.height = 'calc(200px * 9 / 16)';
+                        video.style.pointerEvents = 'auto';
+                    });
+                    const activeVideo = relatedVideos.querySelector(`[data-video-id="${videoId}"]`);
+                    if (activeVideo) {
+                        activeVideo.classList.add('active', 'playing');
+                        activeVideo.style.setProperty('opacity', '1', '!important');
+                        activeVideo.style.setProperty('visibility', 'visible', '!important');
+                        activeVideo.style.setProperty('pointer-events', 'auto', '!important');
+                        activeVideo.style.zIndex = '2';
+                        activeVideo.style.width = '200px';
+                        activeVideo.style.height = 'calc(200px * 9 / 16)';
+                        activeVideo.querySelector('img').style.display = 'block';
+                        activeVideo.querySelector('img').style.setProperty('opacity', '1', '!important');
+                        activeVideo.querySelector('img').style.setProperty('visibility', 'visible', '!important');
+                        activeVideo.querySelector('.playing-text').style.display = 'block';
+                    }
+                }, 10);
             } catch (error) {
                 console.error('Erreur dans playRelatedVideo:', error);
                 const videoContent = document.getElementById('video-content');
@@ -1457,137 +1450,139 @@
             }
         }
 
+        // Basculer le panneau de partage
         function toggleSharePanel() {
             console.log('toggleSharePanel appelé');
             try {
                 const sharePanel = document.querySelector('.share-panel');
                 if (sharePanel) {
                     sharePanel.classList.toggle('active');
+                    sharePanel.style.pointerEvents = sharePanel.classList.contains('active') ? 'auto' : 'none';
                 }
             } catch (error) {
                 console.error('Erreur dans toggleSharePanel:', error);
             }
         }
 
-        function showSection(sectionId) {
-            console.log(`showSection appelé pour ${sectionId}`);
+        // Afficher une modale
+        function showModal(contentId) {
+            console.log(`showModal appelé pour ${contentId}`);
             try {
-                const section = document.getElementById(`${sectionId}-section`);
-                const hero = document.getElementById('hero');
-                const mosaic = document.getElementById('mosaic');
-                const videoSection = document.getElementById('video-section');
-                const videoContent = document.getElementById('video-content');
-                const closeBtn = document.querySelector('.video-section .close-btn');
-
-                if (!section || !hero || !mosaic || !videoSection || !videoContent || !closeBtn) {
-                    console.error('Éléments manquants:', { section, hero, mosaic, videoSection, videoContent, closeBtn });
+                const modal = document.getElementById('modal');
+                const modalContentText = document.getElementById('modal-content-text');
+                if (!modal || !modalContentText) {
+                    console.error('Éléments manquants:', { modal, modalContentText });
                     return;
                 }
 
-                document.querySelectorAll('.bio-section, .contact-section, .equip-section, .video-section').forEach(s => {
-                    s.classList.remove('active');
-                    s.style.display = 'none';
-                    s.style.opacity = '0';
-                    s.style.transform = 'translateY(0)';
-                    s.style.zIndex = '-1';
-                });
+                const modalContent = {
+                    'mentions-legales': 'Contenu des mentions légales...',
+                    'politique-confidentialite': 'Contenu de la politique de confidentialité...',
+                    'politique-cookies': 'Contenu de la politique des cookies...',
+                    'termes-conditions': 'Contenu des termes et conditions...'
+                };
 
-                section.style.display = 'block';
-                setTimeout(() => {
-                    section.style.opacity = '1';
-                    section.style.transform = 'translateY(0)';
-                    section.style.zIndex = '998';
-                    section.classList.add('active');
-                }, 10);
-
-                hero.style.display = 'none';
-                hero.style.opacity = '0';
-                hero.style.pointerEvents = 'none';
-                hero.style.zIndex = '-1';
-                mosaic.style.transform = 'translateX(0)';
-                mosaic.style.pointerEvents = 'none';
-                mosaic.style.opacity = '0';
-                mosaic.style.zIndex = '-1';
-                currentColumn = 0;
-
-                videoSection.style.display = 'none';
-                videoSection.style.opacity = '0';
-                videoSection.style.zIndex = '-1';
-                videoContent.style.display = 'none';
-                videoContent.innerHTML = '';
-                closeBtn.style.display = 'none';
-                closeBtn.style.opacity = '0';
-                closeBtn.style.zIndex = '-1';
-
-                initArrows();
+                modalContentText.textContent = modalContent[contentId] || 'Contenu non disponible.';
+                modal.classList.add('active');
+                modal.style.display = 'flex';
+                modal.style.pointerEvents = 'auto';
             } catch (error) {
-                console.error('Erreur dans showSection:', error);
+                console.error('Erreur dans showModal:', error);
             }
         }
 
-        function hideSection(sectionId) {
-            console.log(`hideSection appelé pour ${sectionId}`);
-            try {
-                const section = document.getElementById(`${sectionId}-section`);
-                const hero = document.getElementById('hero');
-                const mosaic = document.getElementById('mosaic');
-                const videoSection = document.getElementById('video-section');
-                const videoContent = document.getElementById('video-content');
-                const closeBtn = document.querySelector('.video-section .close-btn');
-
-                if (!section || !hero || !mosaic || !videoSection || !videoContent || !closeBtn) {
-                    console.error('Éléments manquants:', { section, hero, mosaic, videoSection, videoContent, closeBtn });
-                    return;
-                }
-
-                section.style.opacity = '0';
-                section.style.transform = 'translateY(100%)';
-                section.style.zIndex = '-1';
-                setTimeout(() => {
-                    section.classList.remove('active');
-                    section.style.display = 'none';
-                }, 500);
-
-                hero.style.display = 'block';
-                mosaic.style.opacity = '1';
-                mosaic.style.zIndex = '1';
-                setTimeout(() => {
-                    hero.style.opacity = '1';
-                    hero.style.pointerEvents = 'auto';
-                    hero.style.zIndex = '1';
-                    mosaic.style.pointerEvents = 'auto';
-                }, 10);
-                mosaic.style.transform = `translateX(-${currentColumn * 100}vw)`;
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-
-                videoSection.classList.remove('active');
-                videoSection.style.display = 'none';
-                videoSection.style.opacity = '0';
-                videoSection.style.zIndex = '-1';
-                videoContent.style.display = 'none';
-                videoContent.innerHTML = '';
-                closeBtn.style.display = 'none';
-                closeBtn.style.opacity = '0';
-                closeBtn.style.zIndex = '-1';
-
-                initArrows();
-            } catch (error) {
-                console.error('Erreur dans hideSection:', error);
-            }
-        }
-
+        // Fermer la modale
         function closeModal() {
             console.log('closeModal appelé');
             try {
                 const modal = document.getElementById('modal');
                 if (modal) {
                     modal.classList.remove('active');
+                    modal.style.display = 'none';
+                    modal.style.pointerEvents = 'none';
                 }
             } catch (error) {
                 console.error('Erreur dans closeModal:', error);
             }
         }
 
+        // Naviguer vers un projet spécifique
+        function scrollToProject(projectNumber) {
+            console.log(`scrollToProject appelé pour projet ${projectNumber}`);
+            try {
+                const mosaic = document.getElementById('mosaic');
+                const hero = document.getElementById('hero');
+                const videoSection = document.getElementById('video-section');
+                const videoContent = document.getElementById('video-content');
+                const relatedVideos = document.getElementById('related-videos');
+                const closeBtn = document.querySelector('.video-section .close-btn');
+                const sections = document.querySelectorAll('.bio-section, .contact-section, .equip-section');
+
+                if (!mosaic || !hero || !videoSection || !videoContent || !relatedVideos || !closeBtn) {
+                    console.error('Éléments manquants:', { mosaic, hero, videoSection, videoContent, relatedVideos, closeBtn });
+                    return;
+                }
+
+                // Réinitialiser toutes les sections
+                sections.forEach(s => {
+                    s.classList.remove('active');
+                    s.style.display = 'none';
+                    s.style.opacity = '0';
+                    s.style.zIndex = '-1';
+                    s.style.pointerEvents = 'none';
+                    s.style.transform = 'translateY(100%)';
+                });
+
+                // Réinitialiser la section vidéo
+                videoSection.classList.remove('active');
+                videoSection.style.display = 'none';
+                videoSection.style.opacity = '0';
+                videoSection.style.zIndex = '-1';
+                videoSection.style.pointerEvents = 'none';
+                videoContent.style.display = 'none';
+                videoContent.style.opacity = '0';
+                videoContent.style.zIndex = '-1';
+                videoContent.style.pointerEvents = 'none';
+                videoContent.innerHTML = '';
+                relatedVideos.style.display = 'none';
+                relatedVideos.style.opacity = '0';
+                relatedVideos.style.zIndex = '-1';
+                relatedVideos.style.pointerEvents = 'none';
+                closeBtn.style.display = 'none';
+                closeBtn.style.opacity = '0';
+                closeBtn.style.zIndex = '-1';
+                closeBtn.style.pointerEvents = 'none';
+
+                // Afficher la mosaïque
+                hero.style.display = 'block';
+                hero.style.opacity = '1';
+                hero.style.zIndex = '1';
+                hero.style.pointerEvents = 'auto';
+                mosaic.style.opacity = '1';
+                mosaic.style.zIndex = '1';
+                mosaic.style.pointerEvents = 'auto';
+
+                // Calculer la colonne cible en fonction du numéro de projet
+                const projectToColumn = {
+                    4: 1, // Narration
+                    7: 2, // Publicité
+                    10: 0  // Musique-Vidéo
+                };
+                currentColumn = projectToColumn[projectNumber] || 0;
+                mosaic.style.transform = `translateX(-${currentColumn * 100}vw)`;
+                mosaic.style.transition = 'transform 0.5s ease';
+
+                // Réinitialiser les flèches
+                initArrows();
+
+                // Faire défiler la page vers le haut
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } catch (error) {
+                console.error('Erreur dans scrollToProject:', error);
+            }
+        }
+
+        // Naviguer vers la colonne suivante
         function nextColumn() {
             console.log('nextColumn appelé');
             try {
@@ -1609,6 +1604,7 @@
             }
         }
 
+        // Naviguer vers la colonne précédente
         function prevColumn() {
             console.log('prevColumn appelé');
             try {
@@ -1630,57 +1626,153 @@
             }
         }
 
-        function scrollToProject(projectNumber) {
-            console.log(`scrollToProject appelé pour projet ${projectNumber}`);
+        // Afficher une section (Bio, Contact, Équipement)
+        function showSection(sectionId) {
+            console.log(`showSection appelé pour ${sectionId}`);
             try {
-                const mosaic = document.getElementById('mosaic');
+                const section = document.getElementById(`${sectionId}-section`);
                 const hero = document.getElementById('hero');
+                const mosaic = document.getElementById('mosaic');
                 const videoSection = document.getElementById('video-section');
                 const videoContent = document.getElementById('video-content');
                 const closeBtn = document.querySelector('.video-section .close-btn');
 
-                if (!mosaic || !hero || !videoSection || !videoContent || !closeBtn) {
-                    console.error('Éléments manquants:', { mosaic, hero, videoSection, videoContent, closeBtn });
+                if (!section || !hero || !mosaic || !videoSection || !videoContent || !closeBtn) {
+                    console.error('Éléments manquants:', { section, hero, mosaic, videoSection, videoContent, closeBtn });
                     return;
                 }
-
-                const row = Math.floor((projectNumber - 1) / 3);
-                currentColumn = (projectNumber - 1) % 3;
-                mosaic.style.transform = `translateX(-${currentColumn * 100}vw)`;
-                mosaic.style.transition = 'transform 0.5s ease';
-                mosaic.style.pointerEvents = 'auto';
-                mosaic.style.opacity = '1';
-                mosaic.style.zIndex = '1';
-                window.scrollTo({ top: row * window.innerHeight, behavior: 'smooth' });
 
                 document.querySelectorAll('.bio-section, .contact-section, .equip-section, .video-section').forEach(s => {
                     s.classList.remove('active');
                     s.style.display = 'none';
                     s.style.opacity = '0';
-                    s.style.transform = 'translateY(0)';
+                    s.style.transform = 'translateY(100%)';
                     s.style.zIndex = '-1';
+                    s.style.pointerEvents = 'none';
                 });
 
-                hero.style.display = 'block';
+                section.style.display = 'block';
                 setTimeout(() => {
-                    hero.style.opacity = '1';
-                    hero.style.pointerEvents = 'auto';
-                    hero.style.zIndex = '1';
+                    section.style.opacity = '1';
+                    section.style.transform = 'translateY(0)';
+                    section.style.zIndex = '998';
+                    section.style.pointerEvents = 'auto';
+                    section.classList.add('active');
                 }, 10);
+
+                hero.style.display = 'none';
+                hero.style.opacity = '0';
+                hero.style.pointerEvents = 'none';
+                hero.style.zIndex = '-1';
+                mosaic.style.transform = 'translateX(0)';
+                mosaic.style.pointerEvents = 'none';
+                mosaic.style.opacity = '0';
+                mosaic.style.zIndex = '-1';
+                currentColumn = 0;
 
                 videoSection.style.display = 'none';
                 videoSection.style.opacity = '0';
                 videoSection.style.zIndex = '-1';
+                videoSection.style.pointerEvents = 'none';
                 videoContent.style.display = 'none';
                 videoContent.innerHTML = '';
                 closeBtn.style.display = 'none';
                 closeBtn.style.opacity = '0';
                 closeBtn.style.zIndex = '-1';
+                closeBtn.style.pointerEvents = 'none';
 
                 initArrows();
             } catch (error) {
-                console.error('Erreur dans scrollToProject:', error);
+                console.error('Erreur dans showSection:', error);
             }
         }
-    </script>
-</body></html>
+
+        // Cacher une section
+    function hideSection(sectionId) {
+        console.log(`hideSection appelé pour ${sectionId}`);
+        try {
+            const section = document.getElementById(`${sectionId}-section`);
+            const hero = document.getElementById('hero');
+            const mosaic = document.getElementById('mosaic');
+            const videoSection = document.getElementById('video-section');
+            const videoContent = document.getElementById('video-content');
+            const closeBtn = document.querySelector('.video-section .close-btn');
+
+            if (!section || !hero || !mosaic || !videoSection || !videoContent || !closeBtn) {
+                console.error('Éléments manquants:', { section, hero, mosaic, videoSection, videoContent, closeBtn });
+                return;
+            }
+
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(100%)';
+            section.style.zIndex = '-1';
+            section.style.pointerEvents = 'none';
+            setTimeout(() => {
+                section.classList.remove('active');
+                section.style.display = 'none';
+            }, 500);
+
+            hero.style.display = 'block';
+            mosaic.style.opacity = '1';
+            mosaic.style.zIndex = '1';
+            mosaic.style.pointerEvents = 'auto';
+            setTimeout(() => {
+                hero.style.opacity = '1';
+                hero.style.pointerEvents = 'auto';
+                hero.style.zIndex = '1';
+            }, 10);
+            mosaic.style.transform = `translateX(-${currentColumn * 100}vw)`;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            videoSection.classList.remove('active');
+            videoSection.style.display = 'none';
+            videoSection.style.opacity = '0';
+            videoSection.style.zIndex = '-1';
+            videoSection.style.pointerEvents = 'none';
+            videoContent.style.display = 'none';
+            videoContent.innerHTML = '';
+            closeBtn.style.display = 'none';
+            closeBtn.style.opacity = '0';
+            closeBtn.style.zIndex = '-1';
+            closeBtn.style.pointerEvents = 'none';
+
+            initArrows();
+        } catch (error) {
+            console.error('Erreur dans hideSection:', error);
+        }
+    }
+
+    // Gestion du défilement de la barre de navigation
+    window.addEventListener('scroll', () => {
+        const nav = document.getElementById('nav');
+        if (nav) {
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        }
+    });
+
+    // Initialisation au chargement de la page
+    document.addEventListener('DOMContentLoaded', () => {
+        console.log('DOMContentLoaded - Initialisation');
+        initArrows();
+        document.querySelectorAll('.bio-section, .contact-section, .equip-section, .video-section').forEach(s => {
+            s.style.display = 'none';
+            s.style.opacity = '0';
+            s.style.zIndex = '-1';
+            s.classList.remove('active');
+            s.style.pointerEvents = 'none';
+        });
+        const hero = document.getElementById('hero');
+        if (hero) {
+            hero.style.display = 'block';
+            hero.style.opacity = '1';
+            hero.style.pointerEvents = 'auto';
+            hero.style.zIndex = '1';
+        }
+    });
+</script>
+</body>
+</html>
