@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PLNononono Prod</title>
+    <title>PLNanananana Prod</title>
     <style>
         * {
             margin: 0;
@@ -127,7 +127,6 @@
 
         .mosaic-item button {
             background-color: #3498db;
-            color reproductive: true;
             color: #fff;
             border: none;
             padding: 1rem 2rem;
@@ -173,29 +172,27 @@
 
         .video-section {
             display: none;
-            padding: 3rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-            background-color: #111;
-            min-height: 100vh;
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
+            background-color: #111;
             z-index: 999;
             justify-content: center;
             align-items: center;
             flex-direction: column;
             opacity: 0;
             transition: opacity 0.5s ease;
+            padding: 0;
+            margin: 0;
+            overflow: hidden;
         }
 
         .video-section.active {
             display: flex !important;
             opacity: 1 !important;
             visibility: visible !important;
-            background-color: #111 !important;
             z-index: 999 !important;
         }
 
@@ -209,7 +206,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            height: 100px;
+            height: 60px;
         }
 
         .video-header .left-controls {
@@ -242,14 +239,14 @@
         }
 
         .video-section .close-btn {
-            position: fixed;
-            top: 6.5rem;
+            position: absolute;
+            top: 1rem;
             right: 1rem;
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             color: #fff;
             cursor: pointer;
             background: rgba(0, 0, 0, 0.8);
-            padding: 0.6rem 0.7rem;
+            padding: 0.5rem;
             border-radius: 50%;
             transition: background 0.3s;
             z-index: 1002;
@@ -265,11 +262,12 @@
             gap: 2rem;
             align-items: flex-start;
             justify-content: center;
-            margin-top: 100px;
+            margin-top: 80px;
             position: relative;
             flex-wrap: wrap;
             width: 100%;
-            background-color: #111;
+            max-width: 1200px;
+            background-color: transparent;
             z-index: 2;
             opacity: 1 !important;
             visibility: visible !important;
@@ -281,13 +279,16 @@
             width: 100%;
             height: calc(600px * 9 / 16);
             background-color: #222;
+            z-index: 2;
         }
 
         .video-content iframe {
             width: 100%;
             height: 100%;
-            z-index: 1;
+            z-index: 2;
             background: transparent;
+            display: block !important;
+            visibility: visible !important;
         }
 
         .video-content .video-title-overlay {
@@ -311,6 +312,7 @@
         .video-description {
             max-width: 500px;
             text-align: left;
+            z-index: 2;
         }
 
         .video-description h2 {
@@ -341,6 +343,7 @@
             gap: 1rem;
             margin-top: 2rem;
             width: 100%;
+            max-width: 1200px;
             z-index: 2;
             opacity: 1 !important;
             visibility: visible !important;
@@ -353,6 +356,7 @@
             position: relative;
             opacity: 1 !important;
             visibility: visible !important;
+            z-index: 2;
         }
 
         .related-video img {
@@ -364,6 +368,7 @@
             display: block !important;
             opacity: 1 !important;
             visibility: visible !important;
+            z-index: 1;
         }
 
         .related-video.active img {
@@ -379,12 +384,16 @@
             color: #fff;
             padding: 0.5rem 1rem;
             border-radius: 5px;
-            font-size: 0.9vw;
+            font-size: 0.9rem;
             font-weight: bold;
             text-align: center;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
             z-index: 10;
             background: rgba(0, 0, 0, 0.7);
+        }
+
+        .related-video:not(.active.playing) .playing-text {
+            display: none !important;
         }
 
         .related-video:not(.playing):hover img {
@@ -405,6 +414,7 @@
             z-index: 3;
             opacity: 1 !important;
             visibility: visible !important;
+            background: rgba(0, 0, 0, 0.5);
         }
 
         .related-video:not(.playing):hover .video-info {
@@ -418,8 +428,8 @@
 
         .video-info .video-title {
             color: #fff;
-            padding: 0.3vw 0.6vw;
-            font-size: 0.6vw;
+            padding: 0.3rem 0.6rem;
+            font-size: 0.8rem;
             text-align: center;
             width: 100%;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
@@ -427,8 +437,8 @@
 
         .video-info .video-duration {
             color: #fff;
-            padding: 0.3vw 0.6vw;
-            font-size: 0.5vw;
+            padding: 0.3rem 0.6rem;
+            font-size: 0.7rem;
             text-align: center;
             width: 100%;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
@@ -746,6 +756,7 @@
             }
 
             .video-content .video-wrapper {
+                max-width: 100%;
                 height: calc(100vw * 9 / 16);
             }
 
@@ -762,13 +773,14 @@
             }
 
             .video-section .close-btn {
-                font-size: 1.4rem;
-                padding: 0.4rem 0.7rem;
-                top: 5.5rem;
+                font-size: 1.2rem;
+                padding: 0.4rem 0.6rem;
+                top: 1rem;
+                right: 1rem;
             }
 
             .video-header {
-                height: 80px;
+                height: 60px;
             }
 
             .video-header .left-controls {
@@ -792,7 +804,16 @@
             }
 
             .related-video .playing-text {
-                font-size: 1.5rem;
+                font-size: 0.7rem;
+                padding: 0.3rem 0.6rem;
+            }
+
+            .related-video .video-info .video-title {
+                font-size: 0.7rem;
+            }
+
+            .related-video .video-info .video-duration {
+                font-size: 0.6rem;
             }
 
             .bio-content, .equip-content {
@@ -1100,6 +1121,13 @@
             video3: { url: "https://www.youtube.com/embed/3tmd-ClzV_Q", title: "Vidéo 3", description: "Description vidéo 3..." }
         };
 
+        // URLs valides pour les vignettes (remplacer les placeholders)
+        const thumbnailUrls = {
+            video1: "https://media.giphy.com/media/3o6Zta2kQfOv1oXz4Q/giphy.gif",
+            video2: "https://media.giphy.com/media/3o7TKz9fL5s9Z6Z6hW/giphy.gif",
+            video3: "https://media.giphy.com/media/l0MYt5j0ya4jXh6M0/giphy.gif"
+        };
+
         // Initialisation des flèches
         function initArrows() {
             console.log('Initialisation des flèches');
@@ -1145,7 +1173,17 @@
                     return;
                 }
 
-                // Réinitialiser l'état
+                // Masquer toutes les autres sections
+                const allSections = document.querySelectorAll('.bio-section, .contact-section, .equip-section');
+                allSections.forEach(s => {
+                    s.classList.remove('active');
+                    s.style.display = 'none';
+                    s.style.opacity = '0';
+                    s.style.transform = 'translateY(100%)';
+                    s.style.zIndex = '-1';
+                });
+
+                // Réinitialiser la mosaïque et masquer hero
                 currentColumn = 0;
                 mosaic.style.transform = 'translateX(0vw)';
                 mosaic.style.pointerEvents = 'none';
@@ -1153,14 +1191,16 @@
                 hero.style.opacity = '0';
                 hero.style.pointerEvents = 'none';
                 hero.style.zIndex = '-1';
-                console.log('Mosaïque masquée');
+                console.log('Mosaïque et hero masqués');
 
                 // Afficher la section vidéo
                 videoSection.style.display = 'flex';
+                videoSection.style.opacity = '0';
+                videoSection.style.zIndex = '999';
                 setTimeout(() => {
                     videoSection.style.opacity = '1';
-                    videoSection.style.zIndex = '999';
                     videoSection.classList.add('active');
+                    videoSection.style.visibility = 'visible';
                 }, 10);
                 console.log('Section vidéo affichée');
 
@@ -1183,8 +1223,8 @@
 
                 // Vignettes liées
                 relatedVideos.innerHTML = `
-                    <div class="related-video" data-video-id="video1">
-                        <img src="https://via.placeholder.com/200x112?text=Video+1" alt="Vignette 1">
+                    <div class="related-video active playing" data-video-id="video1">
+                        <img src="${thumbnailUrls.video1}" alt="Vignette 1">
                         <div class="video-info">
                             <div class="video-title">Vidéo 1</div>
                             <div class="video-duration">3:45</div>
@@ -1193,7 +1233,7 @@
                         <div class="playing-text">Lecture en cours</div>
                     </div>
                     <div class="related-video" data-video-id="video2">
-                        <img src="https://via.placeholder.com/200x112?text=Video+2" alt="Vignette 2">
+                        <img src="${thumbnailUrls.video2}" alt="Vignette 2">
                         <div class="video-info">
                             <div class="video-title">Vidéo 2</div>
                             <div class="video-duration">4:12</div>
@@ -1202,7 +1242,7 @@
                         <div class="playing-text">Lecture en cours</div>
                     </div>
                     <div class="related-video" data-video-id="video3">
-                        <img src="https://via.placeholder.com/200x112?text=Video+3" alt="Vignette 3">
+                        <img src="${thumbnailUrls.video3}" alt="Vignette 3">
                         <div class="video-info">
                             <div class="video-title">Vidéo 3</div>
                             <div class="video-duration">2:30</div>
@@ -1218,9 +1258,12 @@
                     const videoId = video.getAttribute('data-video-id');
                     video.style.opacity = '1';
                     video.style.visibility = 'visible';
+                    video.style.zIndex = '2';
+                    video.querySelector('img').style.display = 'block';
+                    video.querySelector('img').style.opacity = '1';
+                    video.querySelector('img').style.visibility = 'visible';
                     video.addEventListener('click', () => playRelatedVideo(videoId));
                 });
-                relatedVideos.querySelector('[data-video-id="video1"]').classList.add('active', 'playing');
                 console.log('Gestionnaires d\'événements attachés');
             } catch (error) {
                 console.error('Erreur dans showVideo:', error);
@@ -1297,12 +1340,20 @@
                 const fallback = videoContent.querySelector('.video-fallback');
                 if (fallback) fallback.style.display = 'none';
 
-                relatedVideos.querySelectorAll('.related-video').forEach(video => video.classList.remove('active', 'playing'));
+                relatedVideos.querySelectorAll('.related-video').forEach(video => {
+                    video.classList.remove('active', 'playing');
+                    video.querySelector('.playing-text').style.display = 'none';
+                });
                 const activeVideo = relatedVideos.querySelector(`[data-video-id="${videoId}"]`);
                 if (activeVideo) {
                     activeVideo.classList.add('active', 'playing');
                     activeVideo.style.opacity = '1';
                     activeVideo.style.visibility = 'visible';
+                    activeVideo.style.zIndex = '2';
+                    activeVideo.querySelector('img').style.display = 'block';
+                    activeVideo.querySelector('img').style.opacity = '1';
+                    activeVideo.querySelector('img').style.visibility = 'visible';
+                    activeVideo.querySelector('.playing-text').style.display = 'block';
                 }
                 console.log(`Vignette ${videoId} marquée comme active`);
             } catch (error) {
@@ -1334,11 +1385,22 @@
                 const section = document.getElementById(sectionId + '-section');
                 const hero = document.getElementById('hero');
                 const mosaic = document.getElementById('mosaic');
+                const videoSection = document.getElementById('video-section');
 
                 if (!section || !hero || !mosaic) {
                     console.error('Éléments manquants:', { section, hero, mosaic });
                     return;
                 }
+
+                // Masquer la section vidéo et toutes les autres sections
+                const allSections = document.querySelectorAll('.bio-section, .contact-section, .equip-section, .video-section');
+                allSections.forEach(s => {
+                    s.classList.remove('active');
+                    s.style.display = 'none';
+                    s.style.opacity = '0';
+                    s.style.transform = 'translateY(100%)';
+                    s.style.zIndex = '-1';
+                });
 
                 section.style.display = 'block';
                 setTimeout(() => {
@@ -1355,17 +1417,6 @@
                 mosaic.style.transform = 'translateX(0vw)';
                 mosaic.style.pointerEvents = 'none';
 
-                const allSections = document.querySelectorAll('.bio-section, .contact-section, .equip-section, .video-section');
-                allSections.forEach(s => {
-                    if (s.id !== sectionId + '-section') {
-                        s.classList.remove('active');
-                        s.style.display = 'none';
-                        s.style.opacity = '0';
-                        s.style.transform = 'translateY(100%)';
-                        s.style.zIndex = '-1';
-                    }
-                });
-
                 initArrows();
             } catch (error) {
                 console.error('Erreur dans showSection:', error);
@@ -1378,6 +1429,7 @@
                 const section = document.getElementById(sectionId + '-section');
                 const hero = document.getElementById('hero');
                 const mosaic = document.getElementById('mosaic');
+                const videoSection = document.getElementById('video-section');
 
                 if (!section || !hero || !mosaic) {
                     console.error('Éléments manquants:', { section, hero, mosaic });
@@ -1401,6 +1453,14 @@
                 mosaic.style.transform = `translateX(-${currentColumn * 100}vw)`;
                 mosaic.style.pointerEvents = 'auto';
                 window.scrollTo({ top: 0, behavior: 'smooth' });
+
+                // S'assurer que la section vidéo est masquée
+                if (videoSection) {
+                    videoSection.classList.remove('active');
+                    videoSection.style.display = 'none';
+                    videoSection.style.opacity = '0';
+                    videoSection.style.zIndex = '-1';
+                }
 
                 initArrows();
             } catch (error) {
@@ -1473,6 +1533,8 @@
             try {
                 const mosaic = document.getElementById('mosaic');
                 const hero = document.getElementById('hero');
+                const videoSection = document.getElementById('video-section');
+
                 if (!mosaic || !hero) {
                     console.error('Éléments manquants:', { mosaic, hero });
                     return;
@@ -1531,6 +1593,8 @@
                 console.log('Clic sur flèche:', e.target.className);
             } else if (e.target.classList.contains('related-video') || e.target.closest('.related-video')) {
                 console.log('Clic sur vignette:', e.target.closest('.related-video').getAttribute('data-video-id'));
+            } else if (e.target.classList.contains('close-btn')) {
+                console.log('Clic sur bouton de fermeture vidéo');
             }
         });
 
