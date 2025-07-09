@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PLN Prorrrrrrrd</title>
+    <title>PLNononono Prod</title>
     <style>
         * {
             margin: 0;
@@ -127,6 +127,7 @@
 
         .mosaic-item button {
             background-color: #3498db;
+            color reproductive: true;
             color: #fff;
             border: none;
             padding: 1rem 2rem;
@@ -282,7 +283,7 @@
             background-color: #222;
         }
 
-        .video-content img {
+        .video-content iframe {
             width: 100%;
             height: 100%;
             z-index: 1;
@@ -350,6 +351,8 @@
             height: calc(200px * 9 / 16);
             cursor: pointer;
             position: relative;
+            opacity: 1 !important;
+            visibility: visible !important;
         }
 
         .related-video img {
@@ -358,14 +361,17 @@
             object-fit: cover;
             border-radius: 5px;
             transition: opacity 0.3s;
+            display: block !important;
+            opacity: 1 !important;
+            visibility: visible !important;
         }
 
         .related-video.active img {
             opacity: 0.8;
         }
 
-        .related-video.active.playing:hover .playing-text {
-            display: block;
+        .related-video.active.playing .playing-text {
+            display: block !important;
             position: absolute;
             top: 50%;
             left: 50%;
@@ -378,6 +384,7 @@
             text-align: center;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
             z-index: 10;
+            background: rgba(0, 0, 0, 0.7);
         }
 
         .related-video:not(.playing):hover img {
@@ -396,10 +403,12 @@
             align-items: center;
             padding: 10px;
             z-index: 3;
+            opacity: 1 !important;
+            visibility: visible !important;
         }
 
         .related-video:not(.playing):hover .video-info {
-            display: flex;
+            display: flex !important;
         }
 
         .related-video.active.playing .video-info,
@@ -782,6 +791,10 @@
                 height: calc(120px * 9 / 16);
             }
 
+            .related-video .playing-text {
+                font-size: 1.5rem;
+            }
+
             .bio-content, .equip-content {
                 width: 100%;
                 margin-left: 5%;
@@ -1014,7 +1027,7 @@
                     </a>
                     <a href="https://instagram.com" target="_blank">
                         <svg width="30" height="30" viewBox="0 0 24 24" fill="#E1306C">
-                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.317 3.608 1.292.975.975 1.23 2.242 1.292 3.608.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.062 1.366-.317 2.633-1.292 3.608-.975.975-2.242 1.23-3.608 1.292-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.366-.062-2.633-.317-3.608-1.292-.975-.975-1.23-2.242-1.292-3.608-.058-1.266-.07-1.646-.07-4.85s.012-3.584.07-4.85c.062-1.366.317-2.633 1.292-3.608.975-.975 2.242-1.23 3.608-1.292 1.266-.058 1.646-.07 4.85-.07m0-2.163c-3.259 0-3.667.014-4.947.072-1.316.059-2.593.317-3.533 1.257C2.27 2.452 2.013 3.729 1.954 5.053c-.058 1.28-.072 1.688-.072 4.947s.014 3.667.072 4.947c.059 1.324.317 2.6 1.257 3.54.94.94 2.216 1.198 3.54 1.257 1.28.058 1.688.072 4.947.072s3.667-.014 4.947-.072c1.324-.059 2.6-.317 3.54-1.257.94-.94 1.198-2.216 1.257-3.54.058-1.28.072-1.688.072-4.947s-.014-3.667-.072-4.947c-.059-1.324-.317-2.6-1.257-3.54-.94-.94-2.216-1.198-3.54-1.257-1.28-.058-1.688-.072-4.947-.072h-.008zM12 6.875c-3.617 0-6.55 2.925-6.55 6.55s2.925 6.55 6.55 6.55 6.55-2.925 6.55-6.55-2.925-6.55-6.55-6.55zm0 10.85c-2.312 0-4.175-1.867-4.175-4.175s1.863-4.175 4.175-4.175 4.175 1.863 4.175 4.175-1.863-4.175-4.175-4.175zm6.844-10.975c0 .96-.775 1.735-1.735 1735 0-1.735-.775 1.735-1.735.96 0 1.735.775-1.735 1.735z"/>
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.317 3.608 1.292.975.975 1.23 2.242 1.292 3.608.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.062 1.366-.317 2.633-1.292 3.608-.975.975-2.242 1.23-3.608 1.292-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.366-.062-2.633-.317-3.608-1.292-.975-.975-1.23-2.242-1.292-3.608-.058-1.266-.07-1.646-.07-4.85s.012-3.584.07-4.85c.062-1.366.317-2.633 1.292-3.608.975-.975 2.242-1.23 3.608-1.292 1.266-.058 1.646-.07 4.85-.07m0-2.163c-3.259 0-3.667.014-4.947.072-1.316.059-2.593.317-3.533 1.257C2.27 2.452 2.013 3.729 1.954 5.053c-.058 1.28-.072 1.688-.072 4.947s.014 3.667.072 4.947c.059 1.324.317 2.6 1.257 3.54.94.94 2.216 1.198 3.54 1.257 1.28.058 1.688.072 4.947.072s3.667-.014 4.947-.072c1.324-.059 2.6-.317 3.54-1.257.94-.94 1.198-2.216 1.257-3.54.058-1.28.072-1.688.072-4.947s-.014-3.667-.072-4.947c-.059-1.324-.317-2.6-1.257-3.54-.94-.94-2.216-1.198-3.54-1.257-1.28-.058-1.688-.072-4.947-.072h-.008zM12 6.875c-3.617 0-6.55 2.925-6.55 6.55s2.925 6.55 6.55 6.55 6.55-2.925 6.55-6.55-2.925-6.55-6.55-6.55zm0 10.85c-2.312 0-4.175-1.867-4.175-4.175s1.863-4.175 4.175-4.175 4.175 1.863 4.175 4.175-1.863-4.175-4.175-4.175zm6.844-10.975c0 .96-.775 1.735-1.735 1.735 0-1.735-.775 1.735-1.735.96 0 1.735.775-1.735 1.735z"/>
                         </svg>
                     </a>
                     <a href="https://vimeo.com" target="_blank" style="font-family: 'cursive'; font-size: 25px;">V</a>
@@ -1068,6 +1081,25 @@
         // Variable globale pour suivre la colonne actuelle
         let currentColumn = 0;
 
+        // Données des vidéos
+        const videoData = {
+            project1: { url: "https://www.youtube.com/embed/dQw4w9WgXcQ", title: "Projet 1", description: "Description du projet 1..." },
+            project2: { url: "https://www.youtube.com/embed/9bZkp7q19f0", title: "Projet 2", description: "Description du projet 2..." },
+            project3: { url: "https://www.youtube.com/embed/3tmd-ClzV_Q", title: "Projet 3", description: "Description du projet 3..." },
+            project4: { url: "https://www.youtube.com/embed/5qap5aO4i9A", title: "Projet 4", description: "Description du projet 4..." },
+            project5: { url: "https://www.youtube.com/embed/9bZkp7q19f0", title: "Projet 5", description: "Description du projet 5..." },
+            project6: { url: "https://www.youtube.com/embed/dQw4w9WgXcQ", title: "Projet 6", description: "Description du projet 6..." },
+            project7: { url: "https://www.youtube.com/embed/3tmd-ClzV_Q", title: "Projet 7", description: "Description du projet 7..." },
+            project8: { url: "https://www.youtube.com/embed/5qap5aO4i9A", title: "Projet 8", description: "Description du projet 8..." },
+            project9: { url: "https://www.youtube.com/embed/dQw4w9WgXcQ", title: "Projet 9", description: "Description du projet 9..." },
+            project10: { url: "https://www.youtube.com/embed/9bZkp7q19f0", title: "Projet 10", description: "Description du projet 10..." },
+            project11: { url: "https://www.youtube.com/embed/3tmd-ClzV_Q", title: "Projet 11", description: "Description du projet 11..." },
+            project12: { url: "https://www.youtube.com/embed/5qap5aO4i9A", title: "Projet 12", description: "Description du projet 12..." },
+            video1: { url: "https://www.youtube.com/embed/dQw4w9WgXcQ", title: "Vidéo 1", description: "Description vidéo 1..." },
+            video2: { url: "https://www.youtube.com/embed/9bZkp7q19f0", title: "Vidéo 2", description: "Description vidéo 2..." },
+            video3: { url: "https://www.youtube.com/embed/3tmd-ClzV_Q", title: "Vidéo 3", description: "Description vidéo 3..." }
+        };
+
         // Initialisation des flèches
         function initArrows() {
             console.log('Initialisation des flèches');
@@ -1113,7 +1145,7 @@
                     return;
                 }
 
-                // Réinitialiser la mosaïque
+                // Réinitialiser l'état
                 currentColumn = 0;
                 mosaic.style.transform = 'translateX(0vw)';
                 mosaic.style.pointerEvents = 'none';
@@ -1125,25 +1157,29 @@
 
                 // Afficher la section vidéo
                 videoSection.style.display = 'flex';
-                videoSection.style.opacity = '1';
-                videoSection.style.zIndex = '999';
-                videoSection.classList.add('active');
+                setTimeout(() => {
+                    videoSection.style.opacity = '1';
+                    videoSection.style.zIndex = '999';
+                    videoSection.classList.add('active');
+                }, 10);
                 console.log('Section vidéo affichée');
 
                 // Contenu vidéo
+                const video = videoData[projectId] || videoData['project1'];
                 videoContent.innerHTML = `
                     <div class="video-wrapper">
-                        <img src="https://via.placeholder.com/600x337?text=Video+${projectId}" alt="Vidéo ${projectId}">
-                        <div class="video-title-overlay">Titre de la vidéo ${projectId}</div>
+                        <iframe src="${video.url}?autoplay=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                        <div class="video-title-overlay">${video.title}</div>
                     </div>
                     <div class="video-description">
-                        <h2>Titre de la vidéo ${projectId}</h2>
-                        <p>Description de la vidéo ${projectId}...</p>
+                        <h2>${video.title}</h2>
+                        <p>${video.description}</p>
                     </div>
                     <div class="video-fallback">Vidéo non disponible.</div>
                 `;
                 const fallback = videoContent.querySelector('.video-fallback');
                 if (fallback) fallback.style.display = 'none';
+                console.log(`Vidéo chargée pour ${projectId}`);
 
                 // Vignettes liées
                 relatedVideos.innerHTML = `
@@ -1154,6 +1190,7 @@
                             <div class="video-duration">3:45</div>
                             <div class="play-icon"></div>
                         </div>
+                        <div class="playing-text">Lecture en cours</div>
                     </div>
                     <div class="related-video" data-video-id="video2">
                         <img src="https://via.placeholder.com/200x112?text=Video+2" alt="Vignette 2">
@@ -1162,6 +1199,7 @@
                             <div class="video-duration">4:12</div>
                             <div class="play-icon"></div>
                         </div>
+                        <div class="playing-text">Lecture en cours</div>
                     </div>
                     <div class="related-video" data-video-id="video3">
                         <img src="https://via.placeholder.com/200x112?text=Video+3" alt="Vignette 3">
@@ -1170,21 +1208,25 @@
                             <div class="video-duration">2:30</div>
                             <div class="play-icon"></div>
                         </div>
+                        <div class="playing-text">Lecture en cours</div>
                     </div>
                 `;
                 console.log('Vignettes insérées');
 
-                // Attacher les gestionnaires d'événements aux vignettes
+                // Attacher les gestionnaires d'événements
                 relatedVideos.querySelectorAll('.related-video').forEach(video => {
                     const videoId = video.getAttribute('data-video-id');
+                    video.style.opacity = '1';
+                    video.style.visibility = 'visible';
                     video.addEventListener('click', () => playRelatedVideo(videoId));
                 });
                 relatedVideos.querySelector('[data-video-id="video1"]').classList.add('active', 'playing');
+                console.log('Gestionnaires d\'événements attachés');
             } catch (error) {
                 console.error('Erreur dans showVideo:', error);
                 const videoContent = document.getElementById('video-content');
                 if (videoContent) {
-                    videoContent.innerHTML = `<div class="video-fallback">Erreur de chargement.</div>`;
+                    videoContent.innerHTML = `<div class="video-fallback">Erreur de chargement de la vidéo.</div>`;
                 }
             }
         }
@@ -1203,17 +1245,21 @@
                     return;
                 }
 
-                videoSection.classList.remove('active');
-                videoSection.style.display = 'none';
                 videoSection.style.opacity = '0';
-                videoSection.style.zIndex = '-1';
-                videoContent.innerHTML = '';
-                relatedVideos.innerHTML = '';
+                setTimeout(() => {
+                    videoSection.classList.remove('active');
+                    videoSection.style.display = 'none';
+                    videoSection.style.zIndex = '-1';
+                    videoContent.innerHTML = '';
+                    relatedVideos.innerHTML = '';
+                }, 500);
 
                 hero.style.display = 'block';
-                hero.style.opacity = '1';
-                hero.style.pointerEvents = 'auto';
-                hero.style.zIndex = '1';
+                setTimeout(() => {
+                    hero.style.opacity = '1';
+                    hero.style.pointerEvents = 'auto';
+                    hero.style.zIndex = '1';
+                }, 10);
                 mosaic.style.transform = `translateX(-${currentColumn * 100}vw)`;
                 mosaic.style.pointerEvents = 'auto';
                 window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -1236,14 +1282,15 @@
                     return;
                 }
 
+                const video = videoData[videoId] || videoData['video1'];
                 videoContent.innerHTML = `
                     <div class="video-wrapper">
-                        <img src="https://via.placeholder.com/600x337?text=Video+${videoId}" alt="Vidéo ${videoId}">
-                        <div class="video-title-overlay">Titre de la vidéo ${videoId}</div>
+                        <iframe src="${video.url}?autoplay=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                        <div class="video-title-overlay">${video.title}</div>
                     </div>
                     <div class="video-description">
-                        <h2>Titre de la vidéo ${videoId}</h2>
-                        <p>Description de la vidéo ${videoId}...</p>
+                        <h2>${video.title}</h2>
+                        <p>${video.description}</p>
                     </div>
                     <div class="video-fallback">Vidéo non disponible.</div>
                 `;
@@ -1254,13 +1301,15 @@
                 const activeVideo = relatedVideos.querySelector(`[data-video-id="${videoId}"]`);
                 if (activeVideo) {
                     activeVideo.classList.add('active', 'playing');
+                    activeVideo.style.opacity = '1';
+                    activeVideo.style.visibility = 'visible';
                 }
                 console.log(`Vignette ${videoId} marquée comme active`);
             } catch (error) {
                 console.error('Erreur dans playRelatedVideo:', error);
                 const videoContent = document.getElementById('video-content');
                 if (videoContent) {
-                    videoContent.innerHTML = `<div class="video-fallback">Erreur de chargement.</div>`;
+                    videoContent.innerHTML = `<div class="video-fallback">Erreur de chargement de la vidéo.</div>`;
                 }
             }
         }
@@ -1291,12 +1340,12 @@
                     return;
                 }
 
-                section.classList.add('active');
                 section.style.display = 'block';
                 setTimeout(() => {
                     section.style.opacity = '1';
                     section.style.transform = 'translateY(0)';
                     section.style.zIndex = '998';
+                    section.classList.add('active');
                 }, 10);
 
                 hero.style.display = 'none';
@@ -1344,9 +1393,11 @@
                 }, 500);
 
                 hero.style.display = 'block';
-                hero.style.opacity = '1';
-                hero.style.pointerEvents = 'auto';
-                hero.style.zIndex = '1';
+                setTimeout(() => {
+                    hero.style.opacity = '1';
+                    hero.style.pointerEvents = 'auto';
+                    hero.style.zIndex = '1';
+                }, 10);
                 mosaic.style.transform = `translateX(-${currentColumn * 100}vw)`;
                 mosaic.style.pointerEvents = 'auto';
                 window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -1445,9 +1496,11 @@
                 });
 
                 hero.style.display = 'block';
-                hero.style.opacity = '1';
-                hero.style.pointerEvents = 'auto';
-                hero.style.zIndex = '1';
+                setTimeout(() => {
+                    hero.style.opacity = '1';
+                    hero.style.pointerEvents = 'auto';
+                    hero.style.zIndex = '1';
+                }, 10);
                 console.log('Mosaïque restaurée');
 
                 initArrows();
