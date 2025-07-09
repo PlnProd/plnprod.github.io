@@ -3,7 +3,258 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PLNanananana Prod</title>
+    <title>PLNozProd</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #000;
+            color: #fff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        nav {
+            background-color: #000;
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        nav.scrolled {
+            background-color: transparent;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            margin-left: 2rem;
+        }
+
+        .nav-logo img {
+            width: 40px;
+            height: auto;
+            margin-right: 0.5rem;
+        }
+
+        .nav-logo p {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            margin-right: 2rem;
+        }
+
+        nav ul li {
+            margin: 0 1.5rem;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            cursor: pointer;
+        }
+
+        nav ul li a:hover {
+            color: #3498db;
+        }
+
+        .hero {
+            position: relative;
+            min-height: 400vh;
+            overflow-x: hidden;
+            transition: opacity 0.5s ease;
+            display: block;
+            z-index: 1;
+            pointer-events: auto;
+        }
+
+        .mosaic-container {
+            display: grid;
+            grid-template-columns: repeat(3, 100vw);
+            grid-template-rows: repeat(4, 100vh);
+            width: 300vw;
+            transition: transform 0.5s ease;
+            pointer-events: auto;
+        }
+
+        .mosaic-item {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .mosaic-item img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+        }
+
+        .mosaic-item .content {
+            text-align: center;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 2rem;
+            border-radius: 10px;
+            z-index: 2;
+        }
+
+        .mosaic-item h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .mosaic-item button {
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            cursor: pointer;
+            border-radius: 5px;
+            z-index: 2;
+        }
+
+        .mosaic-item button:hover {
+            background-color: #2980b9;
+        }
+
+        .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2rem;
+            color: #fff;
+            cursor: pointer;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 0.5rem;
+            border-radius: 50%;
+            z-index: 100;
+            display: block !important;
+            visibility: visible !important;
+            pointer-events: auto !important;
+            opacity: 1 !important;
+            transition: background 0.3s;
+        }
+
+        .arrow:hover {
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        .arrow-right {
+            right: 20px;
+        }
+
+        .arrow-left {
+            left: 20px;
+        }
+
+        .video-section {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: #111;
+            z-index: 999;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            padding: 0;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .video-section.active {
+            display: flex !important;
+            opacity: 1 !important;
+            visibility: visible !important;
+            z-index: 999 !important;
+        }
+
+        .video-header {
+            background-color: #000;
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1001;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 60px;
+        }
+
+        .video-header .left-controls {
+            display: flex;
+            align-items: center;
+            margin-left: 2rem;
+        }
+
+        .video-header .info-icon,
+        .video-header .share-icon,
+        .video-header .share-text {
+            color: #fff;
+            font-size: 1.2rem;
+            margin-right: 0.5rem;
+            cursor: pointer;
+        }
+
+        .video-header .share-text {
+            text-decoration: none;
+        }
+
+        .video-header .share-text:hover,
+        .video-header .share-icon:hover {
+            color: #3498db;
+        }
+
+        .video-header .divider {
+            color: #fff;
+            margin: 0 0.5rem;
+        }
+
+        .video-section .close-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            color: #fff;
+            cursor: pointer;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 0.5rem;
+            border-radius: 50%;
+            transition: background 0.3s;
+            z-index: 1002<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PLN Prod</title>
     <style>
         * {
             margin: 0;
@@ -250,6 +501,16 @@
             border-radius: 50%;
             transition: background 0.3s;
             z-index: 1002;
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
+
+        .video-section.active .close-btn {
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            z-index: 1002 !important;
         }
 
         .video-section .close-btn:hover {
@@ -280,6 +541,9 @@
             height: calc(600px * 9 / 16);
             background-color: #222;
             z-index: 2;
+            display: block !important;
+            opacity: 1 !important;
+            visibility: visible !important;
         }
 
         .video-content iframe {
@@ -289,6 +553,7 @@
             background: transparent;
             display: block !important;
             visibility: visible !important;
+            opacity: 1 !important;
         }
 
         .video-content .video-title-overlay {
@@ -1121,7 +1386,7 @@
             video3: { url: "https://www.youtube.com/embed/3tmd-ClzV_Q", title: "Vidéo 3", description: "Description vidéo 3..." }
         };
 
-        // URLs valides pour les vignettes (remplacer les placeholders)
+        // URLs valides pour les vignettes
         const thumbnailUrls = {
             video1: "https://media.giphy.com/media/3o6Zta2kQfOv1oXz4Q/giphy.gif",
             video2: "https://media.giphy.com/media/3o7TKz9fL5s9Z6Z6hW/giphy.gif",
@@ -1167,9 +1432,10 @@
                 const relatedVideos = document.getElementById('related-videos');
                 const hero = document.getElementById('hero');
                 const mosaic = document.getElementById('mosaic');
+                const closeBtn = document.querySelector('.close-btn');
 
-                if (!videoSection || !videoContent || !relatedVideos || !hero || !mosaic) {
-                    console.error('Éléments manquants:', { videoSection, videoContent, relatedVideos, hero, mosaic });
+                if (!videoSection || !videoContent || !relatedVideos || !hero || !mosaic || !closeBtn) {
+                    console.error('Éléments manquants:', { videoSection, videoContent, relatedVideos, hero, mosaic, closeBtn });
                     return;
                 }
 
@@ -1187,6 +1453,8 @@
                 currentColumn = 0;
                 mosaic.style.transform = 'translateX(0vw)';
                 mosaic.style.pointerEvents = 'none';
+                mosaic.style.opacity = '0';
+                mosaic.style.zIndex = '-1';
                 hero.style.display = 'none';
                 hero.style.opacity = '0';
                 hero.style.pointerEvents = 'none';
@@ -1197,10 +1465,17 @@
                 videoSection.style.display = 'flex';
                 videoSection.style.opacity = '0';
                 videoSection.style.zIndex = '999';
+                videoSection.style.visibility = 'visible';
+                videoContent.style.display = 'flex';
+                videoContent.style.opacity = '1';
+                videoContent.style.zIndex = '2';
+                closeBtn.style.display = 'block';
+                closeBtn.style.opacity = '1';
+                closeBtn.style.visibility = 'visible';
+                closeBtn.style.zIndex = '1002';
                 setTimeout(() => {
                     videoSection.style.opacity = '1';
                     videoSection.classList.add('active');
-                    videoSection.style.visibility = 'visible';
                 }, 10);
                 console.log('Section vidéo affichée');
 
@@ -1253,7 +1528,7 @@
                 `;
                 console.log('Vignettes insérées');
 
-                // Attacher les gestionnaires d'événements
+                // Attacher les gestionnaires d'événements pour les vignettes
                 relatedVideos.querySelectorAll('.related-video').forEach(video => {
                     const videoId = video.getAttribute('data-video-id');
                     video.style.opacity = '1';
@@ -1264,7 +1539,7 @@
                     video.querySelector('img').style.visibility = 'visible';
                     video.addEventListener('click', () => playRelatedVideo(videoId));
                 });
-                console.log('Gestionnaires d\'événements attachés');
+                console.log('Gestionnaires d\'événements attachés aux vignettes');
             } catch (error) {
                 console.error('Erreur dans showVideo:', error);
                 const videoContent = document.getElementById('video-content');
@@ -1282,29 +1557,37 @@
                 const relatedVideos = document.getElementById('related-videos');
                 const hero = document.getElementById('hero');
                 const mosaic = document.getElementById('mosaic');
+                const closeBtn = document.querySelector('.close-btn');
 
-                if (!videoSection || !videoContent || !relatedVideos || !hero || !mosaic) {
-                    console.error('Éléments manquants:', { videoSection, videoContent, relatedVideos, hero, mosaic });
+                if (!videoSection || !videoContent || !relatedVideos || !hero || !mosaic || !closeBtn) {
+                    console.error('Éléments manquants:', { videoSection, videoContent, relatedVideos, hero, mosaic, closeBtn });
                     return;
                 }
 
                 videoSection.style.opacity = '0';
+                videoContent.style.opacity = '0';
+                closeBtn.style.opacity = '0';
                 setTimeout(() => {
                     videoSection.classList.remove('active');
                     videoSection.style.display = 'none';
                     videoSection.style.zIndex = '-1';
+                    videoContent.style.display = 'none';
                     videoContent.innerHTML = '';
                     relatedVideos.innerHTML = '';
+                    closeBtn.style.display = 'none';
+                    closeBtn.style.zIndex = '-1';
                 }, 500);
 
                 hero.style.display = 'block';
+                mosaic.style.opacity = '1';
+                mosaic.style.zIndex = '1';
                 setTimeout(() => {
                     hero.style.opacity = '1';
                     hero.style.pointerEvents = 'auto';
                     hero.style.zIndex = '1';
+                    mosaic.style.pointerEvents = 'auto';
                 }, 10);
                 mosaic.style.transform = `translateX(-${currentColumn * 100}vw)`;
-                mosaic.style.pointerEvents = 'auto';
                 window.scrollTo({ top: 0, behavior: 'smooth' });
                 console.log('Mosaïque restaurée');
 
@@ -1319,9 +1602,10 @@
             try {
                 const videoContent = document.getElementById('video-content');
                 const relatedVideos = document.getElementById('related-videos');
+                const closeBtn = document.querySelector('.close-btn');
 
-                if (!videoContent || !relatedVideos) {
-                    console.error('Éléments manquants:', { videoContent, relatedVideos });
+                if (!videoContent || !relatedVideos || !closeBtn) {
+                    console.error('Éléments manquants:', { videoContent, relatedVideos, closeBtn });
                     return;
                 }
 
@@ -1339,6 +1623,14 @@
                 `;
                 const fallback = videoContent.querySelector('.video-fallback');
                 if (fallback) fallback.style.display = 'none';
+
+                videoContent.style.display = 'flex';
+                videoContent.style.opacity = '1';
+                videoContent.style.zIndex = '2';
+                closeBtn.style.display = 'block';
+                closeBtn.style.opacity = '1';
+                closeBtn.style.visibility = 'visible';
+                closeBtn.style.zIndex = '1002';
 
                 relatedVideos.querySelectorAll('.related-video').forEach(video => {
                     video.classList.remove('active', 'playing');
@@ -1387,12 +1679,12 @@
                 const mosaic = document.getElementById('mosaic');
                 const videoSection = document.getElementById('video-section');
 
-                if (!section || !hero || !mosaic) {
-                    console.error('Éléments manquants:', { section, hero, mosaic });
+                if (!section || !hero || !mosaic || !videoSection) {
+                    console.error('Éléments manquants:', { section, hero, mosaic, videoSection });
                     return;
                 }
 
-                // Masquer la section vidéo et toutes les autres sections
+                // Masquer toutes les sections, y compris la section vidéo
                 const allSections = document.querySelectorAll('.bio-section, .contact-section, .equip-section, .video-section');
                 allSections.forEach(s => {
                     s.classList.remove('active');
@@ -1416,6 +1708,8 @@
                 hero.style.zIndex = '-1';
                 mosaic.style.transform = 'translateX(0vw)';
                 mosaic.style.pointerEvents = 'none';
+                mosaic.style.opacity = '0';
+                mosaic.style.zIndex = '-1';
 
                 initArrows();
             } catch (error) {
@@ -1431,8 +1725,8 @@
                 const mosaic = document.getElementById('mosaic');
                 const videoSection = document.getElementById('video-section');
 
-                if (!section || !hero || !mosaic) {
-                    console.error('Éléments manquants:', { section, hero, mosaic });
+                if (!section || !hero || !mosaic || !videoSection) {
+                    console.error('Éléments manquants:', { section, hero, mosaic, videoSection });
                     return;
                 }
 
@@ -1445,21 +1739,29 @@
                 }, 500);
 
                 hero.style.display = 'block';
+                mosaic.style.opacity = '1';
+                mosaic.style.zIndex = '1';
                 setTimeout(() => {
                     hero.style.opacity = '1';
                     hero.style.pointerEvents = 'auto';
                     hero.style.zIndex = '1';
+                    mosaic.style.pointerEvents = 'auto';
                 }, 10);
                 mosaic.style.transform = `translateX(-${currentColumn * 100}vw)`;
-                mosaic.style.pointerEvents = 'auto';
                 window.scrollTo({ top: 0, behavior: 'smooth' });
 
-                // S'assurer que la section vidéo est masquée
-                if (videoSection) {
-                    videoSection.classList.remove('active');
-                    videoSection.style.display = 'none';
-                    videoSection.style.opacity = '0';
-                    videoSection.style.zIndex = '-1';
+                // S'assurer que la section vidéo est complètement masquée
+                videoSection.classList.remove('active');
+                videoSection.style.display = 'none';
+                videoSection.style.opacity = '0';
+                videoSection.style.zIndex = '-1';
+                const videoContent = document.getElementById('video-content');
+                const closeBtn = document.querySelector('.close-btn');
+                if (videoContent) videoContent.style.display = 'none';
+                if (closeBtn) {
+                    closeBtn.style.display = 'none';
+                    closeBtn.style.opacity = '0';
+                    closeBtn.style.zIndex = '-1';
                 }
 
                 initArrows();
@@ -1535,8 +1837,8 @@
                 const hero = document.getElementById('hero');
                 const videoSection = document.getElementById('video-section');
 
-                if (!mosaic || !hero) {
-                    console.error('Éléments manquants:', { mosaic, hero });
+                if (!mosaic || !hero || !videoSection) {
+                    console.error('Éléments manquants:', { mosaic, hero, videoSection });
                     return;
                 }
 
@@ -1545,6 +1847,8 @@
                 mosaic.style.transform = `translateX(-${currentColumn * 100}vw)`;
                 mosaic.style.transition = 'transform 0.5s ease';
                 mosaic.style.pointerEvents = 'auto';
+                mosaic.style.opacity = '1';
+                mosaic.style.zIndex = '1';
                 window.scrollTo({ top: row * window.innerHeight, behavior: 'smooth' });
                 console.log(`Mosaïque déplacée à colonne ${currentColumn}, ligne ${row}`);
 
