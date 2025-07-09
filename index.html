@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PLN POULIDOR</title>
+    <title>PLN desifgpoug</title>
     <style>
         * {
             margin: 0;
@@ -1190,12 +1190,18 @@
             console.log('Initialisation des flèches');
             try {
                 const arrows = document.querySelectorAll('.arrow');
+                const mosaic = document.getElementById('mosaic');
+                if (!mosaic || !arrows) {
+                    console.error('Éléments manquants:', { mosaic, arrows });
+                    return;
+                }
+
                 arrows.forEach(arrow => {
-                    arrow.style.display = 'block';
+                    arrow.style.setProperty('display', 'block', '!important');
+                    arrow.style.setProperty('opacity', '1', '!important');
                     arrow.style.setProperty('visibility', 'visible', '!important');
                     arrow.style.setProperty('pointer-events', 'auto', '!important');
-                    arrow.style.setProperty('opacity', '1', '!important');
-                    arrow.style.zIndex = '100';
+                    arrow.style.setProperty('z-index', '100', '!important');
                     arrow.onclick = null; // Réinitialiser pour éviter les doubles bindings
                     if (arrow.classList.contains('arrow-right')) {
                         arrow.onclick = nextColumn;
@@ -1203,15 +1209,60 @@
                         arrow.onclick = prevColumn;
                     }
                 });
-                const mosaic = document.getElementById('mosaic');
-                if (mosaic) {
-                    mosaic.style.pointerEvents = 'auto';
-                    mosaic.style.opacity = '1';
-                    mosaic.style.zIndex = '1';
-                    mosaic.style.transform = `translateX(-${currentColumn * 100}vw)`;
-                }
+
+                mosaic.style.pointerEvents = 'auto';
+                mosaic.style.opacity = '1';
+                mosaic.style.zIndex = '1';
+                mosaic.style.transform = `translateX(-${currentColumn * 100}vw)`;
+                console.log(`Flèches initialisées, currentColumn: ${currentColumn}`);
             } catch (error) {
                 console.error('Erreur dans initArrows:', error);
+            }
+        }
+
+        // Naviguer vers la colonne suivante
+        function nextColumn() {
+            console.log('nextColumn appelé');
+            try {
+                const mosaic = document.getElementById('mosaic');
+                if (!mosaic) {
+                    console.error('Mosaïque introuvable');
+                    return;
+                }
+
+                if (currentColumn < 2) {
+                    currentColumn++;
+                    mosaic.style.transform = `translateX(-${currentColumn * 100}vw)`;
+                    mosaic.style.transition = 'transform 0.5s ease';
+                    console.log(`Défilement vers colonne ${currentColumn}`);
+                }
+
+                initArrows();
+            } catch (error) {
+                console.error('Erreur dans nextColumn:', error);
+            }
+        }
+
+        // Naviguer vers la colonne précédente
+        function prevColumn() {
+            console.log('prevColumn appelé');
+            try {
+                const mosaic = document.getElementById('mosaic');
+                if (!mosaic) {
+                    console.error('Mosaïque introuvable');
+                    return;
+                }
+
+                if (currentColumn > 0) {
+                    currentColumn--;
+                    mosaic.style.transform = `translateX(-${currentColumn * 100}vw)`;
+                    mosaic.style.transition = 'transform 0.5s ease';
+                    console.log(`Défilement vers colonne ${currentColumn}`);
+                }
+
+                initArrows();
+            } catch (error) {
+                console.error('Erreur dans prevColumn:', error);
             }
         }
 
