@@ -1179,12 +1179,43 @@
             video3: { url: "https://www.youtube.com/embed/3tmd-ClzV_Q", title: "Vidéo 3", description: "Description vidéo 3..." }
         };
 
-        const thumbnailUrls = {
-            video1: "https://media.giphy.com/media/3o6Zta2kQfOv1oXz4Q/giphy.gif",
-            video2: "https://media.giphy.com/media/3o7TKz9fL5s9Z6Z6hW/giphy.gif",
-            video3: "https://media.giphy.com/media/l0MYt5j0ya4jXh6M0/giphy.gif"
-        };
 
+   const thumbnailUrls = {
+    project1: "https://media.giphy.com/media/3o6Zta2kQfOv1oXz4Q/giphy.gif",
+    project2: "https://media.giphy.com/media/3o7TKz9fL5s9Z6Z6hW/giphy.gif",
+    project3: "https://media.giphy.com/media/l0MYt5j0ya4jXh6M0/giphy.gif",
+    project4: "https://media.giphy.com/media/xT9IgzoZZ0xxInIgZq/giphy.gif",
+    project5: "https://media.giphy.com/media/3o6Zt6KHxJTbNbLDeM/giphy.gif",
+    project6: "https://media.giphy.com/media/26xBzdT9i8m7Dq1k4/giphy.gif",
+    project7: "https://media.giphy.com/media/xT9IgG2xK7z4z6z6hW/giphy.gif",
+    project8: "https://media.giphy.com/media/3o7aDcz6By4yX8Wn3G/giphy.gif",
+    project9: "https://media.giphy.com/media/3o6ZtaO9BZHcOjmErm/giphy.gif",
+    project10: "https://media.giphy.com/media/l0Iyl55kTeh71nTWw/giphy.gif",
+    project11: "https://media.giphy.com/media/26FPy3G0rLKBPlrB6/giphy.gif",
+    project12: "https://media.giphy.com/media/3o7TKF0r3wY2f2gQ6k/giphy.gif",
+    video1: "https://media.giphy.com/media/3o6Zta2kQfOv1oXz4Q/giphy.gif",
+    video2: "https://media.giphy.com/media/3o7TKz9fL5s9Z6Z6hW/giphy.gif",
+    video3: "https://media.giphy.com/media/l0MYt5j0ya4jXh6M0/giphy.gif"
+};
+        
+        // Mappage des vidéos associées pour chaque projet
+const relatedVideosMapping = {
+    project1: ['project2', 'project3', 'video1'],
+    project2: ['project1', 'project4', 'video2'],
+    project3: ['project2', 'project5', 'video3'],
+    project4: ['project3', 'project6', 'video1'],
+    project5: ['project4', 'project7', 'video2'],
+    project6: ['project5', 'project8', 'video3'],
+    project7: ['project6', 'project9', 'video1'],
+    project8: ['project7', 'project10', 'video2'],
+    project9: ['project8', 'project11', 'video3'],
+    project10: ['project9', 'project12', 'video1'],
+    project11: ['project10', 'project1', 'video2'],
+    project12: ['project11', 'project2', 'video3'],
+    video1: ['project1', 'project2', 'video2'],
+    video2: ['project3', 'project4', 'video3'],
+    video3: ['project5', 'project6', 'video1']
+};
         // Initialisation des flèches
         function initArrows() {
             console.log('Initialisation des flèches');
@@ -1266,134 +1297,117 @@
             }
         }
 
-        // Afficher une vidéo
-        function showVideo(projectId) {
-            console.log(`showVideo appelé pour ${projectId}`);
-            try {
-                const videoSection = document.getElementById('video-section');
-                const videoContent = document.getElementById('video-content');
-                const relatedVideos = document.getElementById('related-videos');
-                const hero = document.getElementById('hero');
-                const mosaic = document.getElementById('mosaic');
-                const closeBtn = document.querySelector('.video-section .close-btn');
+// Afficher une vidéo
+function showVideo(projectId) {
+    console.log(`showVideo appelé pour ${projectId}`);
+    try {
+        const videoSection = document.getElementById('video-section');
+        const videoContent = document.getElementById('video-content');
+        const relatedVideos = document.getElementById('related-videos');
+        const hero = document.getElementById('hero');
+        const mosaic = document.getElementById('mosaic');
+        const closeBtn = document.querySelector('.video-section .close-btn');
 
-                if (!videoSection || !videoContent || !relatedVideos || !hero || !mosaic || !closeBtn) {
-                    console.error('Éléments manquants:', { videoSection, videoContent, relatedVideos, hero, mosaic, closeBtn });
-                    return;
-                }
-
-                // Réinitialiser toutes les sections
-                document.querySelectorAll('.bio-section, .contact-section, .equip-section, .video-section').forEach(s => {
-                    s.classList.remove('active');
-                    s.style.display = 'none';
-                    s.style.opacity = '0';
-                    s.style.zIndex = '-1';
-                    s.style.pointerEvents = 'none';
-                });
-
-                // Cacher hero et mosaïque
-                hero.style.display = 'none';
-                hero.style.opacity = '0';
-                hero.style.pointerEvents = 'none';
-                hero.style.zIndex = '-1';
-                mosaic.style.transform = 'translateX(0)';
-                mosaic.style.pointerEvents = 'none';
-                mosaic.style.opacity = '0';
-                mosaic.style.zIndex = '-1';
-                currentColumn = 0;
-
-                // Afficher la section vidéo
-                setTimeout(() => {
-                    videoSection.style.display = 'flex';
-                    videoSection.style.opacity = '1';
-                    videoSection.style.pointerEvents = 'auto';
-                    videoSection.style.zIndex = '999';
-                    videoSection.classList.add('active');
-                    videoContent.style.display = 'flex';
-                    videoContent.style.opacity = '1';
-                    videoContent.style.pointerEvents = 'auto';
-                    videoContent.style.zIndex = '2';
-                    relatedVideos.style.display = 'flex';
-                    relatedVideos.style.opacity = '1';
-                    relatedVideos.style.pointerEvents = 'auto';
-                    relatedVideos.style.zIndex = '2';
-
-                    // Forcer l'affichage de la croix
-                    closeBtn.style.setProperty('display', 'block', '!important');
-                    closeBtn.style.setProperty('opacity', '1', '!important');
-                    closeBtn.style.setProperty('visibility', 'visible', '!important');
-                    closeBtn.style.setProperty('z-index', '1002', '!important');
-                    closeBtn.style.setProperty('pointer-events', 'auto', '!important');
-                    closeBtn.onclick = null; // Réinitialiser l'événement
-                    closeBtn.onclick = closeVideoAndReturnToMosaic;
-                    console.log('Croix de fermeture initialisée:', closeBtn);
-                }, 10);
-
-                // Contenu de la vidéo
-                const video = videoData[projectId] || videoData['project1'];
-                videoContent.innerHTML = `
-                    <div class="video-wrapper">
-                        <iframe src="${video.url}?autoplay=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                        <div class="video-title-overlay">${video.title}</div>
-                    </div>
-                    <div class="video-description">
-                        <h2>${video.title}</h2>
-                        <p>${video.description}</p>
-                    </div>
-                    <div class="video-fallback">Vidéo non disponible.</div>
-                `;
-                const fallback = videoContent.querySelector('.video-fallback');
-                if (fallback) fallback.style.display = 'none';
-
-                // Vignettes liées
-                relatedVideos.innerHTML = `
-                    <div class="related-video active playing" data-video-id="video1">
-                        <img src="${thumbnailUrls.video1}" alt="Vignette 1">
-                        <div class="video-info">
-                            <div class="video-title">Vidéo 1</div>
-                            <div class="video-duration">3:45</div>
-                            <div class="play-icon"></div>
-                        </div>
-                        <div class="playing-text">Lecture en cours</div>
-                    </div>
-                    <div class="related-video" data-video-id="video2">
-                        <img src="${thumbnailUrls.video2}" alt="Vignette 2">
-                        <div class="video-info">
-                            <div class="video-title">Vidéo 2</div>
-                            <div class="video-duration">4:12</div>
-                            <div class="play-icon"></div>
-                        </div>
-                        <div class="playing-text">Lecture en cours</div>
-                    </div>
-                    <div class="related-video" data-video-id="video3">
-                        <img src="${thumbnailUrls.video3}" alt="Vignette 3">
-                        <div class="video-info">
-                            <div class="video-title">Vidéo 3</div>
-                            <div class="video-duration">2:30</div>
-                            <div class="play-icon"></div>
-                        </div>
-                        <div class="playing-text">Lecture en cours</div>
-                    </div>
-                `;
-
-                relatedVideos.querySelectorAll('.related-video').forEach(video => {
-                    const videoId = video.getAttribute('data-video-id');
-                    video.style.display = 'block';
-                    video.style.setProperty('opacity', '1', '!important');
-                    video.style.setProperty('visibility', 'visible', '!important');
-                    video.style.setProperty('pointer-events', 'auto', '!important');
-                    video.style.zIndex = '2';
-                    video.onclick = () => playRelatedVideo(videoId);
-                });
-            } catch (error) {
-                console.error('Erreur dans showVideo:', error);
-                const videoContent = document.getElementById('video-content');
-                if (videoContent) {
-                    videoContent.innerHTML = `<div class="video-fallback">Erreur de chargement de la vidéo.</div>`;
-                }
-            }
+        if (!videoSection || !videoContent || !relatedVideos || !hero || !mosaic || !closeBtn) {
+            console.error('Éléments manquants:', { videoSection, videoContent, relatedVideos, hero, mosaic, closeBtn });
+            return;
         }
 
+        // Réinitialiser toutes les sections
+        document.querySelectorAll('.bio-section, .contact-section, .equip-section, .video-section').forEach(s => {
+            s.classList.remove('active');
+            s.style.display = 'none';
+            s.style.opacity = '0';
+            s.style.zIndex = '-1';
+            s.style.pointerEvents = 'none';
+        });
+
+        // Cacher hero et mosaïque
+        hero.style.display = 'none';
+        hero.style.opacity = '0';
+        hero.style.pointerEvents = 'none';
+        hero.style.zIndex = '-1';
+        mosaic.style.transform = 'translateX(0)';
+        mosaic.style.pointerEvents = 'none';
+        mosaic.style.opacity = '0';
+        mosaic.style.zIndex = '-1';
+        currentColumn = 0;
+
+        // Afficher la section vidéo
+        setTimeout(() => {
+            videoSection.style.display = 'flex';
+            videoSection.style.opacity = '1';
+            videoSection.style.pointerEvents = 'auto';
+            videoSection.style.zIndex = '999';
+            videoSection.classList.add('active');
+            videoContent.style.display = 'flex';
+            videoContent.style.opacity = '1';
+            videoContent.style.pointerEvents = 'auto';
+            videoContent.style.zIndex = '2';
+            relatedVideos.style.display = 'flex';
+            relatedVideos.style.opacity = '1';
+            relatedVideos.style.pointerEvents = 'auto';
+            relatedVideos.style.zIndex = '2';
+
+            // Forcer l'affichage de la croix
+            closeBtn.style.setProperty('display', 'block', '!important');
+            closeBtn.style.setProperty('opacity', '1', '!important');
+            closeBtn.style.setProperty('visibility', 'visible', '!important');
+            closeBtn.style.setProperty('z-index', '1002', '!important');
+            closeBtn.style.setProperty('pointer-events', 'auto', '!important');
+            closeBtn.onclick = null; // Réinitialiser l'événement
+            closeBtn.onclick = closeVideoAndReturnToMosaic;
+            console.log('Croix de fermeture initialisée:', closeBtn);
+        }, 10);
+
+        // Contenu de la vidéo principale
+        const video = videoData[projectId] || videoData['project1'];
+        videoContent.innerHTML = `
+            <div class="video-wrapper">
+                <iframe src="${video.url}?autoplay=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                <div class="video-title-overlay">${video.title}</div>
+            </div>
+            <div class="video-description">
+                <h2>${video.title}</h2>
+                <p>${video.description}</p>
+            </div>
+            <div class="video-fallback">Vidéo non disponible.</div>
+        `;
+        const fallback = videoContent.querySelector('.video-fallback');
+        if (fallback) fallback.style.display = 'none';
+
+        // Générer les vignettes des vidéos associées dynamiquement
+        const relatedIds = relatedVideosMapping[projectId] || ['video1', 'video2', 'video3'];
+        relatedVideos.innerHTML = relatedIds.map((id, index) => `
+            <div class="related-video ${id === projectId ? 'active playing' : ''}" data-video-id="${id}">
+                <img src="${thumbnailUrls[id]}" alt="Vignette ${id}">
+                <div class="video-info">
+                    <div class="video-title">${videoData[id].title}</div>
+                    <div class="video-duration">3:45</div>
+                    <div class="play-icon"></div>
+                </div>
+                <div class="playing-text">Lecture en cours</div>
+            </div>
+        `).join('');
+
+        // Attacher les événements aux vignettes
+        relatedVideos.querySelectorAll('.related-video').forEach(video => {
+            const videoId = video.getAttribute('data-video-id');
+            video.style.display = 'block';
+            video.style.setProperty('opacity', '1', '!important');
+            video.style.setProperty('visibility', 'visible', '!important');
+            video.style.setProperty('pointer-events', 'auto', '!important');
+            video.style.zIndex = '2';
+            video.onclick = () => playRelatedVideo(videoId);
+        });
+    } catch (error) {
+        console.error('Erreur dans showVideo:', error);
+        const videoContent = document.getElementById('video-content');
+        if (videoContent) {
+            videoContent.innerHTML = `<div class="video-fallback">Erreur de chargement de la vidéo.</div>`;
+        }
+    }
+}
         // Fermer la vidéo et revenir à la mosaïque
         function closeVideoAndReturnToMosaic() {
             console.log('closeVideoAndReturnToMosaic appelé');
@@ -1863,3 +1877,4 @@
 </script>
 </body>
 </html>
+
