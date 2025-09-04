@@ -1166,6 +1166,9 @@
             project2: { url: "https://www.youtube.com/embed/9bZkp7q19f0", title: "Projet 2", description: "Description du projet 2..." },
             project3: { url: "https://www.youtube.com/embed/3tmd-ClzV_Q", title: "Projet 3", description: "Description du projet 3..." },
             project4: { url: "https://www.youtube.com/embed/cVMxBTPFjIs?si=OWiPdsMlIPWcSLGq", title: "Concert de Conservatoire", description: "L’ensemble Cordissimo rassemble les élèves des classes d’Alto, Contrebasse, Violon et Violoncelle du Cycle 2 du conservatoire de Rennes. Lors de ce concert, les instrumentistes présentent leur travail réalisé tout au long de l’année." },
+            video401: { url: "https://www.youtube.com/embed/ivcBJ4Bbm68?si=SPurQwCu06-_XQws", title: "Ode à la joie", description: "L’ensemble Cordissimo rassemble les élèves des classes d’Alto, Contrebasse, Violon et Violoncelle du Cycle 2 du conservatoire de Rennes. Dans cet extrait de leur concert, les instrumentistes présentent une adaptation de l'<i>Ode à la Joie</i> de Ludwig van Beethoven." },
+            video402: { url: "https://www.youtube.com/embed/hsVlgnPXVec?si=X5iSjG5OiWUfnfma", title: "West side story", description: "L’ensemble Cordissimo rassemble les élèves des classes d’Alto, Contrebasse, Violon et Violoncelle du Cycle 2 du conservatoire de Rennes. Dans cet extrait de leur concert, les instrumentistes présentent une adaptation de la chanson <i>America</i> extraite de la comédie musicale <i>West side story</i> de Léonard Bernstein." },
+            video403: { url: "https://www.youtube.com/embed/IA88ixP2fzk?si=HIAcC7jMCRJE6jqC", title: "Indiana Jones", description: "L’ensemble Cordissimo rassemble les élèves des classes d’Alto, Contrebasse, Violon et Violoncelle du Cycle 2 du conservatoire de Rennes. Dans cet extrait de leur concert, les instrumentistes présentent une adaptation du thème principal d'<i>Indiana Jones</i> de John Williams" },
             project5: { url: "https://www.youtube.com/embed/9bZkp7q19f0", title: "Projet 5", description: "Description du projet 5..." },
             project6: { url: "https://www.youtube.com/embed/dQw4w9WgXcQ", title: "Projet 6", description: "Description du projet 6..." },
             project7: { url: "https://www.youtube.com/embed/3tmd-ClzV_Q", title: "Projet 7", description: "Description du projet 7..." },
@@ -1189,6 +1192,9 @@
     project2: "https://media.giphy.com/media/3o7TKz9fL5s9Z6Z6hW/giphy.gif",
     project3: "https://media.giphy.com/media/l0MYt5j0ya4jXh6M0/giphy.gif",
     project4: "https://media.giphy.com/media/xT9IgzoZZ0xxInIgZq/giphy.gif",
+    project401: "https://i9.ytimg.com/vi/ivcBJ4Bbm68/mqdefault.jpg?sqp=CISr5sUG-oaymwEmCMACELQB8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGHIgWChAMA8=&rs=AOn4CLCRTef4YHaWd0Y1SgHots4AwViL_A",
+    project402: "https://i9.ytimg.com/vi/hsVlgnPXVec/mqdefault.jpg?sqp=CISr5sUG-oaymwEmCMACELQB8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGHIgWShBMA8=&rs=AOn4CLB1Xd8xeSgXxjBSb1qBDW5Z79RysA",
+    project403: "https://i9.ytimg.com/vi/IA88ixP2fzk/mqdefault.jpg?sqp=CISr5sUG-oaymwEmCMACELQB8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGGUgUihIMA8=&rs=AOn4CLCSBtt5PJHI0I12Dp21L5Nz3vqWBQ",
     project5: "https://media.giphy.com/media/3o6Zt6KHxJTbNbLDeM/giphy.gif",
     project6: "https://media.giphy.com/media/26xBzdT9i8m7Dq1k4/giphy.gif",
     project7: "https://media.giphy.com/media/xT9IgG2xK7z4z6z6hW/giphy.gif",
@@ -1211,7 +1217,7 @@ const relatedVideosMapping = {
     project1: ['project2', 'project3', 'video1'],
     project2: ['project1', 'project4', 'video2'],
     project3: ['project2', 'project5', 'video3'],
-    project4: ['project3', 'project6', 'video1', 'video2'],
+    project4: ['video401', 'video402', 'video403'],
     project5: ['project4', 'project7', 'video2'],
     project6: ['project5', 'project8', 'video3'],
     project7: ['project6', 'project9', 'video1'],
@@ -1885,6 +1891,7 @@ function showVideo(projectId) {
 </script>
 </body>
 </html>
+
 
 
 
