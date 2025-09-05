@@ -1037,7 +1037,11 @@
                 <div class="arrow arrow-left">❮</div>
             </div>
             <div class="mosaic-item" data-project="project10">
-                <img src="https://media.giphy.com/media/l0Iyl55kTeh71nTWw/giphy.gif" alt="Vidéo Narrative">
+               <video autoplay muted loop playsinline>
+                  <source src="arc_loop.mp4" type="video/mp4">
+                   Your browser does not support the video tag. <!-- Fallback text -->
+               </video> 
+
                 <div class="content">
                     <h1>Tir à l'arc</h1>
                     <button onclick="showVideo('project10')">Lire la vidéo</button>
@@ -1913,6 +1917,7 @@ function showVideo(projectId) {
 </script>
 </body>
 </html>
+
 
 
 
