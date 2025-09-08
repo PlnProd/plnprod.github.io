@@ -995,8 +995,11 @@
                 <div class="arrow arrow-right">❯</div>
             </div>
             <div class="mosaic-item" data-project="project5">
-                <img src="https://media.giphy.com/media/3o6Zt6KHxJTbNbLDeM/giphy.gif" alt="Concert de fin de stage">
-                <div class="content">
+              <video autoplay muted loop playsinline>
+                  <source src="py_loop.mp4" type="video/mp4">
+                   Your browser does not support the video tag. <!-- Fallback text -->
+               </video> 
+                 <div class="content">
                     <h1>Concert de fin de stage</h1>
                     <button onclick="showVideo('project5')">Lire la vidéo</button>
                 </div>
@@ -1925,6 +1928,7 @@ function showVideo(projectId) {
 </script>
 </body>
 </html>
+
 
 
 
