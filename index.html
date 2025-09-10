@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PLN GUNGUN</title>
+    <title>PLN POPI</title>
     <style>
         * {
             margin: 0;
@@ -1233,12 +1233,13 @@
     <!-- début récup vignette -->
     <!-- ---------------------------------------------------------- -->
 
-const axios = require('axios'); // Utilisez axios pour les requêtes HTTP (ou fetch si vous préférez)
+//const axios = require('axios'); // Utilisez axios pour les requêtes HTTP (ou fetch si vous préférez)
 
 // Votre clé API YouTube
 const API_KEY = 'AIzaSyD7UGkJeO6DrgZjBkC4GXpsOO0VSxWr2K4';
 
 // Votre constante pour stocker les URLs des vignettes
+        /*
 const thumbnailUrls = {
     project1: "https://media.giphy.com/media/3o6Zta2kQfOv1oXz4Q/giphy.gif",
     project2: "https://media.giphy.com/media/3o7TKz9fL5s9Z6Z6hW/giphy.gif",
@@ -1266,7 +1267,6 @@ const thumbnailUrls = {
     video103: "https://i.ytimg.com/vi/ceQZvVofQN8/hqdefault.jpg?sqp=-oaymwFBCPYBEIoBSFryq4qpAzMIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB8AEB-AH-CYAC0AWKAgwIABABGGUgUyhBMA8=&rs=AOn4CLCPSZhX2hJir2ka3lZc59rywsKn9Q",
     video104: "https://i.ytimg.com/vi/Ln7A_6Uf8tY/hqdefault.jpg?sqp=-oaymwEnCPYBEIoBSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLATkCvh40Sw2h8wxSA1ec6yv0WeNA"
 };
-/*
 // Fonction pour récupérer l'URL de la vignette
 async function fetchThumbnailUrl(videoId, videoKey) {
   try {
@@ -1320,32 +1320,32 @@ async function fetchThumbnailUrl(videoId, videoKey) {
         
 
   // const thumbnailUrls = {
-  //  project1: "https://media.giphy.com/media/3o6Zta2kQfOv1oXz4Q/giphy.gif",
-  //  project2: "https://media.giphy.com/media/3o7TKz9fL5s9Z6Z6hW/giphy.gif",
- //   project3: "https://media.giphy.com/media/l0MYt5j0ya4jXh6M0/giphy.gif",
- //   project4: "https://media.giphy.com/media/xT9IgzoZZ0xxInIgZq/giphy.gif",
- //   video401: "https://i9.ytimg.com/vi_webp/ivcBJ4Bbm68/mq2.webp?sqp=CNiJ6MUG-oaymwEmCMACELQB8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGHIgWChAMA8=&rs=AOn4CLBmrBfzWPmJ29BzVUtEoLyOgwAE_A",
- //   video402: "https://i9.ytimg.com/vi_webp/hsVlgnPXVec/mq2.webp?sqp=CNiJ6MUG-oaymwEmCMACELQB8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGHIgWShBMA8=&rs=AOn4CLB94aW9DJ8Bu4EE8ccd87iOsYS3ug",
-//    video403: "https://i9.ytimg.com/vi/IA88ixP2fzk/mqdefault.jpg?sqp=CICF6MUG-oaymwEmCMACELQB8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGGUgUihIMA8=&rs=AOn4CLD-8kcHBSB7xJMmUtqeNdZ5__f9gw",
-//    project5: "https://i9.ytimg.com/vi_webp/O70wUdl1PEc/mq2.webp?sqp=CPDS5sUG-oaymwEmCMACELQB8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGFYgYihlMA8=&rs=AOn4CLBHqb1ZwYaVcH5Wd_mk7viqK-XZ8A",
-//    video501: "https://i9.ytimg.com/vi/z2Ge4Et5-98/mqdefault.jpg?sqp=CKDp6sUG-oaymwEmCMACELQB8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGGQgZShSMA8=&rs=AOn4CLCxewrAlj7mp3TFk2OdY8yTsolaCw",
-//    video502: "https://i9.ytimg.com/vi_webp/EgIlAg4hvE4/mq2.webp?sqp=CLCO6MUG-oaymwEmCMACELQB8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGEsgYShlMA8=&rs=AOn4CLBWtTB04F_M7esBTU0gDcsetsAxuQ",
-//    video503: "https://i9.ytimg.com/vi/CKqNgZslIKU/mqdefault.jpg?sqp=CJiZ58UG-oaymwEmCMACELQB8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGGUgWShAMA8%3D&rs=AOn4CLACtbyK7MnfI1UCemBGST-ypK0fYg&retry=4",
-//    project6: "https://i9.ytimg.com/vi_webp/GEgkFXc5XWY/mq2.webp?sqp=COz6gMYG-oaymwEmCMACELQB8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGH8gRSgiMA8=&rs=AOn4CLDe1FpQH51kxZKjXXdgFsdLTZdwiA",
-//    project7: "https://media.giphy.com/media/xT9IgG2xK7z4z6z6hW/giphy.gif",
-//    project8: "https://media.giphy.com/media/3o7aDcz6By4yX8Wn3G/giphy.gif",
-//    project9: "https://media.giphy.com/media/3o6ZtaO9BZHcOjmErm/giphy.gif",
-//    project10: "https://media.giphy.com/media/l0Iyl55kTeh71nTWw/giphy.gif",
-//    project11: "https://media.giphy.com/media/26FPy3G0rLKBPlrB6/giphy.gif",
-//    project12: "https://media.giphy.com/media/3o7TKF0r3wY2f2gQ6k/giphy.gif",
-//    video1: "https://media.giphy.com/media/3o6Zta2kQfOv1oXz4Q/giphy.gif",
-//    video2: "https://media.giphy.com/media/3o7TKz9fL5s9Z6Z6hW/giphy.gif",
-//    video3: "https://media.giphy.com/media/l0MYt5j0ya4jXh6M0/giphy.gif",
- //   video101: "https://i.ytimg.com/vi/ZlmYrphKUxc/hqdefault.jpg?sqp=-oaymwEnCPYBEIoBSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLBRNbUVNJu-UFEVQ2wPbTm7tgJ-hA",
- //   video102: "https://i.ytimg.com/vi/NrfJZrZ-n5M/hqdefault.jpg?sqp=-oaymwEnCPYBEIoBSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLBbQ1yQGgyKtGkQMMqmSnQMTUuyOw",
- //   video103: "https://i.ytimg.com/vi/ceQZvVofQN8/hqdefault.jpg?sqp=-oaymwFBCPYBEIoBSFryq4qpAzMIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB8AEB-AH-CYAC0AWKAgwIABABGGUgUyhBMA8=&rs=AOn4CLCPSZhX2hJir2ka3lZc59rywsKn9Q",
-//    video104: "https://i.ytimg.com/vi/Ln7A_6Uf8tY/hqdefault.jpg?sqp=-oaymwEnCPYBEIoBSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLATkCvh40Sw2h8wxSA1ec6yv0WeNA"
-//};
+    project1: "https://media.giphy.com/media/3o6Zta2kQfOv1oXz4Q/giphy.gif",
+    project2: "https://media.giphy.com/media/3o7TKz9fL5s9Z6Z6hW/giphy.gif",
+    project3: "https://media.giphy.com/media/l0MYt5j0ya4jXh6M0/giphy.gif",
+    project4: "https://media.giphy.com/media/xT9IgzoZZ0xxInIgZq/giphy.gif",
+    video401: "https://i9.ytimg.com/vi_webp/ivcBJ4Bbm68/mq2.webp?sqp=CNiJ6MUG-oaymwEmCMACELQB8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGHIgWChAMA8=&rs=AOn4CLBmrBfzWPmJ29BzVUtEoLyOgwAE_A",
+    video402: "https://i9.ytimg.com/vi_webp/hsVlgnPXVec/mq2.webp?sqp=CNiJ6MUG-oaymwEmCMACELQB8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGHIgWShBMA8=&rs=AOn4CLB94aW9DJ8Bu4EE8ccd87iOsYS3ug",
+    video403: "https://i9.ytimg.com/vi/IA88ixP2fzk/mqdefault.jpg?sqp=CICF6MUG-oaymwEmCMACELQB8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGGUgUihIMA8=&rs=AOn4CLD-8kcHBSB7xJMmUtqeNdZ5__f9gw",
+    project5: "https://i9.ytimg.com/vi_webp/O70wUdl1PEc/mq2.webp?sqp=CPDS5sUG-oaymwEmCMACELQB8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGFYgYihlMA8=&rs=AOn4CLBHqb1ZwYaVcH5Wd_mk7viqK-XZ8A",
+   video501: "https://i9.ytimg.com/vi/z2Ge4Et5-98/mqdefault.jpg?sqp=CKDp6sUG-oaymwEmCMACELQB8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGGQgZShSMA8=&rs=AOn4CLCxewrAlj7mp3TFk2OdY8yTsolaCw",
+    video502: "https://i9.ytimg.com/vi_webp/EgIlAg4hvE4/mq2.webp?sqp=CLCO6MUG-oaymwEmCMACELQB8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGEsgYShlMA8=&rs=AOn4CLBWtTB04F_M7esBTU0gDcsetsAxuQ",
+    video503: "https://i9.ytimg.com/vi/CKqNgZslIKU/mqdefault.jpg?sqp=CJiZ58UG-oaymwEmCMACELQB8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGGUgWShAMA8%3D&rs=AOn4CLACtbyK7MnfI1UCemBGST-ypK0fYg&retry=4",
+   project6: "https://i9.ytimg.com/vi_webp/GEgkFXc5XWY/mq2.webp?sqp=COz6gMYG-oaymwEmCMACELQB8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGH8gRSgiMA8=&rs=AOn4CLDe1FpQH51kxZKjXXdgFsdLTZdwiA",
+    project7: "https://media.giphy.com/media/xT9IgG2xK7z4z6z6hW/giphy.gif",
+    project8: "https://media.giphy.com/media/3o7aDcz6By4yX8Wn3G/giphy.gif",
+    project9: "https://media.giphy.com/media/3o6ZtaO9BZHcOjmErm/giphy.gif",
+    project10: "https://media.giphy.com/media/l0Iyl55kTeh71nTWw/giphy.gif",
+    project11: "https://media.giphy.com/media/26FPy3G0rLKBPlrB6/giphy.gif",
+    project12: "https://media.giphy.com/media/3o7TKF0r3wY2f2gQ6k/giphy.gif",
+    video1: "https://media.giphy.com/media/3o6Zta2kQfOv1oXz4Q/giphy.gif",
+    video2: "https://media.giphy.com/media/3o7TKz9fL5s9Z6Z6hW/giphy.gif",
+    video3: "https://media.giphy.com/media/l0MYt5j0ya4jXh6M0/giphy.gif",
+    video101: "https://i.ytimg.com/vi/ZlmYrphKUxc/hqdefault.jpg?sqp=-oaymwEnCPYBEIoBSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLBRNbUVNJu-UFEVQ2wPbTm7tgJ-hA",
+    video102: "https://i.ytimg.com/vi/NrfJZrZ-n5M/hqdefault.jpg?sqp=-oaymwEnCPYBEIoBSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLBbQ1yQGgyKtGkQMMqmSnQMTUuyOw",
+    video103: "https://i.ytimg.com/vi/ceQZvVofQN8/hqdefault.jpg?sqp=-oaymwFBCPYBEIoBSFryq4qpAzMIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB8AEB-AH-CYAC0AWKAgwIABABGGUgUyhBMA8=&rs=AOn4CLCPSZhX2hJir2ka3lZc59rywsKn9Q",
+    video104: "https://i.ytimg.com/vi/Ln7A_6Uf8tY/hqdefault.jpg?sqp=-oaymwEnCPYBEIoBSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLATkCvh40Sw2h8wxSA1ec6yv0WeNA"
+};
         
         // Mappage des vidéos associées pour chaque projet
 const relatedVideosMapping = {
@@ -2026,6 +2026,7 @@ function showVideo(projectId) {
 </script>
 </body>
 </html>
+
 
 
 
