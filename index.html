@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PLN Prod</title>
-    <script src="https://www.youtube.com/iframe_api"></script>
+    <title>PLN mobile</title>
     <style>
         * {
             margin: 0;
@@ -17,9 +16,9 @@
             background-color: #000;
             color: #fff;
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        /* Barre de navigation */
         nav {
             background-color: #000;
             padding: 1rem;
@@ -27,7 +26,6 @@
             width: 100%;
             top: 0;
             z-index: 1000;
-            transition: background-color 0.3s;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -69,17 +67,22 @@
             text-decoration: none;
             font-size: 1.1rem;
             text-transform: uppercase;
+            cursor: pointer;
+            pointer-events: auto !important;
         }
 
         nav ul li a:hover {
             color: #3498db;
         }
 
-        /* Section mosaïque */
         .hero {
             position: relative;
             min-height: 400vh;
             overflow-x: hidden;
+            transition: opacity 0.5s ease;
+            display: block;
+            z-index: 1;
+            pointer-events: auto !important;
         }
 
         .mosaic-container {
@@ -88,6 +91,8 @@
             grid-template-rows: repeat(4, 100vh);
             width: 300vw;
             transition: transform 0.5s ease;
+            pointer-events: auto !important;
+            z-index: 1;
         }
 
         .mosaic-item {
@@ -108,6 +113,16 @@
             object-fit: cover;
             z-index: 1;
         }
+        
+         .mosaic-item video {
+           position: absolute;
+           top: 0;
+           left: 0;
+           width: 100%;
+           height: 100%;
+           object-fit: cover; /* Ensures video fills container without distortion */
+           z-index: -1; /* Places video behind other content */
+       }
 
         .mosaic-item .content {
             text-align: center;
@@ -131,6 +146,7 @@
             cursor: pointer;
             border-radius: 5px;
             z-index: 2;
+            pointer-events: auto !important;
         }
 
         .mosaic-item button:hover {
@@ -148,6 +164,15 @@
             padding: 0.5rem;
             border-radius: 50%;
             z-index: 100;
+            display: block !important;
+            visibility: visible !important;
+            pointer-events: auto !important;
+            opacity: 1 !important;
+            transition: background 0.3s;
+        }
+
+        .arrow:hover {
+            background: rgba(0, 0, 0, 0.8);
         }
 
         .arrow-right {
@@ -158,19 +183,32 @@
             left: 20px;
         }
 
-        /* Section vidéo */
         .video-section {
             display: none;
-            padding: 3rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-            background-color: #000;
-            min-height: 100vh;
-            position: relative;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: #111;
+            z-index: 999;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            padding: 0;
+            margin: 0;
+            overflow: hidden;
+            pointer-events: none;
         }
 
         .video-section.active {
-            display: block;
+            display: flex !important;
+            opacity: 1 !important;
+            visibility: visible !important;
+            z-index: 999 !important;
+            pointer-events: auto !important;
         }
 
         .video-header {
@@ -183,7 +221,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            height: 100px;
+            height: 60px;
         }
 
         .video-header .left-controls {
@@ -199,6 +237,7 @@
             font-size: 1.2rem;
             margin-right: 0.5rem;
             cursor: pointer;
+            pointer-events: auto !important;
         }
 
         .video-header .share-text {
@@ -216,17 +255,29 @@
         }
 
         .video-section .close-btn {
-            position: fixed;
-            top: 6.5rem;
+            position: absolute;
+            top: 1rem;
             right: 1rem;
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             color: #fff;
             cursor: pointer;
             background: rgba(0, 0, 0, 0.8);
-            padding: 0.6rem 0.9rem;
+            padding: 0.5rem;
             border-radius: 50%;
             transition: background 0.3s;
-            z-index: 1002;
+            z-index: 1002 !important;
+            display: none !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
+            pointer-events: none !important;
+        }
+
+        .video-section.active .close-btn {
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            z-index: 1002 !important;
+            pointer-events: auto !important;
         }
 
         .video-section .close-btn:hover {
@@ -239,9 +290,21 @@
             gap: 2rem;
             align-items: flex-start;
             justify-content: center;
-            margin-top: 100px;
+            margin-top: 80px;
             position: relative;
             flex-wrap: wrap;
+            width: 100%;
+            max-width: 1200px;
+            background-color: transparent;
+            z-index: 2;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .video-section.active .video-content {
+            opacity: 1 !important;
+            visibility: visible !important;
+            pointer-events: auto !important;
         }
 
         .video-content .video-wrapper {
@@ -249,24 +312,23 @@
             max-width: 600px;
             width: 100%;
             height: calc(600px * 9 / 16);
+            background-color: #222;
+            z-index: 2;
+            display: block !important;
+            opacity: 1 !important;
+            visibility: visible !important;
+            pointer-events: auto !important;
         }
 
         .video-content iframe {
             width: 100%;
             height: 100%;
-            z-index: 1;
-            /* Ajout pour masquer les éléments comme "4K" */
-            background: #000; /* Couvre les éléments indésirables */
-        }
-
-        .video-content .video-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
             z-index: 2;
-            pointer-events: none;
+            background: transparent;
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            pointer-events: auto !important;
         }
 
         .video-content .video-title-overlay {
@@ -290,6 +352,7 @@
         .video-description {
             max-width: 500px;
             text-align: left;
+            z-index: 2;
         }
 
         .video-description h2 {
@@ -301,36 +364,68 @@
             font-size: 1.1rem;
         }
 
-        /* Vignettes des vidéos associées */
+        .video-fallback {
+            width: 100%;
+            height: 100%;
+            background-color: #333;
+            color: #fff;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            text-align: center;
+            z-index: 2;
+        }
+
         .related-videos {
-            display: flex;
-            justify-content: flex-start;
+            display: none;
+            justify-content: center;
             gap: 1rem;
             margin-top: 2rem;
             width: 100%;
+            max-width: 1200px;
+            z-index: 2;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .video-section.active .related-videos {
+            display: flex !important;
+            opacity: 1 !important;
+            visibility: visible !important;
+            pointer-events: auto !important;
         }
 
         .related-video {
-            width: 200px;
-            height: calc(200px * 9 / 16);
+            width: 200px !important;
+            height: calc(200px * 9 / 16) !important;
             cursor: pointer;
             position: relative;
+            overflow: hidden;
+            opacity: 1 !important;
+            visibility: visible !important;
+            z-index: 2;
+            pointer-events: auto !important;
         }
 
         .related-video img {
-            width: 100%;
-            height: 100%;
+            width: 100% !important;
+            height: 100% !important;
             object-fit: cover;
             border-radius: 5px;
             transition: opacity 0.3s;
+            display: block !important;
+            opacity: 1 !important;
+            visibility: visible !important;
+            z-index: 1;
         }
 
         .related-video.active img {
             opacity: 0.8;
         }
 
-        .related-video.active.playing:hover .playing-text {
-            display: block;
+        .related-video.active.playing .playing-text {
+            display: block !important;
             position: absolute;
             top: 50%;
             left: 50%;
@@ -338,11 +433,16 @@
             color: #fff;
             padding: 0.5rem 1rem;
             border-radius: 5px;
-            font-size: 0.9vw;
+            font-size: 0.9rem;
             font-weight: bold;
             text-align: center;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-            z-index: 10; /* Augmenté pour priorité */
+            z-index: 10;
+            background: rgba(0, 0, 0, 0.7);
+        }
+
+        .related-video:not(.active.playing) .playing-text {
+            display: none !important;
         }
 
         .related-video:not(.playing):hover img {
@@ -361,10 +461,14 @@
             align-items: center;
             padding: 10px;
             z-index: 3;
+            opacity: 1 !important;
+            visibility: visible !important;
+            background: rgba(0, 0, 0, 0.5);
+            pointer-events: auto !important;
         }
 
         .related-video:not(.playing):hover .video-info {
-            display: flex;
+            display: flex !important;
         }
 
         .related-video.active.playing .video-info,
@@ -374,8 +478,8 @@
 
         .video-info .video-title {
             color: #fff;
-            padding: 0.3vw 0.6vw;
-            font-size: 0.6vw;
+            padding: 0.3rem 0.6rem;
+            font-size: 0.8rem;
             text-align: center;
             width: 100%;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
@@ -383,90 +487,275 @@
 
         .video-info .video-duration {
             color: #fff;
-            padding: 0.3vw 0.6vw;
-            font-size: 0.5vw;
+            padding: 0.3rem 0.6rem;
+            font-size: 0.7rem;
             text-align: center;
             width: 100%;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
         }
 
         .video-info .play-icon {
+            display: block;
             width: 40px;
             height: 40px;
             background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>') no-repeat center;
             background-size: contain;
             opacity: 0.9;
             transition: opacity 0.3s;
+            pointer-events: auto !important;
         }
 
         .video-info .play-icon:hover {
             opacity: 1;
         }
 
-        /* Panneau de partage */
-        .share-panel {
+        .bio-section, .contact-section, .equip-section {
             display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: #000;
+            z-index: 998;
+            padding: 2rem;
+            opacity: 0;
+            transform: translateY(100%);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            pointer-events: none;
+        }
+
+        .bio-section.active, .contact-section.active, .equip-section.active {
+            display: block !important;
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+            pointer-events: auto !important;
+            z-index: 998 !important;
+        }
+
+        .bio-content, .equip-content {
+            width: 90%;
+            margin-left: 5%;
+            padding-top: 80px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .bio-title {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .bio-text {
+            font-size: 1rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+
+        .bio-link {
+            display: block;
+            font-size: 1.1rem;
+            color: #3498db;
+            text-decoration: none;
+            cursor: pointer;
+            pointer-events: auto !important;
+        }
+
+        .bio-link:hover {
+            color: #2980b9;
+        }
+
+        .bio-image {
+            width: 100%;
+            height: calc(100vh - 150px);
+            object-fit: cover;
+            margin-bottom: 2rem;
+        }
+
+        .bio-awards {
+            margin-top: 2rem;
+            text-align: center;
+            max-width: 600px;
             position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .bio-awards h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .bio-awards p {
+            font-size: 1rem;
+            color: #ccc;
+        }
+
+        .contact-content {
+            width: 90%;
+            margin-left: 5%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            padding-top: 80px;
+        }
+
+        .contact-column-1, .contact-column-2 {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            max-width: 400px;
+        }
+
+        .contact-column p {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            white-space: nowrap;
+        }
+
+        .contact-column p.br-after-exprimer {
+            white-space: normal;
+        }
+
+        .contact-column a {
+            font-size: 1.1rem;
+            color: #3498db;
+            text-decoration: none;
+            pointer-events: auto !important;
+        }
+
+        .contact-column a:hover {
+            color: #2980b9;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-icons a {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            pointer-events: auto !important;
+        }
+
+        .social-icons a:hover {
+            opacity: 0.8;
+        }
+
+        .contact-column-2 input {
+            padding: 0.5rem;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            width: 100%;
+            max-width: 400px;
+            background-color: #333;
+            border: 1px solid #555;
+            color: #fff;
+            pointer-events: auto !important;
+        }
+
+        .contact-column-2 button {
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            max-width: 400px;
+            pointer-events: auto !important;
+        }
+
+        .contact-column-2 button:hover {
+            background-color: #2980b9;
+        }
+
+        .legal-links {
+            position: absolute;
+            bottom: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 1rem;
+        }
+
+        .legal-links a {
+            color: #3498db;
+            text-decoration: none;
+            font-size: 0.9rem;
+            pointer-events: auto !important;
+        }
+
+        .legal-links a:hover {
+            color: #2980b9;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            z-index: 1003;
-            flex-direction: column;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
             justify-content: center;
             align-items: center;
+            pointer-events: none;
         }
 
-        .share-panel.active {
-            display: flex;
+        .modal.active {
+            display: flex !important;
+            pointer-events: auto !important;
+            z-index: 1000 !important;
         }
 
-        .share-panel .share-text {
+        .modal-content {
+            background: #222;
+            padding: 2rem;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            border-radius: 5px;
+            text-align: left;
+        }
+
+        .modal-content h2 {
             font-size: 1.5rem;
             margin-bottom: 1rem;
-            text-align: center;
-            color: #fff;
         }
 
-        .share-panel .close-share {
+        .modal-content p {
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        .close-modal {
             position: absolute;
-            top: 10px;
-            right: 10px;
+            top: 1rem;
+            right: 1rem;
             font-size: 1.5rem;
-            cursor: pointer;
             color: #fff;
+            cursor: pointer;
+            pointer-events: auto !important;
         }
 
-        .share-panel .close-share:hover {
+        .close-modal:hover {
             color: #3498db;
         }
 
-        .share-panel .share-buttons {
-            position: absolute;
-            bottom: 60px;
-            left: 20px;
-            right: 20px;
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-        }
-
-        .share-panel .share-button {
-            width: 40px;
-            height: 40px;
-            background: none;
-            border: none;
-            cursor: pointer;
-        }
-
-        .share-panel .share-button img {
-            width: 100%;
-            height: 100%;
-            filter: brightness(0) invert(1);
-        }
-
-        /* Footer */
         footer {
             background-color: #000;
             color: #fff;
@@ -474,9 +763,9 @@
             padding: 1rem;
             position: relative;
             width: 100%;
+            z-index: 1;
         }
 
-        /* Responsive */
         @media (max-width: 768px) {
             .nav-logo img {
                 width: 30px;
@@ -516,6 +805,7 @@
             }
 
             .video-content .video-wrapper {
+                max-width: 100%;
                 height: calc(100vw * 9 / 16);
             }
 
@@ -523,21 +813,9 @@
                 font-size: 0.9rem;
             }
 
-            .share-panel {
-                height: calc(100vw * 9 / 16);
-            }
-
-            .share-panel .share-text {
-                font-size: 1.2rem;
-            }
-
-            .share-panel .share-buttons {
-                bottom: 40px;
-                gap: 1rem;
-            }
-
             .video-description {
                 text-align: center;
+                max-width: 90%;
             }
 
             .video-description h2 {
@@ -545,18 +823,14 @@
             }
 
             .video-section .close-btn {
-                font-size: 1.4rem;
-                padding: 0.4rem 0.7rem;
-                top: 5.5rem;
-                background: rgba(0, 0, 0, 0.8);
-            }
-
-            .video-section .close-btn:hover {
-                background: rgba(0, 0, 0, 1);
+                font-size: 1.2rem;
+                padding: 0.4rem 0.6rem;
+                top: 1rem;
+                right: 1rem;
             }
 
             .video-header {
-                height: 80px;
+                height: 60px;
             }
 
             .video-header .left-controls {
@@ -571,36 +845,92 @@
 
             .related-videos {
                 gap: 0.5rem;
-                justify-content: flex-start;
+                justify-content: center;
             }
 
             .related-video {
-                width: 120px;
-                height: calc(120px * 9 / 16);
+                width: 120px !important;
+                height: calc(120px * 9 / 16) !important;
             }
 
-            .related-video.active.playing:hover .playing-text {
-                font-size: 2.8vw;
-                padding: 0.8rem 1.2rem;
-                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-                z-index: 10;
+            .related-video .playing-text {
+                font-size: 0.7rem;
+                padding: 0.3rem 0.6rem;
             }
 
-            .video-info .video-title {
-                font-size: 2.5vw;
-                padding: 1vw 1.5vw;
-                text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+            .related-video .video-info .video-title {
+                font-size: 0.7rem;
             }
 
-            .video-info .video-duration {
-                font-size: 2vw;
-                padding: 1vw 1.5vw;
-                text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+            .related-video .video-info .video-duration {
+                font-size: 0.6rem;
             }
 
-            .video-info .play-icon {
-                width: 30px;
-                height: 30px;
+            .bio-content, .equip-content {
+                width: 90%;
+                margin-left: 5%;
+                padding-top: 80px;
+            }
+
+            .bio-title {
+                font-size: 1.5rem;
+            }
+
+            .bio-text {
+                font-size: 0.9rem;
+            }
+
+            .bio-image {
+                height: calc(100vh - 200px);
+            }
+
+            .bio-awards {
+                max-width: 90%;
+            }
+
+            .contact-content {
+                width: 90%;
+                margin-left: 5%;
+                grid-template-columns: 1fr;
+                gap: 1rem;
+                padding-top: 80px;
+            }
+
+            .contact-column-1, .contact-column-2 {
+                justify-content: flex-start;
+                max-width: 100%;
+            }
+
+            .contact-column-1 p {
+                font-size: 1.2rem;
+            }
+
+            .contact-column-2 p {
+                font-size: 1.2rem;
+            }
+
+            .contact-column-2 input,
+            .contact-column-2 button {
+                max-width: 100%;
+            }
+
+            .social-icons a {
+                width: 25px;
+                height: 25px;
+            }
+
+            .legal-links {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .modal-content {
+                max-width: 90%;
+            }
+
+            .video-fallback {
+                width: 100%;
+                height: calc(100vw * 9 / 16);
             }
         }
     </style>
@@ -609,29 +939,32 @@
     <!-- Barre de navigation -->
     <nav id="nav">
         <div class="nav-logo">
-            <img src="https://via.placeholder.com/40x40?text=Logo" alt="PLN Prod Logo">
+            <img src="logo.jpg" alt="PLN Prod Logo">
             <p>PLN Prod</p>
         </div>
         <ul>
-            <li><a href="#narration">Narration</a></li>
-            <li><a href="#publicite">Publicité</a></li>
-            <li><a href="#musique-video">Musique-Vidéo</a></li>
-            <li><a href="#bio">Bio</a></li>
-            <li><a href="#equipement">Équipement</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="#narration" onclick="scrollToProject(4)">Musique</a></li>
+            <li><a href="#publicite" onclick="scrollToProject(7)">Nature</a></li>
+            <li><a href="#musique-video" onclick="scrollToProject(10)">Sport</a></li>
+            <li><a href="#" onclick="showSection('bio')">Bio</a></li>
+            <li><a href="#" onclick="showSection('contact')">Contact</a></li>
+            <li><a href="#" onclick="showSection('equip')">Formules</a></li>
         </ul>
     </nav>
 
     <!-- Section mosaïque -->
-    <section class="hero">
+    <section class="hero" id="hero">
         <div class="mosaic-container" id="mosaic">
             <div class="mosaic-item" data-project="project1">
-                <img src="https://media.giphy.com/media/3o6Zta2kQfOv1oXz4Q/giphy.gif" alt="Performance Live">
-                <div class="content">
-                    <h1>Projet 1</h1>
+              <video autoplay muted loop playsinline>
+                  <source src="guitare_loop.mp4" type="video/mp4">
+                   Your browser does not support the video tag. <!-- Fallback text -->
+               </video> 
+               <div class="content">
+                    <h1>Derniers projets</h1>
                     <button onclick="showVideo('project1')">Lire la vidéo</button>
                 </div>
-                <div class="arrow arrow-right" onclick="nextColumn()">❯</div>
+                <div class="arrow arrow-right">❯</div>
             </div>
             <div class="mosaic-item" data-project="project2">
                 <img src="https://media.giphy.com/media/3o7TKz9fL5s9Z6Z6hW/giphy.gif" alt="Clip Musical">
@@ -639,8 +972,8 @@
                     <h1>Projet 2</h1>
                     <button onclick="showVideo('project2')">Lire la vidéo</button>
                 </div>
-                <div class="arrow arrow-left" onclick="prevColumn()">❮</div>
-                <div class="arrow arrow-right" onclick="nextColumn()">❯</div>
+                <div class="arrow arrow-left">❮</div>
+                <div class="arrow arrow-right">❯</div>
             </div>
             <div class="mosaic-item" data-project="project3">
                 <img src="https://media.giphy.com/media/l0MYt5j0ya4jXh6M0/giphy.gif" alt="Animation Abstraite">
@@ -648,82 +981,108 @@
                     <h1>Projet 3</h1>
                     <button onclick="showVideo('project3')">Lire la vidéo</button>
                 </div>
-                <div class="arrow arrow-left" onclick="prevColumn()">❮</div>
+                <div class="arrow arrow-left">❮</div>
             </div>
             <div class="mosaic-item" data-project="project4">
-                <img src="https://media.giphy.com/media/xT9IgzoZZ0xxInIgZq/giphy.gif" alt="Concert Électrique">
+              <video autoplay muted loop playsinline>
+                  <source src="orchestre_loop.mp4" type="video/mp4">
+                   Your browser does not support the video tag. <!-- Fallback text -->
+               </video> 
                 <div class="content">
-                    <h1>Projet 4</h1>
-                    <button onclick="showVideo('project4')">Lire la vidéo</button>
+                    <h1>Concerts</h1>
+                    <button onclick="showVideo('project4')">Accéder aux concerts</button>
                 </div>
-                <div class="arrow arrow-right" onclick="nextColumn()">❯</div>
+                <div class="arrow arrow-right">❯</div>
             </div>
             <div class="mosaic-item" data-project="project5">
-                <img src="https://media.giphy.com/media/3o6Zt6KHxJTbNbLDeM/giphy.gif" alt="Publicité Créative">
-                <div class="content">
-                    <h1>Projet 5</h1>
+              <video autoplay muted loop playsinline>
+                  <source src="Valses Poétiques_loop.mp4" type="video/mp4">
+                   Your browser does not support the video tag. <!-- Fallback text -->
+               </video> 
+                 <div class="content">
+                    <h1>Concours</h1>
                     <button onclick="showVideo('project5')">Lire la vidéo</button>
                 </div>
-                <div class="arrow arrow-left" onclick="prevColumn()">❮</div>
-                <div class="arrow arrow-right" onclick="nextColumn()">❯</div>
+                <div class="arrow arrow-left">❮</div>
+                <div class="arrow arrow-right">❯</div>
             </div>
             <div class="mosaic-item" data-project="project6">
-                <img src="https://media.giphy.com/media/26xBzdT9i8m7Dq1k4/giphy.gif" alt="Documentaire Musical">
+               <video autoplay muted loop playsinline>
+                  <source src="Golberg_loop.mp4" type="video/mp4">
+                   Your browser does not support the video tag. <!-- Fallback text -->
+               </video>                 
                 <div class="content">
-                    <h1>Projet 6</h1>
+                    <h1>Ateliers, répétitions,...</h1>
                     <button onclick="showVideo('project6')">Lire la vidéo</button>
                 </div>
-                <div class="arrow arrow-left" onclick="prevColumn()">❮</div>
+                <div class="arrow arrow-left">❮</div>
             </div>
             <div class="mosaic-item" data-project="project7">
-                <img src="https://media.giphy.com/media/xT9IgG2xK7z4z6z6hW/giphy.gif" alt="Performance Acoustique">
+               <video autoplay muted loop playsinline>
+                  <source src="cascade_loop.mp4" type="video/mp4">
+                   Your browser does not support the video tag. <!-- Fallback text -->
+               </video> 
                 <div class="content">
-                    <h1>Projet 7</h1>
+                    <h1>Montagne</h1>
                     <button onclick="showVideo('project7')">Lire la vidéo</button>
                 </div>
-                <div class="arrow arrow-right" onclick="nextColumn()">❯</div>
+                <div class="arrow arrow-right">❯</div>
             </div>
             <div class="mosaic-item" data-project="project8">
-                <img src="https://media.giphy.com/media/3o7aDcz6By4yX8Wn3G/giphy.gif" alt="Clip Experimental">
+               <video autoplay muted loop playsinline>
+                  <source src="nature_loop.mp4" type="video/mp4">
+                   Your browser does not support the video tag. <!-- Fallback text -->
+               </video> 
                 <div class="content">
-                    <h1>Projet 8</h1>
+                    <h1>Biodiversité</h1>
                     <button onclick="showVideo('project8')">Lire la vidéo</button>
                 </div>
-                <div class="arrow arrow-left" onclick="prevColumn()">❮</div>
-                <div class="arrow arrow-right" onclick="nextColumn()">❯</div>
+                <div class="arrow arrow-left">❮</div>
+                <div class="arrow arrow-right">❯</div>
             </div>
             <div class="mosaic-item" data-project="project9">
-                <img src="https://media.giphy.com/media/3o6ZtaO9BZHcOjmErm/giphy.gif" alt="Live Studio">
-                <div class="content">
-                    <h1>Projet 9</h1>
+                <video autoplay muted loop playsinline>
+                  <source src="magnolia_loop.mp4" type="video/mp4">
+                   Your browser does not support the video tag. <!-- Fallback text -->
+               </video>                 <div class="content">
+                    <h1>Jardin de rêve</h1>
                     <button onclick="showVideo('project9')">Lire la vidéo</button>
                 </div>
-                <div class="arrow arrow-left" onclick="prevColumn()">❮</div>
+                <div class="arrow arrow-left">❮</div>
             </div>
             <div class="mosaic-item" data-project="project10">
-                <img src="https://media.giphy.com/media/l0Iyl55kTeh71nTWw/giphy.gif" alt="Vidéo Narrative">
+               <video autoplay muted loop playsinline>
+                  <source src="arc_loop.mp4" type="video/mp4">
+                   Your browser does not support the video tag. <!-- Fallback text -->
+               </video> 
+
                 <div class="content">
-                    <h1>Projet 10</h1>
+                    <h1>Sports en salle</h1>
                     <button onclick="showVideo('project10')">Lire la vidéo</button>
                 </div>
-                <div class="arrow arrow-right" onclick="nextColumn()">❯</div>
+                <div class="arrow arrow-right">❯</div>
             </div>
             <div class="mosaic-item" data-project="project11">
-                <img src="https://media.giphy.com/media/26FPy3G0rLKBPlrB6/giphy.gif" alt="Visualisation Musicale">
+               <video autoplay muted loop playsinline>
+                  <source src="ski_loop.mp4" type="video/mp4">
+                   Your browser does not support the video tag. <!-- Fallback text -->
+               </video> 
                 <div class="content">
-                    <h1>Projet 11</h1>
+                    <h1>Sports de plein air</h1>
                     <button onclick="showVideo('project11')">Lire la vidéo</button>
                 </div>
-                <div class="arrow arrow-left" onclick="prevColumn()">❮</div>
-                <div class="arrow arrow-right" onclick="nextColumn()">❯</div>
+                <div class="arrow arrow-left">❮</div>
+                <div class="arrow arrow-right">❯</div>
             </div>
             <div class="mosaic-item" data-project="project12">
-                <img src="https://media.giphy.com/media/3o7TKF0r3wY2f2gQ6k/giphy.gif" alt="Show Live">
-                <div class="content">
-                    <h1>Projet 12</h1>
+               <video autoplay muted loop playsinline>
+                  <source src="yoga_loop.mp4" type="video/mp4">
+                   Your browser does not support the video tag. <!-- Fallback text -->
+               </video>                 <div class="content">
+                    <h1>Autres sports</h1>
                     <button onclick="showVideo('project12')">Lire la vidéo</button>
                 </div>
-                <div class="arrow arrow-left" onclick="prevColumn()">❮</div>
+                <div class="arrow arrow-left">❮</div>
             </div>
         </div>
     </section>
@@ -738,7 +1097,7 @@
                 <a href="#" class="share-text" onclick="toggleSharePanel()">partager</a>
             </div>
         </div>
-        <div class="close-btn" onclick="closeVideo()">✖</div>
+        <div class="close-btn" onclick="closeVideoAndReturnToMosaic()">✖</div>
         <div class="video-content" id="video-content">
             <!-- Lecteur et description -->
         </div>
@@ -747,349 +1106,1459 @@
         </div>
     </section>
 
+    <!-- Section Bio -->
+    <section class="bio-section" id="bio-section">
+        <div class="bio-content">
+            <div class="bio-title">Vidéaste Passionné de Vidéographie.<br>Créateur de Films.<br><br>Conteur d'Histoires</div>
+            <div class="bio-text"><i>Texte de paragraphe. Vous pouvez le personnaliser et ajouter votre propre contenu.</i></div>
+            <a href="#" class="bio-link" onclick="hideSection('bio')">voir le portfolio</a>
+            <img src="https://via.placeholder.com/1200x600?text=Image+Portfolio" alt="Image Portfolio" class="bio-image">
+        </div>
+        <div class="bio-awards">
+            <h3>Distinctions & Commentaires Clients</h3>
+            <p>"Travail exceptionnel, très professionnel !" - Client A</p>
+            <p>"Une créativité hors pair, je recommande vivement !" - Client B</p>
+        </div>
+    </section>
+
+    <!-- Section Contact -->
+    <section class="contact-section" id="contact-section">
+        <div class="contact-content">
+            <div class="contact-column-1">
+                <p class="br-after-exprimer">Me contacter pour exprimer<br>notre créativité ensemble</p>
+                <a href="mailto:pln.prod35@gmail.com">pln.prod35@gmail.com</a>
+                <div class="social-icons">
+                    <a href="https://twitter.com" target="_blank">
+                        <svg width="30" height="30" viewBox="0 0 24 24" fill="#1DA1F2">
+                            <path d="M23.954 4.569c-.885.389-1.83.654-2.825.775 1.014-.611 1.794-1.574 2.163-2.723-.951.555-2.005.959-3.127 1.184-.897-.957-2.178-1.555-3.594-1.555-2.717 0-4.92 2.203-4.92 4.917 0 .39.045.765.127 1.124C7.691 8.094 4.066 6.13 1.64 3.161c-.427.722-.666 1.561-.666 2.475 0 1.71.87 3.213 2.188 4.096-.807-.026-1.566-.248-2.228-.616v.061c0 2.385 1.693 4.374 3.946 4.827-.413.111-.849.171-1.296.171-.314 0-.615-.03-.916-.086.631 1.953 2.445 3.377 4.604 3.417-1.68 1.319-3.809 2.105-6.102 2.105-.39 0-.779-.023-1.17-.067 2.189 1.394 4.768 2.209 7.557 2.209 9.054 0 14.01-7.496 14.01-13.986 0-.209 0-.42-.015-.63.961-.689 1.8-1.56 2.46-2.548l-.047-.02z"/>
+                        </svg>
+                    </a>
+                    <a href="https://facebook.com" target="_blank">
+                        <svg width="30" height="30" viewBox="0 0 24 24" fill="#3B5998">
+                            <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/>
+                        </svg>
+                    </a>
+                    <a href="https://youtube.com" target="_blank">
+                        <svg width="30" height="30" viewBox="0 0 24 24" fill="#FF0000">
+                            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                        </svg>
+                    </a>
+                    <a href="https://instagram.com" target="_blank">
+                        <svg width="30" height="30" viewBox="0 0 24 24" fill="#E1306C">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.317 3.608 1.292.975.975 1.23 2.242 1.292 3.608.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.062 1.366-.317 2.633-1.292 3.608-.975.975-2.242 1.23-3.608 1.292-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.366-.062-2.633-.317-3.608-1.292-.975-.975-1.23-2.242-1.292-3.608-.058-1.266-.07-1.646-.07-4.85s.012-3.584.07-4.85c.062-1.366.317-2.633 1.292-3.608.975-.975 2.242-1.23 3.608-1.292 1.266-.058 1.646-.07 4.85-.07m0-2.163c-3.259 0-3.667.014-4.947.072-1.316.059-2.593.317-3.533 1.257C2.27 2.452 2.013 3.729 1.954 5.053c-.058 1.28-.072 1.688-.072 4.947s.014 3.667.072 4.947c.059 1.324.317 2.6 1.257 3.54.94.94 2.216 1.198 3.54 1.257 1.28.058 1.688.072 4.947.072s3.667-.014 4.947-.072c1.324-.059 2.6-.317 3.54-1.257.94-.94 1.198-2.216 1.257-3.54.058-1.28.072-1.688.072-4.947s-.014-3.667-.072-4.947c-.059-1.324-.317-2.6-1.257-3.54-.94-.94-2.216-1.198-3.54-1.257-1.28-.058-1.688-.072-4.947-.072h-.008zM12 6.875c-3.617 0-6.55 2.925-6.55 6.55s2.925 6.55 6.55 6.55 6.55-2.925 6.55-6.55-2.925-6.55-6.55-6.55zm0 10.85c-2.312 0-4.175-1.867-4.175-4.175s1.863-4.175 4.175-4.175 4.175 1.863 4.175 4.175-1.863 4.175-4.175 4.175zm6.844-10.975c0 .96-.775 1.735-1.735 1.735s-.96-.775-1.735 0c-.775.96 0-1.735 0-1.735s.775-.96 1.735 0z"/>
+                        </svg>
+                    </a>
+                    <a href="https://vimeo.com" target="_blank" style="font-family: 'cursive'; font-size: 25px;">V</a>
+                </div>
+            </div>
+            <div class="contact-column-2">
+                <p>Envoyez-moi un message</p>
+                <input type="text" placeholder="Nom">
+                <input type="email" placeholder="Email">
+                <button>Envoyer</button>
+            </div>
+        </div>
+        <div class="legal-links">
+            <a href="#" onclick="showModal('mentions-legales')">Mentions légales</a>
+            <a href="#" onclick="showModal('politique-confidentialite')">Politique de confidentialité</a>
+            <a href="#" onclick="showModal('politique-cookies')">Politique des cookies</a>
+            <a href="#" onclick="showModal('termes-conditions')">Termes et Conditions</a>
+        </div>
+    </section>
+
+    <!-- Section Équipement -->
+    <section class="equip-section" id="equip-section">
+        <div class="equip-content">
+            <div class="bio-title">Notre société</div>
+            <div class="bio-text"><i>PLN Prod est une entreprise de vidéaste spécialisée dans la création de contenus vidéos de haute qualité.</i></div>
+            <a href="#" class="bio-link" onclick="hideSection('equip')">retour</a>
+        </div>
+        <div class="legal-links">
+            <a href="#" onclick="showModal('mentions-legales')">Mentions légales</a>
+            <a href="#" onclick="showModal('politique-confidentialite')">Politique de confidentialité</a>
+            <a href="#" onclick="showModal('politique-cookies')">Politique des cookies</a>
+            <a href="#" onclick="showModal('termes-conditions')">Termes et Conditions</a>
+        </div>
+    </section>
+
+    <!-- Modal -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">✖</span>
+            <h2>Informations</h2>
+            <p id="modal-content-text">Ceci est un exemple de contenu modal.</p>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer>
-        <p>© 2016 by Plnp-Prod. Proudly created by PLN Prod.</p>
+        <p>© 2025 PLN Prod. Tous droits réservés.</p>
     </footer>
 
     <script>
-        // Données des vidéos YouTube et GIFs pour chaque projet
+        // Variable globale pour suivre la colonne actuelle
+        let currentColumn = 0;
+
+        // Données des vidéos
         const videoData = {
-            project1: {
-                url: 'https://www.youtube.com/embed/dQw4w9WgXcQ?controls=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=0&rel=0', // Ajout de paramètres pour masquer "4K"
-                title: 'Projet 1 : Performance Live',
-                description: 'Une performance live vibrante capturant l’essence de la musique et de la créativité.',
-                gif: 'https://media.giphy.com/media/3o6Zta2kQfOv1oXz4Q/giphy.gif',
-                duration: '3:45'
-            },
-            project2: {
-                url: 'https://www.youtube.com/embed/9bZkp7q19f0?controls=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=0&rel=0',
-                title: 'Projet 2 : Clip Musical',
-                description: 'Un clip musical énergique avec des visuels audacieux et une production soignée.',
-                gif: 'https://media.giphy.com/media/3o7TKz9fL5s9Z6Z6hW/giphy.gif',
-                duration: '4:20'
-            },
-            project3: {
-                url: 'https://www.youtube.com/embed/M7lc1UVf-VE?controls=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=0&rel=0',
-                title: 'Projet 3 : Animation Abstraite',
-                description: 'Une exploration visuelle abstraite synchronisée avec une bande-son unique.',
-                gif: 'https://media.giphy.com/media/l0MYt5j0ya4jXh6M0/giphy.gif',
-                duration: '2:50'
-            },
-            project4: {
-                url: 'https://www.youtube.com/embed/dQw4w9WgXcQ?controls=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=0&rel=0',
-                title: 'Projet 4 : Concert Électrique',
-                description: 'Un concert capturé avec une énergie brute et des effets visuels immersifs.',
-                gif: 'https://media.giphy.com/media/xT9IgzoZZ0xxInIgZq/giphy.gif',
-                duration: '5:10'
-            },
-            project5: {
-                url: 'https://www.youtube.com/embed/9bZkp7q19f0?controls=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=0&rel=0',
-                title: 'Projet 5 : Publicité Créative',
-                description: 'Une publicité innovante combinant narration et visuels modernes.',
-                gif: 'https://media.giphy.com/media/3o6Zt6KHxJTbNbLDeM/giphy.gif',
-                duration: '1:30'
-            },
-            project6: {
-                url: 'https://www.youtube.com/embed/M7lc1UVf-VE?controls=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=0&rel=0',
-                title: 'Projet 6 : Documentaire Musical',
-                description: 'Un documentaire explorant la création d’un projet musical unique.',
-                gif: 'https://media.giphy.com/media/26xBzdT9i8m7Dq1k4/giphy.gif',
-                duration: '8:15'
-            },
-            project7: {
-                url: 'https://www.youtube.com/embed/dQw4w9WgXcQ?controls=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=0&rel=0',
-                title: 'Projet 7 : Performance Acoustique',
-                description: 'Une session acoustique intime avec une ambiance chaleureuse.',
-                gif: 'https://media.giphy.com/media/xT9IgG2xK7z4z6z6hW/giphy.gif',
-                duration: '3:20'
-            },
-            project8: {
-                url: 'https://www.youtube.com/embed/9bZkp7q19f0?controls=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=0&rel=0',
-                title: 'Projet 8 : Clip Experimental',
-                description: 'Un clip expérimental jouant avec les couleurs et les formes.',
-                gif: 'https://media.giphy.com/media/3o7aDcz6By4yX8Wn3G/giphy.gif',
-                duration: '4:00'
-            },
-            project9: {
-                url: 'https://www.youtube.com/embed/M7lc1UVf-VE?controls=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=0&rel=0',
-                title: 'Projet 9 : Live Studio',
-                description: 'Une session live enregistrée en studio avec un son pur.',
-                gif: 'https://media.giphy.com/media/3o6ZtaO9BZHcOjmErm/giphy.gif',
-                duration: '6:05'
-            },
-            project10: {
-                url: 'https://www.youtube.com/embed/dQw4w9WgXcQ?controls=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=0&rel=0',
-                title: 'Projet 10 : Vidéo Narrative',
-                description: 'Une histoire captivante racontée à travers des images puissantes.',
-                gif: 'https://media.giphy.com/media/l0Iyl55kTeh71nTWw/giphy.gif',
-                duration: '5:30'
-            },
-            project11: {
-                url: 'https://www.youtube.com/embed/9bZkp7q19f0?controls=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=0&rel=0',
-                title: 'Projet 11 : Visualisation Musicale',
-                description: 'Une visualisation musicale dynamique et immersive.',
-                gif: 'https://media.giphy.com/media/26FPy3G0rLKBPlrB6/giphy.gif',
-                duration: '3:10'
-            },
-            project12: {
-                url: 'https://www.youtube.com/embed/M7lc1UVf-VE?controls=0&showinfo=0&modestbranding=1&iv_load_policy=3&fs=0&rel=0',
-                title: 'Projet 12 : Show Live',
-                description: 'Un spectacle live mettant en avant une production audiovisuelle de pointe.',
-                gif: 'https://media.giphy.com/media/3o7TKF0r3wY2f2gQ6k/giphy.gif',
-                duration: '7:25'
-            }
+            project1: { url: "https://www.youtube.com/embed/dQw4w9WgXcQ", title: "Projet 1", description: "Description du projet 1..." },
+            project2: { url: "https://www.youtube.com/embed/9bZkp7q19f0", title: "Projet 2", description: "Description du projet 2..." },
+            project3: { url: "https://www.youtube.com/embed/3tmd-ClzV_Q", title: "Projet 3", description: "Description du projet 3..." },
+            project4: { url: "https://www.youtube.com/embed/cVMxBTPFjIs?si=OWiPdsMlIPWcSLGq", title: "Concert de conservatoire", description: "L’ensemble Cordissimo rassemble les élèves des classes d’Alto, Contrebasse, Violon et Violoncelle du Cycle 2 du conservatoire de Rennes. Lors de ce concert, les instrumentistes présentent leur travail réalisé tout au long de l’année." },
+            //video401: { url: "https://www.youtube.com/embed/ivcBJ4Bbm68?si=SPurQwCu06-_XQws", title: "Ode à la joie", description: "L’ensemble Cordissimo rassemble les élèves des classes d’Alto, Contrebasse, Violon et Violoncelle du Cycle 2 du conservatoire de Rennes. Dans cet extrait de leur concert, les instrumentistes présentent une adaptation de l'<i>Ode à la Joie</i> de Ludwig van Beethoven." },
+            //video402: { url: "https://www.youtube.com/embed/hsVlgnPXVec?si=X5iSjG5OiWUfnfma", title: "West Side Story", description: "L’ensemble Cordissimo rassemble les élèves des classes d’Alto, Contrebasse, Violon et Violoncelle du Cycle 2 du conservatoire de Rennes. Dans cet extrait de leur concert, les instrumentistes présentent une adaptation de la chanson <i>America</i> extraite de la comédie musicale <i>West Side Story</i> de Léonard Bernstein." },
+            //video403: { url: "https://www.youtube.com/embed/IA88ixP2fzk?si=HIAcC7jMCRJE6jqC", title: "Indiana Jones", description: "L’ensemble Cordissimo rassemble les élèves des classes d’Alto, Contrebasse, Violon et Violoncelle du Cycle 2 du conservatoire de Rennes. Dans cet extrait de leur concert, les instrumentistes présentent une adaptation du thème principal d'<i>Indiana Jones</i> de John Williams" },
+            video404: { url: "https://www.youtube.com/embed/O70wUdl1PEc?si=zsbu0HBB9cfSIsvU", title: "Concert de fin de stage", description: "Le stage de Guitare Classique du Maestro Jean-François Ruiz a lieu chaque été dans le village de Py (Pyrénées-Orientales). Il rassemble des guitaristes de tous niveaux qui, pendant une semaine, se perfectionnent tant dans la pratique individuelle que collective." },
+            video405: { url: "https://www.youtube.com/embed/GEgkFXc5XWY?si=dlX3mUyiUyAipM5c", title: "Concert BACH", description: "Lors de ce concert à l'église Saint Martin d'Acigné, cinq concertistes (Mezzo-Soprano, Baryton-Basse, Orgue, Violon, Hautbois) interprétent des oeuvres de Jean-Sébastien Bach." },
+            video406: { url: "https://www.youtube.com/embed/Y1pTrvMggwY?si=zd4RH2WDLSaPKAnh", title: "Concert Guitare romantique et voix lyriques", description: "Lors de ce concert au Panama café à Rennes, trois concertistes (Mezzo-Soprano, Baryton-Basse, Guitariste) interprétent des oeuvres de Manuel de Falla, Franz Schubert, Sergei Rudnev, Georges Bizet, Wolfgang Amadeus Mozart, Vincenzo Bellini." },
+            project5: { url: "https://www.youtube.com/embed/zKE6wBm37aw?si=n7ErRAjwdzKJhWF9", title: "Concours, enregistrement studio,...", description: "Présentation vidéo du Duo Humus dans le cadre de sa participation au Concours Bellan 2025. Nous écoutons ici les quatre premières valses poétiques de Enrique Granados" },
+            video501: { url: "https://www.youtube.com/embed/x-7W1ZQYctA?si=mkMvKOfcBN7Rhyw2", title: "Making of de l'enregistrement studio", description: "Dans la cadre du concours Bellan 2025, la présélection des candidats est effectuée sur sélection vidéo. Le Duo Humus avait enregistré sa vidéo de participation à l'auditorium du Conservation de Rennes en sollicitant ses capacités d'enregistrement studio." },
+            //video501: { url: "https://www.youtube.com/embed/z2Ge4Et5-98?si=UBGoMDYYAk_iSO9U", title: "Techno - J. Kindle", description: "Le stage de Guitare Classique du Maestro Jean-François Ruiz a lieu chaque été dans le village de Py (Pyrénées-Orientales). Il rassemble des guitaristes de tous niveaux qui, pendant une semaine, se perfectionnent tant dans la pratique individuelle que collective. <br><br> Ici, une pièce d'ensemble <i>Techno</i> de Jürg Kindle, compositeur suisse contemporain." },
+            //video502: { url: "https://www.youtube.com/embed/EgIlAg4hvE4?si=2Ioj0O4KEa-1zNjG", title: "Etude Op.60 N°19 - M. Carcassi", description: "Le stage de Guitare Classique du Maestro Jean-François Ruiz a lieu chaque été dans le village de Py (Pyrénées-Orientales). Il rassemble des guitaristes de tous niveaux qui, pendant une semaine, se perfectionnent tant dans la pratique individuelle que collective. <br><br> Ici, une étude de Matteo Carcassi (compositeur italien du début du 19ème siécle)" },
+            //video503: { url: "https://www.youtube.com/embed/CKqNgZslIKU?si=oi3QwpMIiM8-KZF2", title: "Valses poétiques - E. Granados", description: "Le stage de Guitare Classique du Maestro Jean-François Ruiz a lieu chaque été dans le village de Py (Pyrénées-Orientales). Il rassemble des guitaristes de tous niveaux qui, pendant une semaine, se perfectionnent tant dans la pratique individuelle que collective. <br><br> Ici, les quatre premières valses poétiques de Enrique Granados." },
+            project6: { url: "https://www.youtube.com/embed/hWDx8kS7mF4?si=W3yOnYQcXluJI3CB", title: "Atelier", description: "Cette vidéo de présentation d'une prestation musicale fictive met en évidence la valorisarion potentielle d'une séance de travail, son aboutissement ou tout autre aspect à mettre en valeur." },
+            project7: { url: "https://www.youtube.com/embed/3tmd-ClzV_Q", title: "Projet 7", description: "Description du projet 7..." },
+            project8: { url: "https://www.youtube.com/embed/5qap5aO4i9A", title: "Projet 8", description: "Description du projet 8..." },
+            project9: { url: "https://www.youtube.com/embed/dQw4w9WgXcQ", title: "Projet 9", description: "Description du projet 9..." },
+            project10: { url: "https://www.youtube.com/embed/cM4NBRcUd4Q?si=N7eeBa8sXn5yvALD", title: "Coupe des Miss", description: "La Coupe des Miss est une compétition internationale de Tir à l'Arc en salle, 100% féminine, qui se déroule le dernier week-end d'hiver à Issy-les-Moulineaux (France)" },
+            project11: { url: "https://www.youtube.com/embed/3tmd-ClzV_Q", title: "Projet 11", description: "Description du projet 11..." },
+            project12: { url: "https://www.youtube.com/embed/5qap5aO4i9A", title: "Projet 12", description: "Description du projet 12..." },
+            video101: { url: "https://www.youtube.com/embed/ZlmYrphKUxc?si=n1c4pj-Zb7ajDZD0", title: "Finale Classique du Samedi", description: "Une compétition de Tir à l'Arc 100% féminine : La Coupe des Miss édition 2012! <br><br> La Finale Classique du Samedi 17 Mars (1er jour de compétition) oppose DELOISON Alexia (FRA) à LAURSEN Louise (DEN) <br><br> Day 1 of Coupe des Miss 2012 in Issy-les-Moulineaux (France). Women Individual Recurve Gold Match - DELOISON Alexia (FRA) vs LAURSEN Louise (DEN)" },
+            video102: { url: "https://www.youtube.com/embed/NrfJZrZ-n5M?si=C4Y3JDMUsm439u3Q", title: "Finale Poulies du Dimanche", description: "Une compétition de Tir à l'Arc 100% féminine : La Coupe des Miss édition 2012! <br><br> La Finale Poulies du Dimanche 18 Mars (2ème jour de compétition) oppose CHICHOU Elyane (FRA) à TREMEAU-CAUDAL Sandrine (FRA) <br><br> Day 2 of Coupe des Miss 2012 in Issy-les-Moulineaux (France). Women Individual Compound Gold Match - CHICHOU Elyane (FRA) vs TREMEAU-CAUDAL Sandrine (FRA)" },
+            video103: { url: "https://www.youtube.com/embed/ceQZvVofQN8?si=nbAuB_uNb9n9V09C", title: "Finale Classique du Dimanche", description: "Une compétition de Tir à l'Arc 100% féminine : La Coupe des Miss édition 2012! <br><br> La Finale Classique du Dimanche 18 Mars (2ème jour de compétition) oppose ADICEOM Audrey (FRA) à LAURSEN Louise (DEN) <br><br> Day 2 of the Coupe des Miss 2012 in Issy-les-Moulineaux (France). Women Individual Recurve Gold Match - ADICEOM Audrey (FRA) vs LAURSEN Louise (DEN) " },
+            video104: { url: "https://www.youtube.com/embed/Ln7A_6Uf8tY?si=aLicRcH4Iy7JcVCM", title: "Finale Poulies du Samedi", description: "Une compétition de Tir à l'Arc 100% féminine : La Coupe des Miss édition 2012! <br><br> La Finale Poulies du Samedi 17 Mars (1er jour de compétition) oppose JOIGNIER Hélène (FRA) à BARRUEL Hélène (FRA) <br><br> Day 1 of Coupe des Miss 2012 in Issy-les-Moulineaux (France). Women Individual Compound Gold Match - JOIGNIER Hélène (FRA) vs BARRUEL Hélène (FRA) " },
+            video1: { url: "https://www.youtube.com/embed/dQw4w9WgXcQ", title: "Vidéo 1", description: "Description vidéo 1..." },
+            video2: { url: "https://www.youtube.com/embed/9bZkp7q19f0", title: "Vidéo 2", description: "Description vidéo 2..." },
+            video3: { url: "https://www.youtube.com/embed/3tmd-ClzV_Q", title: "Vidéo 3", description: "Description vidéo 3..." }
         };
 
-        // Gestion du défilement pour la barre de navigation
-        window.addEventListener('scroll', () => {
-            const nav = document.getElementById('nav');
+
+   const thumbnailUrls = {
+    project1: "https://media.giphy.com/media/3o6Zta2kQfOv1oXz4Q/giphy.gif",
+    project2: "https://media.giphy.com/media/3o7TKz9fL5s9Z6Z6hW/giphy.gif",
+    project3: "https://media.giphy.com/media/l0MYt5j0ya4jXh6M0/giphy.gif",
+    project4: "cordissimo.jpg",
+    video401: "https://i9.ytimg.com/vi_webp/ivcBJ4Bbm68/mq2.webp?sqp=CNiJ6MUG-oaymwEmCMACELQB8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGHIgWChAMA8=&rs=AOn4CLBmrBfzWPmJ29BzVUtEoLyOgwAE_A",
+    video402: "https://i9.ytimg.com/vi_webp/hsVlgnPXVec/mq2.webp?sqp=CNiJ6MUG-oaymwEmCMACELQB8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGHIgWShBMA8=&rs=AOn4CLB94aW9DJ8Bu4EE8ccd87iOsYS3ug",
+    video403: "https://i9.ytimg.com/vi/IA88ixP2fzk/mqdefault.jpg?sqp=CICF6MUG-oaymwEmCMACELQB8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGGUgUihIMA8=&rs=AOn4CLD-8kcHBSB7xJMmUtqeNdZ5__f9gw",
+    video404: "py.jpg",
+    video405: "acigné.webp",
+    video406: "panama.jpg",
+    project5: "humus.jpg",
+    video501: "humus making of.webp",
+    //video502: "https://i9.ytimg.com/vi_webp/EgIlAg4hvE4/mq2.webp?sqp=CLCO6MUG-oaymwEmCMACELQB8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGEsgYShlMA8=&rs=AOn4CLBWtTB04F_M7esBTU0gDcsetsAxuQ",
+    //video503: "https://i9.ytimg.com/vi/CKqNgZslIKU/mqdefault.jpg?sqp=CJiZ58UG-oaymwEmCMACELQB8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGGUgWShAMA8%3D&rs=AOn4CLACtbyK7MnfI1UCemBGST-ypK0fYg&retry=4",
+    project6: "goldberg.jpg",
+    project7: "https://media.giphy.com/media/xT9IgG2xK7z4z6z6hW/giphy.gif",
+    project8: "https://media.giphy.com/media/3o7aDcz6By4yX8Wn3G/giphy.gif",
+    project9: "https://media.giphy.com/media/3o6ZtaO9BZHcOjmErm/giphy.gif",
+    project10: "https://i.ytimg.com/vi/cM4NBRcUd4Q/hqdefault.jpg?sqp=-oaymwEnCPYBEIoBSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLCHls-NTNYL-Su1s2vNo1hH5QcReQ",
+    project11: "https://media.giphy.com/media/26FPy3G0rLKBPlrB6/giphy.gif",
+    project12: "https://media.giphy.com/media/3o7TKF0r3wY2f2gQ6k/giphy.gif",
+    video1: "https://media.giphy.com/media/3o6Zta2kQfOv1oXz4Q/giphy.gif",
+    video2: "https://media.giphy.com/media/3o7TKz9fL5s9Z6Z6hW/giphy.gif",
+    video3: "https://media.giphy.com/media/l0MYt5j0ya4jXh6M0/giphy.gif",
+    video101: "https://i.ytimg.com/vi/ZlmYrphKUxc/hqdefault.jpg?sqp=-oaymwEnCPYBEIoBSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLBRNbUVNJu-UFEVQ2wPbTm7tgJ-hA",
+    video102: "https://i.ytimg.com/vi/NrfJZrZ-n5M/hqdefault.jpg?sqp=-oaymwEnCPYBEIoBSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLBbQ1yQGgyKtGkQMMqmSnQMTUuyOw",
+    video103: "https://i.ytimg.com/vi/ceQZvVofQN8/hqdefault.jpg?sqp=-oaymwFBCPYBEIoBSFryq4qpAzMIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB8AEB-AH-CYAC0AWKAgwIABABGGUgUyhBMA8=&rs=AOn4CLCPSZhX2hJir2ka3lZc59rywsKn9Q",
+    video104: "https://i.ytimg.com/vi/Ln7A_6Uf8tY/hqdefault.jpg?sqp=-oaymwEnCPYBEIoBSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLATkCvh40Sw2h8wxSA1ec6yv0WeNA"
+};
+        
+        // Mappage des vidéos associées pour chaque projet
+const relatedVideosMapping = {
+    project1: ['project2', 'project3', 'video1'],
+    project2: ['project1', 'project4', 'video2'],
+    project3: ['project2', 'project5', 'video3'],
+    project4: ['project4', 'video404', 'video405', 'video406'],
+    project5: ['project5', 'video501'],
+    project6: ['project6', 'project8', 'video3'],
+    project7: ['project7', 'project9', 'video1'],
+    project8: ['project8', 'project10', 'video2'],
+    project9: ['project9', 'project11', 'video3'],
+    project10: ['project10','video101', 'video102', 'video103', 'video104'],
+    project11: ['project10', 'project1', 'video2'],
+    project12: ['project11', 'project2', 'video3'],
+    video1: ['project1', 'project2', 'video2'],
+    video2: ['project3', 'project4', 'video3'],
+    video3: ['project5', 'project6', 'video1']
+};
+        // Initialisation des flèches
+        function initArrows() {
+            console.log('Initialisation des flèches');
+            try {
+                const arrows = document.querySelectorAll('.arrow');
+                const mosaic = document.getElementById('mosaic');
+                if (!mosaic || !arrows) {
+                    console.error('Éléments manquants:', { mosaic, arrows });
+                    return;
+                }
+
+                arrows.forEach(arrow => {
+                    arrow.style.setProperty('display', 'block', '!important');
+                    arrow.style.setProperty('opacity', '1', '!important');
+                    arrow.style.setProperty('visibility', 'visible', '!important');
+                    arrow.style.setProperty('pointer-events', 'auto', '!important');
+                    arrow.style.setProperty('z-index', '100', '!important');
+                    arrow.onclick = null; // Réinitialiser pour éviter les doubles bindings
+                    if (arrow.classList.contains('arrow-right')) {
+                        arrow.onclick = nextColumn;
+                    } else if (arrow.classList.contains('arrow-left')) {
+                        arrow.onclick = prevColumn;
+                    }
+                });
+
+                mosaic.style.pointerEvents = 'auto';
+                mosaic.style.opacity = '1';
+                mosaic.style.zIndex = '1';
+                mosaic.style.transform = `translateX(-${currentColumn * 100}vw)`;
+                console.log(`Flèches initialisées, currentColumn: ${currentColumn}`);
+            } catch (error) {
+                console.error('Erreur dans initArrows:', error);
+            }
+        }
+
+        // Naviguer vers la colonne suivante
+        function nextColumn() {
+            console.log('nextColumn appelé');
+            try {
+                const mosaic = document.getElementById('mosaic');
+                if (!mosaic) {
+                    console.error('Mosaïque introuvable');
+                    return;
+                }
+
+                if (currentColumn < 2) {
+                    currentColumn++;
+                    mosaic.style.transform = `translateX(-${currentColumn * 100}vw)`;
+                    mosaic.style.transition = 'transform 0.5s ease';
+                    console.log(`Défilement vers colonne ${currentColumn}`);
+                }
+
+                initArrows();
+            } catch (error) {
+                console.error('Erreur dans nextColumn:', error);
+            }
+        }
+
+        // Naviguer vers la colonne précédente
+        function prevColumn() {
+            console.log('prevColumn appelé');
+            try {
+                const mosaic = document.getElementById('mosaic');
+                if (!mosaic) {
+                    console.error('Mosaïque introuvable');
+                    return;
+                }
+
+                if (currentColumn > 0) {
+                    currentColumn--;
+                    mosaic.style.transform = `translateX(-${currentColumn * 100}vw)`;
+                    mosaic.style.transition = 'transform 0.5s ease';
+                    console.log(`Défilement vers colonne ${currentColumn}`);
+                }
+
+                initArrows();
+            } catch (error) {
+                console.error('Erreur dans prevColumn:', error);
+            }
+        }
+
+// Afficher une vidéo
+function showVideo(projectId) {
+    console.log(`showVideo appelé pour ${projectId}`);
+    try {
+        const videoSection = document.getElementById('video-section');
+        const videoContent = document.getElementById('video-content');
+        const relatedVideos = document.getElementById('related-videos');
+        const hero = document.getElementById('hero');
+        const mosaic = document.getElementById('mosaic');
+        const closeBtn = document.querySelector('.video-section .close-btn');
+
+        if (!videoSection || !videoContent || !relatedVideos || !hero || !mosaic || !closeBtn) {
+            console.error('Éléments manquants:', { videoSection, videoContent, relatedVideos, hero, mosaic, closeBtn });
+            return;
+        }
+
+        // Réinitialiser toutes les sections
+        document.querySelectorAll('.bio-section, .contact-section, .equip-section, .video-section').forEach(s => {
+            s.classList.remove('active');
+            s.style.display = 'none';
+            s.style.opacity = '0';
+            s.style.zIndex = '-1';
+            s.style.pointerEvents = 'none';
+        });
+
+        // Cacher hero et mosaïque
+        hero.style.display = 'none';
+        hero.style.opacity = '0';
+        hero.style.pointerEvents = 'none';
+        hero.style.zIndex = '-1';
+        mosaic.style.transform = 'translateX(0)';
+        mosaic.style.pointerEvents = 'none';
+        mosaic.style.opacity = '0';
+        mosaic.style.zIndex = '-1';
+        currentColumn = 0;
+
+        // Afficher la section vidéo
+        setTimeout(() => {
+            videoSection.style.display = 'flex';
+            videoSection.style.opacity = '1';
+            videoSection.style.pointerEvents = 'auto';
+            videoSection.style.zIndex = '999';
+            videoSection.classList.add('active');
+            videoContent.style.display = 'flex';
+            videoContent.style.opacity = '1';
+            videoContent.style.pointerEvents = 'auto';
+            videoContent.style.zIndex = '2';
+            relatedVideos.style.display = 'flex';
+            relatedVideos.style.opacity = '1';
+            relatedVideos.style.pointerEvents = 'auto';
+            relatedVideos.style.zIndex = '2';
+
+            // Forcer l'affichage de la croix
+            closeBtn.style.setProperty('display', 'block', '!important');
+            closeBtn.style.setProperty('opacity', '1', '!important');
+            closeBtn.style.setProperty('visibility', 'visible', '!important');
+            closeBtn.style.setProperty('z-index', '1002', '!important');
+            closeBtn.style.setProperty('pointer-events', 'auto', '!important');
+            closeBtn.onclick = null; // Réinitialiser l'événement
+            closeBtn.onclick = closeVideoAndReturnToMosaic;
+            console.log('Croix de fermeture initialisée:', closeBtn);
+        }, 10);
+
+        // Contenu de la vidéo principale
+        const video = videoData[projectId] || videoData['project1'];
+        videoContent.innerHTML = `
+            <div class="video-wrapper">
+                <iframe src="${video.url}?autoplay=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                <div class="video-title-overlay">${video.title}</div>
+            </div>
+            <div class="video-description">
+                <h2>${video.title}</h2>
+                <p>${video.description}</p>
+            </div>
+            <div class="video-fallback">Vidéo non disponible.</div>
+        `;
+        const fallback = videoContent.querySelector('.video-fallback');
+        if (fallback) fallback.style.display = 'none';
+
+        // Générer les vignettes des vidéos associées dynamiquement
+        const relatedIds = relatedVideosMapping[projectId] || ['video1', 'video2', 'video3'];
+        relatedVideos.innerHTML = relatedIds.map((id, index) => `
+            <div class="related-video ${id === projectId ? 'active playing' : ''}" data-video-id="${id}">
+                <img src="${thumbnailUrls[id]}" alt="Vignette ${id}">
+                <div class="video-info">
+                    <div class="video-title">${videoData[id].title}</div>
+                    <div class="video-duration">3:45</div>
+                    <div class="play-icon"></div>
+                </div>
+                <div class="playing-text">Lecture en cours</div>
+            </div>
+        `).join('');
+
+        // Attacher les événements aux vignettes
+        relatedVideos.querySelectorAll('.related-video').forEach(video => {
+            const videoId = video.getAttribute('data-video-id');
+            video.style.display = 'block';
+            video.style.setProperty('opacity', '1', '!important');
+            video.style.setProperty('visibility', 'visible', '!important');
+            video.style.setProperty('pointer-events', 'auto', '!important');
+            video.style.zIndex = '2';
+            video.onclick = () => playRelatedVideo(videoId);
+        });
+    } catch (error) {
+        console.error('Erreur dans showVideo:', error);
+        const videoContent = document.getElementById('video-content');
+        if (videoContent) {
+            videoContent.innerHTML = `<div class="video-fallback">Erreur de chargement de la vidéo.</div>`;
+        }
+    }
+}
+        // Fermer la vidéo et revenir à la mosaïque
+        function closeVideoAndReturnToMosaic() {
+            console.log('closeVideoAndReturnToMosaic appelé');
+            try {
+                const videoSection = document.getElementById('video-section');
+                const videoContent = document.getElementById('video-content');
+                const relatedVideos = document.getElementById('related-videos');
+                const hero = document.getElementById('hero');
+                const mosaic = document.getElementById('mosaic');
+                const closeBtn = document.querySelector('.video-section .close-btn');
+
+                if (!videoSection || !videoContent || !relatedVideos || !hero || !mosaic || !closeBtn) {
+                    console.error('Éléments manquants:', { videoSection, videoContent, relatedVideos, hero, mosaic, closeBtn });
+                    return;
+                }
+
+                videoSection.style.opacity = '0';
+                videoContent.style.opacity = '0';
+                relatedVideos.style.opacity = '0';
+                closeBtn.style.opacity = '0';
+                videoSection.style.pointerEvents = 'none';
+                videoContent.style.pointerEvents = 'none';
+                relatedVideos.style.pointerEvents = 'none';
+                closeBtn.style.pointerEvents = 'none';
+                setTimeout(() => {
+                    videoSection.classList.remove('active');
+                    videoSection.style.display = 'none';
+                    videoSection.style.zIndex = '-1';
+                    videoContent.style.display = 'none';
+                    videoContent.innerHTML = '';
+                    relatedVideos.style.display = 'none';
+                    relatedVideos.innerHTML = '';
+                    closeBtn.style.setProperty('display', 'none', '!important');
+                    closeBtn.style.setProperty('visibility', 'hidden', '!important');
+                    closeBtn.style.setProperty('z-index', '-1', '!important');
+                    closeBtn.style.setProperty('pointer-events', 'none', '!important');
+                }, 500);
+
+                hero.style.display = 'block';
+                mosaic.style.opacity = '1';
+                mosaic.style.zIndex = '1';
+                mosaic.style.pointerEvents = 'auto';
+                setTimeout(() => {
+                    hero.style.opacity = '1';
+                    hero.style.pointerEvents = 'auto';
+                    hero.style.zIndex = '1';
+                }, 10);
+                mosaic.style.transform = `translateX(-${currentColumn * 100}vw)`;
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+
+                initArrows();
+            } catch (error) {
+                console.error('Erreur dans closeVideoAndReturnToMosaic:', error);
+            }
+        }
+
+        // Jouer une vidéo liée
+        function playRelatedVideo(videoId) {
+            console.log(`playRelatedVideo appelé pour ${videoId}`);
+            try {
+                const videoContent = document.getElementById('video-content');
+                const relatedVideos = document.getElementById('related-videos');
+                const closeBtn = document.querySelector('.video-section .close-btn');
+
+                if (!videoContent || !relatedVideos || !closeBtn) {
+                    console.error('Éléments manquants:', { videoContent, relatedVideos, closeBtn });
+                    return;
+                }
+
+                videoContent.style.display = 'none';
+                videoContent.style.opacity = '0';
+                videoContent.style.pointerEvents = 'none';
+                videoContent.innerHTML = '';
+
+                setTimeout(() => {
+                    const video = videoData[videoId] || videoData['video1'];
+                    videoContent.innerHTML = `
+                        <div class="video-wrapper">
+                            <iframe src="${video.url}?autoplay=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                            <div class="video-title-overlay">${video.title}</div>
+                        </div>
+                        <div class="video-description">
+                            <h2>${video.title}</h2>
+                            <p>${video.description}</p>
+                        </div>
+                        <div class="video-fallback">Vidéo non disponible.</div>
+                    `;
+                    const fallback = videoContent.querySelector('.video-fallback');
+                    if (fallback) fallback.style.display = 'none';
+
+                    videoContent.style.display = 'flex';
+                    videoContent.style.opacity = '1';
+                    videoContent.style.zIndex = '2';
+                    videoContent.style.pointerEvents = 'auto';
+
+                    closeBtn.style.setProperty('display', 'block', '!important');
+                    closeBtn.style.setProperty('opacity', '1', '!important');
+                    closeBtn.style.setProperty('visibility', 'visible', '!important');
+                    closeBtn.style.setProperty('z-index', '1002', '!important');
+                    closeBtn.style.setProperty('pointer-events', 'auto', '!important');
+                    closeBtn.onclick = null; // Réinitialiser l'événement
+                    closeBtn.onclick = closeVideoAndReturnToMosaic;
+                    console.log('Croix de fermeture réinitialisée dans playRelatedVideo:', closeBtn);
+
+                    relatedVideos.querySelectorAll('.related-video').forEach(video => {
+                        video.classList.remove('active', 'playing');
+                        video.querySelector('.playing-text').style.display = 'none';
+                        video.style.width = '200px';
+                        video.style.height = 'calc(200px * 9 / 16)';
+                        video.style.pointerEvents = 'auto';
+                    });
+                    const activeVideo = relatedVideos.querySelector(`[data-video-id="${videoId}"]`);
+                    if (activeVideo) {
+                        activeVideo.classList.add('active', 'playing');
+                        activeVideo.style.setProperty('opacity', '1', '!important');
+                        activeVideo.style.setProperty('visibility', 'visible', '!important');
+                        activeVideo.style.setProperty('pointer-events', 'auto', '!important');
+                        activeVideo.style.zIndex = '2';
+                        activeVideo.style.width = '200px';
+                        activeVideo.style.height = 'calc(200px * 9 / 16)';
+                        activeVideo.querySelector('img').style.display = 'block';
+                        activeVideo.querySelector('img').style.setProperty('opacity', '1', '!important');
+                        activeVideo.querySelector('img').style.setProperty('visibility', 'visible', '!important');
+                        activeVideo.querySelector('.playing-text').style.display = 'block';
+                    }
+                }, 10);
+            } catch (error) {
+                console.error('Erreur dans playRelatedVideo:', error);
+                const videoContent = document.getElementById('video-content');
+                if (videoContent) {
+                    videoContent.innerHTML = `<div class="video-fallback">Erreur de chargement de la vidéo.</div>`;
+                }
+            }
+        }
+
+        // Basculer le panneau de partage
+        function toggleSharePanel() {
+            console.log('toggleSharePanel appelé');
+            try {
+                const sharePanel = document.querySelector('.share-panel');
+                if (sharePanel) {
+                    sharePanel.classList.toggle('active');
+                    sharePanel.style.pointerEvents = sharePanel.classList.contains('active') ? 'auto' : 'none';
+                } else {
+                    console.warn('Panneau de partage non trouvé');
+                }
+            } catch (error) {
+                console.error('Erreur dans toggleSharePanel:', error);
+            }
+        }
+
+        // Afficher une modale
+        function showModal(contentId) {
+            console.log(`showModal appelé pour ${contentId}`);
+            try {
+                const modal = document.getElementById('modal');
+                const modalContentText = document.getElementById('modal-content-text');
+                if (!modal || !modalContentText) {
+                    console.error('Éléments manquants:', { modal, modalContentText });
+                    return;
+                }
+
+                const modalContent = {
+                    'mentions-legales': 'Contenu des mentions légales...',
+                    'politique-confidentialite': 'Contenu de la politique de confidentialité...',
+                    'politique-cookies': 'Contenu de la politique des cookies...',
+                    'termes-conditions': 'Contenu des termes et conditions...'
+                };
+
+                modalContentText.textContent = modalContent[contentId] || 'Contenu non disponible.';
+                modal.classList.add('active');
+                modal.style.display = 'flex';
+                modal.style.pointerEvents = 'auto';
+            } catch (error) {
+                console.error('Erreur dans showModal:', error);
+            }
+        }
+
+        // Fermer la modale
+        function closeModal() {
+            console.log('closeModal appelé');
+            try {
+                const modal = document.getElementById('modal');
+                if (modal) {
+                    modal.classList.remove('active');
+                    modal.style.display = 'none';
+                    modal.style.pointerEvents = 'none';
+                }
+            } catch (error) {
+                console.error('Erreur dans closeModal:', error);
+            }
+        }
+
+        // Naviguer vers un projet spécifique
+    function scrollToProject(projectNumber) {
+        console.log(`scrollToProject appelé pour projet ${projectNumber}`);
+        try {
+            const mosaic = document.getElementById('mosaic');
+            const hero = document.getElementById('hero');
+            const videoSection = document.getElementById('video-section');
+            const videoContent = document.getElementById('video-content');
+            const relatedVideos = document.getElementById('related-videos');
+            const closeBtn = document.querySelector('.video-section .close-btn');
+            const sections = document.querySelectorAll('.bio-section, .contact-section, .equip-section');
+
+            if (!mosaic || !hero || !videoSection || !videoContent || !relatedVideos || !closeBtn) {
+                console.error('Éléments manquants:', { mosaic, hero, videoSection, videoContent, relatedVideos, closeBtn });
+                return;
+            }
+
+            // Réinitialiser toutes les sections
+            sections.forEach(s => {
+                s.classList.remove('active');
+                s.style.display = 'none';
+                s.style.opacity = '0';
+                s.style.zIndex = '-1';
+                s.style.pointerEvents = 'none';
+                s.style.transform = 'translateY(100%)';
+            });
+
+            // Réinitialiser la section vidéo
+            videoSection.classList.remove('active');
+            videoSection.style.display = 'none';
+            videoSection.style.opacity = '0';
+            videoSection.style.zIndex = '-1';
+            videoSection.style.pointerEvents = 'none';
+            videoContent.style.display = 'none';
+            videoContent.style.opacity = '0';
+            videoContent.style.zIndex = '-1';
+            videoContent.style.pointerEvents = 'none';
+            videoContent.innerHTML = '';
+            relatedVideos.style.display = 'none';
+            relatedVideos.style.opacity = '0';
+            relatedVideos.style.zIndex = '-1';
+            relatedVideos.style.pointerEvents = 'none';
+            closeBtn.style.setProperty('display', 'none', '!important');
+            closeBtn.style.setProperty('opacity', '0', '!important');
+            closeBtn.style.setProperty('visibility', 'hidden', '!important');
+            closeBtn.style.setProperty('z-index', '-1', '!important');
+            closeBtn.style.setProperty('pointer-events', 'none', '!important');
+
+            // Afficher la mosaïque
+            hero.style.display = 'block';
+            hero.style.opacity = '1';
+            hero.style.zIndex = '1';
+            hero.style.pointerEvents = 'auto';
+            mosaic.style.opacity = '1';
+            mosaic.style.zIndex = '1';
+            mosaic.style.pointerEvents = 'auto';
+
+            // Mappage des projets à la colonne 0 et défilement vertical
+            const projectToRow = {
+                4: 1, // Narration -> Projet 4, ligne 2
+                7: 2, // Publicité -> Projet 7, ligne 3
+                10: 3 // Musique-Vidéo -> Projet 10, ligne 4
+            };
+            currentColumn = 0; // Projets 4, 7, 10 sont dans la colonne 0
+            mosaic.style.transform = `translateX(-${currentColumn * 100}vw)`;
+            mosaic.style.transition = 'transform 0.5s ease';
+
+            // Défilement vertical vers le projet
+            const rowIndex = projectToRow[projectNumber] || 0;
+            const scrollPosition = rowIndex * window.innerHeight;
+            window.scrollTo({ top: scrollPosition, behavior: 'smooth' });
+
+            // Réinitialiser les flèches
+            initArrows();
+        } catch (error) {
+            console.error('Erreur dans scrollToProject:', error);
+        }
+    }
+
+    // Afficher une section (Bio, Contact, Équipement)
+    function showSection(sectionId) {
+        console.log(`showSection appelé pour ${sectionId}`);
+        try {
+            const section = document.getElementById(`${sectionId}-section`);
+            const hero = document.getElementById('hero');
+            const mosaic = document.getElementById('mosaic');
+            const videoSection = document.getElementById('video-section');
+            const videoContent = document.getElementById('video-content');
+            const relatedVideos = document.getElementById('related-videos');
+            const closeBtn = document.querySelector('.video-section .close-btn');
+
+            if (!section || !hero || !mosaic || !videoSection || !videoContent || !relatedVideos || !closeBtn) {
+                console.error('Éléments manquants:', { section, hero, mosaic, videoSection, videoContent, relatedVideos, closeBtn });
+                return;
+            }
+
+            // Réinitialiser toutes les sections
+            document.querySelectorAll('.bio-section, .contact-section, .equip-section').forEach(s => {
+                s.classList.remove('active');
+                s.style.display = 'none';
+                s.style.opacity = '0';
+                s.style.zIndex = '-1';
+                s.style.pointerEvents = 'none';
+                s.style.transform = 'translateY(100%)';
+            });
+
+            // Réinitialiser la section vidéo
+            videoSection.classList.remove('active');
+            videoSection.style.display = 'none';
+            videoSection.style.opacity = '0';
+            videoSection.style.zIndex = '-1';
+            videoSection.style.pointerEvents = 'none';
+            videoContent.style.display = 'none';
+            videoContent.style.opacity = '0';
+            videoContent.style.zIndex = '-1';
+            videoContent.style.pointerEvents = 'none';
+            videoContent.innerHTML = '';
+            relatedVideos.style.display = 'none';
+            relatedVideos.style.opacity = '0';
+            relatedVideos.style.zIndex = '-1';
+            relatedVideos.style.pointerEvents = 'none';
+            closeBtn.style.setProperty('display', 'none', '!important');
+            closeBtn.style.setProperty('opacity', '0', '!important');
+            closeBtn.style.setProperty('visibility', 'hidden', '!important');
+            closeBtn.style.setProperty('z-index', '-1', '!important');
+            closeBtn.style.setProperty('pointer-events', 'none', '!important');
+
+            // Cacher la mosaïque
+            hero.style.display = 'none';
+            hero.style.opacity = '0';
+            hero.style.pointerEvents = 'none';
+            hero.style.zIndex = '-1';
+            mosaic.style.opacity = '0';
+            mosaic.style.pointerEvents = 'none';
+            mosaic.style.zIndex = '-1';
+
+            // Afficher la section demandée
+            section.style.display = 'block';
+            setTimeout(() => {
+                section.classList.add('active');
+                section.style.opacity = '1';
+                section.style.transform = 'translateY(0)';
+                section.style.zIndex = '998';
+                section.style.pointerEvents = 'auto';
+            }, 10);
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        } catch (error) {
+            console.error('Erreur dans showSection:', error);
+        }
+    }
+
+    // Cacher une section
+    function hideSection(sectionId) {
+        console.log(`hideSection appelé pour ${sectionId}`);
+        try {
+            const section = document.getElementById(`${sectionId}-section`);
+            const hero = document.getElementById('hero');
+            const mosaic = document.getElementById('mosaic');
+            const videoSection = document.getElementById('video-section');
+            const videoContent = document.getElementById('video-content');
+            const relatedVideos = document.getElementById('related-videos');
+            const closeBtn = document.querySelector('.video-section .close-btn');
+
+            if (!section || !hero || !mosaic || !videoSection || !videoContent || !relatedVideos || !closeBtn) {
+                console.error('Éléments manquants:', { section, hero, mosaic, videoSection, videoContent, relatedVideos, closeBtn });
+                return;
+            }
+
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(100%)';
+            section.style.zIndex = '-1';
+            section.style.pointerEvents = 'none';
+            setTimeout(() => {
+                section.classList.remove('active');
+                section.style.display = 'none';
+            }, 500);
+
+            // Réinitialiser la section vidéo
+            videoSection.classList.remove('active');
+            videoSection.style.display = 'none';
+            videoSection.style.opacity = '0';
+            videoSection.style.zIndex = '-1';
+            videoSection.style.pointerEvents = 'none';
+            videoContent.style.display = 'none';
+            videoContent.style.opacity = '0';
+            videoContent.style.zIndex = '-1';
+            videoContent.style.pointerEvents = 'none';
+            videoContent.innerHTML = '';
+            relatedVideos.style.display = 'none';
+            relatedVideos.style.opacity = '0';
+            relatedVideos.style.zIndex = '-1';
+            relatedVideos.style.pointerEvents = 'none';
+            closeBtn.style.setProperty('display', 'none', '!important');
+            closeBtn.style.setProperty('opacity', '0', '!important');
+            closeBtn.style.setProperty('visibility', 'hidden', '!important');
+            closeBtn.style.setProperty('z-index', '-1', '!important');
+            closeBtn.style.setProperty('pointer-events', 'none', '!important');
+
+            // Afficher la mosaïque
+            hero.style.display = 'block';
+            mosaic.style.opacity = '1';
+            mosaic.style.zIndex = '1';
+            mosaic.style.pointerEvents = 'auto';
+            setTimeout(() => {
+                hero.style.opacity = '1';
+                hero.style.pointerEvents = 'auto';
+                hero.style.zIndex = '1';
+            }, 10);
+            mosaic.style.transform = `translateX(-${currentColumn * 100}vw)`;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            initArrows();
+        } catch (error) {
+            console.error('Erreur dans hideSection:', error);
+        }
+    }
+
+    // Gestion du défilement de la barre de navigation
+    window.addEventListener('scroll', () => {
+        const nav = document.getElementById('nav');
+        if (nav) {
             if (window.scrollY > 50) {
                 nav.classList.add('scrolled');
             } else {
                 nav.classList.remove('scrolled');
             }
-        });
-
-        // Gestion du défilement horizontal
-        let currentColumn = 0;
-        let currentProject = null;
-        let player = null;
-        const mosaic = document.getElementById('mosaic');
-        const totalColumns = 3;
-
-        function nextColumn() {
-            if (currentColumn < totalColumns - 1) {
-                currentColumn++;
-                mosaic.style.transform = `translateX(-${currentColumn * 100}vw)`;
-            }
         }
+    });
 
-        function prevColumn() {
-            if (currentColumn > 0) {
-                currentColumn--;
-                mosaic.style.transform = `translateX(-${currentColumn * 100}vw)`;
-            }
-        }
-
-        // Afficher la section vidéo
-        function showVideo(projectId) {
-            currentProject = projectId;
-            const data = videoData[projectId];
-            const projectIndex = parseInt(projectId.replace('project', '')) - 1;
-            const row = Math.floor(projectIndex / 3);
-            const projectsInRow = [
-                `project${row * 3 + 1}`,
-                `project${row * 3 + 2}`,
-                `project${row * 3 + 3}`
-            ].filter(id => id in videoData);
-
-            const videoContent = document.getElementById('video-content');
-            const relatedVideos = document.getElementById('related-videos');
-            videoContent.innerHTML = `
-                <div class="video-wrapper">
-                    <iframe id="youtube-player" src="${data.url}" frameborder="0" allowfullscreen></iframe>
-                    <div class="video-overlay"></div>
-                    <div class="video-title-overlay">${data.title}</div>
-                    <div class="share-panel" id="share-panel">
-                        <span class="close-share" onclick="toggleSharePanel()">✖</span>
-                        <div class="share-text">partager cette vidéo sur :</div>
-                        <div class="share-buttons">
-                            <button class="share-button" onclick="shareTo('facebook')">
-                                <img src="https://www.flaticon.com/svg/static/icons/svg/124/124010.svg" alt="Facebook">
-                            </button>
-                            <button class="share-button" onclick="shareTo('twitter')">
-                                <img src="https://www.flaticon.com/svg/static/icons/svg/733/733579.svg" alt="Twitter">
-                            </button>
-                            <button class="share-button" onclick="shareTo('pinterest')">
-                                <img src="https://www.flaticon.com/svg/static/icons/svg/2111/2111502.svg" alt="Pinterest">
-                            </button>
-                            <button class="share-button" onclick="shareTo('tumblr')">
-                                <img src="https://www.flaticon.com/svg/static/icons/svg/174/174876.svg" alt="Tumblr">
-                            </button>
-                            <button class="share-button" onclick="copyLink()">
-                                <img src="https://www.flaticon.com/svg/static/icons/svg/1828/1828460.svg" alt="Copier le lien">
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="video-description">
-                    <h2>${data.title}</h2>
-                    <p>${data.description}</p>
-                </div>
-            `;
-            relatedVideos.innerHTML = `
-                ${projectsInRow.map(id => `
-                    <div class="related-video ${id === projectId ? 'active' : ''}" data-project-id="${id}" onclick="showVideo('${id}')">
-                        <img src="${videoData[id].gif}" alt="${videoData[id].title}">
-                        <div class="video-info">
-                            <span class="video-title">${videoData[id].title}</span>
-                            <span class="play-icon"></span>
-                            <span class="video-duration">${videoData[id].duration}</span>
-                        </div>
-                        <span class="playing-text" style="display: none;">En cours de lecture</span>
-                    </div>
-                `).join('')}
-            `;
-            document.querySelector('.hero').style.display = 'none';
-            document.querySelector('.video-section').classList.add('active');
-            window.scrollTo(0, 0);
-
-            // Initialiser le lecteur YouTube
-            player = new YT.Player('youtube-player', {
-                events: {
-                    'onStateChange': onPlayerStateChange,
-                    'onReady': (event) => {
-                        console.log('YouTube Player is ready');
-                    }
-                }
+    // Initialisation au chargement de la page
+    document.addEventListener('DOMContentLoaded', () => {
+        console.log('DOMContentLoaded - Initialisation');
+        try {
+            // Masquer toutes les sections sauf la mosaïque
+            document.querySelectorAll('.bio-section, .contact-section, .equip-section, .video-section').forEach(s => {
+                s.style.display = 'none';
+                s.style.opacity = '0';
+                s.style.zIndex = '-1';
+                s.style.pointerEvents = 'none';
+                s.classList.remove('active');
             });
 
-            // Réappliquer les écouteurs aux nouvelles vignettes
-            applyThumbnailListeners();
-        }
-
-        // Gérer les changements d'état du lecteur
-        function onPlayerStateChange(event) {
-            const activeThumbnail = document.querySelector('.related-video.active');
-            console.log('Player state changed:', event.data, 'Thumbnail found:', !!activeThumbnail);
-            if (activeThumbnail) {
-                const videoInfo = activeThumbnail.querySelector('.video-info');
-                const playingText = activeThumbnail.querySelector('.playing-text');
-                if (event.data === YT.PlayerState.PLAYING) {
-                    console.log('Video is playing, adding .playing class');
-                    activeThumbnail.classList.add('playing');
-                    if (videoInfo) videoInfo.style.display = 'none';
-                    if (playingText) playingText.style.display = 'none'; // Masqué par défaut
-                } else if (event.data === YT.PlayerState.PAUSED || event.data === YT.PlayerState.ENDED) {
-                    console.log('Video is paused or ended, removing .playing class');
-                    activeThumbnail.classList.remove('playing');
-                    if (videoInfo) videoInfo.style.display = '';
-                    if (playingText) playingText.style.display = 'none';
-                } else {
-                    console.log('Unknown player state:', event.data);
-                }
-            } else {
-                console.log('No active thumbnail found');
+            // Masquer la croix de fermeture au chargement
+            const closeBtn = document.querySelector('.video-section .close-btn');
+            if (closeBtn) {
+                closeBtn.style.setProperty('display', 'none', '!important');
+                closeBtn.style.setProperty('opacity', '0', '!important');
+                closeBtn.style.setProperty('visibility', 'hidden', '!important');
+                closeBtn.style.setProperty('z-index', '-1', '!important');
+                closeBtn.style.setProperty('pointer-events', 'none', '!important');
             }
-        }
 
-        // Démarrer la lecture
-        function playVideo() {
-            if (player && player.playVideo) {
-                console.log('Playing video via custom play button');
-                player.playVideo();
-            }
-        }
-
-        // Passer en plein écran (désactivé via paramètres URL)
-        function goFullscreen() {
-            const iframe = document.getElementById('youtube-player');
-            if (iframe.requestFullscreen) {
-                iframe.requestFullscreen();
-            } else if (iframe.mozRequestFullScreen) {
-                iframe.mozRequestFullScreen();
-            } else if (iframe.webkitRequestFullscreen) {
-                iframe.webkitRequestFullscreen();
-            } else if (iframe.msRequestFullscreen) {
-                iframe.msRequestFullscreen();
-            }
-        }
-
-        // Fermer la section vidéo
-        function closeVideo() {
-            document.querySelector('.video-section').classList.remove('active');
-            document.querySelector('.hero').style.display = 'block';
-            const sharePanel = document.getElementById('share-panel');
-            if (sharePanel) sharePanel.classList.remove('active');
-            if (player && player.stopVideo) {
-                console.log('Stopping video');
-                player.stopVideo(); // Assure l'arrêt complet de la vidéo et du son
-            }
-            // Restaurer la position dans la mosaïque
-            if (currentProject) {
-                const projectIndex = parseInt(currentProject.replace('project', '')) - 1;
-                currentColumn = Math.floor(projectIndex % 3);
-                const row = Math.floor(projectIndex / 3);
+            // Afficher la mosaïque
+            const hero = document.getElementById('hero');
+            const mosaic = document.getElementById('mosaic');
+            if (hero && mosaic) {
+                hero.style.display = 'block';
+                hero.style.opacity = '1';
+                hero.style.pointerEvents = 'auto';
+                hero.style.zIndex = '1';
+                mosaic.style.opacity = '1';
+                mosaic.style.zIndex = '1';
+                mosaic.style.pointerEvents = 'auto';
                 mosaic.style.transform = `translateX(-${currentColumn * 100}vw)`;
-                window.scrollTo(0, row * window.innerHeight);
             }
-            player = null; // Réinitialiser le lecteur pour éviter les problèmes
-        }
 
-        // Ouvrir/fermer le panneau de partage
-        function toggleSharePanel() {
-            const sharePanel = document.getElementById('share-panel');
-            if (sharePanel) {
-                sharePanel.classList.toggle('active');
-            }
+            // Initialiser les flèches
+            initArrows();
+        } catch (error) {
+            console.error('Erreur dans DOMContentLoaded:', error);
         }
-
-        // Fonctions de partage
-        function shareTo(platform) {
-            const data = videoData[currentProject];
-            const url = data.url;
-            let shareUrl;
-            switch (platform) {
-                case 'facebook':
-                    shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
-                    break;
-                case 'twitter':
-                    shareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(data.title)}`;
-                    break;
-                case 'pinterest':
-                    shareUrl = `https://pinterest.com/pin/create/button/?url=${encodeURIComponent(url)}&description=${encodeURIComponent(data.title)}`;
-                    break;
-                case 'tumblr':
-                    shareUrl = `https://www.tumblr.com/widgets/share/tool?canonicalUrl=${encodeURIComponent(url)}&title=${encodeURIComponent(data.title)}`;
-                    break;
-            }
-            window.open(shareUrl, '_blank');
-        }
-
-        // Copier le lien
-        function copyLink() {
-            const data = videoData[currentProject];
-            navigator.clipboard.writeText(data.url).then(() => {
-                alert('Lien copié dans le presse-papiers !');
-            }).catch(err => {
-                console.error('Erreur lors de la copie du lien :', err);
-            });
-        }
-
-        // Nouvelle fonction pour appliquer les écouteurs
-        function applyThumbnailListeners() {
-            const thumbnails = document.querySelectorAll('.related-video');
-            thumbnails.forEach(thumbnail => {
-                thumbnail.removeEventListener('mouseenter', handleMouseEnter);
-                thumbnail.removeEventListener('mouseleave', handleMouseLeave);
-                thumbnail.addEventListener('mouseenter', handleMouseEnter);
-                thumbnail.addEventListener('mouseleave', handleMouseLeave);
-            });
-        }
-
-        // Définir les gestionnaires comme fonctions séparées
-        function handleMouseEnter(event) {
-            const thumbnail = event.currentTarget;
-            const playingText = thumbnail.querySelector('.playing-text');
-            const videoInfo = thumbnail.querySelector('.video-info');
-            if (thumbnail.classList.contains('active') && thumbnail.classList.contains('playing') && playingText) {
-                playingText.style.display = 'block';
-                if (videoInfo) videoInfo.style.display = 'none';
-            } else if (videoInfo && !thumbnail.classList.contains('playing')) {
-                videoInfo.style.display = 'flex';
-            }
-        }
-
-        function handleMouseLeave(event) {
-            const thumbnail = event.currentTarget;
-            const playingText = thumbnail.querySelector('.playing-text');
-            const videoInfo = thumbnail.querySelector('.video-info');
-            if (playingText) playingText.style.display = 'none';
-            if (videoInfo && !thumbnail.classList.contains('playing')) {
-                videoInfo.style.display = 'none';
-            }
-        }
-    </script>
+    });
+</script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Pour optimiser le code HTML/CSS fourni afin qu'il s'affiche bien sur un téléphone portable tout en maintenant ses fonctionnalités, je vais identifier les problèmes spécifiques liés à l'affichage mobile et proposer des améliorations. Le code est déjà partiellement adapté grâce à une media query pour les écrans de 768px ou moins, mais plusieurs aspects peuvent être optimisés pour améliorer l'expérience utilisateur (UX), la performance et la compatibilité mobile. Voici les recommandations et modifications proposées :
+Problèmes identifiés pour l'affichage mobile
+
+    Navigation non optimisée :
+        La navigation (menu) passe en disposition verticale (flex-direction: column) sur mobile, mais elle peut être difficile à utiliser si elle prend trop de place ou si les éléments ne sont pas bien centrés.
+        Les éléments du menu ne sont pas assez espacés pour une interaction tactile facile.
+    Mosaïque (grid) :
+        La mosaïque utilise une grille de 3 colonnes de 100vw chacune, ce qui entraîne un défilement horizontal. Sur mobile, cela peut être confus, car les utilisateurs s'attendent généralement à un défilement vertical.
+        Les vidéos en boucle automatique (autoplay muted loop) peuvent ralentir le chargement ou consommer beaucoup de données sur mobile.
+    Section vidéo :
+        La section vidéo utilise des tailles fixes (ex. : max-width: 600px pour le lecteur vidéo), ce qui peut ne pas s'adapter parfaitement à tous les écrans mobiles.
+        Les vignettes des vidéos associées (related-videos) sont réduites à 120px, ce qui peut rendre les textes (titre, durée) difficiles à lire.
+    Performance :
+        Les vidéos en boucle dans la mosaïque (12 vidéos <video> avec autoplay) peuvent surcharger le rendu sur les appareils mobiles, augmentant le temps de chargement et la consommation de batterie.
+        Les images (ex. : GIFs via Giphy) ne sont pas optimisées pour le mobile (manque de formats modernes comme WebP).
+    Accessibilité tactile :
+        Les boutons (ex. : flèches de navigation, boutons de lecture) pourraient ne pas être assez grands pour une interaction tactile confortable (recommandation : minimum 44x44px).
+        Les éléments interactifs (liens, boutons) manquent parfois de marges suffisantes pour éviter les clics accidentels.
+    Disposition des sections (Bio, Contact, Équipement) :
+        Les sections comme bio-section et contact-section s'adaptent bien avec la media query, mais les textes et images pourraient être mieux proportionnés pour éviter un défilement excessif sur mobile.
+        Les icônes sociales et les champs de formulaire dans la section contact pourraient être mieux alignés et espacés.
+    JavaScript :
+        Le JavaScript gère les interactions (défilement, affichage des sections, etc.), mais il pourrait être optimisé pour éviter les erreurs ou les retards sur mobile, notamment en réduisant les appels DOM fréquents.
+
+Optimisations proposées
+
+Voici les modifications spécifiques pour améliorer l'affichage et les performances sur mobile, tout en préservant les fonctionnalités existantes :
+1. Améliorer la navigation mobile
+
+    Ajout d'un menu burger : Remplacer la liste verticale par un menu hamburger pour économiser de l'espace et améliorer l'ergonomie.
+    Agrandir les éléments tactiles : Augmenter l'espacement et la taille des liens du menu pour une meilleure interaction tactile.
+
+Modification CSS (dans <style>) :
+css
+
+/* Ajouter un menu burger pour mobile */
+.nav-toggle {
+    display: none;
+    font-size: 1.5rem;
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    margin-right: 1rem;
+}
+
+nav ul {
+    display: flex;
+    margin-right: 2rem;
+}
+
+@media (max-width: 768px) {
+    .nav-toggle {
+        display: block;
+    }
+
+    nav ul {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background-color: #000;
+        padding: 1rem;
+        z-index: 999;
+    }
+
+    nav ul.active {
+        display: flex;
+    }
+
+    nav ul li {
+        margin: 1rem 0;
+    }
+
+    nav ul li a {
+        font-size: 1.2rem;
+        padding: 0.5rem;
+        display: block; /* Remplit la largeur pour une meilleure zone de clic */
+    }
+}
+
+Modification HTML (dans <nav>) :
+html
+
+<nav id="nav">
+    <div class="nav-logo">
+        <img src="logo.jpg" alt="PLN Prod Logo">
+        <p>PLN Prod</p>
+    </div>
+    <button class="nav-toggle">☰</button>
+    <ul id="nav-menu">
+        <li><a href="#narration" onclick="scrollToProject(4)">Musique</a></li>
+        <li><a href="#publicite" onclick="scrollToProject(7)">Nature</a></li>
+        <li><a href="#musique-video" onclick="scrollToProject(10)">Sport</a></li>
+        <li><a href="#" onclick="showSection('bio')">Bio</a></li>
+        <li><a href="#" onclick="showSection('contact')">Contact</a></li>
+        <li><a href="#" onclick="showSection('equip')">Formules</a></li>
+    </ul>
+</nav>
+
+Ajout JavaScript (dans <script>) :
+javascript
+
+// Gestion du menu burger
+document.querySelector('.nav-toggle').addEventListener('click', () => {
+    document.getElementById('nav-menu').classList.toggle('active');
+});
+
+2. Simplifier la mosaïque pour mobile
+
+    Passer à un défilement vertical : Au lieu d'une grille horizontale de 3 colonnes (100vw chacune), utiliser une grille à une seule colonne avec des rangées de 100vh pour un défilement vertical, plus naturel sur mobile.
+    Lazy loading des vidéos : Ajouter un chargement différé pour les vidéos afin de réduire la charge initiale.
+
+Modification CSS :
+css
+
+.mosaic-container {
+    display: grid;
+    grid-template-columns: 100vw; /* Une seule colonne */
+    grid-template-rows: repeat(12, 100vh); /* 12 rangées pour 12 projets */
+    width: 100vw;
+    transition: transform 0.5s ease;
+    pointer-events: auto !important;
+    z-index: 1;
+}
+
+@media (min-width: 769px) {
+    .mosaic-container {
+        grid-template-columns: repeat(3, 100vw); /* Conserver la grille 3x4 sur desktop */
+        grid-template-rows: repeat(4, 100vh);
+        width: 300vw;
+    }
+}
+
+/* Réduire la taille des flèches sur mobile */
+@media (max-width: 768px) {
+    .arrow {
+        font-size: 1.2rem;
+        padding: 0.4rem;
+    }
+}
+
+Modification JavaScript (dans initArrows, nextColumn, prevColumn) :
+
+    Mettre à jour la logique pour gérer le défilement vertical sur mobile (en ajustant translateY au lieu de translateX).
+
+javascript
+
+function initArrows() {
+    console.log('Initialisation des flèches');
+    try {
+        const arrows = document.querySelectorAll('.arrow');
+        const mosaic = document.getElementById('mosaic');
+        if (!mosaic || !arrows) return;
+
+        arrows.forEach(arrow => {
+            arrow.style.setProperty('display', 'block', '!important');
+            arrow.style.setProperty('opacity', '1', '!important');
+            arrow.style.setProperty('visibility', 'visible', '!important');
+            arrow.style.setProperty('pointer-events', 'auto', '!important');
+            arrow.style.setProperty('z-index', '100', '!important');
+            arrow.onclick = null;
+            if (window.innerWidth <= 768) {
+                // Mobile : défilement vertical
+                if (arrow.classList.contains('arrow-right')) {
+                    arrow.innerHTML = '▼'; // Flèche bas
+                    arrow.onclick = nextRow;
+                } else if (arrow.classList.contains('arrow-left')) {
+                    arrow.innerHTML = '▲'; // Flèche haut
+                    arrow.onclick = prevRow;
+                }
+            } else {
+                // Desktop : défilement horizontal
+                if (arrow.classList.contains('arrow-right')) {
+                    arrow.innerHTML = '❯';
+                    arrow.onclick = nextColumn;
+                } else if (arrow.classList.contains('arrow-left')) {
+                    arrow.innerHTML = '❮';
+                    arrow.onclick = prevColumn;
+                }
+            }
+        });
+
+        mosaic.style.pointerEvents = 'auto';
+        mosaic.style.opacity = '1';
+        mosaic.style.zIndex = '1';
+        if (window.innerWidth <= 768) {
+            mosaic.style.transform = `translateY(-${currentColumn * 100}vh)`;
+        } else {
+            mosaic.style.transform = `translateX(-${currentColumn * 100}vw)`;
+        }
+    } catch (error) {
+        console.error('Erreur dans initArrows:', error);
+    }
+}
+
+function nextRow() {
+    try {
+        const mosaic = document.getElementById('mosaic');
+        if (!mosaic) return;
+        if (currentColumn < 11) { // 12 projets - 1
+            currentColumn++;
+            mosaic.style.transform = `translateY(-${currentColumn * 100}vh)`;
+            mosaic.style.transition = 'transform 0.5s ease';
+        }
+        initArrows();
+    } catch (error) {
+        console.error('Erreur dans nextRow:', error);
+    }
+}
+
+function prevRow() {
+    try {
+        const mosaic = document.getElementById('mosaic');
+        if (!mosaic) return;
+        if (currentColumn > 0) {
+            currentColumn--;
+            mosaic.style.transform = `translateY(-${currentColumn * 100}vh)`;
+            mosaic.style.transition = 'transform 0.5s ease';
+        }
+        initArrows();
+    } catch (error) {
+        console.error('Erreur dans prevRow:', error);
+    }
+}
+
+Lazy loading des vidéos :
+
+    Ajouter l'attribut loading="lazy" aux balises <video> et <img> pour un chargement différé. Modification HTML (exemple pour un mosaic-item) :
+
+html
+
+<div class="mosaic-item" data-project="project1">
+    <video autoplay muted loop playsinline loading="lazy">
+        <source src="guitare_loop.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <div class="content">
+        <h1>Derniers projets</h1>
+        <button onclick="showVideo('project1')">Lire la vidéo</button>
+    </div>
+    <div class="arrow arrow-right">❯</div>
+</div>
+
+3. Optimiser la section vidéo
+
+    Ajuster le lecteur vidéo : Utiliser une largeur fluide (100%) pour le lecteur vidéo sur mobile.
+    Améliorer la lisibilité des vignettes : Augmenter légèrement la taille des vignettes et des textes pour une meilleure lisibilité.
+
+Modification CSS :
+css
+
+@media (max-width: 768px) {
+    .video-content .video-wrapper {
+        max-width: 100%;
+        width: 100%;
+        height: calc(100vw * 9 / 16); /* Conserver le ratio 16:9 */
+    }
+
+    .related-videos {
+        flex-wrap: wrap; /* Permettre un retour à la ligne si nécessaire */
+        gap: 0.8rem;
+    }
+
+    .related-video {
+        width: 140px !important; /* Légèrement plus grand pour lisibilité */
+        height: calc(140px * 9 / 16) !important;
+    }
+
+    .related-video .video-info .video-title {
+        font-size: 0.8rem;
+    }
+
+    .related-video .video-info .video-duration {
+        font-size: 0.7rem;
+    }
+}
+
+4. Améliorer la performance
+
+    Optimisation des vidéos : Convertir les vidéos en format WebM ou utiliser des services comme YouTube/Vimeo pour les vidéos en boucle dans la mosaïque, ce qui réduit la charge sur le serveur.
+    Optimisation des images : Remplacer les GIFs (ex. : Giphy) par des images WebP ou des miniatures statiques générées à partir des vidéos YouTube.
+
+Exemple de remplacement d'une image :
+html
+
+<div class="mosaic-item" data-project="project2">
+    <img src="project2_thumbnail.webp" alt="Clip Musical" loading="lazy">
+    <div class="content">
+        <h1>Projet 2</h1>
+        <button onclick="showVideo('project2')">Lire la vidéo</button>
+    </div>
+    <div class="arrow arrow-left">❮</div>
+    <div class="arrow arrow-right">❯</div>
+</div>
+
+    Réduire les appels JavaScript : Fusionner les fonctions similaires (showSection, hideSection, etc.) pour réduire la complexité et éviter les erreurs répétitives.
+
+5. Améliorer l'accessibilité tactile
+
+    Agrandir les boutons :
+
+css
+
+@media (max-width: 768px) {
+    .mosaic-item button {
+        padding: 0.8rem 1.5rem;
+        font-size: 1.1rem;
+        min-width: 44px;
+        min-height: 44px;
+    }
+
+    .arrow {
+        min-width: 44px;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .video-section .close-btn {
+        min-width: 44px;
+        min-height: 44px;
+        font-size: 1.3rem;
+    }
+}
+
+6. Ajuster les sections Bio/Contact/Équipement
+
+    Réduire la hauteur des images : Ajuster la hauteur de l'image dans bio-section pour éviter un défilement excessif.
+    Améliorer le formulaire de contact : Ajouter des marges et un espacement pour les champs de saisie.
+
+Modification CSS :
+css
+
+@media (max-width: 768px) {
+    .bio-image {
+        height: 40vh; /* Réduire la hauteur pour mobile */
+        object-fit: cover;
+    }
+
+    .contact-column-2 input,
+    .contact-column-2 button {
+        margin-bottom: 1.2rem;
+        padding: 0.8rem;
+        font-size: 1.1rem;
+    }
+
+    .social-icons a {
+        width: 35px;
+        height: 35px;
+    }
+}
+
+7. Optimisation JavaScript
+
+    Réduire les manipulations DOM : Mettre en cache les sélecteurs réutilisés.
+    Exemple (dans <script>) :
+
+javascript
+
+// Définir les sélecteurs en haut du script
+const selectors = {
+    mosaic: document.getElementById('mosaic'),
+    hero: document.getElementById('hero'),
+    videoSection: document.getElementById('video-section'),
+    videoContent: document.getElementById('video-content'),
+    relatedVideos: document.getElementById('related-videos'),
+    closeBtn: document.querySelector('.video-section .close-btn'),
+    nav: document.getElementById('nav')
+};
+
+// Exemple dans showVideo
+function showVideo(projectId) {
+    console.log(`showVideo appelé pour ${projectId}`);
+    try {
+        const { videoSection, videoContent, relatedVideos, hero, mosaic, closeBtn } = selectors;
+        if (!videoSection || !videoContent || !relatedVideos || !hero || !mosaic || !closeBtn) {
+            console.error('Éléments manquants');
+            return;
+        }
+        // ... reste du code ...
+    } catch (error) {
+        console.error('Erreur dans showVideo:', error);
+    }
+}
+
+8. Ajouter des tests pour mobile
+
+    Utiliser les outils de développement de Chrome (mode responsive) ou des services comme BrowserStack pour tester sur différents appareils.
+    Vérifier que les vidéos YouTube s'affichent correctement dans les iframes (problèmes potentiels avec l'autoplay sur certains navigateurs mobiles).
+
+Résumé des modifications
+
+    Navigation : Ajout d'un menu burger et optimisation des zones tactiles.
+    Mosaïque : Passage à un défilement vertical sur mobile avec translateY, ajout de loading="lazy" pour les vidéos/images.
+    Section vidéo : Lecteur vidéo fluide (100% largeur), vignettes légèrement plus grandes.
+    Performance : Utilisation de WebM/WebP, réduction des appels DOM.
+    Accessibilité : Boutons et éléments interactifs agrandis (min. 44x44px).
+    Sections secondaires : Ajustement des tailles d'image et des formulaires pour mobile.
+
+Code final (extrait modifié)
+
+Voici un extrait du code modifié pour la navigation et la mosaïque (les autres sections suivent les mêmes principes) :
+
+HTML (nav) :
+html
+
+<nav id="nav">
+    <div class="nav-logo">
+        <img src="logo.jpg" alt="PLN Prod Logo" loading="lazy">
+        <p>PLN Prod</p>
+    </div>
+    <button class="nav-toggle">☰</button>
+    <ul id="nav-menu">
+        <li><a href="#narration" onclick="scrollToProject(4)">Musique</a></li>
+        <li><a href="#publicite" onclick="scrollToProject(7)">Nature</a></li>
+        <li><a href="#musique-video" onclick="scrollToProject(10)">Sport</a></li>
+        <li><a href="#" onclick="showSection('bio')">Bio</a></li>
+        <li><a href="#" onclick="showSection('contact')">Contact</a></li>
+        <li><a href="#" onclick="showSection('equip')">Formules</a></li>
+    </ul>
+</nav>
+
+CSS (mosaïque et navigation) :
+css
+
+.nav-toggle {
+    display: none;
+    font-size: 1.5rem;
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    margin-right: 1rem;
+}
+
+.mosaic-container {
+    display: grid;
+    grid-template-columns: 100vw;
+    grid-template-rows: repeat(12, 100vh);
+    width: 100vw;
+    transition: transform 0.5s ease;
+    pointer-events: auto !important;
+    z-index: 1;
+}
+
+@media (min-width: 769px) {
+    .mosaic-container {
+        grid-template-columns: repeat(3, 100vw);
+        grid-template-rows: repeat(4, 100vh);
+        width: 300vw;
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-toggle {
+        display: block;
+    }
+
+    nav ul {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background-color: #000;
+        padding: 1rem;
+        z-index: 999;
+    }
+
+    nav ul.active {
+        display: flex;
+    }
+
+    .arrow {
+        min-width: 44px;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        padding: 0.4rem;
+    }
+}
+
+JavaScript (ajout pour menu burger et défilement vertical) :
+javascript
+
+document.querySelector('.nav-toggle').addEventListener('click', () => {
+    document.getElementById('nav-menu').classList.toggle('active');
+});
+
+function initArrows() {
+    const arrows = document.querySelectorAll('.arrow');
+    const mosaic = document.getElementById('mosaic');
+    if (!mosaic || !arrows) return;
+
+    arrows.forEach(arrow => {
+        arrow.style.setProperty('display', 'block', '!important');
+        arrow.style.setProperty('opacity', '1', '!important');
+        arrow.style.setProperty('visibility', 'visible', '!important');
+        arrow.style.setProperty('pointer-events', 'auto', '!important');
+        arrow.style.setProperty('z-index', '100', '!important');
+        arrow.onclick = null;
+        if (window.innerWidth <= 768) {
+            if (arrow.classList.contains('arrow-right')) {
+                arrow.innerHTML = '▼';
+                arrow.onclick = nextRow;
+            } else if (arrow.classList.contains('arrow-left')) {
+                arrow.innerHTML = '▲';
+                arrow.onclick = prevRow;
+            }
+        } else {
+            if (arrow.classList.contains('arrow-right')) {
+                arrow.innerHTML = '❯';
+                arrow.onclick = nextColumn;
+            } else if (arrow.classList.contains('arrow-left')) {
+                arrow.innerHTML = '❮';
+                arrow.onclick = prevColumn;
+            }
+        }
+    });
+
+    mosaic.style.pointerEvents = 'auto';
+    mosaic.style.opacity = '1';
+    mosaic.style.zIndex = '1';
+    if (window.innerWidth <= 768) {
+        mosaic.style.transform = `translateY(-${currentColumn * 100}vh)`;
+    } else {
+        mosaic.style.transform = `translateX(-${currentColumn * 100}vw)`;
+    }
+}
+
+function nextRow() {
+    const mosaic = document.getElementById('mosaic');
+    if (!mosaic) return;
+    if (currentColumn < 11) {
+        currentColumn++;
+        mosaic.style.transform = `translateY(-${currentColumn * 100}vh)`;
+        mosaic.style.transition = 'transform 0.5s ease';
+    }
+    initArrows();
+}
+
+function prevRow() {
+    const mosaic = document.getElementById('mosaic');
+    if (!mosaic) return;
+    if (currentColumn > 0) {
+        currentColumn--;
+        mosaic.style.transform = `translateY(-${currentColumn * 100}vh)`;
+        mosaic.style.transition = 'transform 0.5s ease';
+    }
+    initArrows();
+}
