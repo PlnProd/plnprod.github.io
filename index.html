@@ -937,23 +937,22 @@
     <script async src="https://tally.so/widgets/embed.js"></script>
 </head>
 <body>
-    <!-- Barre de navigation -->
+
+ <!-- NAVIGATION -->
     <nav id="nav">
         <div class="nav-logo">
             <img src="/images/logo.jpg" alt="PLN Prod Logo">
             <p>PLN Prod</p>
         </div>
         <ul>
-            <li><a href="#narration" onclick="scrollToProject(4)">Musique</a></li>
-            <li><a href="#publicite" onclick="scrollToProject(7)">Nature</a></li>
-            <li><a href="#musique-video" onclick="scrollToProject(10)">Sport</a></li>
-            <li><a href="#" onclick="showSection('bio')">Bio</a></li>
+            <li><a href="#realisations">Réalisations</a></li>
+            <li><a href="#approche">Approche</a></li>
+            <li><a href="#augmented">PLN Augmented</a></li>
             <li><a href="#" onclick="showSection('contact')">Contact</a></li>
-            <li><a href="#" onclick="showSection('equip')">Formules</a></li>
         </ul>
     </nav>
 
-    <!-- Section mosaïque -->
+    <!-- HERO -->
     <section class="hero" id="hero">
         <div class="mosaic-container" id="mosaic">
             <div class="mosaic-item" data-project="project1">
@@ -1086,40 +1085,64 @@
                 <div class="arrow arrow-left">❮</div>
             </div>
         </div>
+        
+        <div style="position: absolute; top: 38%; left: 50%; transform: translate(-50%, -50%); text-align: center; z-index: 10; width: 90%; max-width: 920px; padding: 2rem;">
+            <h1 style="font-size: 3.6rem; margin-bottom: 1rem; color: white;">PLN Prod</h1>
+            <p style="font-size: 1.55rem; max-width: 720px; margin: 0 auto 1.5rem;">
+                Production vidéo &amp; documentation visuelle
+            </p>
+            <p style="font-size: 1.25rem; opacity: 0.95; max-width: 680px; margin: 0 auto;">
+                Conception de contenus audiovisuels pour documenter, transmettre et rendre accessibles des sujets complexes.
+            </p>
+        </div>        
     </section>
 
-    <!-- Section vidéo -->
-    <section class="video-section" id="video-section">
-        <div class="video-header">
-            <div class="left-controls">
-                <span class="info-icon">ℹ️</span>
-                <span class="divider">|</span>
-                <span class="share-icon" onclick="toggleSharePanel()">↪</span>
-                <a href="#" class="share-text" onclick="toggleSharePanel()">partager</a>
-            </div>
-        </div>
-        <div class="close-btn" onclick="closeVideoAndReturnToMosaic()">✖</div>
-        <div class="video-content" id="video-content">
-            <!-- Lecteur et description -->
-        </div>
-        <div class="related-videos" id="related-videos">
-            <!-- Vignettes -->
-        </div>
+    <!-- RÉALISATIONS -->
+    <section id="realisations" style="padding: 140px 5%; background: #0a0a0a; text-align: center;">
+        <h2 style="font-size: 2.8rem; margin-bottom: 2rem;">Réalisations</h2>
+        <p style="max-width: 800px; margin: 0 auto 4rem; font-size: 1.25rem;">
+            Captations de concerts et conservatoires • Compétitions sportives (Tir à l'arc) • 
+            Ateliers &amp; répétitions • Reportages et documentation
+        </p>
+        
+        <!-- Tu peux garder ou adapter ta mosaïque ici -->
+        
     </section>
 
-    <!-- Section Bio -->
-    <section class="bio-section" id="bio-section">
-        <div class="bio-content">
-            <div class="bio-title">Vidéaste Passionné de Vidéographie.<br>Créateur de Films.<br><br>Conteur d'Histoires</div>
-            <div class="bio-text"><i>Texte de paragraphe. Vous pouvez le personnaliser et ajouter votre propre contenu.</i></div>
-            <a href="#" class="bio-link" onclick="hideSection('bio')">voir le portfolio</a>
-            <img src="https://via.placeholder.com/1200x600?text=Image+Portfolio" alt="Image Portfolio" class="bio-image">
-        </div>
-        <div class="bio-awards">
-            <h3>Distinctions & Commentaires Clients</h3>
-            <p>"Travail exceptionnel, très professionnel !" - Client A</p>
-            <p>"Une créativité hors pair, je recommande vivement !" - Client B</p>
-        </div>
+    <!-- APPROCHE -->
+    <section id="approche" style="padding: 120px 5%;">
+        <h2 style="text-align: center; font-size: 2.8rem; margin-bottom: 3rem;">Approche &amp; Savoir-faire</h2>
+        <ul style="max-width: 800px; margin: 0 auto; font-size: 1.25rem; line-height: 2.4; text-align: left;">
+            <li>• Cadrage éditorial et scénarisation adaptée au sujet</li>
+            <li>• Tournage professionnel multi-caméras</li>
+            <li>• Montage narratif précis</li>
+            <li>• Post-production et optimisation assistée par IA</li>
+        </ul>
+    </section>
+
+    <!-- PLN AUGMENTED -->
+    <section id="augmented" style="padding: 120px 5%; background: #0a0a0a; text-align: center;">
+        <h2 style="font-size: 2.8rem; margin-bottom: 2rem;">PLN Augmented</h2>
+        <p style="max-width: 720px; margin: 0 auto 3rem; font-size: 1.2rem;">
+            Laboratoire d’expérimentation : vidéo augmentée, motion design génératif et intégration de données en visuel.
+        </p>
+        <a href="https://pln-augmented.github.io/demo/" target="_blank" 
+           style="padding: 16px 40px; background: #3498db; color: white; font-weight: 700; border-radius: 50px; text-decoration: none;">
+            Découvrir PLN Augmented →
+        </a>
+    </section>
+
+    <!-- PASSERELLE ACTIVITÉ PRINCIPALE -->
+    <section style="padding: 120px 5%; text-align: center; background: #000;">
+        <h3 style="font-size: 2.2rem; margin-bottom: 1.5rem;">Conseil Data Quality &amp; Process Automation</h3>
+        <p style="max-width: 680px; margin: 0 auto 3rem; color: #ccc; font-size: 1.2rem;">
+            Accompagnement des organisations dans la structuration de leurs données, 
+            l’automatisation de leurs processus et la mise en place d’analyses fiables.
+        </p>
+        <a href="https://pierre-louis.net" target="_blank" 
+           style="padding: 16px 40px; background: #3498db; color: white; font-weight: 700; border-radius: 50px; text-decoration: none;">
+            Découvrir pierre-louis.net →
+        </a>
     </section>
 
     <!-- Section Contact -->
@@ -1167,35 +1190,9 @@
         </div>
     </section>
 
-    <!-- Section Équipement -->
-    <section class="equip-section" id="equip-section">
-        <div class="equip-content">
-            <div class="bio-title">Notre société</div>
-            <div class="bio-text"><i>PLN Prod est une entreprise de vidéaste spécialisée dans la création de contenus vidéos de haute qualité.</i></div>
-            <a href="#" class="bio-link" onclick="hideSection('equip')">retour</a>
-        </div>
-        <div class="legal-links">
-            <a href="#" onclick="showModal('mentions-legales')">Mentions légales</a>
-            <a href="#" onclick="showModal('politique-confidentialite')">Politique de confidentialité</a>
-            <a href="#" onclick="showModal('politique-cookies')">Politique des cookies</a>
-            <a href="#" onclick="showModal('termes-conditions')">Termes et Conditions</a>
-        </div>
-    </section>
-
-    <!-- Modal -->
-    <div class="modal" id="modal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeModal()">✖</span>
-            <h2>Informations</h2>
-            <p id="modal-content-text">Ceci est un exemple de contenu modal.</p>
-        </div>
-    </div>
-
-    <!-- Footer -->
-    <footer>
-        <p>© 2025 PLN Prod. Tous droits réservés.</p>
+    <footer style="padding: 3rem; text-align: center; background: #000; color: #666;">
+        <p>© 2024 PLN Prod — Atelier de production audiovisuelle et documentation visuelle</p>
     </footer>
-
     <script>
         // Variable globale pour suivre la colonne actuelle
         let currentColumn = 0;
@@ -1943,7 +1940,9 @@ function showVideo(projectId) {
     });
 </script>
 </body>
-</html>
+</html>   
+    
+    
 
 
 
