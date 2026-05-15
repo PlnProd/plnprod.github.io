@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PLN Prod — Production Vidéo & Documentation Visuelle</title>
+    <title>PLNP Prod — Production Vidéo & Documentation Visuelle</title>
  
     <script async src="https://tally.so/widgets/embed.js"></script>
 </head>
@@ -19,7 +19,7 @@
             <li><a href="#realisations">Réalisations</a></li>
             <li><a href="#approche">Approche</a></li>
             <li><a href="#augmented">PLN Augmented</a></li>
-            <li><a href="#" onclick="showSection('contact')">Contact</a></li>
+            <li><a href="#" onclick="showContact(); return false;">Contact</a></li>
         </ul>
     </nav>
 
@@ -1278,38 +1278,42 @@
         </a>
     </section>
 
-    <!-- CONTACT (avec Tally) -->
-    <section class="contact-section" id="contact-section" style="display:none; position:fixed; top:0; left:0; width:100%; height:100vh; background:#000; z-index:998; padding:2rem; overflow-y:auto;">
-        <div style="max-width:900px; margin:80px auto 0; padding:2rem;">
-            <button onclick="hideContact()" style="position:absolute; top:30px; right:30px; background:none; border:none; font-size:2.2rem; color:#fff; cursor:pointer;">✕</button>
+<!-- CONTACT -->
+<section id="contact-section" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: #000; z-index: 9999; overflow-y: auto;">
+    <div style="max-width: 900px; margin: 100px auto 0; padding: 2rem; position: relative;">
+        <button onclick="hideContact()" 
+                style="position: absolute; top: 30px; right: 40px; background: none; border: none; font-size: 2.5rem; color: #fff; cursor: pointer; z-index: 10000;">
+            ✕
+        </button>
+        
+        <h2 style="font-size: 3rem; text-align: center; margin-bottom: 3rem;">Me contacter</h2>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;">
+            <!-- Colonne Tally -->
+            <div>
+                <h3 style="color: #00d4ff; margin-bottom: 1.5rem;">Formulaire de qualification automatisé</h3>
+                <p style="font-size: 1.2rem; line-height: 1.8; color: #ccc;">
+                    Pour gagner du temps, remplissez le formulaire ci-dessous.<br>
+                    Il est directement connecté à mon workflow Tally + Make.
+                </p>
+                <a href="https://tally.so/r/VOTRE_LIEN_TALLY" target="_blank"
+                   style="display: inline-block; margin-top: 2rem; padding: 16px 36px; background: #00d4ff; color: #000; font-weight: bold; border-radius: 50px; text-decoration: none; font-size: 1.1rem;">
+                    → Remplir le formulaire Tally
+                </a>
+            </div>
             
-            <h2 style="font-size:2.8rem; text-align:center; margin-bottom:3rem;">Me contacter</h2>
-            
-            <div style="display:grid; grid-template-columns:1fr 1fr; gap:4rem; max-width:800px; margin:0 auto;">
-                <div>
-                    <h3 style="color:#3498db; margin-bottom:1.5rem;">Formulaire de qualification</h3>
-                    <p style="font-size:1.15rem; line-height:1.8; color:#ccc;">
-                        Pour une réponse plus rapide, remplissez le formulaire ci-dessous.<br>
-                        Il est connecté à mon workflow automatique (Tally + Make).
-                    </p>
-                    <a href="https://tally.so/r/VOTRE_LIEN_TALLY" target="_blank" 
-                       style="display:inline-block; margin-top:2rem; padding:14px 32px; background:#3498db; color:white; font-weight:700; border-radius:50px; text-decoration:none;">
-                        → Remplir le formulaire
-                    </a>
-                </div>
-                
-                <div>
-                    <p style="font-size:1.3rem; margin-bottom:2rem;">
-                        Vous avez un projet de vidéo ou d’accompagnement data ?<br>
-                        Je suis à votre écoute.
-                    </p>
-                    <p style="font-size:1.4rem;">
-                        <a href="mailto:pln.prod35@gmail.com" style="color:#3498db;">pln.prod35@gmail.com</a>
-                    </p>
-                </div>
+            <!-- Colonne Email -->
+            <div>
+                <p style="font-size: 1.35rem; margin-bottom: 2rem;">
+                    Ou contactez-moi directement
+                </p>
+                <p style="font-size: 1.5rem;">
+                    <a href="mailto:pln.prod35@gmail.com" style="color: #00d4ff;">pln.prod35@gmail.com</a>
+                </p>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
     <!-- Footer -->
     <footer style="padding:3rem; text-align:center; background:#000; color:#666;">
@@ -2062,21 +2066,29 @@ function showVideo(projectId) {
         }
     });
 
-        // === Fonctions ajoutées pour le Contact ===
-        function showContact() {
-            document.getElementById('contact-section').style.display = 'block';
-            setTimeout(() => {
-                document.getElementById('contact-section').style.opacity = '1';
-            }, 10);
-        }
+// === FONCTIONS CONTACT (corrigées) ===
+function showContact() {
+    console.log("showContact appelé");
+    const contact = document.getElementById('contact-section');
+    if (contact) {
+        contact.style.display = 'block';
+        setTimeout(() => {
+            contact.style.opacity = '1';
+        }, 10);
+    } else {
+        console.error("Section contact non trouvée !");
+    }
+}
 
-        function hideContact() {
-            const contact = document.getElementById('contact-section');
-            contact.style.opacity = '0';
-            setTimeout(() => {
-                contact.style.display = 'none';
-            }, 400);
-        }
+function hideContact() {
+    const contact = document.getElementById('contact-section');
+    if (contact) {
+        contact.style.opacity = '0';
+        setTimeout(() => {
+            contact.style.display = 'none';
+        }, 400);
+    }
+}
     </script>
 </body>
 </html>
